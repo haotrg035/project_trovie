@@ -1,0 +1,172 @@
+@mixin Rounded($size) {
+    -webkit-border-radius: $size;
+    -moz-border-radius: $size;
+    border-radius: $size;
+}
+
+@mixin BoxShadow($shadow,$shadow2:"") {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
+@mixin TrasnformScale($value) {
+    -webkit-transform: scale($value);
+    -moz-transform: scale($value);
+    -ms-transform: scale($value);
+    -o-transform: scale($value);
+    transform: scale($value);
+}
+
+@mixin TrasnformRotate($value) {
+    -webkit-transform: rotate($value);
+    -moz-transform: rotate($value);
+    -ms-transform: rotate($value);
+    -o-transform: rotate($value);
+    transform: rotate($value);
+}
+
+@mixin TransformTranslate($x,$y) {
+    -webkit-transform: translate($x, $y);
+    -moz-transform: translate($x, $y);
+    -ms-transform: translate($x, $y);
+    -o-transform: translate($x, $y);
+    transform: translate($x, $y);
+}
+
+@mixin Responsive($breakpoint) {
+    @if ($breakpoint == XXS) {
+        @media only screen and (max-width: $XXS) {
+            @content
+        }
+    }
+    @if ($breakpoint == XS) {
+        @media only screen and (max-width: $XS) {
+            @content
+        }
+    }
+    @if ($breakpoint == SM) {
+        @media only screen and (max-width: $SM) {
+            @content
+        }
+    }
+    @if ($breakpoint == MD) {
+        @media only screen and (max-width: $MD) {
+            @content
+        }
+    }
+    @if ($breakpoint == LG) {
+        @media only screen and (max-width: $LG) {
+            @content
+        }
+    }
+    @if ($breakpoint == XL) {
+        @media only screen and (max-width: $XL) {
+            @content
+        }
+    }
+}
+
+@mixin ResponsiveMin($breakpoint) {
+    @if ($breakpoint == SM) {
+        @media only screen and (min-width: #{$SM +1px}) {
+            @content
+        }
+    }
+    @if ($breakpoint == MD) {
+        @media only screen and (min-width: #{$MD +1px}) {
+            @content
+        }
+    }
+    @if ($breakpoint == LG) {
+        @media only screen and (min-width: #{$LG +1px}) {
+            @content
+        }
+    }
+    @if ($breakpoint == XL) {
+        @media only screen and (min-width: #{$XL +1px}) {
+            @content
+        }
+    }
+}
+
+@mixin gradient-background($deg,$start,$end) {
+    background-image: -o-linear-gradient($deg, $start, $end);
+    background-image: -moz-linear-gradient($deg, $start, $end);
+    background-image: -webkit-linear-gradient($deg, $start, $end);
+    background-image: linear-gradient($deg, $start, $end);
+}
+
+@mixin gradient-text($deg,$start,$end) {
+    background-image: -o-linear-gradient($deg, $start, $end);
+    background-image: -moz-linear-gradient($deg, $start, $end);
+    background-image: -webkit-linear-gradient($deg, $start, $end);
+    background-image: linear-gradient($deg, $start, $end);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin gradient-animation( $start, $end, $transTime ) {
+    background-size: 100%;
+    background-image: -o-linear-gradient(45deg, $start, $end);
+    background-image: -moz-linear-gradient(45deg, $start, $end);
+    background-image: -webkit-linear-gradient(45deg, $start, $end);
+    background-image: linear-gradient(45deg, $start, $end);
+    position: relative;
+    z-index: 100;
+    &:before {
+        background-image: -o-linear-gradient(45deg, $end, $start);
+        background-image: -moz-linear-gradient(45deg, $end, $start);
+        background-image: -webkit-linear-gradient(45deg, $end, $start);
+        background-image: linear-gradient(45deg, $end, $start);
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        z-index: -100;
+        transition: opacity $transTime;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+    &:hover {
+        &:before {
+            opacity: 1;
+        }
+    }
+}
+
+@mixin makeButton($background,$color) {
+    @extend %transition-section-item-fast;
+    background: $background;
+    color: $color;
+    border: 1px solid $background;
+    &:hover {
+        background: $color;
+        color: $background;
+    }
+}
+
+@mixin makeButtonOutline($color1,$color2) {
+    @extend %transition-section-item-fast;
+    background: transparent;
+    color: $color2;
+    border: 1px solid $color2;
+    &:hover {
+        background: $color2;
+        color: $color1;
+    }
+}
+
+@mixin lineClamp($lineNum,$lineHeight: 1.25em) {
+    -webkit-line-clamp: $lineNum;
+    line-clamp: $lineNum;
+    line-height: $lineHeight;
+    height: $lineNum * $lineHeight;
+}

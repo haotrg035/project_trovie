@@ -1,0 +1,157 @@
+html, body {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Muli', 'Roboto', serif;
+    font-size: 16px;
+    overflow-x: hidden;
+    font-weight: normal;
+    color: #333333;
+
+    @include Responsive(LG) {
+        font-size: 14px;
+    }
+
+    @include Responsive(SM) {
+        font-size: 13px;
+    }
+}
+
+.page-wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: stretch;
+    background: #f3f5f8;
+    @include Responsive(LG) {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .main-panel {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 94%;
+
+        &__title {
+            font-size: 1.55rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            padding: 1rem;
+
+
+            @include ResponsiveMin(LG) {
+                height: 100vh;
+                overflow-y: auto;
+            }
+        }
+    }
+}
+
+.panel-content {
+    &__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding: 0;
+
+        &__title {
+            margin-bottom: 0;
+            font-size: 1.55rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        &__content {
+            display: flex;
+            flex: 1 1 auto;
+        }
+    }
+}
+
+.trovie-gallery{
+    &__item {
+        position: relative;
+        padding-bottom: 100%;
+        display: block;
+        overflow: hidden;
+        @include Rounded(12px);
+
+        &::before {
+            content: '';
+            background-color: rgba(0, 0, 0, 0.44);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            @extend %transition-section-item-fast;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        &__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            @extend %transition-section-item-fast;
+        }
+
+        &__remove {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: .5rem;
+            left: .5rem;
+            color: #ffffff;
+            z-index: 3;
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 1px solid white;
+            opacity: 0;
+            @include Rounded(50%);
+            @extend %transition-section-item-fast;
+
+            .fa {
+                font-size: .8rem;
+            }
+
+            &:hover {
+                background-color: white;
+                color: var(--danger);
+            }
+        }
+
+        &:hover {
+            &::before {
+                opacity: 1 !important;
+            }
+
+            .trovie-gallery__item {
+                &::before {
+                    opacity: 1;
+                }
+
+                &__image {
+                    @include TrasnformScale(1.15);
+                }
+
+                &__remove {
+                    opacity: 1 !important;
+                }
+            }
+        }
+    }
+}

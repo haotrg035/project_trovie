@@ -1,0 +1,29 @@
+.main-card {
+    background: #ffffff;
+    @extend .shadow-md-light;
+    //@include Rounded(24px);
+
+    &__header {
+        padding: 1rem 1rem 0rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: var(--color-variant-3);
+
+        &__title {
+            margin-bottom: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1.2em;
+            text-transform: uppercase;
+        }
+    }
+
+    &__body {
+        padding: 1rem;
+
+        &.half-padding {
+            padding: .5rem;
+        }
+    }
+}
