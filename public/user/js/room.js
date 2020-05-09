@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -12876,7 +12876,7 @@ var TrovieHelper = /*#__PURE__*/function () {
     }
   }, {
     key: "initGoogleMap",
-    value: function initGoogleMap() {
+    value: function initGoogleMap(element) {
       if ((typeof google === "undefined" ? "undefined" : _typeof(google)) !== 'object') {
         var script = document.createElement("script");
         var apiKey = document.querySelector('meta[name=ggmap-api-key]').getAttribute('content');
@@ -12892,7 +12892,7 @@ var TrovieHelper = /*#__PURE__*/function () {
           lat: 10.1235905,
           lng: 105.2519962
         };
-        var map = new google.maps.Map(document.getElementById('host-info__form-position__map'), {
+        var map = new google.maps.Map(element, {
           zoom: 10,
           center: current
         }); // The marker, positioned at current
@@ -13224,7 +13224,7 @@ function showAddRoomModal() {
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!*****************************************!*\
   !*** multi ./resources/js/user/room.js ***!
   \*****************************************/

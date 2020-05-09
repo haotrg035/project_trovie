@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@openfonts/muli_vietnamese": "^1.0.1",
         "filepond": "^4.13.5",
         "filepond-plugin-file-poster": "^2.2.0",
         "filepond-plugin-image-preview": "^4.6.2",

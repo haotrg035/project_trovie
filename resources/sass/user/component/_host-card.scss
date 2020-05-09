@@ -1,0 +1,124 @@
+.host-card {
+    display: block;
+    color: #000;
+
+    &:hover {
+        color: #000;
+    }
+
+    &-wrapper {
+        @extend %transition-section-item-fast;
+
+        &:hover {
+            @extend .shadow-lg-light;
+        }
+    }
+
+    &::before {
+        content: '';
+        position: relative;
+        padding-bottom: 100%;
+    }
+
+    &__name {
+        margin-bottom: 1rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+    }
+
+    &__attribute-list {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 1rem;
+        border-top: 1px solid lightgray;
+
+        .attribute-list__item {
+            display: flex;
+            flex: 0 0 50%;
+
+            &--wide {
+                flex-basis: 100%;
+            }
+
+            p {
+                margin-bottom: 1rem;
+                @include Responsive(MD) {
+                    margin-bottom: .5rem;
+                    font-size: .75rem;
+                }
+            }
+
+            .item {
+
+                &__label {
+                    color: var(--color-base);
+                    font-weight: 700;
+                    margin-right: .5rem;
+                    min-width: max-content;
+
+                    .fa {
+                        display: inline-block;
+                        width: 1rem;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    &__room-states {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        border-top: 1px solid lightgray;
+        padding-top: 1rem;
+
+        .room-states__item {
+            width: calc(100% / 3);
+            display: flex;
+            position: relative;
+            padding-left: 1rem;
+
+            .item {
+                &__label {
+                    margin-right: .5rem;
+                    margin-bottom: 0;
+                }
+
+                &__value {
+                    margin-bottom: 0;
+                    font-weight: bold;
+                    margin-bottom: 0;
+                }
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                border: .35rem solid var(--color-base);
+                left: 0;
+                top: 50%;
+                @include Rounded(50%);
+                @include TransformTranslate(0, -50%);
+            }
+
+            &--success {
+                &::after {
+                    border-color: var(--success);
+                }
+            }
+
+            &--warning {
+                &::after {
+                    border-color: var(--warning);
+                }
+            }
+
+            &--danger {
+                &::after {
+                    border-color: var(--danger);
+                }
+            }
+        }
+    }
+}

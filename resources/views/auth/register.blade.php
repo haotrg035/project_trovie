@@ -16,7 +16,7 @@
                                                class="col-form-label text-md-right">Tên tài khoản:</label>
                                         <input id="username" type="text" name="username"
                                                class="form-control trovie-input @error('username') is-invalid @enderror"
-                                               value="{{ old('username') }}" required autofocus>
+                                               value="{{ old('username') }}" required focus>
                                         @error('username')
                                         <span class="invalid-feedback"
                                               role="alert"><strong>{{ $message }}</strong></span>
@@ -29,7 +29,7 @@
                                                class="col-form-label text-md-right">Email:</label>
                                         <input id="email" type="text" name="email"
                                                class="form-control trovie-input @error('email') is-invalid @enderror"
-                                               value="{{ old('email') }}" autofocus>
+                                               value="{{ old('email') }}">
                                         @error('email')
                                         <span class="invalid-feedback"
                                               role="alert"><strong>{{ $message }}</strong></span>
@@ -42,7 +42,7 @@
                                                class="col-form-label text-md-right">Mật khẩu:</label>
                                         <input id="password" type="password" name="password"
                                                class="form-control trovie-input @error('password') is-invalid @enderror"
-                                               value="{{ old('password') }}" placeholder="Mật khẩu" required autofocus>
+                                               value="{{ old('password') }}" placeholder="Mật khẩu" required>
                                         @error('password')
                                         <span class="invalid-feedback"
                                               role="alert"><strong>{{ $message }}</strong></span>
@@ -56,7 +56,7 @@
                                         <input id="password_confirmation" type="password" name="password_confirmation"
                                                class="form-control trovie-input @error('password_confirmation') is-invalid @enderror"
                                                value="{{ old('password_confirmation') }}"
-                                               placeholder="Xác nhận mật khẩu" required autofocus>
+                                               placeholder="Xác nhận mật khẩu" required>
                                         @error('password_confirmation')
                                         <span class="invalid-feedback"
                                               role="alert"><strong>{{ $message }}</strong></span>
@@ -69,7 +69,7 @@
                                                class="col-form-label text-md-right">Họ và tên:</label>
                                         <input id="full_name" type="text" name="full_name"
                                                class="form-control trovie-input @error('full_name') is-invalid @enderror"
-                                               value="{{ old('full_name') }}" required autofocus>
+                                               value="{{ old('full_name') }}" required>
                                         @error('full_name')
                                         <span class="invalid-feedback"
                                               role="alert"><strong>{{ $message }}</strong></span>
@@ -106,12 +106,12 @@
                                                class="col-form-label text-md-right">Ngày sinh:</label>
                                         <input id="birthday" type="text" name="birthday"
                                                class="form-control trovie-input @error('birthday') is-invalid @enderror"
-                                               value="{{ old('birthday') }}" required autofocus>
-                                        @error('birthday')
-                                        <span class="invalid-feedback"
-                                              role="alert"><strong>{{ $message }}</strong></span>
-                                        @enderror
+                                               value="{{ old('birthday') }}" required>
                                     </div>
+                                    @error('birthday')
+                                    <span class="invalid-feedback"
+                                          role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
@@ -142,7 +142,7 @@
                                         <button type="submit" class="btn btn-base">ĐĂNG KÍ</button>
                                     </div>
                                     <span class="ml-2">hoặc hãy</span> <a class="btn btn-link color-base-text"
-                                                             href="{{ route('login') }}">{{ __('Đăng nhập') }}</a>
+                                                                          href="{{ route('login') }}">{{ __('Đăng nhập') }}</a>
                                     <span>nếu đã có tài khoản</span>
                                 </div>
                             </div>

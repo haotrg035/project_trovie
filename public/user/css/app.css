@@ -58,6 +58,7 @@ a:hover {
 .trovie-gallery__item__image,
 .trovie-gallery__item::before,
 .room-card,
+.host-card-wrapper,
 .btn-variant-outline,
 .btn-variant,
 .btn-base-outline,
@@ -103,7 +104,8 @@ a:hover {
   box-shadow: var(--shadow-lg);
 }
 
-.shadow-lg-light {
+.shadow-lg-light,
+.host-card-wrapper:hover {
   box-shadow: var(--shadow-lg-light);
 }
 
@@ -209,7 +211,7 @@ a:hover {
 }
 
 .form-group label {
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0;
   padding-top: 0.25rem;
 }
@@ -263,7 +265,7 @@ a:hover {
   content: "";
   position: absolute;
   right: 0;
-  top: 2.5rem;
+  bottom: 0.3rem;
   line-height: 1.25rem;
 }
 
@@ -440,6 +442,117 @@ a:hover {
 
 .main-card__body.half-padding {
   padding: 0.5rem;
+}
+
+.host-card {
+  display: block;
+  color: #000;
+}
+
+.host-card:hover {
+  color: #000;
+}
+
+.host-card::before {
+  content: "";
+  position: relative;
+  padding-bottom: 100%;
+}
+
+.host-card__name {
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.host-card__attribute-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid lightgray;
+}
+
+.host-card__attribute-list .attribute-list__item {
+  display: flex;
+  flex: 0 0 50%;
+}
+
+.host-card__attribute-list .attribute-list__item--wide {
+  flex-basis: 100%;
+}
+
+.host-card__attribute-list .attribute-list__item p {
+  margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .host-card__attribute-list .attribute-list__item p {
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+.host-card__attribute-list .attribute-list__item .item__label {
+  color: var(--color-base);
+  font-weight: 700;
+  margin-right: 0.5rem;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+.host-card__attribute-list .attribute-list__item .item__label .fa {
+  display: inline-block;
+  width: 1rem;
+  text-align: center;
+}
+
+.host-card__room-states {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  border-top: 1px solid lightgray;
+  padding-top: 1rem;
+}
+
+.host-card__room-states .room-states__item {
+  width: calc(100% / 3);
+  display: flex;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.host-card__room-states .room-states__item .item__label {
+  margin-right: 0.5rem;
+  margin-bottom: 0;
+}
+
+.host-card__room-states .room-states__item .item__value {
+  margin-bottom: 0;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.host-card__room-states .room-states__item::after {
+  content: "";
+  position: absolute;
+  border: 0.35rem solid var(--color-base);
+  left: 0;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(0, -50%);
+}
+
+.host-card__room-states .room-states__item--success::after {
+  border-color: var(--success);
+}
+
+.host-card__room-states .room-states__item--warning::after {
+  border-color: var(--warning);
+}
+
+.host-card__room-states .room-states__item--danger::after {
+  border-color: var(--danger);
 }
 
 .room-card {
@@ -1261,7 +1374,7 @@ body {
 
 .panel-content--room__filter--room-type__item a {
   border-radius: 0;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: #333333;
   font-weight: 600;
   text-transform: uppercase;

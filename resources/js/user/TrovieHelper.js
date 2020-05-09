@@ -69,7 +69,7 @@ class TrovieHelper {
         }
     }
 
-    initGoogleMap() {
+    initGoogleMap(element) {
         if (typeof google !== 'object') {
             let script = document.createElement("script");
             let apiKey = document.querySelector('meta[name=ggmap-api-key]').getAttribute('content');
@@ -83,7 +83,7 @@ class TrovieHelper {
         window.initMap = function () {
             const current = {lat: 10.1235905, lng: 105.2519962};
             const map = new google.maps.Map(
-                document.getElementById('host-info__form-position__map'),
+                element,
                 {
                     zoom: 10,
                     center: current

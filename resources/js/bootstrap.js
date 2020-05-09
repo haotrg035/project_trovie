@@ -49,4 +49,5 @@ $.ajaxSetup({
 });
 
 require('./user/input');
+require('@openfonts/muli_vietnamese');
 

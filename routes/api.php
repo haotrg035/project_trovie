@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::name('api.user')->group(function () {
+    Route::apiResource('host', 'Api\HostController')->names('.host');
+});

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\HostRepository;
+use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(HostEloquentRepositoryInterface::class,function (){
+            return new HostRepository();
+        });
     }
 
     /**
