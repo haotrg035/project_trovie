@@ -41186,11 +41186,16 @@ var TrovieHelper = /*#__PURE__*/function () {
   }, {
     key: "initGoogleMap",
     value: function initGoogleMap(element) {
+      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'window.initMap';
+      var addressInput = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var latitudeInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var longitudeInput = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+
       if ((typeof google === "undefined" ? "undefined" : _typeof(google)) !== 'object') {
         var script = document.createElement("script");
         var apiKey = document.querySelector('meta[name=ggmap-api-key]').getAttribute('content');
         script.type = "text/javascript";
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&callback=window.initMap';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&libraries=places&callback=' + callback;
         script.defer = true;
         script.async = true;
         document.body.appendChild(script);
@@ -41210,7 +41215,94 @@ var TrovieHelper = /*#__PURE__*/function () {
           position: current,
           map: map
         });
+        return map;
       };
+
+      window.initialize = function () {
+        // $('form').on('keyup keypress', function (e) {
+        //     var keyCode = e.keyCode || e.which;
+        //     if (keyCode === 13) {
+        //         e.preventDefault();
+        //         return false;
+        //     }
+        // });
+        var locationInputs = document.getElementById("address");
+        var autocompletes = [];
+        var geocoder = new google.maps.Geocoder();
+        var input = locationInputs;
+        var fieldKey = input.id.replace("-input", "");
+        var isEdit = latitudeInput.value != '' && longitudeInput.value != '';
+        var latitude = parseFloat(latitudeInput.value) || 10.1235905;
+        var longitude = parseFloat(longitudeInput.value) || 105.2519962;
+        var map = new google.maps.Map(element, {
+          center: {
+            lat: latitude,
+            lng: longitude
+          },
+          zoom: 13
+        });
+        var marker = new google.maps.Marker({
+          map: map,
+          position: {
+            lat: latitude,
+            lng: longitude
+          }
+        });
+        marker.setVisible(isEdit);
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.key = fieldKey;
+        autocompletes.push({
+          input: input,
+          map: map,
+          marker: marker,
+          autocomplete: autocomplete
+        });
+
+        var _loop = function _loop(i) {
+          var input = autocompletes[i].input;
+          var autocomplete = autocompletes[i].autocomplete;
+          var map = autocompletes[i].map;
+          var marker = autocompletes[i].marker;
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            geocoder.geocode({
+              'placeId': place.place_id
+            }, function (results, status) {
+              if (status === google.maps.GeocoderStatus.OK) {
+                var lat = results[0].geometry.location.lat();
+                var lng = results[0].geometry.location.lng();
+                setLocationCoordinates(autocomplete.key, lat, lng);
+              }
+            });
+
+            if (!place.geometry) {
+              window.alert("No details available for input: '" + place.name + "'");
+              input.value = "";
+              return;
+            }
+
+            if (place.geometry.viewport) {
+              map.fitBounds(place.geometry.viewport);
+            } else {
+              map.setCenter(place.geometry.location);
+              map.setZoom(17);
+            }
+
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+          });
+        };
+
+        for (var i = 0; i < autocompletes.length; i++) {
+          _loop(i);
+        }
+      };
+
+      function setLocationCoordinates(key, lat, lng) {
+        latitudeInput.value = lat;
+        longitudeInput.value = lng;
+      }
     }
   }], [{
     key: "getOptionsForFIlepondInstance",

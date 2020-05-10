@@ -1,4 +1,5 @@
 @extends('user.master')
+@section('site-title','Khu Trọ')
 @section('panel-content')
     <div class="panel-content panel-content--host">
         <div class="panel-content__header">

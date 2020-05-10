@@ -1346,6 +1346,50 @@ body {
   height: 300px;
 }
 
+.create-host-modal__form #form__map {
+  height: 280px;
+  width: 100%;
+}
+
+.create-host-modal__form #form__map canvas {
+  width: 100% !important;
+}
+
+.suggestions-wrapper {
+  position: relative;
+}
+
+.suggestions-wrapper ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  list-style-type: none;
+  margin-bottom: 0;
+  padding: 0;
+  width: 100%;
+  z-index: 99;
+  background: white;
+}
+
+.suggestions-wrapper ul li {
+  position: relative;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid lightgray;
+  padding-left: 1.5rem;
+}
+
+.suggestions-wrapper ul li::before {
+  content: "\F041";
+  font-family: FontAwesome, serif;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1rem;
+  padding-top: 0.05rem;
+  color: var(--color-base);
+}
+
 .panel-content--room__header-tool {
   display: flex;
   justify-content: flex-end;

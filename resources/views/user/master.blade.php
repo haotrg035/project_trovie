@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="ggmap-api-key" content="{{config('app.api_key.google_map')}}">
+    <meta name="goong-map-api-key" content="{{config('app.api_key.goong_map_api')}}">
+    <meta name="goong-map-titles-key" content="{{config('app.api_key.goong_map_titles')}}">
     <title>
         @hasSection('site-title') @yield('site-title') - @endif {{config('app.name')}}
     </title>

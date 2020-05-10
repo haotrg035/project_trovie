@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHomeservicesTable extends Migration
+class CreateHostservicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateHomeservicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('home_services', function (Blueprint $table) {
+        Schema::create('host_services', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('unit_id')->unsigned();
-            $table->integer('home_id')->unsigned();
+            $table->integer('host_id')->unsigned();
             $table->string('name', 60);
             $table->integer('cost')->unsigned();
             $table->tinyInteger('type')->default('1');
             $table->timestamps();
-            $table->index(["home_id"]);
+            $table->index(["host_id"]);
         });
     }
 
@@ -32,7 +32,7 @@ class CreateHomeservicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home_services');
+        Schema::dropIfExists('host_services');
     }
 }
 

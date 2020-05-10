@@ -1,12 +1,10 @@
-
-
 <?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHomechatroomsTable extends Migration
+class CreateHostchatroomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +13,12 @@ class CreateHomechatroomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('home_chat_rooms', function (Blueprint $table) {
+        Schema::create('host_chat_rooms', function (Blueprint $table) {
             $table->integer('id')->unsigned();
-            $table->string('noti', 250)->default('');
-            $table->integer('homes_id')->unsigned();
+            $table->string('notice', 250)->default('');
+            $table->integer('host_id')->unsigned();
             $table->timestamps();
-            $table->index(["homes_id"]);
+            $table->index(["host_id"]);
         });
     }
 
@@ -31,7 +29,7 @@ class CreateHomechatroomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home_chat_rooms');
+        Schema::dropIfExists('host_chat_rooms');
     }
 }
 

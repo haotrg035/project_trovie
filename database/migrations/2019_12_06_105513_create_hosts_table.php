@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHomesTable extends Migration
+class CreateHostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,15 +15,18 @@ class CreateHomesTable extends Migration
      */
     public function up()
     {
-        Schema::create('homes', function (Blueprint $table) {
+        Schema::create('hosts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('name', 120);
             $table->string('desc', 350)->default('');
             $table->string('announcement', 250)->default('');
             $table->boolean('notice')->default(false);
-            $table->integer('district_id')->unsigned()->default(0);
             $table->string('address', 250)->default('');
+            $table->integer('district_id')->unsigned()->default(0);
+            $table->integer('city_id')->unsigned()->default(0);
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->tinyInteger('type')->unsigned()->default('0');
             $table->tinyInteger('rating')->default('0');
             $table->tinyInteger('date_payment')->default(1);
@@ -43,7 +46,7 @@ class CreateHomesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('homes');
+        Schema::dropIfExists('hosts');
     }
 }
 

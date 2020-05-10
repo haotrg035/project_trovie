@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Host extends Model
 {
-    protected $table = 'homes';
+    protected $table = 'hosts';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id', 'name', 'desc', 'address', 'district_id', 'floors'];
+    protected $fillable = ['user_id', 'name', 'desc', 'address', 'district_id', 'city_id', 'latitude', 'longitude', 'floors'];
 }

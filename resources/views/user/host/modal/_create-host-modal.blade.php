@@ -1,6 +1,6 @@
 <div class="modal fade create-host-modal"
      id="create-host-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content border-0">
             <x-main-card has-header="1">
                 <x-slot name="title">
@@ -13,7 +13,7 @@
                 </x-slot>
                 <form action="" class="create-host-modal__form">
                     <div class="row row--custom">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="row row--custom">
                                 <div class="col-lg-8 col--custom">
                                     <div class="form-group">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-0 col--custom">
-                                    <div class="form-group d-flex flex-column pb-4 h-100">
+                                    <div class="form-group d-flex flex-column pb-4 mb-0 h-100">
                                         <label for="">Mô Tả:</label>
                                         <textarea name="desc" id="desc" cols="30"
                                                   class="form-control trovie-input h-auto d-flex flex-fill mb-2"
@@ -81,8 +81,46 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="row row--custom">
+                                <div class="col-12 col-lg-12 col--custom">
+                                    <div class="form-group form-group">
+                                        <label for="">Địa chỉ:</label>
+                                        <input type="text" class="form-control trovie-input" name="address"
+                                               id="address" autocomplete="off"
+                                               placeholder="Số nhà, quận, huyện...">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="latitude" id="latitude">
+                                <input type="hidden" name="longitude" id="longitude">
+{{--                                <div class="col-6 col-lg-4 col--custom">--}}
+{{--                                    <div class="form-group form-group">--}}
+{{--                                        <label for="">Quận/Huyện</label>--}}
+{{--                                        <select class="form-control trovie-input" name="city" id="city">--}}
+{{--                                            <option selected disabled>Chọn quận/huyện</option>--}}
+{{--                                            <option>Cần Thơ</option>--}}
+{{--                                            <option>Hồ Chí Minh</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-6 col-lg-4 col--custom">--}}
+{{--                                    <div class="form-group form-group">--}}
+{{--                                        <label for="">Tỉnh/Thành phố</label>--}}
+{{--                                        <select class="form-control trovie-input" name="city" id="city">--}}
+{{--                                            <option selected disabled>Chọn tỉnh/thành phố</option>--}}
+{{--                                            <option>Cần Thơ</option>--}}
+{{--                                            <option>Hồ Chí Minh</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                                <div class="col-12 col--custom">
+                                    <div id="form__map"
+                                         class="form__map"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-12 col--custom mb-0">
-                            <div class="form-group d-flex justify-content-end pt-3 border-top">
+                            <div class="form-group d-flex justify-content-end pt-3 mb-0 border-top">
                                 <button class="btn btn-base" type="submit">
                                     <i class="fa fa-floppy-o" aria-hidden="true"></i> Thêm
                                 </button>

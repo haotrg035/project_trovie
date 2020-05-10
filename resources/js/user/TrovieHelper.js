@@ -69,31 +69,6 @@ class TrovieHelper {
         }
     }
 
-    initGoogleMap(element) {
-        if (typeof google !== 'object') {
-            let script = document.createElement("script");
-            let apiKey = document.querySelector('meta[name=ggmap-api-key]').getAttribute('content');
-            script.type = "text/javascript";
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&callback=window.initMap';
-            script.defer = true;
-            script.async = true;
-            document.body.appendChild(script);
-        }
-
-        window.initMap = function () {
-            const current = {lat: 10.1235905, lng: 105.2519962};
-            const map = new google.maps.Map(
-                element,
-                {
-                    zoom: 10,
-                    center: current
-                }
-            );
-            // The marker, positioned at current
-            const marker = new google.maps.Marker({position: current, map: map});
-        };
-    }
-
     static convertStrToSlug(str) {
         // Chuyển hết sang chữ thường
         str = str.toLowerCase();
@@ -147,6 +122,108 @@ class TrovieHelper {
         }
 
         return temp;
+    }
+
+    initGoogleMap(element, callback = 'window.initMap', addressInput = null, latitudeInput = null, longitudeInput = null) {
+        if (typeof google !== 'object') {
+            let script = document.createElement("script");
+            let apiKey = document.querySelector('meta[name=ggmap-api-key]').getAttribute('content');
+            script.type = "text/javascript";
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&libraries=places&callback=' + callback;
+            script.defer = true;
+            script.async = true;
+            document.body.appendChild(script);
+        }
+
+        window.initMap = function () {
+            const current = {lat: 10.1235905, lng: 105.2519962};
+            const map = new google.maps.Map(
+                element,
+                {
+                    zoom: 10,
+                    center: current
+                }
+            );
+            // The marker, positioned at current
+            const marker = new google.maps.Marker({position: current, map: map});
+            return map;
+        };
+
+        window.initialize = function () {
+            // $('form').on('keyup keypress', function (e) {
+            //     var keyCode = e.keyCode || e.which;
+            //     if (keyCode === 13) {
+            //         e.preventDefault();
+            //         return false;
+            //     }
+            // });
+            const locationInputs = document.getElementById("address");
+
+            const autocompletes = [];
+            const geocoder = new google.maps.Geocoder;
+            const input = locationInputs;
+            const fieldKey = input.id.replace("-input", "");
+            const isEdit = latitudeInput.value != '' && longitudeInput.value != '';
+
+            const latitude = parseFloat(latitudeInput.value) || 10.1235905;
+            const longitude = parseFloat(longitudeInput.value) || 105.2519962;
+
+            const map = new google.maps.Map(element, {
+                center: {lat: latitude, lng: longitude},
+                zoom: 13
+            });
+            const marker = new google.maps.Marker({
+                map: map,
+                position: {lat: latitude, lng: longitude},
+            });
+
+            marker.setVisible(isEdit);
+
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.key = fieldKey;
+            autocompletes.push({input: input, map: map, marker: marker, autocomplete: autocomplete});
+
+            for (let i = 0; i < autocompletes.length; i++) {
+                const input = autocompletes[i].input;
+                const autocomplete = autocompletes[i].autocomplete;
+                const map = autocompletes[i].map;
+                const marker = autocompletes[i].marker;
+
+                google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                    marker.setVisible(false);
+                    const place = autocomplete.getPlace();
+
+                    geocoder.geocode({'placeId': place.place_id}, function (results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            const lat = results[0].geometry.location.lat();
+                            const lng = results[0].geometry.location.lng();
+                            setLocationCoordinates(autocomplete.key, lat, lng);
+                        }
+                    });
+
+                    if (!place.geometry) {
+                        window.alert("No details available for input: '" + place.name + "'");
+                        input.value = "";
+                        return;
+                    }
+
+                    if (place.geometry.viewport) {
+                        map.fitBounds(place.geometry.viewport);
+                    } else {
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(17);
+                    }
+                    marker.setPosition(place.geometry.location);
+                    marker.setVisible(true);
+
+                });
+            }
+        };
+
+        function setLocationCoordinates(key, lat, lng) {
+            latitudeInput.value = lat;
+            longitudeInput.value = lng;
+        }
     }
 }
 

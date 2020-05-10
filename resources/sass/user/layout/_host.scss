@@ -44,3 +44,51 @@
         }
     }
 }
+
+.create-host-modal {
+    &__form {
+        #form__map {
+            height: 280px;
+            width: 100%;
+
+            canvas {
+                width: 100% !important;
+            }
+        }
+    }
+}
+
+.suggestions-wrapper {
+    position: relative;
+
+    ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        list-style-type: none;
+        margin-bottom: 0;
+        padding: 0;
+        width: 100%;
+        z-index: 99;
+        background: white;
+
+        li {
+            position: relative;
+            padding-bottom: .25rem;
+            margin-bottom: .25rem;
+            border-bottom: 1px solid lightgray;
+            padding-left: 1.5rem;
+
+            &::before {
+                content: '\f041';
+                font-family: FontAwesome, serif;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 1rem;
+                padding-top: 0.05rem;
+                color: var(--color-base);
+            }
+        }
+    }
+}
