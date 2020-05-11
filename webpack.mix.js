@@ -19,6 +19,6 @@ mix.js([
     .js('resources/js/user/host/index.js', 'public/user/js/host/index.js')
     .js('resources/js/user/room.js', 'public/user/js')
     .js('resources/js/user/service.js', 'public/user/js')
-    .sass('resources/sass/user/libs.scss', 'public/user/css/libs.css')
+    // .sass('resources/sass/user/libs.scss', 'public/user/css/libs.css')
     .sass('resources/sass/user/app.scss', 'public/user/css');
 

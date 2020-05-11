@@ -91,9 +91,10 @@
                                         <input type="text" class="form-control trovie-input" name="address"
                                                id="address" autocomplete="off"
                                                placeholder="Số nhà, quận, huyện...">
-                                        <ul class="address-result-list list-unstyled mb-0">
-                                            <li class="address-result-list__item"></li>
-                                        </ul>
+                                        <div class="position-relative">
+                                            <ul class="address-result-list list-unstyled mb-0">
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <input type="hidden" name="latitude" id="latitude">

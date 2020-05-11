@@ -1,0 +1,58 @@
+.address-result-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+    background: #fff;
+    @extend .shadow-xs;
+
+    &__item {
+        display: flex;
+        padding: .5rem;
+        border-bottom: 1px solid lightgray;
+        @extend %transition-section-item-fast;
+
+        &:hover {
+            background: var(--color-base);
+            color: white;
+            cursor: pointer;
+
+            .item__icon {
+                color: white;
+            }
+        }
+
+        .item {
+            &__icon {
+                @extend %transition-section-item-fast;
+                margin-bottom: 0;
+                display: flex;
+                flex: 0 0 1rem;
+                font-size: 1.25rem;
+                color: var(--color-base);
+                justify-content: flex-start;
+                padding-top: .25rem;
+                margin-right: .5rem;
+            }
+
+            &__content {
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+
+                .content {
+                    &__title {
+                        margin-bottom: .25rem;
+                        font-weight: 700;
+                    }
+
+                    &__detail {
+                        margin: 0;
+                        font-size: .85rem;
+                    }
+                }
+            }
+        }
+    }
+}

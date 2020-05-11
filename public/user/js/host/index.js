@@ -146,6 +146,12 @@ return goongjs;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrovieMap", function() { return TrovieMap; });
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -164,12 +170,13 @@ var TrovieMap = /*#__PURE__*/function () {
   function TrovieMap(options) {
     _classCallCheck(this, TrovieMap);
 
+    this._map = null;
+    this._marker = null;
     this.options = options;
     this.options.draggaleMarkder = options.draggaleMarkder || false;
     this.options.apiKey = document.querySelector('meta[name=goong-map-api-key]').getAttribute('content');
     this.options.mapTitlesKey = document.querySelector('meta[name=goong-map-titles-key]').getAttribute('content');
-    this._map = null;
-    this._marker = null;
+    this.options.apiOrigin = 'https://rsapi.goong.io/';
   }
 
   _createClass(TrovieMap, [{
@@ -203,6 +210,53 @@ var TrovieMap = /*#__PURE__*/function () {
         marker: this._marker
       };
     }
+  }, {
+    key: "renderSearchResultItems",
+    value: function renderSearchResultItems(resultList, data) {
+      resultList.innerHtml = '';
+
+      var _iterator = _createForOfIteratorHelper(data),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+          resultList.appendChild(this._getSearchResultItem(item));
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+  }, {
+    key: "_getSearchResultItem",
+    value: function _getSearchResultItem(data) {
+      var html = '   <figure class="item__icon">' + '       <i class="fa fa-map-marker" aria-hidden="true"></i>' + '   </figure>' + '   <div class="item__content">' + '       <p class="content__title">' + data.structured_formatting.main_text + '</p>' + '       <p class="content__detail">' + data.structured_formatting.secondary_text + '</p>' + '   </div>';
+      var item = document.createElement('li');
+      item.className = 'address-result-list__item';
+      item.setAttribute('data-place-id', data.place_id); // let item__icon = document.createElement('figure');
+      // item__icon.className = 'item__icon';
+      // let item__icon__fa = document.createElement('i');
+      // item__icon__fa.className = 'fa fa-map-marker';
+      // item__icon.appendChild(item__icon__fa);
+      // item.appendChild(item__icon);
+      // let item__content = document.createElement('div');
+      // item__content.className = 'item__content';
+      // let content__title = document.createElement('p');
+      // content__title.className = 'content__title';
+      // content__title.innerText = data.structured_formatting.main_text;
+
+      item.innerHTML = html;
+      return item;
+    }
+  }, {
+    key: "getApiUrl",
+    value: function getApiUrl() {
+      return {
+        autoComplete: this.options.apiOrigin + 'Place/AutoComplete'
+      };
+    }
   }]);
 
   return TrovieMap;
@@ -228,19 +282,41 @@ var createHostFormMap = document.querySelector('.create-host-modal__form #form__
 var addressInput = document.querySelector('.create-host-modal__form #address');
 var latitudeInput = document.querySelector('.create-host-modal__form #latitude');
 var longitudeInput = document.querySelector('.create-host-modal__form #longitude');
+var addressResultList = document.querySelector('.create-host-modal__form .address-result-list');
+var mapOptions = {
+  map: createHostFormMap,
+  addressInput: addressInput,
+  center: [105, 20]
+};
+var trovieMap = new _TrovieMap__WEBPACK_IMPORTED_MODULE_0__["TrovieMap"](mapOptions);
 var mapElement;
 document.addEventListener('DOMContentLoaded', function () {
-  initHostFormMap();
+  initAddHostFormMap();
 });
 
-function initHostFormMap() {
+function initAddHostFormMap() {
   if (createHostFormMap !== null) {
-    var options = {
-      map: createHostFormMap,
-      addressInput: addressInput,
-      center: [105, 20]
-    };
-    mapElement = new _TrovieMap__WEBPACK_IMPORTED_MODULE_0__["TrovieMap"](options).initGoongMap();
+    mapElement = trovieMap.initGoongMap();
+  }
+
+  addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
+}
+
+function _addressInputOnKeyDown() {
+  if (addressInput.value.trim() !== '') {
+    axios.get(trovieMap.getApiUrl().autoComplete, {
+      headers: {
+        Accept: 'application/json'
+      },
+      params: {
+        input: addressInput.value,
+        api_key: trovieMap.options.apiKey,
+        limit: 5
+      }
+    }).then(function (response) {
+      addressResultList.innerHTML = "";
+      trovieMap.renderSearchResultItems(addressResultList, response.data.predictions);
+    });
   }
 }
 

@@ -57,6 +57,8 @@ a:hover {
 .trovie-gallery__item__remove,
 .trovie-gallery__item__image,
 .trovie-gallery__item::before,
+.address-result-list__item .item__icon,
+.address-result-list__item,
 .room-card,
 .host-card-wrapper,
 .btn-variant-outline,
@@ -72,6 +74,7 @@ a:hover {
 }
 
 .shadow-xs,
+.address-result-list,
 .room-card {
   box-shadow: var(--shadow-xs);
 }
@@ -773,6 +776,58 @@ a:hover {
   width: -moz-max-content;
   width: max-content;
   margin-left: 0.5rem;
+}
+
+.address-result-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  background: #fff;
+}
+
+.address-result-list__item {
+  display: flex;
+  padding: 0.5rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.address-result-list__item:hover {
+  background: var(--color-base);
+  color: white;
+  cursor: pointer;
+}
+
+.address-result-list__item:hover .item__icon {
+  color: white;
+}
+
+.address-result-list__item .item__icon {
+  margin-bottom: 0;
+  display: flex;
+  flex: 0 0 1rem;
+  font-size: 1.25rem;
+  color: var(--color-base);
+  justify-content: flex-start;
+  padding-top: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+.address-result-list__item .item__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.address-result-list__item .item__content .content__title {
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.address-result-list__item .item__content .content__detail {
+  margin: 0;
+  font-size: 0.85rem;
 }
 
 html,
