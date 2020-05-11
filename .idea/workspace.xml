@@ -2,42 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50936285-61d7-4bf1-ada2-6d577016bf8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/database/factories/HostFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/HostSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/UserSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/@goongmaps/goong-geocoder/lib/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/user/TrovieMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Host.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Host.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_default_home_services_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_default_host_services_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_home_chat_rooms_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_host_chat_rooms_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_home_reviews_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_host_reviews_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_home_service_units_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_host_service_units_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_home_services_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_host_services_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_homes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_hosts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_20_043800_add_home_service_foreign.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_20_043800_add_host_service_foreign.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_service_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_service_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_temporary_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_temporary_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@goongmaps/goong-geocoder/lib/index.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/0.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/css/libs.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/css/libs.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/host/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/host/detail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/host/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/host/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/user/TrovieHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/TrovieHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/user/TrovieMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/TrovieMap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/user/host/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/host/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/user/component/_host-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/component/_host-card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/user/layout/_host.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/layout/_host.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/user/libs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/libs.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/host/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/host/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/host/modal/_create-host-modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/host/modal/_create-host-modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,20 +62,6 @@
         <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="home_services: table" type="dbc44a63:MariaImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="homes: table" type="dbc44a63:MariaImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
         <item name="user_details: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
       <path>
@@ -118,6 +83,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -231,24 +202,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/user/host" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/database" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/database" />
+      <recent name="$PROJECT_DIR$/database/migrations" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/resources/js/user/host" />
+      <recent name="$PROJECT_DIR$/resources/views/user/host/modal" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/database/factories" />
       <recent name="$PROJECT_DIR$/database/factories/Models" />
       <recent name="$PROJECT_DIR$/resources/js/user/host" />
       <recent name="$PROJECT_DIR$/app/Repositories/Interfaces" />
       <recent name="$PROJECT_DIR$/app" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/js/user/host" />
-      <recent name="$PROJECT_DIR$/resources/views/user/host/modal" />
-      <recent name="$PROJECT_DIR$/resources/sass/user/component" />
-      <recent name="$PROJECT_DIR$/resources/views/user/host" />
-      <recent name="$PROJECT_DIR$/public/fonts" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -297,6 +268,7 @@
       <workItem from="1589000707414" duration="5841000" />
       <workItem from="1589029310242" duration="11607000" />
       <workItem from="1589077085220" duration="21967000" />
+      <workItem from="1589214904863" duration="3003000" />
     </task>
     <servers />
   </component>
@@ -304,6 +276,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="399" y="88" width="802" height="727" key="#Intentions" timestamp="1589219919702">
+      <screen x="0" y="24" width="1600" height="831" />
+    </state>
+    <state x="399" y="88" width="802" height="727" key="#Intentions/0.24.1600.831@0.24.1600.831" timestamp="1589219919702" />
     <state x="399" y="88" key="#Notifications" timestamp="1588932872092">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
@@ -336,25 +312,25 @@
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="579" y="348" key="NewPhpFileDialog/0.24.1600.831@0.24.1600.831" timestamp="1589002661773" />
-    <state x="0" y="24" width="1600" height="831" key="SettingsEditor" timestamp="1589034052262">
+    <state x="0" y="24" width="1600" height="831" key="SettingsEditor" timestamp="1589219958057">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
-    <state x="0" y="24" width="1600" height="831" key="SettingsEditor/0.24.1600.831@0.24.1600.831" timestamp="1589034052262" />
+    <state x="0" y="24" width="1600" height="831" key="SettingsEditor/0.24.1600.831@0.24.1600.831" timestamp="1589219958057" />
     <state x="431" y="254" key="com.intellij.ide.util.TipDialog" timestamp="1588932866202">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="431" y="254" key="com.intellij.ide.util.TipDialog/0.24.1600.831@0.24.1600.831" timestamp="1588932866202" />
-    <state x="317" y="24" width="966" height="831" key="find.popup" timestamp="1589077163957">
+    <state x="317" y="24" width="966" height="831" key="find.popup" timestamp="1589219431600">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
-    <state x="317" y="24" width="966" height="831" key="find.popup/0.24.1600.831@0.24.1600.831" timestamp="1589077163957" />
+    <state x="317" y="24" width="966" height="831" key="find.popup/0.24.1600.831@0.24.1600.831" timestamp="1589219431600" />
     <state x="463" y="190" width="672" height="677" key="run.anything.popup" timestamp="1589041549206">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="463" y="190" width="672" height="677" key="run.anything.popup/0.24.1600.831@0.24.1600.831" timestamp="1589041549206" />
-    <state x="463" y="176" width="672" height="678" key="search.everywhere.popup" timestamp="1589034485668">
+    <state x="463" y="176" width="672" height="678" key="search.everywhere.popup" timestamp="1589219495058">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
-    <state x="463" y="176" width="672" height="678" key="search.everywhere.popup/0.24.1600.831@0.24.1600.831" timestamp="1589034485668" />
+    <state x="463" y="176" width="672" height="678" key="search.everywhere.popup/0.24.1600.831@0.24.1600.831" timestamp="1589219495058" />
   </component>
 </project>

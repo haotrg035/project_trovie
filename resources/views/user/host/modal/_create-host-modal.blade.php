@@ -51,21 +51,23 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col--custom">
-                                            <div class="form-group form-group--unit form-group--unit--electric">
+                                            <div
+                                                class="form-group form-group--unit form-group--unit--electric form-group--unit--price">
                                                 <label for=""><i class="fa fa-bolt text-warning" aria-hidden="true"></i>
                                                     Tiền Điện
                                                     (VNĐ): </label>
-                                                <input type="number"
+                                                <input type="text"
                                                        class="form-control trovie-input"
                                                        name="cost_electricity" id="cost_electricity" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col--custom">
-                                            <div class="form-group form-group--unit form-group--unit--water">
+                                            <div
+                                                class="form-group form-group--unit form-group--unit--water form-group--unit--price">
                                                 <label for=""><i class="fa fa-tint text-primary" aria-hidden="true"></i>
                                                     Tiền Nước
                                                     (VNĐ): </label>
-                                                <input type="number" class="form-control trovie-input" name="cost_water"
+                                                <input type="text" class="form-control trovie-input" name="cost_water"
                                                        id="cost_water" placeholder="">
                                             </div>
                                         </div>
@@ -89,30 +91,13 @@
                                         <input type="text" class="form-control trovie-input" name="address"
                                                id="address" autocomplete="off"
                                                placeholder="Số nhà, quận, huyện...">
+                                        <ul class="address-result-list list-unstyled mb-0">
+                                            <li class="address-result-list__item"></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <input type="hidden" name="latitude" id="latitude">
                                 <input type="hidden" name="longitude" id="longitude">
-{{--                                <div class="col-6 col-lg-4 col--custom">--}}
-{{--                                    <div class="form-group form-group">--}}
-{{--                                        <label for="">Quận/Huyện</label>--}}
-{{--                                        <select class="form-control trovie-input" name="city" id="city">--}}
-{{--                                            <option selected disabled>Chọn quận/huyện</option>--}}
-{{--                                            <option>Cần Thơ</option>--}}
-{{--                                            <option>Hồ Chí Minh</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-6 col-lg-4 col--custom">--}}
-{{--                                    <div class="form-group form-group">--}}
-{{--                                        <label for="">Tỉnh/Thành phố</label>--}}
-{{--                                        <select class="form-control trovie-input" name="city" id="city">--}}
-{{--                                            <option selected disabled>Chọn tỉnh/thành phố</option>--}}
-{{--                                            <option>Cần Thơ</option>--}}
-{{--                                            <option>Hồ Chí Minh</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                                 <div class="col-12 col--custom">
                                     <div id="form__map"
                                          class="form__map"></div>

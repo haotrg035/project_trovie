@@ -1,5 +1,4 @@
 class TrovieMap {
-
     /**
      * Create Trovie class
      * @param options
@@ -9,25 +8,28 @@ class TrovieMap {
      * [draggableMarker]
      */
     constructor(options) {
-       this.options = options;
-       this.options.draggaleMarkder = options.draggaleMarkder || false;
+        this.options = options;
+        this.options.draggaleMarkder = options.draggaleMarkder || false;
+        this.options.apiKey = document.querySelector('meta[name=goong-map-api-key]').getAttribute('content');
+        this.options.mapTitlesKey = document.querySelector('meta[name=goong-map-titles-key]').getAttribute('content');
+        this._map = null;
+        this._marker = null;
     }
 
     initGoongMap() {
-        let apiKey = document.querySelector('meta[name=goong-map-api-key]').getAttribute('content');
-        goongjs.accessToken = document.querySelector('meta[name=goong-map-titles-key]').getAttribute('content');
 
-        let _map = new goongjs.Map({
+        goongjs.accessToken = this.options.mapTitlesKey;
+        this._map = new goongjs.Map({
             container: this.options.map,
             style: 'https://tiles.goong.io/assets/goong_map_web.json',
             center: this.options.center, //[lng,lat]
             zoom: 10
         });
 
-        let _marker = new goongjs.Marker({
+        this._marker = new goongjs.Marker({
             draggale: this.options.draggaleMarkder
-        }).setLngLat(this.options.center).addTo(_map);
-        _map.addControl(
+        }).setLngLat(this.options.center).addTo(this._map);
+        this._map.addControl(
             new goongjs.GeolocateControl({
                 positionOptions: {
                     enableHighAccuracy: true
@@ -35,21 +37,16 @@ class TrovieMap {
                 trackUserLocation: true
             })
         );
-        _map.addControl(
-            new GoongGeocoder({
-                accessToken: apiKey,
-                goongjs: goongjs,
-                searchInput: this.options.addressInput
-            })
-        );
-        _map.addControl(new goongjs.FullscreenControl());
-        _map.addControl(new goongjs.NavigationControl());
+
+        this._map.addControl(new goongjs.FullscreenControl());
+        this._map.addControl(new goongjs.NavigationControl());
 
 
         return {
-            map: _map,
-            marker: _marker
+            map: this._map,
+            marker: this._marker
         };
     }
 }
+
 export {TrovieMap};

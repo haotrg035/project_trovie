@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return redirect()->route('user.dashboard.index');
 });
-Route::name('user')->middleware(['auth'])->group(function () {
+Route::name('user')->group(function () {
 
     Route::name('.dashboard')->prefix('dashboard')->group(function () {
         Route::get('/', function () {
@@ -28,13 +28,14 @@ Route::name('user')->middleware(['auth'])->group(function () {
             })->name('.index');
         });
     });
-    Route::resource('/host', 'HostController')->names('.host');
 
     Route::name('service')->prefix('service')->group(function () {
         Route::get('/', function () {
             return view('user.service.index');
         })->name('.index');
     });
+
+    Route::resource('/host', 'HostController')->names('.host');
 });
 
 Auth::routes();

@@ -28,9 +28,9 @@ class CreateTemporaryusersTable extends Migration
             $table->datetime('date_id');
             $table->string('career', 60);
             $table->string('note');
-            $table->integer('home_id')->unsigned();
+            $table->integer('host_id')->unsigned();
             $table->timestamps();
-            $table->index(["home_id"]);
+            $table->index(["host_id"]);
         });
     }
 

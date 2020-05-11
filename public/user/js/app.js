@@ -446,7 +446,7 @@ module.exports = "/fonts/vendor/@openmuli_vietnamese/files/muli-vietnamese-900.w
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./index.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@openfonts/muli_vietnamese/index.css");
+var content = __webpack_require__(/*! !../../css-loader??ref--7-1!../../postcss-loader/src??ref--7-2!./index.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@openfonts/muli_vietnamese/index.css?fe42");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -6812,9 +6812,9 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@openfonts/muli_vietnamese/index.css":
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@openfonts/muli_vietnamese/index.css?fe42":
 /*!*******************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/@openfonts/muli_vietnamese/index.css ***!
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/postcss-loader/src??ref--7-2!./node_modules/@openfonts/muli_vietnamese/index.css ***!
   \*******************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -41514,15 +41514,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./resources/sass/user/libs.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/user/libs.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/js/user/sidebar.js ./resources/sass/user/app.scss ***!
-  \*************************************************************************************************/
+/*!*********************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/js/user/sidebar.js ./resources/sass/user/libs.scss ./resources/sass/user/app.scss ***!
+  \*********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /var/www/html/trovie/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /var/www/html/trovie/resources/js/user/sidebar.js */"./resources/js/user/sidebar.js");
+__webpack_require__(/*! /var/www/html/trovie/resources/sass/user/libs.scss */"./resources/sass/user/libs.scss");
 module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/sass/user/app.scss */"./resources/sass/user/app.scss");
 
 
