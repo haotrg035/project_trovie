@@ -22,9 +22,13 @@ document.addEventListener('DOMContentLoaded', function () {
 function initAddHostFormMap() {
     if (createHostFormMap !== null) {
         mapElement = trovieMap.initGoongMap();
+        window.addEventListener('click', function (e) {
+            if (addressResultList.contains(e.target) === false) {
+                addressResultList.innerHTML = '';
+            }
+        });
     }
     addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
-
 }
 
 function _addressInputOnKeyDown() {
@@ -40,8 +44,44 @@ function _addressInputOnKeyDown() {
             }
         }).then(function (response) {
             addressResultList.innerHTML = "";
-            trovieMap.renderSearchResultItems(addressResultList, response.data.predictions)
+            trovieMap.renderSearchResultItems(addressResultList, response.data.predictions, searchResultItemClickHandler)
+        }).catch(function (error) {
+            console.log(error);
         });
     }
+}
+
+function searchResultItemClickHandler(item) {
+    let placeId = item.getAttribute('data-place-id');
+
+    axios.get(trovieMap.getApiUrl().detail, {
+        headers: {
+            Accept: 'application/json'
+        },
+        params: {
+            placeid: placeId,
+            api_key: trovieMap.options.apiKey,
+        }
+    }).then(function (response) {
+        let data = response.data.result;
+
+        addressResultList.innerHTML = "";
+        addressInput.value = data.formatted_address;
+        longitudeInput.value = data.geometry.location.lng;
+        latitudeInput.value = data.geometry.location.lat;
+        mapElement.map.flyTo({
+            center: [
+                data.geometry.location.lng,
+                data.geometry.location.lat
+            ]
+        });
+        mapElement.marker.setLngLat([
+            data.geometry.location.lng,
+            data.geometry.location.lat
+        ]);
+        console.log(data);
+    }).catch(function (error) {
+        console.log(error);
+    });
 }
 

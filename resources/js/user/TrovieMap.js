@@ -49,10 +49,16 @@ class TrovieMap {
         };
     }
 
-    renderSearchResultItems(resultList, data) {
+    renderSearchResultItems(resultList, data, callback = null) {
         resultList.innerHtml = '';
         for (let item of data) {
-            resultList.appendChild(this._getSearchResultItem(item))
+            let _item = this._getSearchResultItem(item);
+            if (callback !== null) {
+                _item.addEventListener('click', function () {
+                    callback(_item);
+                })
+            }
+            resultList.appendChild(_item)
         }
     }
 
@@ -67,17 +73,6 @@ class TrovieMap {
         let item = document.createElement('li');
         item.className = 'address-result-list__item';
         item.setAttribute('data-place-id', data.place_id);
-        // let item__icon = document.createElement('figure');
-        // item__icon.className = 'item__icon';
-        // let item__icon__fa = document.createElement('i');
-        // item__icon__fa.className = 'fa fa-map-marker';
-        // item__icon.appendChild(item__icon__fa);
-        // item.appendChild(item__icon);
-        // let item__content = document.createElement('div');
-        // item__content.className = 'item__content';
-        // let content__title = document.createElement('p');
-        // content__title.className = 'content__title';
-        // content__title.innerText = data.structured_formatting.main_text;
         item.innerHTML = html;
 
         return item;
@@ -85,7 +80,8 @@ class TrovieMap {
 
     getApiUrl() {
         return {
-            autoComplete: this.options.apiOrigin + 'Place/AutoComplete'
+            autoComplete: this.options.apiOrigin + 'Place/AutoComplete',
+            detail: this.options.apiOrigin + 'Place/Detail',
         }
     }
 

@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50936285-61d7-4bf1-ada2-6d577016bf8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/sass/user/component/_address-result-list.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/host/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/host/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/user/TrovieMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/TrovieMap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/user/host/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/host/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/user/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/host/modal/_create-host-modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/host/modal/_create-host-modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +256,8 @@
       <workItem from="1589000707414" duration="5841000" />
       <workItem from="1589029310242" duration="11607000" />
       <workItem from="1589077085220" duration="21967000" />
-      <workItem from="1589214904863" duration="9024000" />
+      <workItem from="1589214904863" duration="9178000" />
+      <workItem from="1589289598506" duration="1866000" />
     </task>
     <servers />
   </component>

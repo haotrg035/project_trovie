@@ -213,15 +213,31 @@ var TrovieMap = /*#__PURE__*/function () {
   }, {
     key: "renderSearchResultItems",
     value: function renderSearchResultItems(resultList, data) {
+      var _this = this;
+
+      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       resultList.innerHtml = '';
 
       var _iterator = _createForOfIteratorHelper(data),
           _step;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var _loop = function _loop() {
           var item = _step.value;
-          resultList.appendChild(this._getSearchResultItem(item));
+
+          var _item = _this._getSearchResultItem(item);
+
+          if (callback !== null) {
+            _item.addEventListener('click', function () {
+              callback(_item);
+            });
+          }
+
+          resultList.appendChild(_item);
+        };
+
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          _loop();
         }
       } catch (err) {
         _iterator.e(err);
@@ -235,18 +251,7 @@ var TrovieMap = /*#__PURE__*/function () {
       var html = '   <figure class="item__icon">' + '       <i class="fa fa-map-marker" aria-hidden="true"></i>' + '   </figure>' + '   <div class="item__content">' + '       <p class="content__title">' + data.structured_formatting.main_text + '</p>' + '       <p class="content__detail">' + data.structured_formatting.secondary_text + '</p>' + '   </div>';
       var item = document.createElement('li');
       item.className = 'address-result-list__item';
-      item.setAttribute('data-place-id', data.place_id); // let item__icon = document.createElement('figure');
-      // item__icon.className = 'item__icon';
-      // let item__icon__fa = document.createElement('i');
-      // item__icon__fa.className = 'fa fa-map-marker';
-      // item__icon.appendChild(item__icon__fa);
-      // item.appendChild(item__icon);
-      // let item__content = document.createElement('div');
-      // item__content.className = 'item__content';
-      // let content__title = document.createElement('p');
-      // content__title.className = 'content__title';
-      // content__title.innerText = data.structured_formatting.main_text;
-
+      item.setAttribute('data-place-id', data.place_id);
       item.innerHTML = html;
       return item;
     }
@@ -254,7 +259,8 @@ var TrovieMap = /*#__PURE__*/function () {
     key: "getApiUrl",
     value: function getApiUrl() {
       return {
-        autoComplete: this.options.apiOrigin + 'Place/AutoComplete'
+        autoComplete: this.options.apiOrigin + 'Place/AutoComplete',
+        detail: this.options.apiOrigin + 'Place/Detail'
       };
     }
   }]);
@@ -297,6 +303,11 @@ document.addEventListener('DOMContentLoaded', function () {
 function initAddHostFormMap() {
   if (createHostFormMap !== null) {
     mapElement = trovieMap.initGoongMap();
+    window.addEventListener('click', function (e) {
+      if (addressResultList.contains(e.target) === false) {
+        addressResultList.innerHTML = '';
+      }
+    });
   }
 
   addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
@@ -315,9 +326,37 @@ function _addressInputOnKeyDown() {
       }
     }).then(function (response) {
       addressResultList.innerHTML = "";
-      trovieMap.renderSearchResultItems(addressResultList, response.data.predictions);
+      trovieMap.renderSearchResultItems(addressResultList, response.data.predictions, searchResultItemClickHandler);
+    })["catch"](function (error) {
+      console.log(error);
     });
   }
+}
+
+function searchResultItemClickHandler(item) {
+  var placeId = item.getAttribute('data-place-id');
+  axios.get(trovieMap.getApiUrl().detail, {
+    headers: {
+      Accept: 'application/json'
+    },
+    params: {
+      placeid: placeId,
+      api_key: trovieMap.options.apiKey
+    }
+  }).then(function (response) {
+    var data = response.data.result;
+    addressResultList.innerHTML = "";
+    addressInput.value = data.formatted_address;
+    longitudeInput.value = data.geometry.location.lng;
+    latitudeInput.value = data.geometry.location.lat;
+    mapElement.map.flyTo({
+      center: [data.geometry.location.lng, data.geometry.location.lat]
+    });
+    mapElement.marker.setLngLat([data.geometry.location.lng, data.geometry.location.lat]);
+    console.log(data);
+  })["catch"](function (error) {
+    console.log(error);
+  });
 }
 
 /***/ }),
