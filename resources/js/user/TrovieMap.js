@@ -82,6 +82,7 @@ class TrovieMap {
         return {
             autoComplete: this.options.apiOrigin + 'Place/AutoComplete',
             detail: this.options.apiOrigin + 'Place/Detail',
+            geocode: this.options.apiOrigin + 'Geocode',
         }
     }
 

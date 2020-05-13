@@ -16,11 +16,11 @@ class CreateDistrictsTable extends Migration
     public function up()
     {
         Schema::create('districts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->unsignedInteger('id')->unique();
             $table->string('name', 120);
-            $table->integer('city_id')->unsigned();
-            $table->timestamps();
-            $table->index(["city_id"]);
+            $table->string('type', 20);
+            $table->unsignedInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities')->onUpdate('CASCADE');
         });
     }
 

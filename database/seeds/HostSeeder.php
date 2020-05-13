@@ -11,6 +11,6 @@ class HostSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Host::class,5)->create();
+        factory(App\Models\Host::class,3)->create();
     }
 }

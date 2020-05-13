@@ -48,6 +48,5 @@ $.ajaxSetup({
     }
 });
 
-require('./user/input');
-// require('@openfonts/muli_vietnamese');
+import tata from 'tata-js';
 

@@ -34,6 +34,11 @@
 </section>
 <!--   Core JS Files   -->
 <script src="{{mix(config('app.user_theme').'/js/app.js')}}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    });
+</script>
 @yield('script')
 </body>
 </html>

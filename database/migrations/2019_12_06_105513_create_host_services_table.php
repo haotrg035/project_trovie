@@ -15,10 +15,10 @@ class CreateHostservicesTable extends Migration
     {
         Schema::create('host_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->tinyInteger('unit_id')->unsigned();
+            $table->unsignedTinyInteger('unit_id');
             $table->integer('host_id')->unsigned();
             $table->string('name', 60);
-            $table->integer('cost')->unsigned();
+            $table->unsignedInteger('cost')->unsigned();
             $table->tinyInteger('type')->default('1');
             $table->timestamps();
             $table->index(["host_id"]);

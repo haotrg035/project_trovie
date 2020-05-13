@@ -15,6 +15,7 @@ let mapOptions = {
 let trovieMap = new TrovieMap(mapOptions);
 let mapElement;
 
+//main
 document.addEventListener('DOMContentLoaded', function () {
     initAddHostFormMap();
 });
@@ -64,24 +65,36 @@ function searchResultItemClickHandler(item) {
         }
     }).then(function (response) {
         let data = response.data.result;
-
         addressResultList.innerHTML = "";
         addressInput.value = data.formatted_address;
         longitudeInput.value = data.geometry.location.lng;
         latitudeInput.value = data.geometry.location.lat;
-        mapElement.map.flyTo({
-            center: [
-                data.geometry.location.lng,
-                data.geometry.location.lat
-            ]
+
+        axios.get(trovieMap.getApiUrl().geocode, {
+            headers: {
+                Accept: 'application/json'
+            },
+            params: {
+                latlng: latitudeInput.value + ',' + longitudeInput.value,
+                api_key: trovieMap.options.apiKey,
+            }
+        }).then(function (response) {
+            let data = response.data.results[0].address_components;
+            document.querySelector('#city_name').value = data[4].short_name;
+            document.querySelector('#district_name').value = data[3].short_name;
         });
-        mapElement.marker.setLngLat([
-            data.geometry.location.lng,
-            data.geometry.location.lat
-        ]);
-        console.log(data);
+
+        // mapElement.map.flyTo({
+        //     center: [
+        //         data.geometry.location.lng,
+        //         data.geometry.location.lat
+        //     ]
+        // });
+        // mapElement.marker.setLngLat([
+        //     data.geometry.location.lng,
+        //     data.geometry.location.lat
+        // ]);
     }).catch(function (error) {
         console.log(error);
     });
 }
-

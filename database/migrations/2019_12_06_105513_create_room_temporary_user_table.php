@@ -18,10 +18,8 @@ class CreateRoomtemporaryuserTable extends Migration
         Schema::create('room_temporary_user', function (Blueprint $table) {
             $table->datetime('date_in');
             $table->integer('room_id')->unsigned();
-            $table->integer('room_temporary_usercol')->unsigned();
             $table->timestamps();
             $table->index(["room_id"]);
-            $table->index(["room_temporary_usercol"]);
         });
     }
 

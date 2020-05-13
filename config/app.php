@@ -18,8 +18,15 @@ return [
 
     'api_key' => [
         'google_map' => env('GOOGLE_MAP_API_KEY', 'AIzaSyCqujlXita6oAQSltFFA-J_qcALc2WwNDU'),
-        'goong_map_api' => env('GOONG_MAP_API_KEY','eWFXafQR0oI29SWsgs4P1aStUFKIxMIE2A3nA9Rq'),
-        'goong_map_titles' => env('GOONG_MAP_API_KEY','jsCUi41ZeIUwlaBHHMJzU72vb7VkImiwdZgGtk7l')
+        'goong_map_api' => env('GOONG_MAP_API_KEY', 'eWFXafQR0oI29SWsgs4P1aStUFKIxMIE2A3nA9Rq'),
+        'goong_map_titles' => env('GOONG_MAP_API_KEY', 'jsCUi41ZeIUwlaBHHMJzU72vb7VkImiwdZgGtk7l')
+    ],
+
+    'room_state' => [
+        'unavailable' => 0,
+        'free' => 1,
+        'waiting' => 2,
+        'full' => 3
     ],
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +52,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +93,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------

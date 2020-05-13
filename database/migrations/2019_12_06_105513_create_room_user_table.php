@@ -16,7 +16,7 @@ class CreateRoomUserTable extends Migration
         Schema::create('room_user', function (Blueprint $table) {
             $table->datetime('date_in');
             $table->integer('room_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->unique();
             $table->boolean('active')->default(true);
             $table->timestamps();
             $table->primary(['room_id', 'user_id','date_in']);

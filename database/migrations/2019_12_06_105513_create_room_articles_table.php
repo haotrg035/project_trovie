@@ -19,11 +19,11 @@ class CreateRoomarticlesTable extends Migration
             $table->integer('id')->unsigned();
             $table->string('title', 60);
             $table->datetime('date_post');
-            $table->integer('homes_id')->unsigned();
-            $table->integer('rooms_id')->unsigned();
+            $table->integer('host_id')->unsigned();
+            $table->integer('room_id')->unsigned();
             $table->timestamps();
-            $table->index(["homes_id"]);
-            $table->index(["rooms_id"]);
+            $table->index(["host_id"]);
+            $table->index(["room_id"]);
         });
     }
 

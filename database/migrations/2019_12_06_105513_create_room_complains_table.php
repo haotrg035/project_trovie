@@ -20,10 +20,10 @@ class CreateRoomcomplainsTable extends Migration
             $table->string('content', 250);
             $table->datetime('time');
             $table->tinyInteger('state')->default('0');
-            $table->integer('home_id')->unsigned();
+            $table->integer('host_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
-            $table->index(["home_id"]);
+            $table->index(["host_id"]);
             $table->index(["user_id"]);
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Helper\TrovieHelper;
 use App\Repositories\HostRepository;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use Illuminate\Database\Schema\Builder;
@@ -16,8 +17,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(HostEloquentRepositoryInterface::class,function (){
+        $this->app->bind(HostEloquentRepositoryInterface::class, function () {
             return new HostRepository();
+        });
+        $this->app->singleton(TrovieHelper::class, function () {
+            return new TrovieHelper();
         });
     }
 

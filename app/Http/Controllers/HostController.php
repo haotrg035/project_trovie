@@ -2,12 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Host;
+use App\Helper\TrovieHelper;
+use App\Http\Requests\Host\StoreRequest;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
-class HostController extends Controller
+class HostController extends BaseController
 {
+
+    /**
+     * @var HostEloquentRepositoryInterface
+     */
+    private $repository;
+
+    public function __construct(HostEloquentRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+        $this->setViewName();
+    }
+
+    function viewName()
+    {
+        return 'nhà trọ';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,28 +33,25 @@ class HostController extends Controller
      */
     public function index()
     {
-        return view('user.host.index');
-    }
+        $this->data['view_name'] = ucwords('danh sách ' . $this->viewName());
+        $this->data['data'] = $this->repository->getAllHostsByAuth();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('user.host.index', [
+            'data' => $this->data
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $result = $this->repository->create($request->all());
+
+        return $this->returnRedirect($result, route('user.host.index'), 'create');
     }
 
     /**
@@ -83,4 +98,5 @@ class HostController extends Controller
     {
         //
     }
+
 }

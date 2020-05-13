@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('home_id')->unsigned();
+            $table->integer('host_id')->unsigned();
             $table->string('name', 60);
             $table->string('announcement', 250)->default('');
             $table->boolean('notice')->default(false);
@@ -25,7 +25,7 @@ class CreateRoomsTable extends Migration
             $table->tinyInteger('type')->unsigned()->default('0');
             $table->string('desc', 250);
             $table->timestamps();
-            $table->index(["home_id"]);
+            $table->index(["host_id"]);
         });
     }
 

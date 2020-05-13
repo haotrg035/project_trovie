@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Host\CreateRequest;
 use App\Models\Host;
 use Illuminate\Http\Request;
 
@@ -21,18 +22,18 @@ class HostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRequest $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        return 'hi';
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Host  $host
+     * @param \App\Models\Host $host
      * @return \Illuminate\Http\Response
      */
     public function show(Host $host)
@@ -43,8 +44,8 @@ class HostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Host  $host
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Host $host
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Host $host)
@@ -55,7 +56,7 @@ class HostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Host  $host
+     * @param \App\Models\Host $host
      * @return \Illuminate\Http\Response
      */
     public function destroy(Host $host)
