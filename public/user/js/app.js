@@ -40968,12 +40968,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tata_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tata-js */ "./node_modules/tata-js/src/tata.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -41017,7 +41014,11 @@ $.ajaxSetup({
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
+/**
+ * import tata toast js
+ */
 
+window.tata = __webpack_require__(/*! tata-js */ "./node_modules/tata-js/src/tata.js");
 
 /***/ }),
 
@@ -41267,8 +41268,8 @@ var TrovieHelper = /*#__PURE__*/function () {
       return str;
     }
   }, {
-    key: "formatMoneyForm",
-    value: function formatMoneyForm(str) {
+    key: "formatCurrencyForm",
+    value: function formatCurrencyForm(str) {
       var array = [];
       var arraystr = [];
       var x = str;
@@ -41328,7 +41329,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  var priceInputs = document.querySelectorAll('.form-group--unit--price .trovie-input');
+  var priceInputs = document.querySelectorAll('.form-group--unit--price .trovie-input,.form-group--unit--water .trovie-input,.form-group--unit--electric .trovie-input');
   var dateInputs = document.querySelectorAll('.form-group--unit--date .trovie-input');
 
   if (priceInputs.length > 0) {
@@ -41338,8 +41339,8 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var input = _step.value;
-        input.addEventListener('input', function (e) {
-          this.value = _TrovieHelper__WEBPACK_IMPORTED_MODULE_0__["TrovieHelper"].formatMoneyForm(this.value);
+        input.addEventListener('input', function () {
+          this.value = _TrovieHelper__WEBPACK_IMPORTED_MODULE_0__["TrovieHelper"].formatCurrencyForm(this.value);
         });
       }
     } catch (err) {

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Helper\TrovieHelper;
 use App\Http\Requests\Host\StoreRequest;
+use App\Models\Host;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
 class HostController extends BaseController
@@ -34,7 +36,7 @@ class HostController extends BaseController
     public function index()
     {
         $this->data['view_name'] = ucwords('danh sách ' . $this->viewName());
-        $this->data['data'] = $this->repository->getAllHostsByAuth();
+        $this->data['data'] = $this->repository->getAllUserHosts();
 
         return view('user.host.index', [
             'data' => $this->data
@@ -57,44 +59,69 @@ class HostController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param \App\Repositories\Interfaces\HostEloquentRepositoryInterface $host
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Host $host
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function show(HostEloquentRepositoryInterface $host)
+    public function show(Host $host)
     {
-        return view('user.host.detail');
-    }
+        try {
+            $this->authorize('view', $host);
+        } catch (AuthorizationException $e) {
+            return redirect('/');
+        }
+        $this->data['view_name'] = ucwords('thông tin ' . $this->viewName());
+        $this->data['data'] = $this->repository->find($host->id)->toArray();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Repositories\Interfaces\HostEloquentRepositoryInterface $host
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(HostEloquentRepositoryInterface $host)
-    {
-        //
+
+        return view('user.host.detail', ['data' => $this->data]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Repositories\Interfaces\HostEloquentRepositoryInterface $host
-     * @return \Illuminate\Http\Response
+     * @param Host $host
+     * @return void
      */
-    public function update(Request $request, HostEloquentRepositoryInterface $host)
+    public function update(Request $request, Host $host)
     {
         //
     }
 
     /**
+     * @param Request $request
+     * @param Host $host
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     */
+    public function updateInfo(Request $request, Host $host)
+    {
+        try {
+            $this->authorize('update', $host);
+        } catch (AuthorizationException $e) {
+            return dd('/');
+        }
+        $result = $this->repository->update($host->id, $request->all());
+        return $this->returnRedirect($request, route('user.host.show', $host->id), 'update');
+    }
+
+    public function updateAddress(Request $request, Host $host)
+    {
+        try {
+            $this->authorize('update', $host);
+        } catch (AuthorizationException $e) {
+            return dd('/');
+        }
+        $result = $this->repository->update($host->id, $request->all());
+        return $this->returnRedirect($request, route('user.host.show', $host->id), 'update');
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Repositories\Interfaces\HostEloquentRepositoryInterface $host
-     * @return \Illuminate\Http\Response
+     * @param Host $host
+     * @return void
      */
-    public function destroy(HostEloquentRepositoryInterface $host)
+    public function destroy(Host $host)
     {
         //
     }

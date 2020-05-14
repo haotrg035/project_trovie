@@ -332,8 +332,8 @@ var TrovieHelper = /*#__PURE__*/function () {
       return str;
     }
   }, {
-    key: "formatMoneyForm",
-    value: function formatMoneyForm(str) {
+    key: "formatCurrencyForm",
+    value: function formatCurrencyForm(str) {
       var array = [];
       var arraystr = [];
       var x = str;

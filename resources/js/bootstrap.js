@@ -48,5 +48,7 @@ $.ajaxSetup({
     }
 });
 
-import tata from 'tata-js';
-
+/**
+ * import tata toast js
+ */
+window.tata = require('tata-js');

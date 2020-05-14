@@ -188,7 +188,7 @@ var TrovieMap = /*#__PURE__*/function () {
         style: 'https://tiles.goong.io/assets/goong_map_web.json',
         center: this.options.center,
         //[lng,lat]
-        zoom: 10
+        zoom: 17
       });
       this._marker = new goongjs.Marker({
         draggale: this.options.draggaleMarkder
@@ -295,21 +295,34 @@ var mapOptions = {
   addressInput: addressInput,
   center: [105, 20]
 };
+var is_edit_address = true;
 var trovieMap = new _TrovieMap__WEBPACK_IMPORTED_MODULE_0__["TrovieMap"](mapOptions);
 var mapElement; //main
 
 document.addEventListener('DOMContentLoaded', function () {
   initAddHostFormMap();
+  document.querySelector('.create-host-modal__form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (is_edit_address) {
+      tata.warn('Thông báo', 'Hãy chọn chính xác địa chỉ theo map!', {
+        duration: 5000
+      });
+      addressInput.classList.add('is-invalid');
+    } else {
+      this.submit();
+    }
+  });
 });
 
 function initAddHostFormMap() {
   if (createHostFormMap !== null) {
-    mapElement = trovieMap.initGoongMap();
-    window.addEventListener('click', function (e) {
-      if (addressResultList.contains(e.target) === false) {
-        addressResultList.innerHTML = '';
-      }
-    });
+    mapElement = trovieMap.initGoongMap(); //Bat su kien click ngoai result list
+    // window.addEventListener('click', function (e) {
+    //     if (addressResultList.contains(e.target) === false) {
+    //         addressResultList.innerHTML = '';
+    //     }
+    // });
   }
 
   addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
@@ -317,6 +330,8 @@ function initAddHostFormMap() {
 
 function _addressInputOnKeyDown() {
   if (addressInput.value.trim() !== '') {
+    is_edit_address = true;
+    addressInput.classList.add('is-invalid');
     axios.get(trovieMap.getApiUrl().autoComplete, {
       headers: {
         Accept: 'application/json'
@@ -337,6 +352,8 @@ function _addressInputOnKeyDown() {
 
 function searchResultItemClickHandler(item) {
   var placeId = item.getAttribute('data-place-id');
+  is_edit_address = false;
+  addressInput.classList.remove('is-invalid');
   axios.get(trovieMap.getApiUrl().detail, {
     headers: {
       Accept: 'application/json'
@@ -351,6 +368,10 @@ function searchResultItemClickHandler(item) {
     addressInput.value = data.formatted_address;
     longitudeInput.value = data.geometry.location.lng;
     latitudeInput.value = data.geometry.location.lat;
+    mapElement.map.flyTo({
+      center: [data.geometry.location.lng, data.geometry.location.lat]
+    });
+    mapElement.marker.setLngLat([data.geometry.location.lng, data.geometry.location.lat]);
     axios.get(trovieMap.getApiUrl().geocode, {
       headers: {
         Accept: 'application/json'
@@ -363,16 +384,7 @@ function searchResultItemClickHandler(item) {
       var data = response.data.results[0].address_components;
       document.querySelector('#city_name').value = data[4].short_name;
       document.querySelector('#district_name').value = data[3].short_name;
-    }); // mapElement.map.flyTo({
-    //     center: [
-    //         data.geometry.location.lng,
-    //         data.geometry.location.lat
-    //     ]
-    // });
-    // mapElement.marker.setLngLat([
-    //     data.geometry.location.lng,
-    //     data.geometry.location.lat
-    // ]);
+    });
   })["catch"](function (error) {
     console.log(error);
   });

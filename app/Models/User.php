@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         $this->belongsToMany(Room::class, 'room_user');
     }
+
+    public function isHostOwner()
+    {
+        return $this->role === 1;
+    }
 }

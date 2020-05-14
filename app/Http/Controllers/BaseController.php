@@ -24,7 +24,7 @@ abstract class BaseController extends Controller
     {
         $_response = [];
         if ($result) {
-            $_response['status'] = true;
+            $_response['status'] = 'success';
             switch ($messageType) {
                 case 'create':
                 {
@@ -43,7 +43,7 @@ abstract class BaseController extends Controller
                 }
             }
         } else {
-            $_response['status'] = false;
+            $_response['status'] = 'error';
             switch ($messageType) {
                 case 'create':
                 {

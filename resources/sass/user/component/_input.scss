@@ -61,18 +61,18 @@
         }
 
         .form-control {
-            padding-right: 2rem;
+            padding-right: 3.5rem;
         }
 
         &--electric {
             &::after {
-                content: '/ kV';
+                content: 'đ / kV';
             }
         }
 
         &--water {
             &::after {
-                content: "/ m3";
+                content: "đ / m3";
             }
         }
 

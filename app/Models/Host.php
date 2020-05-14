@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\TrovieHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Host extends Model
@@ -65,5 +66,15 @@ class Host extends Model
             'users' => $totalUsers,
             'room_type' => $room_type
         ];
+    }
+
+    public function setCostElectricAttribute($value)
+    {
+        $this->attributes['cost_electric'] = TrovieHelper::parseCurrencyString($value);
+    }
+
+    public function setCostWaterAttribute($value)
+    {
+        $this->attributes['cost_water'] = TrovieHelper::parseCurrencyString($value);
     }
 }

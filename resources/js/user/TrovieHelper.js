@@ -98,7 +98,7 @@ class TrovieHelper {
         return str;
     }
 
-    static formatMoneyForm(str) {
+    static formatCurrencyForm(str) {
         const array = [];
         const arraystr = [];
         let x = str;

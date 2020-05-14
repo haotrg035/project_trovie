@@ -16,7 +16,7 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         return Host::class;
     }
 
-    public function getAllHostsByAuth()
+    public function getAllUserHosts()
     {
         $data = $this->_model->where('user_id', auth()->id())->get()->toArray();
         foreach ($data as $key => $host) {
@@ -36,7 +36,26 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         $attributes['user_id'] = auth()->id();
         $attributes['city_id'] = \DB::table('cities')->where('name', $city)->first()->id;
         $attributes['district_id'] = \DB::table('districts')->where('name', $district)->first()->id;
-        
+
         return $this->_model->create($attributes);
+    }
+
+    public function update($id, array $attributes)
+    {
+        if (isset($attributes['city_name'])) {
+            $city = ucwords(TrovieHelper::stripAddressCompoentName($attributes['city_name']));
+            $attributes['city_id'] = \DB::table('cities')->where('name', $city)->first()->id;
+        }
+        if (isset($attributes['district_name'])) {
+            $district = ucwords(TrovieHelper::stripAddressCompoentName($attributes['district_name']));
+            $attributes['district_id'] = \DB::table('districts')->where('name', $district)->first()->id;
+        }
+        $result = $this->find($id);
+        if ($result) {
+            $result->update($attributes);
+            return $result;
+        }
+
+        return false;
     }
 }

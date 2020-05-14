@@ -35,10 +35,13 @@ Route::name('user')->middleware(['auth'])->group(function () {
     });
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('/host', 'HostController')->except([
-        'create',
-    ])->names('user.host');
+Route::middleware(['auth', 'web'])->group(function () {
+    Route::prefix('/host')->name('user.host')->group(function () {
+        Route::patch('/update-info/{host}', 'HostController@updateInfo')->name('.update_info');
+        Route::patch('/update-address/{host}', 'HostController@updateAddress')->name('.update_address');
+    });
+    Route::resource('/host', 'HostController')->except(['create', 'edit'])
+        ->middleware(['host_owner'])->names('user.host');
 });
 
 Auth::routes();

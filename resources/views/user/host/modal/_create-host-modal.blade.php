@@ -109,7 +109,7 @@
                                 <div class="col-lg-4 mb-0 col--custom">
                                     <div class="form-group d-flex flex-column pb-4 mb-0 h-100">
                                         <label for="desc">Mô Tả:</label>
-                                        <textarea name="desc" id="desc" cols="30"
+                                        <textarea name="desc" id="desc" cols="30" required
                                                   class="form-control trovie-input h-auto d-flex flex-fill mb-2 @if($errors->first('desc')) is-invalid  @endif"
                                                   placeholder="Mô tả ngắn về khu trọ">{{old('desc') || ''}}</textarea>
                                         @if($errors->first('desc'))
@@ -142,16 +142,21 @@
                                 <div class="col-12 col-lg-12 col--custom">
                                     <div class="form-group form-group">
                                         <label for="address">Địa chỉ:</label>
-                                        <input type="text" class="form-control trovie-input" name="address"
-                                               id="address" autocomplete="off" required value="{{old('address')}}"
-                                               placeholder="Số nhà, quận, huyện...">
+                                        <input type="text"
+                                               class="form-control trovie-input @if($errors->first('address')) is-invalid  @endif"
+                                               name="address" id="address" autocomplete="off" required
+                                               value="{{old('address')}}" placeholder="Số nhà, quận, huyện...">
+                                        @if($errors->first('address'))
+                                            <div class="invalid-feedback">
+                                                {{$errors->first('address')}}
+                                            </div>
+                                        @endif
                                         <div class="position-relative">
                                             <ul class="address-result-list list-unstyled mb-0">
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="data-address" id="data-address">
                                 <input type="hidden" name="latitude" id="latitude">
                                 <input type="hidden" name="longitude" id="longitude">
                                 <input type="hidden" name="city_name" id="city_name">

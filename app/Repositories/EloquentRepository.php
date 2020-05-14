@@ -5,11 +5,13 @@ namespace App\Repositories;
 
 
 use App\Repositories\Interfaces\EloquentRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class EloquentRepository implements EloquentRepositoryInterface
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
     protected $_model;
 
@@ -39,11 +41,10 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
 
     /**
      * Get All
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return Collection|static[]
      */
     public function getAll()
     {
-
         return $this->_model->all();
     }
 
@@ -54,9 +55,7 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
      */
     public function find($id)
     {
-        $result = $this->_model->find($id);
-
-        return $result;
+        return $this->_model->find($id);
     }
 
     /**

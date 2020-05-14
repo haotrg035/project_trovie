@@ -1,8 +1,9 @@
 @extends('user.master')
+@section('site-title',$data['view_name'])
 @section('panel-content')
     <div class="panel-content panel-content--host">
         <div class="panel-content__header">
-            <h5 class="panel-content__header__title">Thông Tin Nhà Trọ</h5>
+            <h5 class="panel-content__header__title">{{$data['view_name']}}</h5>
             <div class="panel-content__header__content">
                 <ul class="panel-content--host__header__elements list-unstyled">
                     <li class="panel-content--host__header__elements__item">
@@ -24,66 +25,115 @@
                     <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1" class="host-info">
                             <x-slot name="title">Thông Tin</x-slot>
-                            <form action="" class="host-info__form-change-name">
-                                <div class="form-group form-group--edit">
-                                    <input type="text" class="form-control trovie-input"
-                                           name="name" id="name" placeholder=""
-                                           value="Nhà Trọ Võ Văn Kiệt" readonly>
-                                    <a href="javascript:void(0)" class="form-group--edit__edit-btn">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
+                            <form action="{{route('user.host.update_info',$data['data']['id'])}}" id="form-host-info"
+                                  method="post" class="host-info__form-detail">
+                                @method('PATCH')
+                                @csrf
+                                <div class="host-info__form-change-name">
+                                    <div class="form-group form-group--edit">
+                                        <input type="text"
+                                               class="form-control trovie-input @if($errors->first('name')) is-invalid  @endif"
+                                               name="name" id="name" required
+                                               placeholder="Nhập tên khu trọ" data-name="{{$data['data']['name']}}"
+                                               value="{{$data['data']['name']}}" readonly>
+                                        <a href="javascript:void(0)" class="form-group--edit__edit-btn">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    @if($errors->first('name'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('name')}}
+                                        </div>
+                                    @endif
                                 </div>
-                            </form>
-                            <form action="" class="host-info__form-detail">
                                 <div class="row row--custom">
                                     <div class="col-lg-4 col--custom">
                                         <div class="form-group">
-                                            <label for="date_payment">Ngày Ghi Điện:</label>
-                                            <input type="number" min="1" max="31" class="form-control trovie-input"
-                                                   name="date_payment"
-                                                   id="date_payment" placeholder="">
+                                            <label for="date_note_electric">Ngày Ghi Điện:</label>
+                                            <input type="number" min="1" max="31"
+                                                   class="form-control trovie-input @if($errors->first('date_note_electric')) is-invalid  @endif"
+                                                   name="date_note_electric" required
+                                                   value="{{$data['data']['date_note_electric']}}"
+                                                   id="date_note_electric" placeholder="">
+                                            @if($errors->first('date_note_electric'))
+                                                <div class="invalid-feedback">
+                                                    {{$errors->first('date_note_electric')}}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col--custom">
                                         <div class="form-group">
-                                            <label for="date_note_electric">Ngày Ghi Nước:</label>
-                                            <input type="number" min="1" max="31" class="form-control trovie-input"
-                                                   name="date_note_water"
-                                                   id="date_note_electric" placeholder="">
+                                            <label for="date_note_water">Ngày Ghi Nước:</label>
+                                            <input type="number" min="1" max="31" required
+                                                   class="form-control trovie-input @if($errors->first('date_note_water')) is-invalid  @endif"
+                                                   name="date_note_water" value="{{$data['data']['date_note_water']}}"
+                                                   id="date_note_water" placeholder="">
+                                            @if($errors->first('date_note_water'))
+                                                <div class="invalid-feedback">
+                                                    {{$errors->first('date_note_water')}}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col--custom">
                                         <div class="form-group">
                                             <label for="date_payment">Ngày Thu Tiền:</label>
-                                            <input type="number" min="1" max="31" class="form-control trovie-input" name="date_payment"
+                                            <input type="number" min="1" max="31" required
+                                                   class="form-control trovie-input @if($errors->first('date_payment')) is-invalid  @endif"
+                                                   name="date_payment" value="{{$data['data']['date_payment']}}"
                                                    id="date_payment" placeholder="">
+                                            @if($errors->first('date_payment'))
+                                                <div class="invalid-feedback">
+                                                    {{$errors->first('date_payment')}}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col--custom">
                                         <div class="form-group form-group--unit form-group--unit--electric">
-                                            <label for=""><i class="fa fa-bolt text-warning" aria-hidden="true"></i>
-                                                Tiền Điện
-                                                (VNĐ): </label>
-                                            <input type="number"
-                                                   class="form-control trovie-input"
-                                                   name="cost_electricity" id="cost_electricity" placeholder="">
+                                            <label for="cost_electric">
+                                                <i class="fa fa-bolt text-warning" aria-hidden="true"></i>
+                                                Tiền Điện: </label>
+                                            <input type="text" required
+                                                   class="form-control trovie-input @if($errors->first('cost_electric')) is-invalid  @endif"
+                                                   value="{{\App\Helper\TrovieHelper::currencyFormat($data['data']['cost_electric'])}}"
+                                                   name="cost_electric" id="cost_electric" placeholder="">
+                                            @if($errors->first('cost_electric'))
+                                                <div class="invalid-feedback">
+                                                    {{$errors->first('cost_electric')}}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col--custom">
                                         <div class="form-group form-group--unit form-group--unit--water">
-                                            <label for=""><i class="fa fa-tint text-primary" aria-hidden="true"></i>
-                                                Tiền Nước
-                                                (VNĐ): </label>
-                                            <input type="number" class="form-control trovie-input" name="cost_water"
-                                                   id="cost_water" placeholder="">
+                                            <label for="cost_water">
+                                                <i class="fa fa-tint text-primary" aria-hidden="true"></i>
+                                                Tiền Nước: </label>
+                                            <input type="text" required
+                                                   class="form-control trovie-input @if($errors->first('cost_water')) is-invalid  @endif"
+                                                   name="cost_water"
+                                                   id="cost_water" placeholder=""
+                                                   value="{{\App\Helper\TrovieHelper::currencyFormat($data['data']['cost_water'])}}">
+                                            @if($errors->first('cost_water'))
+                                                <div class="invalid-feedback">
+                                                    {{$errors->first('cost_water')}}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Mô Tả:</label>
-                                    <textarea name="desc" id="desc" cols="30" rows="3"
-                                              class="form-control trovie-input"
-                                              placeholder="Mô tả ngắn về khu trọ"></textarea>
+                                    <label for="desc">Mô Tả:</label>
+                                    <textarea name="desc" id="desc" cols="30" rows="3" required
+                                              class="form-control trovie-input @if($errors->first('desc')) is-invalid  @endif"
+                                              placeholder="Mô tả ngắn về khu trọ">{{$data['data']['desc']}}</textarea>
+                                    @if($errors->first('desc'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('desc')}}
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button class="btn btn-base" type="submit">
@@ -97,38 +147,25 @@
                     <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1" class="host-info" body-class="pb-0">
                             <x-slot name="title">Vị trí</x-slot>
-                            <form action="" class="host-info__form-position">
+                            <form action="{{route('user.host.update_address',$data['data']['id'])}}"
+                                  id="form-host-position" method="post"
+                                  class="host-info__form-position">
+                                @method('PATCH')
+                                @csrf
                                 <div class="row row--custom">
-                                    <div class="col-12 col-lg-4 col--custom">
+                                    <div class="col-12 col-lg-12 col--custom">
                                         <div class="form-group form-group">
-                                            <label for="">Địa chỉ:</label>
+                                            <label for="address">Địa chỉ:</label>
                                             <input type="text" class="form-control trovie-input" name="address"
-                                                   id="address"
-                                                   placeholder="Số nhà, quận, huyện...">
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-lg-4 col--custom">
-                                        <div class="form-group form-group">
-                                            <label for="">Quận/Huyện</label>
-                                            <select class="form-control trovie-input" name="city" id="city">
-                                                <option selected disabled>Chọn quận/huyện</option>
-                                                <option>Cần Thơ</option>
-                                                <option>Hồ Chí Minh</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-lg-4 col--custom">
-                                        <div class="form-group form-group">
-                                            <label for="">Tỉnh/Thành phố</label>
-                                            <select class="form-control trovie-input" name="city" id="city">
-                                                <option selected disabled>Chọn tỉnh/thành phố</option>
-                                                <option>Cần Thơ</option>
-                                                <option>Hồ Chí Minh</option>
-                                            </select>
+                                                   id="address" value="{{$data['data']['address']}}" required
+                                                   placeholder="Số nhà, quận/huyện, tỉnh/thành" autocomplete="off"
+                                                   data-address="{{$data['data']['address']}}">
+                                            <ul class="address-result-list list-unstyled mb-0">
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="col-12 col--custom">
-                                        <div id="host-info__form-position__map"
+                                        <div id="form-position__map"
                                              class="host-info__form-position__map"></div>
                                     </div>
                                     <div class="col-12 col--custom d-flex justify-content-end">
@@ -138,6 +175,12 @@
                                         </button>
                                     </div>
                                 </div>
+                                <input type="hidden" name="latitude" id="latitude"
+                                       value="{{$data['data']['latitude']}}" required>
+                                <input type="hidden" name="longitude" id="longitude"
+                                       value="{{$data['data']['longitude']}}" required>
+                                <input type="hidden" name="city_name" id="city_name" required>
+                                <input type="hidden" name="district_name" id="district_name" required>
                             </form>
                         </x-main-card>
                     </div>

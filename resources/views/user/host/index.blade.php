@@ -1,10 +1,6 @@
 @extends('user.master')
 @section('site-title',$data['view_name'])
 @section('panel-content')
-    @if( !empty($response_message))
-        {{dd($response_message)}}
-    @endif
-
     <div class="panel-content panel-content--host">
         <div class="panel-content__header">
             <h5 class="panel-content__header__title">{{$data['view_name']}}</h5>
@@ -28,7 +24,7 @@
                 @foreach($data['data'] as $host)
                     <div class="col-md-4 col--custom">
                         <x-main-card body-class="" class="host-card-wrapper">
-                            <a href="#" class="host-card">
+                            <a href="{{route('user.host.show',$host['id'])}}" class="host-card">
                                 <p class="host-card__name line-clamp" title="{{$host['name']}}"
                                    style="line-height: 1.5em;height: 1.5em;-webkit-line-clamp:1">
                                     {{$host['name']}}

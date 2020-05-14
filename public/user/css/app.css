@@ -273,15 +273,15 @@ a:hover {
 }
 
 .form-group--unit .form-control {
-  padding-right: 2rem;
+  padding-right: 3.5rem;
 }
 
 .form-group--unit--electric::after {
-  content: "/ kV";
+  content: "\111   / kV";
 }
 
 .form-group--unit--water::after {
-  content: "/ m3";
+  content: "\111   / m3";
 }
 
 .form-group--unit--meter::after {
@@ -785,7 +785,7 @@ a:hover {
 
 .address-result-list {
   position: absolute;
-  top: 0;
+  top: 100%;
   left: 0;
   width: 100%;
   z-index: 9;

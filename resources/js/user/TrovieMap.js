@@ -24,7 +24,7 @@ class TrovieMap {
             container: this.options.map,
             style: 'https://tiles.goong.io/assets/goong_map_web.json',
             center: this.options.center, //[lng,lat]
-            zoom: 10
+            zoom: 17
         });
 
         this._marker = new goongjs.Marker({

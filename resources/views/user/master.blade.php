@@ -34,11 +34,28 @@
 </section>
 <!--   Core JS Files   -->
 <script src="{{mix(config('app.user_theme').'/js/app.js')}}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-    });
-</script>
+@if(!empty(session()->get('response_message')))
+    @php($message = session()->get('response_message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @switch($message['status'])
+            @case('success')
+            tata.success('Thông báo', '{{$message['message']}}');
+            @break
+            @case('warning')
+            tata.warn('Thông báo', '{{$message['message']}}');
+            @break
+            @case('error')
+            tata.error('Thông báo', '{{$message['message']}}');
+            @break
+            @default
+            tata.text('Thông báo', '{{$message['message']}}');
+            @endswitch
+            // tata.log('Hello World', 'CSSScript.Com')
+            // tata.info('Hello World', 'CSSScript.Com')
+        });
+    </script>
+@endif
 @yield('script')
 </body>
 </html>
