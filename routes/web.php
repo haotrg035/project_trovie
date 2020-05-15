@@ -39,6 +39,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::prefix('/host')->name('user.host')->group(function () {
         Route::patch('/update-info/{host}', 'HostController@updateInfo')->name('.update_info');
         Route::patch('/update-address/{host}', 'HostController@updateAddress')->name('.update_address');
+        Route::patch('/update-announcement/{host}', 'HostController@updateAnouncement')->name('.update_announcement');
     });
     Route::resource('/host', 'HostController')->except(['create', 'edit'])
         ->middleware(['host_owner'])->names('user.host');

@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\EloquentRepository;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseController extends Controller
 {
@@ -65,4 +67,12 @@ abstract class BaseController extends Controller
         return redirect($route)->with(['response_message' => $_response]);
     }
 
+    public function checkUpdateAuth(Model $model)
+    {
+        try {
+            $this->authorize('update', $model);
+        } catch (AuthorizationException $e) {
+            return redirect('/');
+        }
+    }
 }

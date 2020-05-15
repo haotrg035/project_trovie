@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\Helper\TrovieHelper;
 use App\Models\Host;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class HostRepository extends EloquentRepository implements HostEloquentRepositoryInterface
 {
@@ -50,12 +51,18 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
             $district = ucwords(TrovieHelper::stripAddressCompoentName($attributes['district_name']));
             $attributes['district_id'] = \DB::table('districts')->where('name', $district)->first()->id;
         }
+
+        if (isset($attributes['notice'])) {
+            $attributes['notice'] = 1;
+        } else {
+            $attributes['notice'] = 0;
+        }
+
         $result = $this->find($id);
         if ($result) {
             $result->update($attributes);
             return $result;
         }
-
         return false;
     }
 }

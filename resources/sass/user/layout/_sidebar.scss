@@ -130,6 +130,7 @@
                 &__text {
                     font-size: .8em;
                     display: none;
+                    color: var(--color-base);
                     @include Responsive(LG) {
                         display: inline;
                         font-size: 1rem;
@@ -242,7 +243,7 @@
             text-transform: uppercase;
             font-size: 1rem;
             font-weight: bold;
-            background: var(--color-variant-2);
+            background: var(--color-base);
             color: #ffffff;
             padding: 1rem;
             margin-bottom: 0;
@@ -260,7 +261,7 @@
             &__link {
                 display: flex;
                 align-items: center;
-                color: var(--color-variant-2);
+                color: var(--color-base);
                 padding: .5rem 1rem;
                 font-size: 1rem;
                 @extend %transition-section-item-fast;
@@ -271,7 +272,7 @@
                 }
 
                 &:hover {
-                    background: var(--color-variant-2);
+                    background: var(--color-base);
                     color: #ffffff;
 
                     .fa {
@@ -285,7 +286,7 @@
                     display: flex;
                     justify-content: center;
                     margin-right: .5rem;
-                    color: var(--color-variant);
+                    color: var(--color-base);
                 }
             }
 

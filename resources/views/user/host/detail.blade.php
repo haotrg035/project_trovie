@@ -34,7 +34,7 @@
                                         <input type="text"
                                                class="form-control trovie-input @if($errors->first('name')) is-invalid  @endif"
                                                name="name" id="name" required
-                                               placeholder="Nhập tên khu trọ" data-name="{{$data['data']['name']}}"
+                                               placeholder="Nhập tên khu trọ" data-default="{{$data['data']['name']}}"
                                                value="{{$data['data']['name']}}" readonly>
                                         <a href="javascript:void(0)" class="form-group--edit__edit-btn">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -154,7 +154,7 @@
                                 @csrf
                                 <div class="row row--custom">
                                     <div class="col-12 col-lg-12 col--custom">
-                                        <div class="form-group form-group">
+                                        <div class="form-group">
                                             <label for="address">Địa chỉ:</label>
                                             <input type="text" class="form-control trovie-input" name="address"
                                                    id="address" value="{{$data['data']['address']}}" required
@@ -191,14 +191,19 @@
                     <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1">
                             <x-slot name="title">Thông Báo</x-slot>
-                            <form action="#" class="host-info__form-announce">
+                            <form action="{{route('user.host.update_announcement',$data['data']['id'])}}"
+                                  class="host-info__form-announce" method="POST">
+                                @method('PATCH')
+                                @csrf
                                 <div class="form-group">
-                            <textarea name="announcement" id="announcement" cols="30" rows="3"
-                                      class="form-control trovie-input" placeholder="Nội dung thông báo"></textarea>
+                                    <textarea name="announcement" id="announcement" cols="30" rows="3"
+                                              class="form-control trovie-input"
+                                              placeholder="Nội dung thông báo">{{$data['data']['announcement']}}</textarea>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="toggleThongBao">
+                                        <input name="notice" type="checkbox" class="custom-control-input"
+                                               id="toggleThongBao" @if($data['data']['notice'] === 1) checked @endif>
                                         <label class="custom-control-label" for="toggleThongBao">Bật thông báo</label>
                                     </div>
                                     <button class="btn btn-base" type="submit">

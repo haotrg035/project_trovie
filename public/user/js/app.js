@@ -41331,6 +41331,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 document.addEventListener('DOMContentLoaded', function () {
   var priceInputs = document.querySelectorAll('.form-group--unit--price .trovie-input,.form-group--unit--water .trovie-input,.form-group--unit--electric .trovie-input');
   var dateInputs = document.querySelectorAll('.form-group--unit--date .trovie-input');
+  var inlineEditInputs = document.querySelectorAll('.form-group--edit');
 
   if (priceInputs.length > 0) {
     var _iterator = _createForOfIteratorHelper(priceInputs),
@@ -41367,6 +41368,44 @@ document.addEventListener('DOMContentLoaded', function () {
       _iterator2.e(err);
     } finally {
       _iterator2.f();
+    }
+  }
+
+  if (inlineEditInputs.length > 0) {
+    var _iterator3 = _createForOfIteratorHelper(inlineEditInputs),
+        _step3;
+
+    try {
+      var _loop = function _loop() {
+        var formGroup = _step3.value;
+        var stateToggleBtn = formGroup.querySelector('.form-group--edit__edit-btn');
+        var input = formGroup.querySelector('.trovie-input');
+        stateToggleBtn.addEventListener('click', function () {
+          if (input.getAttribute('readonly') !== null) {
+            input.removeAttribute('readonly');
+            input.focus();
+            stateToggleBtn.setAttribute('title', 'Hủy chỉnh sửa');
+            stateToggleBtn.style.background = 'var(--danger)';
+            stateToggleBtn.querySelector('.fa').classList.remove('fa-pencil-square-o');
+            stateToggleBtn.querySelector('.fa').classList.add('fa-times');
+          } else {
+            input.setAttribute('readonly', '1');
+            input.value = input.getAttribute('data-default');
+            stateToggleBtn.setAttribute('title', 'Chỉnh sửa');
+            stateToggleBtn.style.background = 'var(--color-base)';
+            stateToggleBtn.querySelector('.fa').classList.add('fa-pencil-square-o');
+            stateToggleBtn.querySelector('.fa').classList.remove('fa-times');
+          }
+        });
+      };
+
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
     }
   }
 });

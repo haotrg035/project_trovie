@@ -14,6 +14,8 @@ class Host extends Model
         'user_id',
         'name',
         'desc',
+        'announcement',
+        'notice',
         'address',
         'district_id',
         'city_id',

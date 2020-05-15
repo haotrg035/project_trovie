@@ -8,6 +8,7 @@ use App\Models\Host;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Promise\all;
 
 class HostController extends BaseController
 {
@@ -64,11 +65,7 @@ class HostController extends BaseController
      */
     public function show(Host $host)
     {
-        try {
-            $this->authorize('view', $host);
-        } catch (AuthorizationException $e) {
-            return redirect('/');
-        }
+        $this->checkUpdateAuth($host);
         $this->data['view_name'] = ucwords('thông tin ' . $this->viewName());
         $this->data['data'] = $this->repository->find($host->id)->toArray();
 
@@ -81,11 +78,13 @@ class HostController extends BaseController
      *
      * @param \Illuminate\Http\Request $request
      * @param Host $host
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Host $host)
     {
-        //
+        $this->checkUpdateAuth($host);
+        $result = $this->repository->update($host->id, $request->all());
+        return $this->returnRedirect($result, route('user.host.show', $host->id), 'update');
     }
 
     /**
@@ -95,24 +94,17 @@ class HostController extends BaseController
      */
     public function updateInfo(Request $request, Host $host)
     {
-        try {
-            $this->authorize('update', $host);
-        } catch (AuthorizationException $e) {
-            return dd('/');
-        }
-        $result = $this->repository->update($host->id, $request->all());
-        return $this->returnRedirect($request, route('user.host.show', $host->id), 'update');
+        return $this->update($request, $host);
     }
 
     public function updateAddress(Request $request, Host $host)
     {
-        try {
-            $this->authorize('update', $host);
-        } catch (AuthorizationException $e) {
-            return dd('/');
-        }
-        $result = $this->repository->update($host->id, $request->all());
-        return $this->returnRedirect($request, route('user.host.show', $host->id), 'update');
+        return $this->update($request, $host);
+    }
+
+    public function updateAnouncement(Request $request, Host $host)
+    {
+        return $this->update($request, $host);
     }
 
     /**
