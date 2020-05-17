@@ -15,7 +15,7 @@ class TrovieHelper {
                 url: serverObj.url || '/filepond/api',
                 process: serverObj.process || '/process',
                 headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value
+                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value,
                 }
             }
         };
@@ -26,7 +26,7 @@ class TrovieHelper {
                     type: 'local',
                     file: {
                         name: element.getAttribute('data-poster-name') || 'Ảnh',
-                        size: element.getAttribute('data-poster-size') || 3001025,
+                        size: element.getAttribute('data-poster-size') || '',
                         type: 'image/jpg'
                     },
                     metadata: {

@@ -19,6 +19,7 @@ class CreateHostsTable extends Migration
             $table->string('name', 120);
             $table->string('desc', 350)->default('');
             $table->string('announcement', 250)->default('');
+            $table->string('image')->nullable();
             $table->boolean('notice')->default(false);
             $table->string('address', 250)->default('');
             $table->unsignedInteger('district_id')->default(0);

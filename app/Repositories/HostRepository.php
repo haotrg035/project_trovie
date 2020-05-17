@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Helper\TrovieFile;
 use App\Helper\TrovieHelper;
 use App\Models\Host;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
@@ -23,7 +24,15 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         foreach ($data as $key => $host) {
             $data[$key]['cost_electric'] = TrovieHelper::currencyFormat($host['cost_electric']);
             $data[$key]['cost_water'] = TrovieHelper::currencyFormat($host['cost_electric']);
+            $data[$key]['image'] = 'storage/' . $host['image'];
         }
+        return $data;
+    }
+
+    public function find($id)
+    {
+        $data = $this->_model->find($id);
+        $data->image = 'storage/' . $data->image;
         return $data;
     }
 
@@ -64,5 +73,18 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
             return $result;
         }
         return false;
+    }
+
+    public function updateAvatar($file, $id)
+    {
+        $current_host = $this->find($id);
+        $new_name = '';
+        if (!empty($current_host->image)) {
+            $new_name = TrovieFile::updateFIle($file, $current_host->image, config('filepath.images.avatar.host'));
+        } else {
+            $new_name = TrovieFile::storeFile($file, config('filepath.images.avatar.host'));
+        }
+        $current_host->image = $new_name;
+        return $current_host->save();
     }
 }

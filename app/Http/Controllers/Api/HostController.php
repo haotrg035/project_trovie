@@ -2,21 +2,37 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Host\CreateRequest;
 use App\Models\Host;
+use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
-class HostController extends Controller
+class HostController extends BaseController
 {
+    /**
+     * @var HostEloquentRepositoryInterface
+     */
+    private $repository;
+
+    public function __construct(HostEloquentRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param HostEloquentRepositoryInterface $repository
+     * @return void
      */
     public function index()
     {
-        //
+    }
+
+    protected function viewName()
+    {
+        return 'Nhà Trọ';
     }
 
     /**
@@ -27,7 +43,7 @@ class HostController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        return 'hi';
+
     }
 
     /**
@@ -62,5 +78,11 @@ class HostController extends Controller
     public function destroy(Host $host)
     {
         //
+    }
+
+    public function updateAvatar(Request $request, Host $host)
+    {
+        $result = $this->repository->updateAvatar($request->file('avatar'), $host->id);
+        return $this->getResponse($result, 'update');
     }
 }

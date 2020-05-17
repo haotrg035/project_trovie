@@ -39,11 +39,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function initFileUploader() {
+    if (avatarUploader !== null) {
+        FilePond.create(avatarUploader, TrovieHelper.getOptionsForFIlepondInstance(avatarUploader, {
+            url: '/api/host/update-avatar/',
+            process: avatarUploader.getAttribute('data-host-id'),
+        }));
+    }
     if (galleryUploader !== null) {
         FilePond.create(galleryUploader, TrovieHelper.getOptionsForFIlepondInstance(galleryUploader));
-    }
-    if (avatarUploader !== null) {
-        FilePond.create(avatarUploader, TrovieHelper.getOptionsForFIlepondInstance(avatarUploader));
     }
 }
 

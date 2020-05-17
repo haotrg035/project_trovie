@@ -18,6 +18,6 @@ class checkIsHostOwner
         if (\Auth::user()->isHostOwner()) {
             return $next($request);
         }
-        redirect('/');
+        return redirect('/');
     }
 }

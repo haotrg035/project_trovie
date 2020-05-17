@@ -15,6 +15,7 @@ class Host extends Model
         'name',
         'desc',
         'announcement',
+        'image',
         'notice',
         'address',
         'district_id',
@@ -69,6 +70,11 @@ class Host extends Model
             'room_type' => $room_type
         ];
     }
+
+//    public function getImageAttribute($value)
+//    {
+//        return 'storage/' . $value;
+//    }
 
     public function setCostElectricAttribute($value)
     {

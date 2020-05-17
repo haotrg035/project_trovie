@@ -217,11 +217,15 @@
                     <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1" class="host-avatar">
                             <x-slot name="title">Ảnh Đại Diện</x-slot>
-                            <input class="filepond mb-0" type="file" name="avatar" id="file-avatar"
-                                   data-poster-src="{{asset('storage/image.jpg')}}"
-                                   data-poster-size="3001025"
-                                   data-max-file-size="2MB"
-                                   data-poster-name="Ảnh Đại Diện">
+                            <form action="{{route('api.user.host.update_avatar',$data['data']['id'])}}" method="POST"
+                                  enctype="multipart/form-data">
+                                <input class="filepond mb-0" type="file" name="avatar" id="file-avatar"
+                                       data-host-id="{{$data['data']['id']}}"
+                                       data-poster-src="{{asset($data['data']['image'])}}"
+                                       {{--                                       data-poster-size="3001025"--}}
+                                       data-max-file-size="2MB"
+                                       data-poster-name="Ảnh Đại Diện">
+                            </form>
                         </x-main-card>
                     </div>
                     <div class="col-lg-12 col--custom">

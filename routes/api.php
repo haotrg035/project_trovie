@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-//Route::apiResource('host', 'Api\HostController')->names('api.user.host');
+Route::prefix('host')->group(function () {
+    Route::post('/update-avatar/{host}','Api\HostController@updateAvatar')->name('api.user.host.update_avatar');
+});
+Route::apiResource('host', 'Api\HostController')->names('api.user.host');

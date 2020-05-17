@@ -22,7 +22,7 @@ abstract class BaseController extends Controller
         $this->data['view_name'] = $this->viewName();
     }
 
-    protected function returnRedirect($result, $route, $messageType)
+    protected function getResponse($result, $messageType)
     {
         $_response = [];
         if ($result) {
@@ -64,7 +64,12 @@ abstract class BaseController extends Controller
                 }
             }
         }
-        return redirect($route)->with(['response_message' => $_response]);
+        return $_response;
+    }
+
+    protected function returnRedirect($result, $messageType, $route)
+    {
+        return redirect($route)->with(['response_message' => $this->getResponse($result, $messageType)]);
     }
 
     public function checkUpdateAuth(Model $model)

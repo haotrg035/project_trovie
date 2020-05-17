@@ -16,5 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(HostSeeder::class);
         $this->call(RoomSeeder::class);
+
+        \Illuminate\Support\Facades\DB::table('users')->find(1)->update([
+            'username' => 'haotrg035',
+            'role' => 1
+        ]);
     }
 }

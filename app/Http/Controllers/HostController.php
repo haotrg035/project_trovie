@@ -54,7 +54,7 @@ class HostController extends BaseController
     {
         $result = $this->repository->create($request->all());
 
-        return $this->returnRedirect($result, route('user.host.index'), 'create');
+        return $this->returnRedirect($result, 'create', route('user.host.index'));
     }
 
     /**
@@ -84,7 +84,7 @@ class HostController extends BaseController
     {
         $this->checkUpdateAuth($host);
         $result = $this->repository->update($host->id, $request->all());
-        return $this->returnRedirect($result, route('user.host.show', $host->id), 'update');
+        return $this->returnRedirect($result, 'update', route('user.host.show', $host->id));
     }
 
     /**
@@ -105,6 +105,10 @@ class HostController extends BaseController
     public function updateAnouncement(Request $request, Host $host)
     {
         return $this->update($request, $host);
+    }
+
+    public function updateAvatar(Request $request, Host $host)
+    {
     }
 
     /**

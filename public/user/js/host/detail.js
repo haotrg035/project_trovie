@@ -17392,7 +17392,7 @@ var TrovieHelper = /*#__PURE__*/function () {
             type: 'local',
             file: {
               name: element.getAttribute('data-poster-name') || 'Ảnh',
-              size: element.getAttribute('data-poster-size') || 3001025,
+              size: element.getAttribute('data-poster-size') || '',
               type: 'image/jpg'
             },
             metadata: {
@@ -17661,12 +17661,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function initFileUploader() {
-  if (galleryUploader !== null) {
-    filepond__WEBPACK_IMPORTED_MODULE_0__["create"](galleryUploader, _TrovieHelper__WEBPACK_IMPORTED_MODULE_3__["TrovieHelper"].getOptionsForFIlepondInstance(galleryUploader));
+  if (avatarUploader !== null) {
+    filepond__WEBPACK_IMPORTED_MODULE_0__["create"](avatarUploader, _TrovieHelper__WEBPACK_IMPORTED_MODULE_3__["TrovieHelper"].getOptionsForFIlepondInstance(avatarUploader, {
+      url: '/api/host/update-avatar/',
+      process: avatarUploader.getAttribute('data-host-id')
+    }));
   }
 
-  if (avatarUploader !== null) {
-    filepond__WEBPACK_IMPORTED_MODULE_0__["create"](avatarUploader, _TrovieHelper__WEBPACK_IMPORTED_MODULE_3__["TrovieHelper"].getOptionsForFIlepondInstance(avatarUploader));
+  if (galleryUploader !== null) {
+    filepond__WEBPACK_IMPORTED_MODULE_0__["create"](galleryUploader, _TrovieHelper__WEBPACK_IMPORTED_MODULE_3__["TrovieHelper"].getOptionsForFIlepondInstance(galleryUploader));
   }
 }
 

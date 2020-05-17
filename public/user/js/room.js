@@ -13026,7 +13026,7 @@ var TrovieHelper = /*#__PURE__*/function () {
             type: 'local',
             file: {
               name: element.getAttribute('data-poster-name') || 'Ảnh',
-              size: element.getAttribute('data-poster-size') || 3001025,
+              size: element.getAttribute('data-poster-size') || '',
               type: 'image/jpg'
             },
             metadata: {
