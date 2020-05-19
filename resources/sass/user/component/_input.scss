@@ -61,6 +61,10 @@
         }
 
         .form-control {
+            padding-right: 2rem;
+        }
+
+        .form-control--wide {
             padding-right: 3.5rem;
         }
 
@@ -78,7 +82,7 @@
 
         &--meter {
             &::after {
-                content: "/ m2";
+                content: "m2";
             }
         }
 

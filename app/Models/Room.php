@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\TrovieHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
@@ -35,4 +36,8 @@ class Room extends Model
         return $this->belongsToMany(User::class, 'room_user');
     }
 
+    public function getPriceAttribute($value)
+    {
+        return TrovieHelper::currencyFormat($value);
+    }
 }

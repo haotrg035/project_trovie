@@ -1,5 +1,3 @@
-
-
 <?php
 
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +15,7 @@ class CreateRoomtemporaryuserTable extends Migration
     {
         Schema::create('room_temporary_user', function (Blueprint $table) {
             $table->datetime('date_in');
+            $table->integer('user_id')->unsigned();
             $table->integer('room_id')->unsigned();
             $table->timestamps();
             $table->index(["room_id"]);

@@ -11,9 +11,14 @@ abstract class BaseController extends Controller
 {
     protected $data;
 
+    public function __construct()
+    {
+        $this->setViewName();
+    }
+
     /**
-     * set view's name
-     * @return string
+     * set view name
+     * @return mixed
      */
     abstract protected function viewName();
 
@@ -84,21 +89,18 @@ abstract class BaseController extends Controller
         return redirect($route)->with(['response_message' => $this->getResponse($result, $messageType)]);
     }
 
+    public function checkViewAuth(Model $model)
+    {
+        return $this->authorize('view', $model);
+    }
+
     public function checkUpdateAuth(Model $model)
     {
-        try {
-            $this->authorize('update', $model);
-        } catch (AuthorizationException $e) {
-            return redirect('/');
-        }
+        $this->authorize('update', $model);
     }
 
     public function checkUpdateAuthApi(Model $model)
     {
-        try {
-            $this->authorize('update', $model);
-        } catch (AuthorizationException $e) {
-            return $this->getResponse(false, 'update');
-        }
+        $this->authorize('update', $model);
     }
 }

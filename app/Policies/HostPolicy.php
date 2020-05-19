@@ -19,7 +19,7 @@ class HostPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -31,7 +31,7 @@ class HostPolicy
      */
     public function view(User $user, Host $host)
     {
-        return $user->isHostOwner() && $user->id === $host->user_id ? Response::allow() : Response::deny('Bạn không thể xem trang này');
+        return ($user->isHostOwner() && $user->id === $host->user_id) ? Response::allow() : Response::deny('Bạn không thể xem nhà trọ này.');
     }
 
     /**
@@ -54,7 +54,7 @@ class HostPolicy
      */
     public function update(User $user, Host $host)
     {
-        return $user->id === $host->user_id ? Response::allow() : Response::deny('Bạn không thể sửa nhà trọ này');
+        return $user->role < 2 && $user->id === $host->user_id ? Response::allow() : Response::deny('Bạn không thể sửa nhà trọ này');
     }
 
     /**
@@ -66,7 +66,7 @@ class HostPolicy
      */
     public function delete(User $user, Host $host)
     {
-        return $user->id === $host->user_id;
+        return $user->role < 2 && $user->id === $host->user_id;
     }
 
     /**

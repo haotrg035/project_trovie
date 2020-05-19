@@ -273,6 +273,10 @@ a:hover {
 }
 
 .form-group--unit .form-control {
+  padding-right: 2rem;
+}
+
+.form-group--unit .form-control--wide {
   padding-right: 3.5rem;
 }
 
@@ -285,7 +289,7 @@ a:hover {
 }
 
 .form-group--unit--meter::after {
-  content: "/ m2";
+  content: "m2";
 }
 
 .form-group--unit--man::after {

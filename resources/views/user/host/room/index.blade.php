@@ -1,4 +1,5 @@
 @extends('user.master')
+@section('site-title',$data['view_name'])
 @section('panel-content')
     <div class="panel-content--room">
         <x-panel-header panel-title="Phòng Trọ">
@@ -14,21 +15,21 @@
                     <li class="nav-item panel-content--room__filter--room-type__item">
                         <a href="javascript:void(0)" data-toggle="tab" class="nav-link active"
                            data-room-type="all">
-                            Tất cả <span>(299)</span>
+                            Tất cả <span>({{$data['data']['room_count']['total']}})</span>
                         </a>
                     </li>
                     <li class="nav-item panel-content--room__filter--room-type__item panel-content--room__filter--room-type__item--success">
                         <a href="javascript:void(0)" data-toggle="tab" class="nav-link" data-room-type="success">
-                            Phòng trống <span>(90)</span></a>
+                            Phòng trống <span>({{$data['data']['room_count']['state'][1]}})</span></a>
                     </li>
                     <li class="nav-item panel-content--room__filter--room-type__item panel-content--room__filter--room-type__item--warning">
                         <a href="javascript:void(0)" data-toggle="tab" class="nav-link" data-room-type="warning">
-                            Sắp trả <span>(20)</span>
+                            Sắp trả <span>({{$data['data']['room_count']['state'][2]}})</span>
                         </a>
                     </li>
                     <li class="nav-item panel-content--room__filter--room-type__item panel-content--room__filter--room-type__item--danger">
                         <a href="javascript:void(0)" data-toggle="tab" class="nav-link" data-room-type="danger">
-                            Đã thuê <span>(150)</span>
+                            Đã thuê <span>({{$data['data']['room_count']['state'][3]}})</span>
                         </a>
                     </li>
                 </ul>
@@ -42,225 +43,101 @@
         </x-main-card>
         <div class="tab-content panel-content--room__list-room">
             <div class="row row--custom">
-                <div class="col-6 col-lg-3 col--custom">
-                    <a href="javascript:void(0)" class="room-card room-card--danger">
-                        <p class="room-card__id">P.01</p>
-                        <ul class="room-card__property-list list-unstyled">
-                            <li class="room-card__property-list__item" title="Giá phòng">
+                @foreach($data['data']['room_list'] as $room)
+                    <div class="col-6 col-lg-3 col--custom">
+                        <a href="javascript:void(0)"
+                           class="room-card
+                            @switch($room['state'])
+                           @case(1)
+                               room-card--success
+                               @break
+                           @case(2)
+                               room-card--warning
+                               @break
+                           @case(3)
+                               room-card--danger
+                               @break
+                           @endswitch">
+                            <p class="room-card__id">{{$room['name']}}</p>
+                            <ul class="room-card__property-list list-unstyled">
+                                <li class="room-card__property-list__item" title="Giá phòng">
                                     <span class="room-card__property-list__item__icon">
                                         <i class="fa fa-dollar" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__property-list__item__value mb-0">1.200.000 đ</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Ngày vào ở">
+                                    <p class="room-card__property-list__item__value mb-0">{{$room['price']}} đ</p>
+                                </li>
+                                <li class="room-card__property-list__item" title="Tầng / Khu / Dãy">
                                     <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <i class="fa fa-building" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__property-list__item__value mb-0">07/02/2020</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Số người thuê">
+                                    <p class="room-card__property-list__item__value mb-0">Tầng/ Khu/ Dãy: {{$room['floor']}}</p>
+                                </li>
+                                <li class="room-card__property-list__item" title="Số người thuê">
                                     <span class="room-card__property-list__item__icon">
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__property-list__item__value mb-0">2 / 2</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Diện tích">
+                                    <p class="room-card__property-list__item__value mb-0">2 / {{$room['members']}}</p>
+                                </li>
+                                <li class="room-card__property-list__item" title="Diện tích">
                                     <span class="room-card__property-list__item__icon">
                                         <i class="fa fa-expand" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__property-list__item__value mb-0">15 m<sup>2</sup></p>
-                            </li>
-                        </ul>
-                        <ul class="room-card__service-list list-unstyled">
-                            <li class="room-card__service-list__item">
+                                    <p class="room-card__property-list__item__value mb-0">{{$room['acreage']}} m<sup>2</sup></p>
+                                </li>
+                            </ul>
+                            <ul class="room-card__service-list list-unstyled">
+                                <li class="room-card__service-list__item">
                                     <span class="room-card__service-list__item__icon">
                                         <i class="fa fa-wifi" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__service-list__item__value mb-0">Wifi</p>
-                            </li>
-                            <li class="room-card__service-list__item">
+                                    <p class="room-card__service-list__item__value mb-0">Wifi</p>
+                                </li>
+                                <li class="room-card__service-list__item">
                                     <span class="room-card__service-list__item__icon">
                                         <i class="fa fa-paw" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__service-list__item__value mb-0">Nuôi thú cưng</p>
-                            </li>
-                            <li class="room-card__service-list__item">
+                                    <p class="room-card__service-list__item__value mb-0">Nuôi thú cưng</p>
+                                </li>
+                                <li class="room-card__service-list__item">
                                     <span class="room-card__service-list__item__icon">
                                         <i class="fa fa-intersex" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__service-list__item__value mb-0">Nam nữ ở chung</p>
-                            </li>
-                            <li class="room-card__service-list__item">
+                                    <p class="room-card__service-list__item__value mb-0">Nam nữ ở chung</p>
+                                </li>
+                                <li class="room-card__service-list__item">
                                     <span class="room-card__service-list__item__icon">
                                         <i class="fa fa-wifi" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__service-list__item__value mb-0">Ban công</p>
-                            </li>
-                            <li class="room-card__service-list__item">
+                                    <p class="room-card__service-list__item__value mb-0">Ban công</p>
+                                </li>
+                                <li class="room-card__service-list__item">
                                     <span class="room-card__service-list__item__icon">
                                         <i class="fa fa-paw" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__service-list__item__value mb-0">Bảo vệ</p>
-                            </li>
-                            <li class="room-card__service-list__item">
+                                    <p class="room-card__service-list__item__value mb-0">Bảo vệ</p>
+                                </li>
+                                <li class="room-card__service-list__item">
                                     <span class="room-card__service-list__item__icon">
                                         <i class="fa fa-intersex" aria-hidden="true"></i>
                                     </span>
-                                <p class="room-card__service-list__item__value mb-0">Máy giặt</p>
-                            </li>
-                        </ul>
-                        <ul class="room-card__customer-list list-unstyled">
-                            <li class="room-card__customer-list__item">
+                                    <p class="room-card__service-list__item__value mb-0">Máy giặt</p>
+                                </li>
+                            </ul>
+                            <ul class="room-card__customer-list list-unstyled">
+                                <li class="room-card__customer-list__item">
                                     <span class="room-card__customer-list__item__avatar">
                                         <img src="{{asset('storage/image.jpg')}}" alt="">
                                     </span>
-                            </li>
-                            <li class="room-card__customer-list__item">
+                                </li>
+                                <li class="room-card__customer-list__item">
                                     <span class="room-card__customer-list__item__avatar">
                                         <img src="{{asset('storage/image.jpg')}}" alt="">
                                     </span>
-                            </li>
-                        </ul>
-                    </a>
-                </div>
-                <div class="col-6 col-lg-3 col--custom">
-                    <a href="javascript:void(0)" class="room-card room-card--success">
-                        <p class="room-card__id">P.01</p>
-                        <ul class="room-card__property-list list-unstyled">
-                            <li class="room-card__property-list__item" title="Giá phòng">
-                                    <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__property-list__item__value mb-0">1.200.000 đ</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Ngày vào ở">
-                                    <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__property-list__item__value mb-0">07/02/2020</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Số người thuê">
-                                    <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-users" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__property-list__item__value mb-0">0 / 2</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Diện tích">
-                                    <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-expand" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__property-list__item__value mb-0">15 m<sup>2</sup></p>
-                            </li>
-                        </ul>
-                        <ul class="room-card__service-list list-unstyled">
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-wifi" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Wifi</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-paw" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Nuôi thú cưng</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-intersex" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Nam nữ ở chung</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-wifi" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Ban công</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-paw" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Bảo vệ</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-intersex" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Máy giặt</p>
-                            </li>
-                        </ul>
-                    </a>
-                </div>
-                <div class="col-6 col-lg-3 col--custom">
-                    <a href="javascript:void(0)" class="room-card room-card--warning">
-                        <p class="room-card__id">P.01</p>
-                        <ul class="room-card__property-list list-unstyled">
-                            <li class="room-card__property-list__item" title="Giá phòng">
-                                    <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__property-list__item__value mb-0">1.200.000 đ</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Ngày vào ở">
-                                    <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__property-list__item__value mb-0">07/02/2020</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Số người thuê">
-                                    <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-users" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__property-list__item__value mb-0">0 / 2</p>
-                            </li>
-                            <li class="room-card__property-list__item" title="Diện tích">
-                                    <span class="room-card__property-list__item__icon">
-                                        <i class="fa fa-expand" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__property-list__item__value mb-0">15 m<sup>2</sup></p>
-                            </li>
-                        </ul>
-                        <ul class="room-card__service-list list-unstyled">
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-wifi" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Wifi</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-paw" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Nuôi thú cưng</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-intersex" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Nam nữ ở chung</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-wifi" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Ban công</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-paw" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Bảo vệ</p>
-                            </li>
-                            <li class="room-card__service-list__item">
-                                    <span class="room-card__service-list__item__icon">
-                                        <i class="fa fa-intersex" aria-hidden="true"></i>
-                                    </span>
-                                <p class="room-card__service-list__item__value mb-0">Máy giặt</p>
-                            </li>
-                        </ul>
-                    </a>
-                </div>
+                                </li>
+                            </ul>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
         @include('user.host.room.modal._room-modal')

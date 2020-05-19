@@ -11,7 +11,7 @@
     <meta name="goong-map-api-key" content="{{config('app.api_key.goong_map_api')}}">
     <meta name="goong-map-titles-key" content="{{config('app.api_key.goong_map_titles')}}">
     <title>
-        @hasSection('site-title') @yield('site-title') - @endif {{config('app.name')}}
+        {{config('app.name')}}@hasSection('site-title') - @yield('site-title')@endif
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>

@@ -7,13 +7,14 @@
             <div class="panel-content__header__content">
                 <ul class="panel-content--host__header__elements list-unstyled">
                     <li class="panel-content--host__header__elements__item">
-                        <a href="#" class="btn rounded-0 btn-base-outline">
+                        <a href="{{route('user.host.room.index',$data['data']['id'])}}"
+                           class="btn rounded-0 btn-base-outline">
                             <i class="fa fa-home" aria-hidden="true"></i>&nbsp;Phòng Trọ
                         </a>
                     </li>
                     <li class="panel-content--host__header__elements__item">
-                        <a href="#" class="btn rounded-0 btn-base-outline">
-                            <i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Tiện Ích
+                        <a href="#" class="btn rounded-0 btn-outline-danger">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Xóa Nhà Trọ
                         </a>
                     </li>
                 </ul>
@@ -96,7 +97,7 @@
                                                 <i class="fa fa-bolt text-warning" aria-hidden="true"></i>
                                                 Tiền Điện: </label>
                                             <input type="text" required
-                                                   class="form-control trovie-input @if($errors->first('cost_electric')) is-invalid  @endif"
+                                                   class="form-control form-control--wide trovie-input @if($errors->first('cost_electric')) is-invalid  @endif"
                                                    value="{{\App\Helper\TrovieHelper::currencyFormat($data['data']['cost_electric'])}}"
                                                    name="cost_electric" id="cost_electric" placeholder="">
                                             @if($errors->first('cost_electric'))
@@ -112,7 +113,7 @@
                                                 <i class="fa fa-tint text-primary" aria-hidden="true"></i>
                                                 Tiền Nước: </label>
                                             <input type="text" required
-                                                   class="form-control trovie-input @if($errors->first('cost_water')) is-invalid  @endif"
+                                                   class="form-control form-control--wide trovie-input @if($errors->first('cost_water')) is-invalid  @endif"
                                                    name="cost_water"
                                                    id="cost_water" placeholder=""
                                                    value="{{\App\Helper\TrovieHelper::currencyFormat($data['data']['cost_water'])}}">

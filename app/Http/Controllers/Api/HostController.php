@@ -17,6 +17,7 @@ class HostController extends BaseController
 
     public function __construct(HostEloquentRepositoryInterface $repository)
     {
+        parent::__construct();
         $this->repository = $repository;
     }
 

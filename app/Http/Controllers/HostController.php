@@ -20,8 +20,8 @@ class HostController extends BaseController
 
     public function __construct(HostEloquentRepositoryInterface $repository)
     {
+        parent::__construct();
         $this->repository = $repository;
-        $this->setViewName();
     }
 
     function viewName()
@@ -65,7 +65,7 @@ class HostController extends BaseController
      */
     public function show(Host $host)
     {
-        $this->checkUpdateAuth($host);
+        $this->checkViewAuth($host);
         $this->data['view_name'] = ucwords('thông tin ' . $this->viewName());
         $this->data['data'] = $this->repository->getHostDetail($host->id);
 
