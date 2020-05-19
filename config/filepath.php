@@ -3,11 +3,11 @@ return [
     'images' => [
         'avatar' => [
             'host' => 'avatars/host',
-            'room' => 'galleries/host'
+            'room' => 'avatars/room'
         ],
-        'galleries' => [
-            'host' => 'avatars/room',
-            'room' => 'galleries/room'
+        'gallery' => [
+            'host' => 'gallery/host',
+            'room' => 'gallery/room'
         ]
     ]
 ];

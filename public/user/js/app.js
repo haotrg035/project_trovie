@@ -40994,6 +40994,7 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -41008,17 +41009,243 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+// $.ajaxSetup({
+//     headers: {
+//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     }
+// });
 
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
 /**
  * import tata toast js
  */
 
 window.tata = __webpack_require__(/*! tata-js */ "./node_modules/tata-js/src/tata.js");
+
+/***/ }),
+
+/***/ "./resources/js/components/input.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/input.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _user_TrovieHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../user/TrovieHelper */ "./resources/js/user/TrovieHelper.js");
+/* harmony import */ var flatpickr_dist_l10n_vn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/l10n/vn */ "./node_modules/flatpickr/dist/l10n/vn.js");
+/* harmony import */ var flatpickr_dist_l10n_vn__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_l10n_vn__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/flatpickr.js");
+/* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flatpickr__WEBPACK_IMPORTED_MODULE_2__);
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  var priceInputs = document.querySelectorAll('.form-group--unit--price .trovie-input,.form-group--unit--water .trovie-input,.form-group--unit--electric .trovie-input');
+  var dateInputs = document.querySelectorAll('.form-group--unit--date .trovie-input');
+  var inlineEditInputs = document.querySelectorAll('.form-group--edit');
+
+  if (priceInputs.length > 0) {
+    var _iterator = _createForOfIteratorHelper(priceInputs),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var input = _step.value;
+        input.addEventListener('input', function () {
+          this.value = _user_TrovieHelper__WEBPACK_IMPORTED_MODULE_0__["TrovieHelper"].formatCurrencyForm(this.value);
+        });
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }
+
+  if (dateInputs.length > 0) {
+    var _iterator2 = _createForOfIteratorHelper(dateInputs),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var _input = _step2.value;
+        flatpickr__WEBPACK_IMPORTED_MODULE_2___default()(_input, {
+          enableTime: false,
+          dateFormat: 'd/m/Y',
+          locale: flatpickr_dist_l10n_vn__WEBPACK_IMPORTED_MODULE_1__["Vietnamese"]
+        });
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  }
+
+  if (inlineEditInputs.length > 0) {
+    var _iterator3 = _createForOfIteratorHelper(inlineEditInputs),
+        _step3;
+
+    try {
+      var _loop = function _loop() {
+        var formGroup = _step3.value;
+        var stateToggleBtn = formGroup.querySelector('.form-group--edit__edit-btn');
+        var input = formGroup.querySelector('.trovie-input');
+        stateToggleBtn.addEventListener('click', function () {
+          if (input.getAttribute('readonly') !== null) {
+            input.removeAttribute('readonly');
+            input.focus();
+            stateToggleBtn.setAttribute('title', 'Hủy chỉnh sửa');
+            stateToggleBtn.style.background = 'var(--danger)';
+            stateToggleBtn.querySelector('.fa').classList.remove('fa-pencil-square-o');
+            stateToggleBtn.querySelector('.fa').classList.add('fa-times');
+          } else {
+            input.setAttribute('readonly', '1');
+            input.value = input.getAttribute('data-default');
+            stateToggleBtn.setAttribute('title', 'Chỉnh sửa');
+            stateToggleBtn.style.background = 'var(--color-base)';
+            stateToggleBtn.querySelector('.fa').classList.add('fa-pencil-square-o');
+            stateToggleBtn.querySelector('.fa').classList.remove('fa-times');
+          }
+        });
+      };
+
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/trovie_gallery.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/trovie_gallery.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var galleries = document.querySelectorAll('.trovie-gallery');
+document.addEventListener('DOMContentLoaded', function () {
+  if (galleries.length > 0) {
+    var _iterator = _createForOfIteratorHelper(galleries),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var gallery = _step.value;
+        var uploadUrl = gallery.getAttribute('data-upload-url');
+        var uploadInput = gallery.querySelector('input[type=file]');
+        var galleryItems = gallery.querySelectorAll('.gallery__item:not(.gallery__item--upload)');
+
+        if (uploadInput !== null) {
+          galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl);
+        }
+
+        if (galleryItems.length > 0) {
+          var _iterator2 = _createForOfIteratorHelper(galleryItems),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var item = _step2.value;
+              galleryRemoveBtnHandler(item);
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }
+});
+
+function galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl) {
+  uploadInput.addEventListener('change', function () {
+    var formData = new FormData(gallery.querySelector('form'));
+    var newInput = cloneGalleryInput(uploadInput);
+    axios.post(uploadUrl, formData).then(function (response) {
+      var item = renderGalleryItem(response.data.data);
+      galleryInputOnChangeHandler(newInput, gallery, uploadUrl);
+      gallery.querySelector('.row').append(item);
+      tata.success('Thành công', response.data.message);
+    })["catch"](function (response) {
+      tata.error('Lỗi', response.message);
+      galleryInputOnChangeHandler(newInput, gallery, uploadUrl);
+    }).then(function () {
+      // always executed
+      uploadInput.parentNode.replaceChild(newInput, uploadInput);
+    });
+  });
+}
+
+function cloneGalleryInput(oldInput) {
+  var newInput = document.createElement("input");
+  newInput.type = "file";
+  newInput.name = oldInput.name;
+  newInput.className = oldInput.className || '';
+  newInput.title = oldInput.title;
+  return newInput;
+}
+
+function renderGalleryItem(data) {
+  var itemWrapper = document.createElement('a');
+  var item = document.createElement('div');
+  var item__img = document.createElement('img');
+  var item__remove = document.createElement('span');
+  itemWrapper.className = 'col-6 col-lg-4 col--custom';
+  itemWrapper.href = 'javascript:void(0)';
+  item.className = 'gallery__item';
+  item.setAttribute('data-delete-url', data.delete_url);
+  item__img.className = 'item__image';
+  item__img.src = data.image;
+  item__remove.className = 'item__remove';
+  item__remove.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+  item.append(item__img);
+  item.append(item__remove);
+  galleryRemoveBtnHandler(item);
+  itemWrapper.append(item);
+  return itemWrapper;
+}
+
+function galleryRemoveBtnHandler(item) {
+  item.querySelector('.item__remove').addEventListener('click', function () {
+    if (confirm('Bạn có chắc muốn xóa ảnh này?')) {
+      var deleteUrl = item.getAttribute('data-delete-url');
+      axios["delete"](deleteUrl).then(function (response) {
+        var parent = item.parentNode;
+        tata.success('Thành công', response.data.message);
+        parent.parentNode.removeChild(parent);
+      })["catch"](function (response) {
+        tata.error('Lỗi', response.data.message);
+      });
+    }
+  });
+}
 
 /***/ }),
 
@@ -41305,113 +41532,6 @@ var TrovieHelper = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./resources/js/user/input.js":
-/*!************************************!*\
-  !*** ./resources/js/user/input.js ***!
-  \************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TrovieHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TrovieHelper */ "./resources/js/user/TrovieHelper.js");
-/* harmony import */ var flatpickr_dist_l10n_vn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/l10n/vn */ "./node_modules/flatpickr/dist/l10n/vn.js");
-/* harmony import */ var flatpickr_dist_l10n_vn__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_l10n_vn__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/flatpickr.js");
-/* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flatpickr__WEBPACK_IMPORTED_MODULE_2__);
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  var priceInputs = document.querySelectorAll('.form-group--unit--price .trovie-input,.form-group--unit--water .trovie-input,.form-group--unit--electric .trovie-input');
-  var dateInputs = document.querySelectorAll('.form-group--unit--date .trovie-input');
-  var inlineEditInputs = document.querySelectorAll('.form-group--edit');
-
-  if (priceInputs.length > 0) {
-    var _iterator = _createForOfIteratorHelper(priceInputs),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var input = _step.value;
-        input.addEventListener('input', function () {
-          this.value = _TrovieHelper__WEBPACK_IMPORTED_MODULE_0__["TrovieHelper"].formatCurrencyForm(this.value);
-        });
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-  }
-
-  if (dateInputs.length > 0) {
-    var _iterator2 = _createForOfIteratorHelper(dateInputs),
-        _step2;
-
-    try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var _input = _step2.value;
-        flatpickr__WEBPACK_IMPORTED_MODULE_2___default()(_input, {
-          enableTime: false,
-          dateFormat: 'd/m/Y',
-          locale: flatpickr_dist_l10n_vn__WEBPACK_IMPORTED_MODULE_1__["Vietnamese"]
-        });
-      }
-    } catch (err) {
-      _iterator2.e(err);
-    } finally {
-      _iterator2.f();
-    }
-  }
-
-  if (inlineEditInputs.length > 0) {
-    var _iterator3 = _createForOfIteratorHelper(inlineEditInputs),
-        _step3;
-
-    try {
-      var _loop = function _loop() {
-        var formGroup = _step3.value;
-        var stateToggleBtn = formGroup.querySelector('.form-group--edit__edit-btn');
-        var input = formGroup.querySelector('.trovie-input');
-        stateToggleBtn.addEventListener('click', function () {
-          if (input.getAttribute('readonly') !== null) {
-            input.removeAttribute('readonly');
-            input.focus();
-            stateToggleBtn.setAttribute('title', 'Hủy chỉnh sửa');
-            stateToggleBtn.style.background = 'var(--danger)';
-            stateToggleBtn.querySelector('.fa').classList.remove('fa-pencil-square-o');
-            stateToggleBtn.querySelector('.fa').classList.add('fa-times');
-          } else {
-            input.setAttribute('readonly', '1');
-            input.value = input.getAttribute('data-default');
-            stateToggleBtn.setAttribute('title', 'Chỉnh sửa');
-            stateToggleBtn.style.background = 'var(--color-base)';
-            stateToggleBtn.querySelector('.fa').classList.add('fa-pencil-square-o');
-            stateToggleBtn.querySelector('.fa').classList.remove('fa-times');
-          }
-        });
-      };
-
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        _loop();
-      }
-    } catch (err) {
-      _iterator3.e(err);
-    } finally {
-      _iterator3.f();
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/user/sidebar.js":
 /*!**************************************!*\
   !*** ./resources/js/user/sidebar.js ***!
@@ -41448,15 +41568,16 @@ document.addEventListener('DOMContentLoaded', function () {
 /***/ }),
 
 /***/ 0:
-/*!******************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/js/user/sidebar.js ./resources/js/user/input.js ./resources/sass/user/app.scss ***!
-  \******************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/js/user/sidebar.js ./resources/js/components/input.js ./resources/js/components/trovie_gallery.js ./resources/sass/user/app.scss ***!
+  \********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /var/www/html/trovie/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /var/www/html/trovie/resources/js/user/sidebar.js */"./resources/js/user/sidebar.js");
-__webpack_require__(/*! /var/www/html/trovie/resources/js/user/input.js */"./resources/js/user/input.js");
+__webpack_require__(/*! /var/www/html/trovie/resources/js/components/input.js */"./resources/js/components/input.js");
+__webpack_require__(/*! /var/www/html/trovie/resources/js/components/trovie_gallery.js */"./resources/js/components/trovie_gallery.js");
 module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/sass/user/app.scss */"./resources/sass/user/app.scss");
 
 

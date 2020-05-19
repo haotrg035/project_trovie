@@ -17,7 +17,7 @@ class CreateHostsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('name', 120);
-            $table->string('desc', 350)->default('');
+            $table->string('desc', 500)->default('');
             $table->string('announcement', 250)->default('');
             $table->string('image')->nullable();
             $table->boolean('notice')->default(false);

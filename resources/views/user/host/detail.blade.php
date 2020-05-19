@@ -197,7 +197,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <textarea name="announcement" id="announcement" cols="30" rows="3"
-                                              class="form-control trovie-input"
+                                              class="form-control trovie-input" required
                                               placeholder="Nội dung thông báo">{{$data['data']['announcement']}}</textarea>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -231,21 +231,9 @@
                     <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1" class="host-gallery" body-class="pb-0">
                             <x-slot name="title">Album Ảnh</x-slot>
-                            <input class="filepond" type="file" name="gallery" id="file-gallery" multiple
-                                   data-max-file-size="2MB">
-                            <div class="trovie-gallery">
-                                <div class="row row--custom">
-                                    <a href="javascript:void(0)" class="col-6 col-lg-4 col--custom">
-                                        <div class="trovie-gallery__item">
-                                            <img class="trovie-gallery__item__image"
-                                                 src="{{asset('storage/image.jpg')}}" alt="">
-                                            <span class="trovie-gallery__item__remove">
-                                                <i class="fa fa-times" aria-hidden="true"></i>
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                            <x-trovie-gallery :gallery-items="$data['data']['gallery']"
+                                              upload-url="{{route('api.user.host.gallery_add',$data['data']['id'])}}">
+                            </x-trovie-gallery>
                         </x-main-card>
                     </div>
                 </div>

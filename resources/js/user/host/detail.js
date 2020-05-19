@@ -6,7 +6,6 @@ import {TrovieMap} from "../TrovieMap";
 
 window.goongjs = require('@goongmaps/goong-js');
 FilePond.registerPlugin(FilePondPluginImagePreview, FilePondPluginFilePoster);
-let galleryUploader = document.querySelector('#file-gallery');
 let avatarUploader = document.querySelector('#file-avatar');
 let updateHostFormMap = document.getElementById('form-position__map');
 let addressInput = document.querySelector('.host-info__form-position input[name=address]');
@@ -44,9 +43,6 @@ function initFileUploader() {
             url: '/api/host/update-avatar/',
             process: avatarUploader.getAttribute('data-host-id'),
         }));
-    }
-    if (galleryUploader !== null) {
-        FilePond.create(galleryUploader, TrovieHelper.getOptionsForFIlepondInstance(galleryUploader));
     }
 }
 

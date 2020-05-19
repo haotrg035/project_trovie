@@ -17629,7 +17629,6 @@ __webpack_require__.r(__webpack_exports__);
 
 window.goongjs = __webpack_require__(/*! @goongmaps/goong-js */ "./node_modules/@goongmaps/goong-js/dist/goong-js.js");
 filepond__WEBPACK_IMPORTED_MODULE_0__["registerPlugin"](filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_1___default.a, filepond_plugin_file_poster__WEBPACK_IMPORTED_MODULE_2___default.a);
-var galleryUploader = document.querySelector('#file-gallery');
 var avatarUploader = document.querySelector('#file-avatar');
 var updateHostFormMap = document.getElementById('form-position__map');
 var addressInput = document.querySelector('.host-info__form-position input[name=address]');
@@ -17666,10 +17665,6 @@ function initFileUploader() {
       url: '/api/host/update-avatar/',
       process: avatarUploader.getAttribute('data-host-id')
     }));
-  }
-
-  if (galleryUploader !== null) {
-    filepond__WEBPACK_IMPORTED_MODULE_0__["create"](galleryUploader, _TrovieHelper__WEBPACK_IMPORTED_MODULE_3__["TrovieHelper"].getOptionsForFIlepondInstance(galleryUploader));
   }
 }
 

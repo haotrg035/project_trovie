@@ -67,7 +67,7 @@ class HostController extends BaseController
     {
         $this->checkUpdateAuth($host);
         $this->data['view_name'] = ucwords('thông tin ' . $this->viewName());
-        $this->data['data'] = $this->repository->find($host->id)->toArray();
+        $this->data['data'] = $this->repository->getHostDetail($host->id);
 
 
         return view('user.host.detail', ['data' => $this->data]);
@@ -105,10 +105,6 @@ class HostController extends BaseController
     public function updateAnouncement(Request $request, Host $host)
     {
         return $this->update($request, $host);
-    }
-
-    public function updateAvatar(Request $request, Host $host)
-    {
     }
 
     /**

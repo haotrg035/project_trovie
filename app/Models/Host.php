@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\TrovieFile;
 use App\Helper\TrovieHelper;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,6 +34,11 @@ class Host extends Model
     public function rooms()
     {
         return $this->hasMany(Room::class, 'host_id', 'id');
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany(HostGallery::class, 'host_id', 'id');
     }
 
     function getCountableInfoAttribute()
@@ -70,11 +76,6 @@ class Host extends Model
             'room_type' => $room_type
         ];
     }
-
-//    public function getImageAttribute($value)
-//    {
-//        return 'storage/' . $value;
-//    }
 
     public function setCostElectricAttribute($value)
     {

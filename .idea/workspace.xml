@@ -2,32 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50936285-61d7-4bf1-ada2-6d577016bf8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Helper/TrovieFile.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/filepath.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/trovie.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trovie.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/trovie_gallery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sass/user/component/_trovie-gallery.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helper/TrovieFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helper/TrovieFile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/HostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/HostController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/checkIsHostOwner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/checkIsHostOwner.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Host.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Host.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/HostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/HostRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/Interfaces/HostEloquentRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Interfaces/HostEloquentRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/filepath.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filepath.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_hosts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_hosts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_rooms_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_rooms_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/user/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/host/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/host/detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/user/TrovieHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/TrovieHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/user/host/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/host/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/user/input.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/input.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/user/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/user/layout/_master.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/layout/_master.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/host/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/host/detail.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +67,13 @@
         <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="host_gallery: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -226,24 +234,24 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/config" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/sass/user/component" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/sass/user/component" />
+      <recent name="$PROJECT_DIR$/config" />
+      <recent name="$PROJECT_DIR$/public/storage" />
+      <recent name="$PROJECT_DIR$/resources/lang/en" />
+      <recent name="$PROJECT_DIR$/database" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components" />
       <recent name="$PROJECT_DIR$/resources/lang/vi" />
       <recent name="$PROJECT_DIR$/database/factories" />
       <recent name="$PROJECT_DIR$/database/factories/Models" />
       <recent name="$PROJECT_DIR$/resources/js/user/host" />
-      <recent name="$PROJECT_DIR$/app/Repositories/Interfaces" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/config" />
-      <recent name="$PROJECT_DIR$/public/storage" />
-      <recent name="$PROJECT_DIR$/resources/lang/en" />
-      <recent name="$PROJECT_DIR$/resources/sass/user/component" />
-      <recent name="$PROJECT_DIR$/database" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -305,6 +313,10 @@
       <workItem from="1589732243629" duration="386000" />
       <workItem from="1589732650974" duration="4089000" />
       <workItem from="1589736764144" duration="3784000" />
+      <workItem from="1589776784641" duration="6239000" />
+      <workItem from="1589789036718" duration="91000" />
+      <workItem from="1589789607633" duration="5766000" />
+      <workItem from="1589811280978" duration="6662000" />
     </task>
     <servers />
   </component>
@@ -384,10 +396,10 @@
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="463" y="190" width="672" height="677" key="run.anything.popup/0.24.1600.831@0.24.1600.831" timestamp="1589557040975" />
-    <state x="463" y="176" width="672" height="678" key="search.everywhere.popup" timestamp="1589314611073">
+    <state x="463" y="176" width="672" height="678" key="search.everywhere.popup" timestamp="1589794236562">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
-    <state x="463" y="176" width="672" height="678" key="search.everywhere.popup/0.24.1600.831@0.24.1600.831" timestamp="1589314611073" />
+    <state x="463" y="176" width="672" height="678" key="search.everywhere.popup/0.24.1600.831@0.24.1600.831" timestamp="1589794236562" />
     <state x="529" y="322" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1589734689409">
       <screen x="0" y="24" width="1600" height="831" />
     </state>

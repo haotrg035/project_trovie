@@ -6,7 +6,7 @@ namespace App\Helper;
 
 use \File;
 
-abstract class TrovieFile
+class TrovieFile
 {
 
     /**
@@ -26,30 +26,33 @@ abstract class TrovieFile
 
     /**
      * @param File $file the new file to replace
-     * @param String $old_file_name name of the file need to be replace full path
-     * @param String $des new destination or use old one
+     * @param String|string $old_file_name name of the file need to be replace full path
+     * @param String|string $des new destination
      * @param String|null $custom_name keep the current file name or make a new name one.
      * @return false|string
      */
-    public static function updateFIle($file, String $old_file_name, String $des = null, String $custom_name = null)
-    {
-        $fileDes = explode('/', $old_file_name);
-        if (count($fileDes) > 1) {
-            if ($fileDes[0] !== '') {
-                $fileDes = $fileDes[0];
-            } else {
-                $fileDes = '/';
-            }
-        } else {
-            $fileDes = '/';
-        }
-        if ($des !== null) {
-            $fileDes = $des;
-        }
+    public static function updateFIle(
+        $file,
+        $old_file_name,
+        $des = '/storage',
+        $custom_name = null
+    ) {
         if (\Storage::exists($old_file_name)) {
             \Storage::delete($old_file_name);
         }
-        return self::storeFile($file, $fileDes);
+        return self::storeFile($file, $des);
     }
 
+    public static function checkFile($file_path)
+    {
+        if (\Storage::exists($file_path)) {
+            return 'storage/' . $file_path;
+        }
+        return 'storage/no_image.jpg';
+    }
+
+    public static function deleteFIle($file_path)
+    {
+        return \Storage::delete($file_path);
+    }
 }

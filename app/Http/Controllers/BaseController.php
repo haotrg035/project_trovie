@@ -22,7 +22,7 @@ abstract class BaseController extends Controller
         $this->data['view_name'] = $this->viewName();
     }
 
-    protected function getResponse($result, $messageType)
+    private function getResponse($result, $messageType, $data = null)
     {
         $_response = [];
         if ($result) {
@@ -43,6 +43,9 @@ abstract class BaseController extends Controller
                     $_response['message'] = __('curd.message.success.delete');
                     break;
                 }
+            }
+            if (!empty($data)) {
+                $_response['data'] = $data;
             }
         } else {
             $_response['status'] = 'error';
@@ -67,6 +70,15 @@ abstract class BaseController extends Controller
         return $_response;
     }
 
+    protected function returnResponse($result, $messageType, $data = null)
+    {
+        $_response = $this->getResponse($result, $messageType, $data);
+        if ($result) {
+            return response($_response, 200);
+        }
+        return response($_response, 500);
+    }
+
     protected function returnRedirect($result, $messageType, $route)
     {
         return redirect($route)->with(['response_message' => $this->getResponse($result, $messageType)]);
@@ -78,6 +90,15 @@ abstract class BaseController extends Controller
             $this->authorize('update', $model);
         } catch (AuthorizationException $e) {
             return redirect('/');
+        }
+    }
+
+    public function checkUpdateAuthApi(Model $model)
+    {
+        try {
+            $this->authorize('update', $model);
+        } catch (AuthorizationException $e) {
+            return $this->getResponse(false, 'update');
         }
     }
 }

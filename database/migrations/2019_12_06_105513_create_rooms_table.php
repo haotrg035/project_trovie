@@ -23,7 +23,7 @@ class CreateRoomsTable extends Migration
             $table->boolean('notice')->default(false);
             $table->tinyInteger('state');
             $table->tinyInteger('type')->unsigned()->default('0');
-            $table->string('desc', 250);
+            $table->string('desc', 500);
             $table->timestamps();
             $table->index(["host_id"]);
         });

@@ -54,9 +54,9 @@ a:hover {
 .main-sidebar__sub-list__item__link,
 .main-sidebar__sub-list,
 .main-sidebar__list__item__link,
-.trovie-gallery__item__remove,
-.trovie-gallery__item__image,
-.trovie-gallery__item::before,
+.trovie-gallery .gallery__item .item__remove,
+.trovie-gallery .gallery__item .item__image,
+.trovie-gallery .gallery__item::before,
 .address-result-list__item .item__icon,
 .address-result-list__item,
 .room-card,
@@ -835,6 +835,102 @@ a:hover {
   font-size: 0.85rem;
 }
 
+.trovie-gallery .gallery__item {
+  position: relative;
+  padding-bottom: 100%;
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.trovie-gallery .gallery__item::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.24);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.trovie-gallery .gallery__item--upload {
+  background: #ebebeb;
+}
+
+.trovie-gallery .gallery__item--upload::before {
+  content: "\F067";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: FontAwesome, serif;
+  opacity: 0.8;
+  color: white;
+  font-size: 3rem;
+}
+
+.trovie-gallery .gallery__item--upload input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.trovie-gallery .gallery__item--upload input:hover {
+  cursor: pointer;
+}
+
+.trovie-gallery .gallery__item .item__image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.trovie-gallery .gallery__item .item__remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  color: #ffffff;
+  z-index: 3;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid white;
+  opacity: 0;
+  border-radius: 50%;
+}
+
+.trovie-gallery .gallery__item .item__remove .fa {
+  font-size: 0.8rem;
+}
+
+.trovie-gallery .gallery__item .item__remove:hover {
+  background-color: white;
+  color: var(--danger);
+}
+
+.trovie-gallery .gallery__item:hover::before {
+  opacity: 1 !important;
+}
+
+.trovie-gallery .gallery__item:hover .item__image {
+  transform: scale(1.15);
+}
+
+.trovie-gallery .gallery__item:hover .item__remove {
+  opacity: 1 !important;
+}
+
 html,
 body {
   scroll-behavior: smooth;
@@ -919,77 +1015,6 @@ body {
 .panel-content__header__content {
   display: flex;
   flex: 1 1 auto;
-}
-
-.trovie-gallery__item {
-  position: relative;
-  padding-bottom: 100%;
-  display: block;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.trovie-gallery__item::before {
-  content: "";
-  background-color: rgba(0, 0, 0, 0.44);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 1;
-}
-
-.trovie-gallery__item__image {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.trovie-gallery__item__remove {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  color: #ffffff;
-  z-index: 3;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 1px solid white;
-  opacity: 0;
-  border-radius: 50%;
-}
-
-.trovie-gallery__item__remove .fa {
-  font-size: 0.8rem;
-}
-
-.trovie-gallery__item__remove:hover {
-  background-color: white;
-  color: var(--danger);
-}
-
-.trovie-gallery__item:hover::before {
-  opacity: 1 !important;
-}
-
-.trovie-gallery__item:hover .trovie-gallery__item::before {
-  opacity: 1;
-}
-
-.trovie-gallery__item:hover .trovie-gallery__item__image {
-  transform: scale(1.15);
-}
-
-.trovie-gallery__item:hover .trovie-gallery__item__remove {
-  opacity: 1 !important;
 }
 
 .main-sidebar {

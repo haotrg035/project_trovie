@@ -7,8 +7,8 @@ namespace App\Repositories;
 use App\Helper\TrovieFile;
 use App\Helper\TrovieHelper;
 use App\Models\Host;
+use App\Models\HostGallery;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class HostRepository extends EloquentRepository implements HostEloquentRepositoryInterface
 {
@@ -20,19 +20,22 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
 
     public function getAllUserHosts()
     {
-        $data = $this->_model->where('user_id', auth()->id())->get()->toArray();
+        $data = $this->_model->with(['gallery'])->where('user_id', auth()->id())->get()->toArray();
         foreach ($data as $key => $host) {
             $data[$key]['cost_electric'] = TrovieHelper::currencyFormat($host['cost_electric']);
             $data[$key]['cost_water'] = TrovieHelper::currencyFormat($host['cost_electric']);
-            $data[$key]['image'] = 'storage/' . $host['image'];
+//            $data[$key]['image'] = 'storage/' . $host['image'];
         }
         return $data;
     }
 
-    public function find($id)
+    public function getHostDetail($id)
     {
-        $data = $this->_model->find($id);
-        $data->image = 'storage/' . $data->image;
+        $data = $this->_model->with('gallery')->find($id)->toArray();
+        $data['image'] = TrovieFile::checkFile($data['image']);
+        foreach ($data['gallery'] as $key => $image) {
+            $data['gallery'][$key]['image'] = TrovieFile::checkFile($image['image']);
+        }
         return $data;
     }
 
@@ -86,5 +89,35 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         }
         $current_host->image = $new_name;
         return $current_host->save();
+    }
+
+    public function addGalleryImage($file, $id)
+    {
+        $image_path = TrovieFile::storeFile($file, config('filepath.images.gallery.host'));
+        $result = HostGallery::insertGetId([
+            'image' => $image_path,
+            'host_id' => $id
+        ]);
+        if ($result) {
+            try {
+                return [
+                    'id' => $result,
+                    'image' => asset(TrovieFile::checkFile($image_path)),
+                    'delete_url' => route('api.user.host.gallery_remove', [$id,$result])
+                ];
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public function removeGalleryImage($id)
+    {
+        $image = HostGallery::find($id);
+        if (TrovieFile::deleteFIle($image->image) && $image->delete()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -24,6 +24,7 @@ try {
 window.axios = require('axios');
 
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -42,11 +43,11 @@ window.axios = require('axios');
 //     encrypted: true
 // });
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+// $.ajaxSetup({
+//     headers: {
+//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     }
+// });
 
 /**
  * import tata toast js
