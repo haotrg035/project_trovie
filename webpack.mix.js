@@ -15,7 +15,8 @@ mix.js([
     'resources/js/app.js',
     'resources/js/user/sidebar.js',
     'resources/js/components/input.js',
-    'resources/js/components/trovie_gallery.js',
+    'resources/js/components/trovie_gallery_uploader.js',
+    'resources/js/components/trovie_avatar_upload.js',
 ], 'public/user/js/app.js')
     .js('resources/js/user/host/detail.js', 'public/user/js/host')
     .js('resources/js/user/host/index.js', 'public/user/js/host/index.js')

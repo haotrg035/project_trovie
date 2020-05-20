@@ -54,7 +54,7 @@ class HostPolicy
      */
     public function update(User $user, Host $host)
     {
-        return $user->role < 2 && $user->id === $host->user_id ? Response::allow() : Response::deny('Bạn không thể sửa nhà trọ này');
+        return ($user->role < 2 && $user->id === $host->user_id) ? Response::allow() : Response::deny('Bạn không thể sửa nhà trọ này');
     }
 
     /**

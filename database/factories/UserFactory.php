@@ -25,6 +25,7 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => \Illuminate\Support\Facades\Hash::make('123456'), // password
         'remember_token' => Str::random(10),
+        'api_token' => Str::random(80),
         'gender' => random_int(0, 1),
         'birthday' => $faker->date(),
         'role' => random_int(1, 2),

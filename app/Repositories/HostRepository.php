@@ -88,7 +88,10 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
             $new_name = TrovieFile::storeFile($file, config('filepath.images.avatar.host'));
         }
         $current_host->image = $new_name;
-        return $current_host->save();
+        if ($current_host->save()) {
+            return 'storage/' . $new_name;
+        }
+        return false;
     }
 
     public function addGalleryImage($file, $id)
@@ -103,7 +106,7 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
                 return [
                     'id' => $result,
                     'image' => asset(TrovieFile::checkFile($image_path)),
-                    'delete_url' => route('api.user.host.gallery_remove', [$id,$result])
+                    'delete_url' => route('api.user.host.gallery_remove', [$id, $result])
                 ];
             } catch (\Exception $e) {
                 return false;

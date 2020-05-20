@@ -83,21 +83,21 @@ class HostController extends BaseController
 
     public function updateAvatar(Request $request, Host $host)
     {
-        $this->checkUpdateAuthApi($host);
+        $this->checkUpdateAuth($host);
         $result = $this->repository->updateAvatar($request->file('avatar'), $host->id);
-        return $this->returnResponse($result, 'update');
+        return $this->returnResponse($result, 'update', ['image' => asset($result)]);
     }
 
     public function addGalleryImage(Request $request, Host $host)
     {
-        $this->checkUpdateAuthApi($host);
+        $this->checkUpdateAuth($host);
         $result = $this->repository->addGalleryImage($request->file('image'), $host->id);
         return $this->returnResponse($result, 'create', $result);
     }
 
     public function removeGalleryImage(Host $host, $image_id)
     {
-        $this->checkUpdateAuthApi($host);
+        $this->checkUpdateAuth($host);
         $result = $this->repository->removeGalleryImage($image_id);
         return $this->returnResponse($result, 'delete', ['id' => $image_id]);
     }

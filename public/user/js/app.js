@@ -41020,6 +41020,8 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
  */
 
 window.tata = __webpack_require__(/*! tata-js */ "./node_modules/tata-js/src/tata.js");
+window.__csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+window.__apiToken = document.querySelector('meta[name="access_token"]').getAttribute('content');
 
 /***/ }),
 
@@ -41130,10 +41132,76 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
-/***/ "./resources/js/components/trovie_gallery.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/trovie_gallery.js ***!
-  \***************************************************/
+/***/ "./resources/js/components/trovie_avatar_upload.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/trovie_avatar_upload.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var uploaders = document.querySelectorAll('.trovie-avatar-upload');
+document.addEventListener('DOMContentLoaded', function () {
+  console.log(uploaders);
+
+  if (uploaders.length > 0) {
+    var _iterator = _createForOfIteratorHelper(uploaders),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var uploader = _step.value;
+        var uploadInput = uploader.querySelector('input[type=file]');
+        avatarInputOnChangeHandler(uploadInput, uploader);
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }
+});
+
+function avatarInputOnChangeHandler(uploadInput, uploader) {
+  uploadInput.addEventListener('change', function () {
+    var formData = new FormData(uploader.querySelector('form'));
+    var newInput = cloneFileInput(uploadInput);
+    var uploadUrl = uploader.getAttribute('data-upload-url');
+    formData.append('api_token', __apiToken);
+    axios.post(uploadUrl, formData).then(function (response) {
+      avatarInputOnChangeHandler(newInput, uploader);
+      uploader.querySelector('.upload__image img').src = response.data.data.image;
+      tata.success('Thành công', response.data.message);
+    })["catch"](function (response) {
+      tata.error('Lỗi', response.message);
+      avatarInputOnChangeHandler(newInput, uploader);
+    }).then(function () {
+      // always executed
+      uploadInput.parentNode.replaceChild(newInput, uploadInput);
+    });
+  });
+}
+
+function cloneFileInput(oldInput) {
+  var newInput = document.createElement("input");
+  newInput.type = "file";
+  newInput.name = oldInput.name;
+  newInput.className = oldInput.className || '';
+  newInput.title = oldInput.title;
+  return newInput;
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/trovie_gallery_uploader.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/trovie_gallery_uploader.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -41188,6 +41256,7 @@ function galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl) {
   uploadInput.addEventListener('change', function () {
     var formData = new FormData(gallery.querySelector('form'));
     var newInput = cloneGalleryInput(uploadInput);
+    formData.append('api_token', __apiToken);
     axios.post(uploadUrl, formData).then(function (response) {
       var item = renderGalleryItem(response.data.data);
       galleryInputOnChangeHandler(newInput, gallery, uploadUrl);
@@ -41236,7 +41305,11 @@ function galleryRemoveBtnHandler(item) {
   item.querySelector('.item__remove').addEventListener('click', function () {
     if (confirm('Bạn có chắc muốn xóa ảnh này?')) {
       var deleteUrl = item.getAttribute('data-delete-url');
-      axios["delete"](deleteUrl).then(function (response) {
+      axios["delete"](deleteUrl, {
+        data: {
+          api_token: __apiToken
+        }
+      }).then(function (response) {
         var parent = item.parentNode;
         tata.success('Thành công', response.data.message);
         parent.parentNode.removeChild(parent);
@@ -41444,7 +41517,8 @@ var TrovieHelper = /*#__PURE__*/function () {
           url: serverObj.url || '/filepond/api',
           process: serverObj.process || '/process',
           headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value
+            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value,
+            api_token: __apiToken
           }
         }
       };
@@ -41568,16 +41642,17 @@ document.addEventListener('DOMContentLoaded', function () {
 /***/ }),
 
 /***/ 0:
-/*!********************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/js/user/sidebar.js ./resources/js/components/input.js ./resources/js/components/trovie_gallery.js ./resources/sass/user/app.scss ***!
-  \********************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/js/user/sidebar.js ./resources/js/components/input.js ./resources/js/components/trovie_gallery_uploader.js ./resources/js/components/trovie_avatar_upload.js ./resources/sass/user/app.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /var/www/html/trovie/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /var/www/html/trovie/resources/js/user/sidebar.js */"./resources/js/user/sidebar.js");
 __webpack_require__(/*! /var/www/html/trovie/resources/js/components/input.js */"./resources/js/components/input.js");
-__webpack_require__(/*! /var/www/html/trovie/resources/js/components/trovie_gallery.js */"./resources/js/components/trovie_gallery.js");
+__webpack_require__(/*! /var/www/html/trovie/resources/js/components/trovie_gallery_uploader.js */"./resources/js/components/trovie_gallery_uploader.js");
+__webpack_require__(/*! /var/www/html/trovie/resources/js/components/trovie_avatar_upload.js */"./resources/js/components/trovie_avatar_upload.js");
 module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/sass/user/app.scss */"./resources/sass/user/app.scss");
 
 

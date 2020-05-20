@@ -16,8 +16,10 @@ class TrovieHelper {
                 process: serverObj.process || '/process',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value,
+                    api_token: __apiToken
                 }
-            }
+            },
+
         };
         if (element.hasAttribute('data-poster-src')) {
             options.files = [{
@@ -27,7 +29,7 @@ class TrovieHelper {
                     file: {
                         name: element.getAttribute('data-poster-name') || 'Ảnh',
                         size: element.getAttribute('data-poster-size') || '',
-                        type: 'image/jpg'
+                        type: 'image/jpg',
                     },
                     metadata: {
                         poster: element.getAttribute('data-poster-src')

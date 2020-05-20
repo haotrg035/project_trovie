@@ -281,7 +281,8 @@ var TrovieHelper = /*#__PURE__*/function () {
           url: serverObj.url || '/filepond/api',
           process: serverObj.process || '/process',
           headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value
+            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value,
+            api_token: __apiToken
           }
         }
       };

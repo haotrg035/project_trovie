@@ -1,4 +1,5 @@
 let galleries = document.querySelectorAll('.trovie-gallery');
+
 document.addEventListener('DOMContentLoaded', function () {
     if (galleries.length > 0) {
         for (let gallery of galleries) {
@@ -23,6 +24,7 @@ function galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl) {
         let formData = new FormData(gallery.querySelector('form'));
         let newInput = cloneGalleryInput(uploadInput);
 
+        formData.append('api_token', __apiToken);
         axios.post(uploadUrl, formData)
             .then(function (response) {
                 let item = renderGalleryItem(response.data.data);
@@ -79,7 +81,11 @@ function galleryRemoveBtnHandler(item) {
     item.querySelector('.item__remove').addEventListener('click', function () {
         if (confirm('Bạn có chắc muốn xóa ảnh này?')) {
             let deleteUrl = item.getAttribute('data-delete-url');
-            axios.delete(deleteUrl)
+            axios.delete(deleteUrl, {
+                data: {
+                    api_token: __apiToken
+                }
+            })
                 .then(function (response) {
                     let parent = item.parentNode;
 

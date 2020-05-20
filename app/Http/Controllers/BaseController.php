@@ -98,9 +98,5 @@ abstract class BaseController extends Controller
     {
         $this->authorize('update', $model);
     }
-
-    public function checkUpdateAuthApi(Model $model)
-    {
-        $this->authorize('update', $model);
-    }
+    
 }

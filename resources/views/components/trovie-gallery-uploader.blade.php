@@ -4,6 +4,7 @@
             <div class="col-6 col-lg-4 col--custom">
                 <div class="gallery__item gallery__item--upload">
                     <form action="" method="post" enctype="multipart/form-data" class="item__form">
+                        @csrf
                         <input type="file" name="image" title="Thêm ảnh">
                     </form>
                 </div>

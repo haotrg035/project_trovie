@@ -69,7 +69,6 @@ class HostController extends BaseController
         $this->data['view_name'] = ucwords('thông tin ' . $this->viewName());
         $this->data['data'] = $this->repository->getHostDetail($host->id);
 
-
         return view('user.host.detail', ['data' => $this->data]);
     }
 

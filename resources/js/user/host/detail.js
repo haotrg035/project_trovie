@@ -1,17 +1,12 @@
-import * as FilePond from 'filepond';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
-import {TrovieHelper} from "../TrovieHelper";
 import {TrovieMap} from "../TrovieMap";
 
-window.goongjs = require('@goongmaps/goong-js');
-FilePond.registerPlugin(FilePondPluginImagePreview, FilePondPluginFilePoster);
 let avatarUploader = document.querySelector('#file-avatar');
 let updateHostFormMap = document.getElementById('form-position__map');
 let addressInput = document.querySelector('.host-info__form-position input[name=address]');
 let latitudeInput = document.querySelector('.host-info__form-position input[name=latitude]');
 let longitudeInput = document.querySelector('.host-info__form-position input[name=longitude]');
 let addressResultList = document.querySelector('.host-info__form-position .address-result-list');
+window.goongjs = require('@goongmaps/goong-js');
 
 let mapOptions = {
     map: updateHostFormMap,
@@ -39,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function initFileUploader() {
     if (avatarUploader !== null) {
-        FilePond.create(avatarUploader, TrovieHelper.getOptionsForFIlepondInstance(avatarUploader, {
-            url: '/api/host/update-avatar/',
-            process: avatarUploader.getAttribute('data-host-id'),
-        }));
+        // FilePond.create(avatarUploader, TrovieHelper.getOptionsForFIlepondInstance(avatarUploader, {
+        //     url: '/api/host/update-avatar/',
+        //     process: avatarUploader.getAttribute('data-host-id'),
+        // }));
     }
 }
 
@@ -66,7 +61,7 @@ function _addressInputOnKeyDown() {
         addressInput.classList.add('is-invalid');
         axios.get(trovieMap.getApiUrl().autoComplete, {
             headers: {
-                Accept: 'application/json'
+                Accept: 'application/json',
             },
             params: {
                 input: addressInput.value,

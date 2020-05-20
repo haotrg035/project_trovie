@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class TrovieGallery extends Component
+class TrovieGalleryUploader extends Component
 {
     public $uploadUrl;
     public $deleteUrl;
@@ -31,6 +31,6 @@ class TrovieGallery extends Component
      */
     public function render()
     {
-        return view('components.trovie-gallery');
+        return view('components.trovie-gallery-uploader');
     }
 }

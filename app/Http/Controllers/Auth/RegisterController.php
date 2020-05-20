@@ -78,6 +78,7 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'birthday' => $data['birthday'],
             'role' => $data['role'],
+            'api_token' => Str::random(80),
         ]);
     }
 }

@@ -218,23 +218,17 @@
                     <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1" class="host-avatar">
                             <x-slot name="title">Ảnh Đại Diện</x-slot>
-                            <form action="{{route('api.user.host.update_avatar',$data['data']['id'])}}" method="POST"
-                                  enctype="multipart/form-data">
-                                <input class="filepond mb-0" type="file" name="avatar" id="file-avatar"
-                                       data-host-id="{{$data['data']['id']}}"
-                                       data-poster-src="{{asset($data['data']['image'])}}"
-                                       {{--                                       data-poster-size="3001025"--}}
-                                       data-max-file-size="2MB"
-                                       data-poster-name="Ảnh Đại Diện">
-                            </form>
+                            <x-trovie-avatar-upload image="{{$data['data']['image']}}" method="POST" title="Ảnh đại diện"
+                                                    upload-url="{{route('api.user.host.update_avatar',$data['data']['id'])}}">
+                            </x-trovie-avatar-upload>
                         </x-main-card>
                     </div>
                     <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1" class="host-gallery" body-class="pb-0">
                             <x-slot name="title">Album Ảnh</x-slot>
-                            <x-trovie-gallery :gallery-items="$data['data']['gallery']"
-                                              upload-url="{{route('api.user.host.gallery_add',$data['data']['id'])}}">
-                            </x-trovie-gallery>
+                            <x-trovie-gallery-uploader :gallery-items="$data['data']['gallery']"
+                                                       upload-url="{{route('api.user.host.gallery_add',$data['data']['id'])}}">
+                            </x-trovie-gallery-uploader>
                         </x-main-card>
                     </div>
                 </div>
