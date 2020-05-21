@@ -1,4 +1,5 @@
 import {TrovieMap} from "../TrovieMap";
+import {TrovieHelper} from "../TrovieHelper";
 
 window.goongjs = require('@goongmaps/goong-js');
 let createHostFormMap = document.querySelector('.create-host-modal__form #form__map');
@@ -6,18 +7,27 @@ let addressInput = document.querySelector('.create-host-modal__form #address');
 let latitudeInput = document.querySelector('.create-host-modal__form #latitude');
 let longitudeInput = document.querySelector('.create-host-modal__form #longitude');
 let addressResultList = document.querySelector('.create-host-modal__form .address-result-list');
-
+let currentCoords = null;
 let mapOptions = {
     map: createHostFormMap,
     addressInput: addressInput,
-    center: [105, 20]
+    center: [100, 20]
 };
 let is_edit_address = true;
-let trovieMap = new TrovieMap(mapOptions);
+let trovieMap = null;
 let mapElement;
 
 //main
 document.addEventListener('DOMContentLoaded', function () {
+
+    // $('#create-host-modal').on('show.bs.modal', function (e) {
+    //     if (currentCoords === null) {
+    //         currentCoords = TrovieHelper.getCurrentLatLng();
+    //         mapOptions.center = [currentCoords.lng, currentCoords.lat];
+    //         trovieMap = new TrovieMap(mapOptions);
+    //
+    //     }
+    // });
     initAddHostFormMap();
     document.querySelector('.create-host-modal__form').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -30,12 +40,16 @@ document.addEventListener('DOMContentLoaded', function () {
             this.submit();
         }
     });
-
 });
 
 function initAddHostFormMap() {
     if (createHostFormMap !== null) {
-        mapElement = trovieMap.initGoongMap();
+        trovieMap = new TrovieMap(mapOptions);
+        if (navigator.geolocation) {
+            mapElement = trovieMap.initGoongMapCenterCurrentGeo();
+        } else {
+            mapElement = trovieMap.initGoongMap();
+        }
         //Bat su kien click ngoai result list
         // window.addEventListener('click', function (e) {
         //     if (addressResultList.contains(e.target) === false) {

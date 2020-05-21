@@ -1,3 +1,5 @@
+import {success} from "tata-js";
+
 class TrovieHelper {
     static getOptionsForFIlepondInstance(element, serverObj = {}) {
         let options = {
@@ -227,6 +229,7 @@ class TrovieHelper {
             longitudeInput.value = lng;
         }
     }
+
 }
 
 export {TrovieHelper};

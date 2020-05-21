@@ -8,6 +8,7 @@ class TrovieMap {
      * [draggableMarker]
      */
     constructor(options) {
+        this._currentCoordinate = null;
         this._map = null;
         this._marker = null;
         this.options = options;
@@ -17,8 +18,25 @@ class TrovieMap {
         this.options.apiOrigin = 'https://rsapi.goong.io/';
     }
 
-    initGoongMap() {
+    getCurrentPosition(options = {}) {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        });
+    }
 
+    async initGoongMapCenterCurrentGeo() {
+        try {
+            let currentCoords = await this.getCurrentPosition();
+            this.options.center = [currentCoords.coords.longitude, currentCoords.coords.latitude];
+            this.initGoongMap();
+            // Handle coordinates
+        } catch (error) {
+            // Handle error
+            console.error(error);
+        }
+    };
+
+    initGoongMap() {
         goongjs.accessToken = this.options.mapTitlesKey;
         this._map = new goongjs.Map({
             container: this.options.map,
@@ -30,6 +48,7 @@ class TrovieMap {
         this._marker = new goongjs.Marker({
             draggale: this.options.draggaleMarkder
         }).setLngLat(this.options.center).addTo(this._map);
+
         this._map.addControl(
             new goongjs.GeolocateControl({
                 positionOptions: {
@@ -41,7 +60,6 @@ class TrovieMap {
 
         this._map.addControl(new goongjs.FullscreenControl());
         this._map.addControl(new goongjs.NavigationControl());
-
 
         return {
             map: this._map,
@@ -85,7 +103,6 @@ class TrovieMap {
             geocode: this.options.apiOrigin + 'Geocode',
         }
     }
-
 }
 
 export {TrovieMap};
