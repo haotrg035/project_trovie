@@ -41147,8 +41147,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var uploaders = document.querySelectorAll('.trovie-avatar-upload');
 document.addEventListener('DOMContentLoaded', function () {
-  console.log(uploaders);
-
   if (uploaders.length > 0) {
     var _iterator = _createForOfIteratorHelper(uploaders),
         _step;

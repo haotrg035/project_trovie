@@ -964,10 +964,7 @@ var TrovieMap = /*#__PURE__*/function () {
               case 3:
                 currentCoords = _context.sent;
                 this.options.center = [currentCoords.coords.longitude, currentCoords.coords.latitude];
-                this.initGoongMap(); // Handle coordinates
-
-                _context.next = 11;
-                break;
+                return _context.abrupt("return", this.initGoongMap());
 
               case 8:
                 _context.prev = 8;

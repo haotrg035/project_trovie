@@ -28,7 +28,7 @@ class TrovieMap {
         try {
             let currentCoords = await this.getCurrentPosition();
             this.options.center = [currentCoords.coords.longitude, currentCoords.coords.latitude];
-            this.initGoongMap();
+            return this.initGoongMap();
             // Handle coordinates
         } catch (error) {
             // Handle error

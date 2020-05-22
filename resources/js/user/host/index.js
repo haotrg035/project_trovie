@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //     }
     // });
     initAddHostFormMap();
+
     document.querySelector('.create-host-modal__form').addEventListener('submit', function (e) {
         e.preventDefault();
         if (is_edit_address) {
@@ -46,7 +47,10 @@ function initAddHostFormMap() {
     if (createHostFormMap !== null) {
         trovieMap = new TrovieMap(mapOptions);
         if (navigator.geolocation) {
-            mapElement = trovieMap.initGoongMapCenterCurrentGeo();
+            let mapPromise = trovieMap.initGoongMapCenterCurrentGeo();
+            mapPromise.then(function (val) {
+                mapElement = val;
+            });
         } else {
             mapElement = trovieMap.initGoongMap();
         }

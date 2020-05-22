@@ -1,5 +1,3 @@
-
-
 <?php
 
 use Illuminate\Support\Facades\Schema;
@@ -15,10 +13,10 @@ class CreateRoomserviceTable extends Migration
      */
     public function up()
     {
-        Schema::create('host_service_room', function (Blueprint $table) {
+        Schema::create('room_service', function (Blueprint $table) {
             $table->integer('room_id')->unsigned();
-            $table->integer('host_service_id')->unsigned();
-            $table->index(["host_service_id"]);
+            $table->integer('service_id')->unsigned();
+            $table->index(['service_id', 'room_id']);
         });
     }
 

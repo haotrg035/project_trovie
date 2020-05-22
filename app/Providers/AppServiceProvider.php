@@ -7,7 +7,9 @@ use App\Helper\TrovieHelper;
 use App\Repositories\HostRepository;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
+use App\Repositories\Interfaces\ServiceEloquentRepositoryInterface;
 use App\Repositories\RoomRepository;
+use App\Repositories\ServiceRepository;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(RoomEloquentRepositoryInterface::class, function () {
             return new RoomRepository();
+        });
+        $this->app->bind(ServiceEloquentRepositoryInterface::class, function () {
+            return new ServiceRepository();
         });
         $this->app->singleton(TrovieHelper::class, function () {
             return new TrovieHelper();

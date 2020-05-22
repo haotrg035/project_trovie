@@ -28,7 +28,20 @@ return [
         'waiting' => 2,
         'full' => 3
     ],
+    'default_services' => [
+        'wifi',
+        'ban công',
+        'nuôi thú cưng',
+        'máy lạnh',
+        'tivi',
+        'truyền hình cáp',
+        'máy giặt',
+        'bãi đổ xe',
+        'có lầu',
+        'nam nữ ở chung'
+    ],
 
+    'default_service_units' => ['Tháng', 'kV', 'm3', 'Cái'],
     /*
     |--------------------------------------------------------------------------
     | Application Environment

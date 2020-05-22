@@ -1,7 +1,6 @@
 let uploaders = document.querySelectorAll('.trovie-avatar-upload');
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log(uploaders);
     if (uploaders.length > 0) {
         for (let uploader of uploaders) {
             let uploadInput = uploader.querySelector('input[type=file]');

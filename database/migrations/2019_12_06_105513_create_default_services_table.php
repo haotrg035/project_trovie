@@ -1,10 +1,12 @@
+
+
 <?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHostservicesTable extends Migration
+class CreateDefaultservicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +15,11 @@ class CreateHostservicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('host_services', function (Blueprint $table) {
+        Schema::create('default_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedTinyInteger('unit_id');
-            $table->integer('host_id')->unsigned();
             $table->string('name', 60);
-            $table->unsignedInteger('cost')->unsigned();
-            $table->tinyInteger('type')->default('1');
+            $table->integer('cost')->unsigned();
             $table->timestamps();
-            $table->index(["host_id"]);
         });
     }
 
@@ -32,7 +30,6 @@ class CreateHostservicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('host_services');
+        Schema::dropIfExists('default_services');
     }
 }
-

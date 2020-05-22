@@ -2169,10 +2169,7 @@ var TrovieMap = /*#__PURE__*/function () {
               case 3:
                 currentCoords = _context.sent;
                 this.options.center = [currentCoords.coords.longitude, currentCoords.coords.latitude];
-                this.initGoongMap(); // Handle coordinates
-
-                _context.next = 11;
-                break;
+                return _context.abrupt("return", this.initGoongMap());
 
               case 8:
                 _context.prev = 8;
@@ -2346,7 +2343,10 @@ function initAddHostFormMap() {
     trovieMap = new _TrovieMap__WEBPACK_IMPORTED_MODULE_0__["TrovieMap"](mapOptions);
 
     if (navigator.geolocation) {
-      mapElement = trovieMap.initGoongMapCenterCurrentGeo();
+      var mapPromise = trovieMap.initGoongMapCenterCurrentGeo();
+      mapPromise.then(function (val) {
+        mapElement = val;
+      });
     } else {
       mapElement = trovieMap.initGoongMap();
     } //Bat su kien click ngoai result list

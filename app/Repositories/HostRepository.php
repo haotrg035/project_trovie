@@ -23,7 +23,7 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         $data = $this->_model->with(['gallery'])->where('user_id', auth()->id())->get()->toArray();
         foreach ($data as $key => $host) {
             $data[$key]['cost_electric'] = TrovieHelper::currencyFormat($host['cost_electric']);
-            $data[$key]['cost_water'] = TrovieHelper::currencyFormat($host['cost_electric']);
+            $data[$key]['cost_water'] = TrovieHelper::currencyFormat($host['cost_water']);
 //            $data[$key]['image'] = 'storage/' . $host['image'];
         }
         return $data;
