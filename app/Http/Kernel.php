@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'host_owner' => \App\Http\Middleware\checkIsHostOwner::class
+        'host_owner' => \App\Http\Middleware\checkIsHostOwner::class,
+        'api_host_owner' => \App\Http\Middleware\checkIsHostOwnerApi::class
     ];
 }

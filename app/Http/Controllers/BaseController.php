@@ -70,6 +70,11 @@ abstract class BaseController extends Controller
                     $_response['message'] = __('curd.message.failed.delete');
                     break;
                 }
+                default :
+                {
+                    $_response['message'] = '';
+                    break;
+                }
             }
         }
         return $_response;
@@ -94,9 +99,19 @@ abstract class BaseController extends Controller
         return $this->authorize('view', $model);
     }
 
+    public function checkCreateAuth(Model $model)
+    {
+        return $this->authorize('create', $model);
+    }
+
     public function checkUpdateAuth(Model $model)
     {
         $this->authorize('update', $model);
     }
-    
+
+    public function checkDeleteAuth(Model $model)
+    {
+        $this->authorize('delete', $model);
+    }
+
 }

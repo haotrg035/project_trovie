@@ -4,5 +4,5 @@
     "/user/js/host/detail.js": "/user/js/host/detail.js",
     "/user/js/host/index.js": "/user/js/host/index.js",
     "/user/js/room.js": "/user/js/room.js",
-    "/user/js/service.js": "/user/js/service.js"
+    "/user/js/service/index.js": "/user/js/service/index.js"
 }

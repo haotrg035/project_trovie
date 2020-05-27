@@ -53,4 +53,6 @@ window.axios = require('axios');
  */
 window.tata = require('tata-js');
 window.__csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-window.__apiToken = document.querySelector('meta[name="access_token"]').getAttribute('content');
+if (document.querySelector('meta[name="access_token"]') !== null) {
+    window.__apiToken = document.querySelector('meta[name="access_token"]').getAttribute('content');
+}

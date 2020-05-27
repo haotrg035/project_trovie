@@ -2,31 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50936285-61d7-4bf1-ada2-6d577016bf8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Interfaces/ServiceEloquentRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/ServiceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/trovie.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trovie.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/service/modal/service-modal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/HostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/HostRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/RoomFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/RoomFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_default_host_services_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_default_services_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_host_service_units_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_service_units_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_host_services_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_services_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_service_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_service_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_20_043800_add_host_service_foreign.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_20_043800_add_service_foreign.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/HostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/HostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Service.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Service.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Interfaces/ServiceEloquentRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Interfaces/ServiceEloquentRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/ServiceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/ServiceRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/user/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/host/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/host/detail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/host/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/host/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/trovie_avatar_upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/trovie_avatar_upload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/user/TrovieMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/TrovieMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/user/host/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/host/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/user/js/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/room.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/user/js/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/user/TrovieHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/TrovieHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/user/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/service/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/user/layout/_master.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/layout/_master.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/service/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/service/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/service/modal/add-service-modal.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +66,13 @@
         <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="room_service: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -227,22 +235,22 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Repositories/Interfaces" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/storage" />
-      <recent name="$PROJECT_DIR$/resources/js/components" />
-      <recent name="$PROJECT_DIR$/resources/lang/vi" />
-      <recent name="$PROJECT_DIR$/database/factories" />
-      <recent name="$PROJECT_DIR$/database/factories/Models" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/Repositories/Interfaces" />
       <recent name="$PROJECT_DIR$/app/Repositories" />
       <recent name="$PROJECT_DIR$/resources/sass/user/component" />
       <recent name="$PROJECT_DIR$/resources/js/components" />
       <recent name="$PROJECT_DIR$/public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/user/service" />
+      <recent name="$PROJECT_DIR$/public/storage" />
+      <recent name="$PROJECT_DIR$/resources/js/components" />
+      <recent name="$PROJECT_DIR$/resources/lang/vi" />
+      <recent name="$PROJECT_DIR$/database/factories" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -312,7 +320,12 @@
       <workItem from="1589957061194" duration="12556000" />
       <workItem from="1590066493079" duration="6839000" />
       <workItem from="1590085029235" duration="3081000" />
-      <workItem from="1590169138140" duration="5130000" />
+      <workItem from="1590169138140" duration="5996000" />
+      <workItem from="1590243634458" duration="6429000" />
+      <workItem from="1590320534743" duration="10460000" />
+      <workItem from="1590426775023" duration="1298000" />
+      <workItem from="1590496165755" duration="5197000" />
+      <workItem from="1590586592158" duration="2464000" />
     </task>
     <servers />
   </component>
@@ -376,26 +389,31 @@
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="579" y="348" key="NewPhpFileDialog/0.24.1600.831@0.24.1600.831" timestamp="1589376911731" />
-    <state x="0" y="24" width="1600" height="831" key="SettingsEditor" timestamp="1589651617841">
-      <screen x="0" y="24" width="1600" height="831" />
+    <state x="0" y="24" width="1600" height="831" key="SettingsEditor" timestamp="1590496212434">
+      <screen x="0" y="24" width="1920" height="1011" />
     </state>
-    <state x="0" y="24" width="1600" height="831" key="SettingsEditor/0.24.1600.831@0.24.1600.831" timestamp="1589651617841" />
+    <state x="0" y="24" width="1600" height="831" key="SettingsEditor/0.24.1600.831@0.24.1600.831" timestamp="1590335159846" />
+    <state x="0" y="24" key="SettingsEditor/0.24.1920.1011@0.24.1920.1011" timestamp="1590496212434" />
     <state x="431" y="254" key="com.intellij.ide.util.TipDialog" timestamp="1588932866202">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="431" y="254" key="com.intellij.ide.util.TipDialog/0.24.1600.831@0.24.1600.831" timestamp="1588932866202" />
-    <state x="468" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1589350783298">
+    <state x="468" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590334546938">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
-    <state x="468" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.24.1600.831@0.24.1600.831" timestamp="1589350783298" />
-    <state x="317" y="24" width="966" height="831" key="find.popup" timestamp="1589961261447">
+    <state x="468" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.24.1600.831@0.24.1600.831" timestamp="1590334546938" />
+    <state x="317" y="24" width="966" height="831" key="find.popup" timestamp="1590244136299">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
-    <state x="317" y="24" width="966" height="831" key="find.popup/0.24.1600.831@0.24.1600.831" timestamp="1589961261447" />
-    <state x="463" y="190" width="672" height="677" key="run.anything.popup" timestamp="1589557040975">
+    <state x="317" y="24" width="966" height="831" key="find.popup/0.24.1600.831@0.24.1600.831" timestamp="1590244136299" />
+    <state width="600" height="440" key="javadoc.popup" timestamp="1590496316522">
+      <screen x="0" y="24" width="1920" height="1011" />
+    </state>
+    <state width="600" height="440" key="javadoc.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1590496316522" />
+    <state x="463" y="190" width="672" height="677" key="run.anything.popup" timestamp="1590245282846">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
-    <state x="463" y="190" width="672" height="677" key="run.anything.popup/0.24.1600.831@0.24.1600.831" timestamp="1589557040975" />
+    <state x="463" y="190" width="672" height="677" key="run.anything.popup/0.24.1600.831@0.24.1600.831" timestamp="1590245282846" />
     <state x="463" y="176" width="672" height="678" key="search.everywhere.popup" timestamp="1589794236562">
       <screen x="0" y="24" width="1600" height="831" />
     </state>

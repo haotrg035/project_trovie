@@ -1058,6 +1058,15 @@ body {
   flex: 1 1 auto;
 }
 
+.page-item .page-link {
+  color: var(--color-base);
+}
+
+.page-item.active .page-link {
+  background: var(--color-base) !important;
+  border-color: var(--color-base) !important;
+}
+
 .main-sidebar {
   z-index: 99;
   height: 100%;

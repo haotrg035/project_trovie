@@ -44,12 +44,13 @@ class TrovieHelper {
         return options;
     }
 
-    getDataTableLanguage(lang = 'vi') {
+    static _datatableGetLang(lang = 'vi') {
         if (lang === 'vi') {
             return {
                 "decimal": "",
                 "emptyTable": "Bảng trống",
-                "info": "Hiển thị từ _START_ đến _END_ trên tổng _TOTAL_ dòng",
+                // "info": "Hiển thị từ _START_ đến _END_ trên tổng _TOTAL_ dòng",
+                "info": "",
                 "infoEmpty": "Không có dữ liệu",
                 "infoFiltered": "(Lọc từ _MAX_ tổng số dòng)",
                 "infoPostFix": "",
@@ -62,8 +63,8 @@ class TrovieHelper {
                 "paginate": {
                     "first": "Đầu tiên",
                     "last": "Cuối",
-                    "next": "Tiếp",
-                    "previous": "Trước"
+                    "next": "<i class='fa fa-angle-right'></i>",
+                    "previous": "<i class='fa fa-angle-left'></i>"
                 },
                 "aria": {
                     "sortAscending": ": activate to sort column ascending",
@@ -126,6 +127,10 @@ class TrovieHelper {
         }
 
         return temp;
+    }
+
+    static parseCurrencyFormat(str) {
+        return str.replace(/\./gi, '');
     }
 
     initGoogleMap(element, callback = 'window.initMap', addressInput = null, latitudeInput = null, longitudeInput = null) {

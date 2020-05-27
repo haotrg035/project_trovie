@@ -16,7 +16,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'password', 'full_name', 'email', 'gender', 'birthday', 'role'
+        'username',
+        'password',
+        'full_name',
+        'email',
+        'gender',
+        'birthday',
+        'role'
     ];
 
     /**
@@ -25,7 +31,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -44,6 +51,6 @@ class User extends Authenticatable
 
     public function isHostOwner()
     {
-        return $this->role === 1;
+        return $this->role < 2;
     }
 }

@@ -24,7 +24,6 @@ class HostController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @param HostEloquentRepositoryInterface $repository
      * @return void
      */
     public function index()

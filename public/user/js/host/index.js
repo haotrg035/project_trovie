@@ -1833,38 +1833,6 @@ var TrovieHelper = /*#__PURE__*/function () {
   }
 
   _createClass(TrovieHelper, [{
-    key: "getDataTableLanguage",
-    value: function getDataTableLanguage() {
-      var lang = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'vi';
-
-      if (lang === 'vi') {
-        return {
-          "decimal": "",
-          "emptyTable": "Bảng trống",
-          "info": "Hiển thị từ _START_ đến _END_ trên tổng _TOTAL_ dòng",
-          "infoEmpty": "Không có dữ liệu",
-          "infoFiltered": "(Lọc từ _MAX_ tổng số dòng)",
-          "infoPostFix": "",
-          "thousands": ",",
-          "lengthMenu": "Hện _MENU_ dòng",
-          "loadingRecords": "Đang tải...",
-          "processing": "Đang xử lý...",
-          "search": "Tìm:",
-          "zeroRecords": "Không có dữ liệu phù hợp với tìm kiếm",
-          "paginate": {
-            "first": "Đầu tiên",
-            "last": "Cuối",
-            "next": "Tiếp",
-            "previous": "Trước"
-          },
-          "aria": {
-            "sortAscending": ": activate to sort column ascending",
-            "sortDescending": ": activate to sort column descending"
-          }
-        };
-      }
-    }
-  }, {
     key: "initGoogleMap",
     value: function initGoogleMap(element) {
       var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'window.initMap';
@@ -2032,6 +2000,39 @@ var TrovieHelper = /*#__PURE__*/function () {
       return options;
     }
   }, {
+    key: "_datatableGetLang",
+    value: function _datatableGetLang() {
+      var lang = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'vi';
+
+      if (lang === 'vi') {
+        return {
+          "decimal": "",
+          "emptyTable": "Bảng trống",
+          // "info": "Hiển thị từ _START_ đến _END_ trên tổng _TOTAL_ dòng",
+          "info": "",
+          "infoEmpty": "Không có dữ liệu",
+          "infoFiltered": "(Lọc từ _MAX_ tổng số dòng)",
+          "infoPostFix": "",
+          "thousands": ",",
+          "lengthMenu": "Hện _MENU_ dòng",
+          "loadingRecords": "Đang tải...",
+          "processing": "Đang xử lý...",
+          "search": "Tìm:",
+          "zeroRecords": "Không có dữ liệu phù hợp với tìm kiếm",
+          "paginate": {
+            "first": "Đầu tiên",
+            "last": "Cuối",
+            "next": "<i class='fa fa-angle-right'></i>",
+            "previous": "<i class='fa fa-angle-left'></i>"
+          },
+          "aria": {
+            "sortAscending": ": activate to sort column ascending",
+            "sortDescending": ": activate to sort column descending"
+          }
+        };
+      }
+    }
+  }, {
     key: "convertStrToSlug",
     value: function convertStrToSlug(str) {
       // Chuyển hết sang chữ thường
@@ -2083,6 +2084,11 @@ var TrovieHelper = /*#__PURE__*/function () {
       }
 
       return temp;
+    }
+  }, {
+    key: "parseCurrencyFormat",
+    value: function parseCurrencyFormat(str) {
+      return str.replace(/\./gi, '');
     }
   }]);
 

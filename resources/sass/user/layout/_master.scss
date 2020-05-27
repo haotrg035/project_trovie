@@ -76,3 +76,17 @@ body {
         }
     }
 }
+
+.page-item {
+    .page-link {
+        //border-color: var(--color-base);
+        color: var(--color-base);
+    }
+
+    &.active {
+        .page-link {
+            background: var(--color-base) !important;
+            border-color: var(--color-base) !important;
+        }
+    }
+}

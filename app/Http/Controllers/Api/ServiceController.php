@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 use App\Models\Service;
-use App\Models\ServiceUnit;
+use App\Models\User;
 use App\Repositories\Interfaces\ServiceEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ServiceController extends BaseController
 {
-
     /**
      * @var ServiceEloquentRepositoryInterface
      */
@@ -23,20 +24,17 @@ class ServiceController extends BaseController
 
     protected function viewName()
     {
-        return 'Tiện Ích';
+        return 'Dịch vụ';
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $this->data['data'] = $this->repository->getAllByUser(auth()->id());
-        $this->data['units'] = ServiceUnit::where('user_id', auth()->id())->get()->toArray();
-
-        return view('user.service.index', ['data' => $this->data]);
+        //
     }
 
     /**
@@ -57,7 +55,9 @@ class ServiceController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->repository->create($request->all());
+
+        return $this->returnResponse($data, 'create', $data);
     }
 
     /**
@@ -68,18 +68,9 @@ class ServiceController extends BaseController
      */
     public function show(Service $service)
     {
-        //
-    }
+        $data = $this->repository->find($service->id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Service $service
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Service $service)
-    {
-        //
+        return $this->returnResponse($data, 'view', $data);
     }
 
     /**
@@ -91,7 +82,10 @@ class ServiceController extends BaseController
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $this->checkUpdateAuth($service);
+        $result = $this->repository->update($service->id, $request->all());
+
+        return $this->returnResponse($result, 'update', $result);
     }
 
     /**
@@ -102,6 +96,9 @@ class ServiceController extends BaseController
      */
     public function destroy(Service $service)
     {
-        //
+        $this->checkDeleteAuth($service);
+        $result = $this->repository->delete($service->id);
+
+        return $this->returnResponse($result, 'delete', $service->id);
     }
 }
