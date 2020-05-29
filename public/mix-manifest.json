@@ -3,6 +3,6 @@
     "/user/css/app.css": "/user/css/app.css",
     "/user/js/host/detail.js": "/user/js/host/detail.js",
     "/user/js/host/index.js": "/user/js/host/index.js",
-    "/user/js/room.js": "/user/js/room.js",
+    "/user/js/room/index.js": "/user/js/room/index.js",
     "/user/js/service/index.js": "/user/js/service/index.js"
 }

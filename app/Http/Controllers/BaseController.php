@@ -72,7 +72,7 @@ abstract class BaseController extends Controller
                 }
                 default :
                 {
-                    $_response['message'] = '';
+                    $_response['message'] = __('curd.message.failed.view');
                     break;
                 }
             }

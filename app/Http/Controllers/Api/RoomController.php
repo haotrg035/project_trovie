@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
+use App\Models\Host;
 use App\Models\Room;
+use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
-class RoomController extends Controller
+class RoomController extends BaseController
 {
+    /**
+     * @var RoomEloquentRepositoryInterface
+     */
+    private $repository;
+
+    public function __construct(RoomEloquentRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +43,7 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,18 +54,19 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Room  $room
+     * @param \App\Models\Room $room
      * @return \Illuminate\Http\Response
      */
-    public function show(Room $room)
+    public function show(Host $host, Room $room)
     {
-        //
+        $result = $this->repository->getRoom($host->id, $room->id);
+        return $this->returnResponse($result, 'show', $result);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Room  $room
+     * @param \App\Models\Room $room
      * @return \Illuminate\Http\Response
      */
     public function edit(Room $room)
@@ -64,8 +77,8 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Room  $room
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Room $room
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Room $room)
@@ -76,11 +89,19 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Room  $room
+     * @param \App\Models\Room $room
      * @return \Illuminate\Http\Response
      */
     public function destroy(Room $room)
     {
         //
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function viewName()
+    {
+        return 'Phòng Trọ';
     }
 }

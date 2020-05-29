@@ -12,6 +12,7 @@ return [
             'delete' => 'Xóa thành công.',
         ],
         'failed' => [
+            'view' => 'Try cập thất bại.',
             'create' => 'Thêm thất bại.',
             'update' => 'Cập nhật thất bại.',
             'delete' => 'Xóa thất bại.',

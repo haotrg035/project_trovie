@@ -49,5 +49,31 @@ class DatabaseSeeder extends Seeder
             }, config('app.default_services'));
             DB::table('services')->insert($services);
         }
+
+        foreach ($hostUsers as $user) {
+            $hosts = DB::table('hosts')->where('user_id', $user)->get('id')->toArray();
+            $hosts = array_map(function ($val) {
+                return $val->id;
+            }, $hosts);
+            foreach ($hosts as $host) {
+                $rooms = DB::table('rooms')->where('host_id', $host)->get('id')->toArray();
+                $services = DB::table('services')->where('user_id', $user)->get('id')->toArray();
+
+                $rooms = array_map(function ($val) {
+                    return $val->id;
+                }, $rooms);
+                $services = array_map(function ($val) {
+                    return $val->id;
+                }, $services);
+
+                foreach ($rooms as $room) {
+                    $_services = array_map(function ($val) use ($room) {
+                        return ['room_id' => $room, 'service_id' => $val];
+                    }, $services);
+
+                    DB::table('room_service')->where('id', $rooms)->insert($_services);
+                }
+            }
+        }
     }
 }

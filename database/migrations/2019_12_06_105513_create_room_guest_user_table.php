@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoomtemporaryuserTable extends Migration
+class CreateRoomguestuserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateRoomtemporaryuserTable extends Migration
      */
     public function up()
     {
-        Schema::create('room_temporary_user', function (Blueprint $table) {
-            $table->datetime('date_in');
-            $table->integer('user_id')->unsigned();
+        Schema::create('room_guest_user', function (Blueprint $table) {
             $table->integer('room_id')->unsigned();
-            $table->timestamps();
-            $table->index(["room_id"]);
+            $table->integer('user_id')->unsigned();
+            $table->datetime('date_in');
+            $table->index(['room_id', 'user_id', 'date_in']);
         });
     }
 
@@ -29,7 +28,7 @@ class CreateRoomtemporaryuserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('room_temporary_user');
+        Schema::dropIfExists('room_guest_user');
     }
 }
 

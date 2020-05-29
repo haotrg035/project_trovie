@@ -16,9 +16,7 @@
                         <div class="col-md-4">
                             <div class="form-group mb-lg-0">
                                 <div class="trovie-gallery trovie-gallery--room mt-2">
-                                    <input class="filepond" type="file" name="gallery" id="file-gallery"
-                                           multiple
-                                           data-max-file-size="2MB">
+                                    <input class="filepond" type="file" name="gallery" id="file-gallery">
                                     <div class="row row--custom">
                                         <a href="javascript:void(0)" class="col-4 col-lg-4 col--custom">
                                             <div class="trovie-gallery__item">
@@ -63,66 +61,21 @@
                                         <label for="price">Tiện ích: </label>
                                         <div
                                             class="row row--custom panel-content--room__room-modal__form__services">
-                                            <div class="col-4 col--custom">
-                                                <div
-                                                    class="custom-control custom-checkbox panel-content--room__room-modal__form__services__item">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="service-checkbox1" name="services[]">
-                                                    <label class="custom-control-label" for="service-checkbox1">
-                                                        Wifi
-                                                    </label>
+                                            @foreach($data['data']['service_list'] as $service)
+                                                <div class="col-6 col--custom">
+                                                    <div
+                                                        class="custom-control custom-checkbox panel-content--room__room-modal__form__services__item">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               id="room-modal__form__services-checkbox-{{$service['id']}}"
+                                                               value="{{$service['id']}}" name="services[]">
+                                                        <label class="custom-control-label"
+                                                               for="room-modal__form__services-checkbox-{{$service['id']}}">
+                                                            <span class="text-capitalize">{{$service['name']}}</span>
+                                                            - {{$service['cost']}}
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-4 col--custom">
-                                                <div
-                                                    class="custom-control custom-checkbox panel-content--room__room-modal__form__services__item">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="service-checkbox2" name="services[]">
-                                                    <label class="custom-control-label" for="service-checkbox2">
-                                                        Nuôi thú cưng
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 col--custom">
-                                                <div
-                                                    class="custom-control custom-checkbox panel-content--room__room-modal__form__services__item">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="service-checkbox3" name="services[]">
-                                                    <label class="custom-control-label" for="service-checkbox3">
-                                                        Wifi
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 col--custom">
-                                                <div
-                                                    class="custom-control custom-checkbox panel-content--room__room-modal__form__services__item">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="service-checkbox4" name="services[]">
-                                                    <label class="custom-control-label" for="service-checkbox4">
-                                                        Nuôi thú cưng
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 col--custom">
-                                                <div
-                                                    class="custom-control custom-checkbox panel-content--room__room-modal__form__services__item">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="service-checkbox5" name="services[]">
-                                                    <label class="custom-control-label" for="service-checkbox5">
-                                                        Nam nữ ở chung
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 col--custom">
-                                                <div
-                                                    class="custom-control custom-checkbox panel-content--room__room-modal__form__services__item">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="service-checkbox6" name="services[]">
-                                                    <label class="custom-control-label" for="service-checkbox6">
-                                                        Nam nữ ở chung
-                                                    </label>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -130,43 +83,44 @@
                         </div>
                         <div class="col-md-4">
                             <div class="row row--custom">
+                                <input type="hidden" name="old_room_id">
+                                <input type="hidden" name="room_id">
                                 <div class="col-12 col--custom">
                                     <div class="form-group">
                                         <label for="name">Tên phòng: </label>
                                         <input type="text" class="form-control trovie-input"
-                                               name="name" id="name" placeholder=""
-                                               value="P.01">
+                                               name="name" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-6 col--custom">
                                     <div class="form-group form-group--unit form-group--unit--price">
                                         <label for="price">Giá phòng: </label>
                                         <input type="text" class="form-control trovie-input" step="1000"
-                                               min="0" name="price" id="price" placeholder="Nhập số tiền">
+                                               min="0" name="price" placeholder="Nhập số tiền">
                                     </div>
                                 </div>
                                 <div class="col-6 col--custom">
                                     <div class="form-group">
                                         <label for="price">Tầng / Khu / Dãy: </label>
                                         <input type="number" class="form-control trovie-input text-center"
-                                               name="floor" id="floor" placeholder="Nhập số tầng/khu/dãy" min="0">
+                                               name="floor" placeholder="Nhập số tầng/khu/dãy" min="0">
                                     </div>
                                 </div>
                                 <div class="col-6 col--custom">
                                     <div class="form-group form-group--unit form-group--unit--meter">
                                         <label for="price">Diện tích: </label>
                                         <input type="number" class="form-control trovie-input text-center"
-                                               name=""  placeholder="Nhập diện tích" min="0">
+                                               name="acreage" placeholder="Nhập diện tích" min="0">
                                     </div>
                                 </div>
                                 <div class="col-6 col--custom">
                                     <div class="form-group form-group--unit form-group--unit--man">
                                         <label for="price">Số người ở tối đa: </label>
                                         <input type="number" class="form-control trovie-input text-center"
-                                               name=""  placeholder="Tối thiểu 1" min="1">
+                                               name="members" placeholder="Tối thiểu 1" min="1">
                                     </div>
                                 </div>
-                                <div class="col-12 col--custom">
+                                <div class="col-12 col--custom d-none">
                                     <div class="form-group">
                                         <label for="price">Khách Thuê: </label>
                                         <ul class="panel-content--room__room-modal__form__user-list list-unstyled">

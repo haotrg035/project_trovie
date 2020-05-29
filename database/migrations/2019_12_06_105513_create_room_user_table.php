@@ -18,7 +18,6 @@ class CreateRoomUserTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->datetime('date_in');
             $table->boolean('active')->default(true);
-            $table->timestamps();
             $table->primary(['room_id', 'user_id', 'date_in']);
         });
     }

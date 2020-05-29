@@ -36,6 +36,11 @@ class Room extends Model
         return $this->belongsToMany(User::class, 'room_user');
     }
 
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
+
     public function getPriceAttribute($value)
     {
         return TrovieHelper::currencyFormat($value);

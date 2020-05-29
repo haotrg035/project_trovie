@@ -30,8 +30,8 @@ Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])
         Route::patch('/update-announcement/{host}', 'HostController@updateAnouncement')->name('.update_announcement');
         Route::post('/update-avatar/{host}', 'HostController@updateAvatar')->name('.update_avatar');
 
-        Route::name('.room')->group(function () {
-            Route::get('{host}/room', 'RoomController@index')->name('.index');
+        Route::prefix('/{host}/room')->name('.room')->group(function () {
+            Route::get('/', 'RoomController@index')->name('.index');
         });
     });
 

@@ -20,7 +20,7 @@ mix.js([
 ], 'public/user/js/app.js')
     .js('resources/js/user/host/detail.js', 'public/user/js/host')
     .js('resources/js/user/host/index.js', 'public/user/js/host/index.js')
-    .js('resources/js/user/room.js', 'public/user/js')
+    .js('resources/js/user/room/index.js', 'public/user/js/room')
     .js('resources/js/user/service/index.js', 'public/user/js/service')
     // .sass('resources/sass/user/libs.scss', 'public/user/css/libs.css')
     .sass('resources/sass/user/app.scss', 'public/user/css');

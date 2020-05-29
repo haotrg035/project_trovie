@@ -35,5 +35,9 @@ Route::middleware(['auth:api', 'api_host_owner'])->group(function () {
     Route::apiResource('service', 'Api\ServiceController')
         ->except(['update', 'show', 'delete'])
         ->names('api.user.service');
+
+    Route::prefix('host/{host}/room')->name('api.user.host.room')->group(function () {
+        Route::get('/{room?}', 'Api\RoomController@show')->name('.show');
+    });
 });
 

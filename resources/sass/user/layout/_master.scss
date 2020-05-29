@@ -32,8 +32,13 @@ body {
 
     .main-panel {
         display: flex;
-        flex-direction: column;
-        flex: 1 1 94%;
+
+
+        @include ResponsiveMin(MD) {
+            flex-direction: column;
+            flex: 0 calc(100% - 5rem);
+            margin-left: 5rem;
+        }
 
         &__title {
             font-size: 1.55rem;
@@ -48,9 +53,20 @@ body {
             padding: 1rem;
 
 
-            @include ResponsiveMin(LG) {
+            @include ResponsiveMin(MD) {
                 height: 100vh;
                 overflow-y: auto;
+                &::-webkit-scrollbar {
+                    width: .5rem;
+                }
+
+                &::-webkit-scrollbar-track {
+                    //background: var(--color-variant-3);
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: var(--color-base);
+                }
             }
         }
     }

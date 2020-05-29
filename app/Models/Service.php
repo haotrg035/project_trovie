@@ -20,7 +20,9 @@ class Service extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-
+    public function rooms(){
+        return $this->belongsToMany(Room::class);
+    }
     function getCostAttribute($value)
     {
         return TrovieHelper::currencyFormat($value);

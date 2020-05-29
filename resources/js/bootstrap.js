@@ -11,6 +11,13 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+
+    window.showBsModal = function (modal) {
+        $(modal).modal('show');
+    };
+    window.hideBsModal = function (modal) {
+        $(modal).modal('hide');
+    }
 } catch (e) {
     console.log(e);
 }
