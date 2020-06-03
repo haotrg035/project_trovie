@@ -20,10 +20,13 @@ class  TrovieHelper
         if (is_numeric($int)) {
             if ($int >= 1000000000) {
                 return round($int / 1000000000, 2) . " tỷ";
-            } else if ($int >= 1000000) {
-                return round($int / 1000000, 2) . " triệu";
-            } else
-                return tien($int);
+            } else {
+                if ($int >= 1000000) {
+                    return round($int / 1000000, 2) . " triệu";
+                } else {
+                    return tien($int);
+                }
+            }
         } else {
             return 0;
         }
@@ -32,6 +35,16 @@ class  TrovieHelper
     public static function stripAddressCompoentName($name)
     {
         $name = strtolower($name);
-        return trim(str_replace(['huyện','quận','thành phố',], '', $name));
+        return trim(str_replace(['huyện', 'quận', 'thành phố',], '', $name));
+    }
+
+    public static function convertAssocIdArrayToValueIdArray($assocArray = [], $key = 'id')
+    {
+        return array_map(function ($val) use ($key) {
+            if (is_array($val)) {
+                return $val[$key];
+            }
+            return $val->$key;
+        }, $assocArray);
     }
 }

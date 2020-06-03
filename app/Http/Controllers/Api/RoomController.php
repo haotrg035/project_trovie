@@ -17,6 +17,7 @@ class RoomController extends BaseController
 
     public function __construct(RoomEloquentRepositoryInterface $repository)
     {
+        parent::__construct();
         $this->repository = $repository;
     }
 
@@ -59,7 +60,15 @@ class RoomController extends BaseController
      */
     public function show(Host $host, Room $room)
     {
+        $this->checkViewAuth($room);
         $result = $this->repository->getRoom($host->id, $room->id);
+        return $this->returnResponse($result, 'show', $result);
+    }
+
+    public function getMembers(Host $host, Room $room)
+    {
+        $this->checkViewAuth($room);
+        $result = $this->repository->getRoomMembers($room->id);
         return $this->returnResponse($result, 'show', $result);
     }
 
@@ -81,9 +90,11 @@ class RoomController extends BaseController
      * @param \App\Models\Room $room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, Host $host, Room $room)
     {
-        //
+        $this->checkUpdateAuth($room);
+        $result = $this->repository->update($room->id, $request->all());
+        return $this->returnResponse($result, 'update', $result);
     }
 
     /**
@@ -103,5 +114,19 @@ class RoomController extends BaseController
     protected function viewName()
     {
         return 'Phòng Trọ';
+    }
+
+    public function addGalleryImage(Request $request, Host $host, Room $room)
+    {
+        $this->checkUpdateAuth($room);
+        $result = $this->repository->addGalleryImage($request->file('image'), $host->id, $room->id);
+        return $this->returnResponse($result, 'create', $result);
+    }
+
+    public function removeGalleryImage(Host $host, $image_id)
+    {
+        $this->checkUpdateAuth($host);
+        $result = $this->repository->removeGalleryImage($image_id);
+        return $this->returnResponse($result, 'delete', ['id' => $image_id]);
     }
 }

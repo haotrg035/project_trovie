@@ -1,4 +1,5 @@
 import {TrovieMap} from "../TrovieMap";
+import {TrovieGallery} from "../TrovieGallery";
 
 let avatarUploader = document.querySelector('#file-avatar');
 let updateHostFormMap = document.getElementById('form-position__map');
@@ -33,11 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function initFileUploader() {
-    if (avatarUploader !== null) {
-        // FilePond.create(avatarUploader, TrovieHelper.getOptionsForFIlepondInstance(avatarUploader, {
-        //     url: '/api/host/update-avatar/',
-        //     process: avatarUploader.getAttribute('data-host-id'),
-        // }));
+    let galleries = document.querySelectorAll('.trovie-gallery');
+
+    if (galleries.length > 0) {
+        for (let gallery of galleries) {
+            TrovieGallery.initGallery(gallery);
+        }
     }
 }
 

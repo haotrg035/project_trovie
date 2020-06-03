@@ -207,6 +207,12 @@ a:hover {
   animation-name: bounceIn;
 }
 
+.form-group--present input,
+.form-group--present select,
+.form-group--present textarea {
+  border-bottom: none;
+}
+
 .form-group label {
   font-weight: 700;
   margin-bottom: 0;
@@ -1183,7 +1189,7 @@ body {
     height: auto;
     top: auto;
     bottom: 0;
-    justify-content: space-between;
+    justify-content: center;
   }
 }
 
@@ -1548,14 +1554,17 @@ body {
   border-radius: 9px;
 }
 
+.modal-room-users__list .list__user.active,
 .modal-room-users__list .list__user:hover {
   background: var(--color-base);
 }
 
+.modal-room-users__list .list__user.active .user__avatar,
 .modal-room-users__list .list__user:hover .user__avatar {
   border-color: #fff;
 }
 
+.modal-room-users__list .list__user.active .user__name,
 .modal-room-users__list .list__user:hover .user__name {
   color: #fff;
 }

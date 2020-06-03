@@ -86,32 +86,197 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/user/room/index.js":
-/*!*****************************************!*\
-  !*** ./resources/js/user/room/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./resources/js/user/TrovieGallery.js":
+/*!********************************************!*\
+  !*** ./resources/js/user/TrovieGallery.js ***!
+  \********************************************/
+/*! exports provided: TrovieGallery */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrovieGallery", function() { return TrovieGallery; });
 function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var TrovieGallery = /*#__PURE__*/function () {
+  function TrovieGallery() {
+    _classCallCheck(this, TrovieGallery);
+  }
+
+  _createClass(TrovieGallery, null, [{
+    key: "initGallery",
+    value: function initGallery(gallery) {
+      var uploadUrl = gallery.getAttribute('upload-url');
+      var uploadInput = gallery.querySelector('input[type=file]');
+      var galleryItems = gallery.querySelectorAll('.gallery__item:not(.gallery__item--upload)');
+
+      if (uploadInput !== null) {
+        TrovieGallery.galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl);
+      }
+
+      if (galleryItems.length > 0) {
+        var _iterator = _createForOfIteratorHelper(galleryItems),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var item = _step.value;
+            TrovieGallery.galleryRemoveBtnHandler(item);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    }
+  }, {
+    key: "galleryInputOnChangeHandler",
+    value: function galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl) {
+      uploadInput.addEventListener('change', _.debounce(onClickHandler, 500));
+
+      function onClickHandler() {
+        var formData = new FormData(gallery.querySelector('form'));
+        var newInput = TrovieGallery.cloneGalleryInput(uploadInput);
+        formData.append('api_token', __apiToken);
+        axios.post(uploadUrl, formData).then(function (response) {
+          var item = TrovieGallery.renderGalleryItem(response.data.data);
+          TrovieGallery.galleryInputOnChangeHandler(newInput, gallery, uploadUrl);
+          gallery.querySelector('.row').append(item);
+          tata.success('Thành công', response.data.message);
+        })["catch"](function (response) {
+          tata.error('Lỗi', response.message);
+          TrovieGallery.galleryInputOnChangeHandler(newInput, gallery, uploadUrl);
+        }).then(function () {
+          // always executed
+          uploadInput.parentNode.replaceChild(newInput, uploadInput);
+        });
+      }
+    }
+  }, {
+    key: "cloneGalleryInput",
+    value: function cloneGalleryInput(oldInput) {
+      var newInput = document.createElement("input");
+      newInput.type = "file";
+      newInput.name = oldInput.name;
+      newInput.className = oldInput.className || '';
+      newInput.title = oldInput.title;
+      newInput.accept = oldInput.accept;
+      return newInput;
+    }
+  }, {
+    key: "renderGalleryItem",
+    value: function renderGalleryItem(data) {
+      var deleteUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var itemWrapper = document.createElement('a');
+      var item = document.createElement('div');
+      var item__img = document.createElement('img');
+      var item__remove = document.createElement('span');
+      itemWrapper.className = 'col-6 col-lg-4 col--custom';
+      itemWrapper.href = 'javascript:void(0)';
+      item.className = 'gallery__item';
+      item.setAttribute('delete-url', data.delete_url);
+      item__img.className = 'item__image';
+      item__img.src = data.image;
+      item__remove.className = 'item__remove';
+      item__remove.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+      item.append(item__img);
+      item.append(item__remove);
+      TrovieGallery.galleryRemoveBtnHandler(item, deleteUrl);
+      itemWrapper.append(item);
+      return itemWrapper;
+    }
+  }, {
+    key: "galleryRemoveBtnHandler",
+    value: function galleryRemoveBtnHandler(item) {
+      var deleteUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      item.querySelector('.item__remove').addEventListener('click', function () {
+        if (confirm('Bạn có chắc muốn xóa ảnh này?')) {
+          if (deleteUrl === null) {
+            deleteUrl = item.getAttribute('delete-url');
+          }
+
+          axios["delete"](deleteUrl, {
+            data: {
+              api_token: __apiToken
+            }
+          }).then(function (response) {
+            var parent = item.parentNode;
+            tata.success('Thành công', response.data.message);
+            parent.parentNode.removeChild(parent);
+          })["catch"](function (response) {
+            try {
+              tata.error('Lỗi', response.data.message);
+            } catch (e) {
+              console.log(e);
+            }
+          });
+        }
+      });
+    }
+  }]);
+
+  return TrovieGallery;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/user/room/index.js":
+/*!*****************************************!*\
+  !*** ./resources/js/user/room/index.js ***!
+  \*****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TrovieGallery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TrovieGallery */ "./resources/js/user/TrovieGallery.js");
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
 var roomCards = document.querySelectorAll('.panel-content--room__list-room .room-card');
 var roomModal = document.getElementById('panel-content--room__room-modal');
 var roomModalForm = document.querySelector('.panel-content--room__room-modal__form');
+var roomModalGallery = roomModal.querySelector('.trovie-gallery');
 var addRoomModal = document.getElementById('add-room-modal');
 var invoiceModal = document.getElementById('panel-content--room__invoice-modal');
 var roomUsersModal = document.getElementById('panel-content--room__room-users-modal');
-var roomAddUsersModal = document.getElementById('room-add-users-modal');
+var roomUsersModalForm = roomUsersModal.querySelector('.room-users-modal__form');
+var roomUsersModalList = document.querySelector('.modal-room-users__list');
+var roomUsersModalUserItem = roomUsersModalList.querySelector('div').cloneNode(true);
 document.addEventListener('DOMContentLoaded', function () {
   initRoomModalHandler();
   initRoomTypeFilterHandler();
   initRoomInvoiceModalEventHandler();
   initRoomUsersModalHandler();
 });
+
+function resetRoomModalIdInput() {
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var _value = roomModal.querySelector('input[name=old_room_id]').value;
+
+  if (value !== null) {
+    _value = value;
+  }
+
+  roomModal.querySelector('input[name=room_id]').value = _value;
+}
 
 function fillRoomModalForm(data) {
   var roomModalFormServiceInputs = roomModalForm.querySelectorAll('.panel-content--room__room-modal__form__services input[type=checkbox]');
@@ -122,6 +287,8 @@ function fillRoomModalForm(data) {
   roomModalForm.querySelector('input[name=floor]').value = data.floor;
   roomModalForm.querySelector('input[name=acreage]').value = data.acreage;
   roomModalForm.querySelector('input[name=members]').value = data.members;
+  roomModalForm.querySelector('textarea[name=announcement]').innerText = data.announcement;
+  roomModalForm.querySelector('input[name=notice]').checked = data.notice === 1;
 
   var _iterator = _createForOfIteratorHelper(roomModalFormServiceInputs),
       _step;
@@ -138,6 +305,51 @@ function fillRoomModalForm(data) {
   }
 }
 
+function renderRoomModalGalleryItems(data) {
+  var galleryListElement = roomModalGallery.querySelector('.row');
+  var galleryItems = roomModalGallery.querySelectorAll('.gallery__item:not(.gallery__item--upload)');
+
+  var _iterator2 = _createForOfIteratorHelper(galleryItems),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var _item2 = _step2.value;
+      galleryListElement.removeChild(_item2.parentNode);
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+
+  if (data.gallery.length > 0) {
+    var deleteUrl = '';
+
+    var _iterator3 = _createForOfIteratorHelper(data.gallery),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var item = _step3.value;
+        deleteUrl = roomModalGallery.getAttribute('data-delete-url') + '/' + item.id;
+        var image = _TrovieGallery__WEBPACK_IMPORTED_MODULE_0__["TrovieGallery"].renderGalleryItem(item, deleteUrl);
+        galleryListElement.append(image);
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+  }
+}
+
+function initRoomModalGallery(data) {
+  var uploadUrl = roomModalGallery.getAttribute('upload-url') + '/' + data.id;
+  var uploadInput = roomModalGallery.querySelector('input[type=file]');
+  _TrovieGallery__WEBPACK_IMPORTED_MODULE_0__["TrovieGallery"].galleryInputOnChangeHandler(uploadInput, roomModalGallery, uploadUrl);
+}
+
 function roomCardClickHandler(roomCard) {
   var getUrl = roomCard.getAttribute('data-view-url');
   axios.get(getUrl, {
@@ -147,8 +359,101 @@ function roomCardClickHandler(roomCard) {
   }).then(function (response) {
     try {
       fillRoomModalForm(response.data.data);
-      console.log(response);
+      renderRoomModalGalleryItems(response.data.data);
+      initRoomModalGallery(response.data.data);
       showBsModal(roomModal);
+    } catch (e) {
+      console.log(e);
+    }
+  })["catch"](function (err) {
+    try {
+      tata.error('Lỗi', err.response.data.message);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+function updateCardServices(targetRoomCard, services) {
+  var serviceList = targetRoomCard.querySelector('.room-card__service-list');
+  var ExampleServiceItem = targetRoomCard.querySelector('li');
+
+  if (ExampleServiceItem.classList.contains('d-none')) {
+    ExampleServiceItem.classList.remove('d-none');
+  }
+
+  serviceList.innerHTML = '';
+
+  var _iterator4 = _createForOfIteratorHelper(services),
+      _step4;
+
+  try {
+    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+      var service = _step4.value;
+
+      var _item = ExampleServiceItem.cloneNode(true);
+
+      _item.querySelector('p').innerText = service.name;
+      serviceList.append(_item);
+    }
+  } catch (err) {
+    _iterator4.e(err);
+  } finally {
+    _iterator4.f();
+  }
+}
+
+function updateCardMembers(targetRoomCard, members) {
+  var MembersList = targetRoomCard.querySelector('.room-card__customer-list');
+  var ExampleMemberItem = MembersList.querySelector('li');
+
+  if (ExampleMemberItem.classList.contains('d-none')) {
+    ExampleMemberItem.classList.remove('d-none');
+  }
+
+  MembersList.innerHTML = '';
+
+  var _iterator5 = _createForOfIteratorHelper(members),
+      _step5;
+
+  try {
+    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+      var member = _step5.value;
+
+      var _member = ExampleMemberItem.cloneNode(true);
+
+      _member.title = member.full_name;
+      _member.querySelector('img').src = member.avatar;
+      MembersList.append(_member);
+    }
+  } catch (err) {
+    _iterator5.e(err);
+  } finally {
+    _iterator5.f();
+  }
+}
+
+function updateCardData(data) {
+  var targetRoomCard = document.querySelector('.room-card[data-id="' + data.id + '"]');
+  targetRoomCard.querySelector('.room-card__id').innerText = data.name;
+  targetRoomCard.querySelector('.property-list__item--price p .value__content').innerText = data.price;
+  targetRoomCard.querySelector('.property-list__item--floor p .value__content').innerText = data.floor;
+  targetRoomCard.querySelector('.property-list__item--members .current-users').innerText = data.total_users;
+  targetRoomCard.querySelector('.property-list__item--members .max-users').innerText = data.members;
+  targetRoomCard.querySelector('.property-list__item--acreage p .value__content').innerText = data.acreage;
+  updateCardServices(targetRoomCard, data.services);
+  updateCardMembers(targetRoomCard, data.users);
+}
+
+function roomModalFormSubmitHandler() {
+  var updateUrl = roomModalForm.action + '/' + roomModalForm.querySelector('input[name=room_id]').value;
+  var formData = new FormData(roomModalForm);
+  formData.append('_method', 'PATCH');
+  formData.append('api_token', __apiToken);
+  axios.post(updateUrl, formData).then(function (response) {
+    try {
+      updateCardData(response.data.data);
+      tata.success('Thành Công', response.data.message);
     } catch (e) {
       console.log(e);
     }
@@ -164,44 +469,37 @@ function initRoomModalHandler() {
   $(roomModal).on('hidden.bs.modal', function (e) {
     roomModal.querySelector('input[name=room_id]').value = '';
     resetRoomModalIdInput('');
+  }); // update room modal form
+
+  roomModal.querySelector('.btn-room-modal-save').addEventListener('click', function (e) {
+    roomModalFormSubmitHandler();
   });
 
-  var _iterator2 = _createForOfIteratorHelper(roomCards),
-      _step2;
+  var _iterator6 = _createForOfIteratorHelper(roomCards),
+      _step6;
 
   try {
     var _loop = function _loop() {
-      var roomCard = _step2.value;
+      var roomCard = _step6.value;
       roomCard.addEventListener('click', function () {
         roomCardClickHandler(roomCard);
       });
     };
 
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
       _loop();
     }
   } catch (err) {
-    _iterator2.e(err);
+    _iterator6.e(err);
   } finally {
-    _iterator2.f();
+    _iterator6.f();
   }
-}
-
-function resetRoomModalIdInput() {
-  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  var _value = roomModal.querySelector('input[name=old_room_id]').value;
-
-  if (value !== null) {
-    _value = value;
-  }
-
-  roomModal.querySelector('input[name=room_id]').value = _value;
 }
 
 function initRoomInvoiceModalEventHandler() {
   document.querySelector('.btn-create-room-invoice').addEventListener('click', function () {
-    closeRoomModal();
-    showInvoiceModal();
+    hideBsModal(roomModal);
+    showBsModal(invoiceModal);
   });
   $(invoiceModal).on('hidden.bs.modal', function () {
     resetRoomModalIdInput();
@@ -209,36 +507,132 @@ function initRoomInvoiceModalEventHandler() {
   });
 }
 
-function initRoomUsersModalHandler() {
-  var isAddingUser = false;
-  $(roomUsersModal).on('hidden.bs.modal', function () {
-    if (!isAddingUser) {
-      resetRoomModalIdInput();
-      showBsModal(roomModal);
+function fillRoomUserModalFormData(data) {
+  roomUsersModalForm.querySelector('input[name=name]').value = data.name || '';
+  roomUsersModalForm.querySelector('input[name=date_in]').value = data.dateIn || '';
+  roomUsersModalForm.querySelector('input[name=phone]').value = data.phone || ''; // roomUsersModalForm.querySelector('input[name=email]').value = data.email || '';
+
+  roomUsersModalForm.querySelector('input[name=id_card]').value = data.idCard || '';
+  roomUsersModalForm.querySelector('input[name=birthday]').value = data.birthday || '';
+  roomUsersModalForm.querySelector('input[name=career]').value = data.career || '';
+  roomUsersModalForm.querySelector('input[name=address]').value = data.address || '';
+}
+
+function initUserItemCardClick(element) {
+  var userCard = element.querySelector('.list__user');
+  element.addEventListener('click', function () {
+    var _iterator7 = _createForOfIteratorHelper(roomUsersModalList.querySelectorAll('.list__user')),
+        _step7;
+
+    try {
+      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+        var user = _step7.value;
+        user.classList.remove('active');
+      }
+    } catch (err) {
+      _iterator7.e(err);
+    } finally {
+      _iterator7.f();
     }
+
+    fillRoomUserModalFormData({
+      name: userCard.getAttribute('data-name'),
+      birthday: userCard.getAttribute('data-birthday'),
+      phone: userCard.getAttribute('data-phone'),
+      career: userCard.getAttribute('data-career'),
+      // email: userCard.getAttribute('data-email'),
+      idCard: userCard.getAttribute('data-id-card'),
+      address: userCard.getAttribute('data-address'),
+      dateIn: userCard.getAttribute('data-date-in')
+    });
+    userCard.classList.add('active');
   });
-  $(roomAddUsersModal).on('hidden.bs.modal', function () {
-    isAddingUser = false;
-    showBsModal(roomUsersModal);
+}
+
+function renderRoomUsersItem(data) {
+  var _userItem = roomUsersModalUserItem.cloneNode(true);
+
+  _userItem.querySelector('.user__avatar img').src = data.avatar;
+  _userItem.querySelector('.user__name').innerText = data.full_name;
+
+  _userItem.querySelector('.list__user').setAttribute('data-id', data.id);
+
+  _userItem.querySelector('.list__user').setAttribute('data-name', data.full_name);
+
+  _userItem.querySelector('.list__user').setAttribute('data-birthday', data.birthday);
+
+  _userItem.querySelector('.list__user').setAttribute('data-career', data.detail.career);
+
+  _userItem.querySelector('.list__user').setAttribute('data-email', data.email);
+
+  _userItem.querySelector('.list__user').setAttribute('data-phone', data.detail.phone);
+
+  _userItem.querySelector('.list__user').setAttribute('data-id-card', data.detail.id_card);
+
+  _userItem.querySelector('.list__user').setAttribute('data-address', data.detail.address);
+
+  _userItem.querySelector('.list__user').setAttribute('data-date-in', data.pivot.date_in);
+
+  initUserItemCardClick(_userItem, data);
+  return _userItem;
+}
+
+function fillRoomUserModalData() {
+  var roomId = roomModalForm.querySelector('input[name=room_id]').value;
+  var getUrl = document.querySelector('.room-card[data-id="' + roomId + '"]').getAttribute('data-view-url');
+  axios.get(getUrl + '/members', {
+    params: {
+      api_token: __apiToken
+    }
+  }).then(function (response) {
+    try {
+      roomUsersModalList.innerHTML = '';
+
+      var _iterator8 = _createForOfIteratorHelper(response.data.data),
+          _step8;
+
+      try {
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          var user = _step8.value;
+          roomUsersModalList.append(renderRoomUsersItem(user));
+        }
+      } catch (err) {
+        _iterator8.e(err);
+      } finally {
+        _iterator8.f();
+      }
+
+      roomUsersModalList.querySelector('.list__user').click();
+    } catch (e) {
+      console.log(e);
+    }
+  })["catch"](function (err) {
+    tata.error('Lỗi', err.response.data.message);
+  });
+}
+
+function initRoomUsersModalHandler() {
+  $(roomUsersModal).on('hidden.bs.modal', function () {
+    resetRoomModalIdInput();
+    showBsModal(roomModal);
+  });
+  $(roomUsersModal).on('hidden.bs.modal', function () {
+    fillRoomUserModalFormData({});
   });
   document.querySelector('.btn-room-users').addEventListener('click', function () {
-    closeRoomModal();
-    showRoomUsersModal();
-  });
-  document.querySelector('.btn-add-user-modal').addEventListener('click', function () {
-    isAddingUser = true;
-    closeRoomUsersModal();
-    showRoomAddUsersModal();
+    hideBsModal(roomModal);
+    fillRoomUserModalData();
+    showBsModal(roomUsersModal);
   });
 }
 
 function initRoomTypeFilterHandler() {
-  var _iterator3 = _createForOfIteratorHelper(document.querySelectorAll('.panel-content--room__filter--room-type__item a')),
-      _step3;
+  var _iterator9 = _createForOfIteratorHelper(document.querySelectorAll('.panel-content--room__filter--room-type__item a')),
+      _step9;
 
   try {
     var _loop2 = function _loop2() {
-      var el = _step3.value;
+      var el = _step9.value;
       el.addEventListener('click', function (e) {
         (function (el) {
           var _listRoomType = ['success', 'warning', 'danger'];
@@ -248,26 +642,26 @@ function initRoomTypeFilterHandler() {
           var filterRoomType = el.getAttribute('data-room-type') || 'all';
 
           if (!_listRoomType.includes(filterRoomType)) {
-            var _iterator4 = _createForOfIteratorHelper(_roomList),
-                _step4;
+            var _iterator10 = _createForOfIteratorHelper(_roomList),
+                _step10;
 
             try {
-              for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-                var _el = _step4.value;
+              for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+                var _el = _step10.value;
                 $(_el).parent().show();
               }
             } catch (err) {
-              _iterator4.e(err);
+              _iterator10.e(err);
             } finally {
-              _iterator4.f();
+              _iterator10.f();
             }
           } else {
-            var _iterator5 = _createForOfIteratorHelper(_roomList),
-                _step5;
+            var _iterator11 = _createForOfIteratorHelper(_roomList),
+                _step11;
 
             try {
-              for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                var _el2 = _step5.value;
+              for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+                var _el2 = _step11.value;
 
                 if (_el2.classList.contains('room-card--' + filterRoomType)) {
                   $(_el2).parent().show();
@@ -276,63 +670,23 @@ function initRoomTypeFilterHandler() {
                 }
               }
             } catch (err) {
-              _iterator5.e(err);
+              _iterator11.e(err);
             } finally {
-              _iterator5.f();
+              _iterator11.f();
             }
           }
         })(el);
       });
     };
 
-    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+    for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
       _loop2();
     }
   } catch (err) {
-    _iterator3.e(err);
+    _iterator9.e(err);
   } finally {
-    _iterator3.f();
+    _iterator9.f();
   }
-}
-
-function closeRoomModal() {
-  $(roomModal).modal('hide');
-}
-
-function showRoomModal() {
-  $(roomModal).modal('show');
-}
-
-function closeInvoiceModal() {
-  $(invoiceModal).modal('hide');
-}
-
-function showInvoiceModal() {
-  $(invoiceModal).modal('show');
-}
-
-function closeRoomUsersModal() {
-  $(roomUsersModal).modal('hide');
-}
-
-function showRoomUsersModal() {
-  $(roomUsersModal).modal('show');
-}
-
-function closeRoomAddUsersModal() {
-  $(roomAddUsersModal).modal('hide');
-}
-
-function showRoomAddUsersModal() {
-  $(roomAddUsersModal).modal('show');
-}
-
-function closeAddRoomModal() {
-  $(addRoomModal).modal('hide');
-}
-
-function showAddRoomModal() {
-  $(addRoomModal).modal('show');
 }
 
 /***/ }),

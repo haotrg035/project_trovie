@@ -25,20 +25,23 @@ class Room extends Model
         $data = $this->users()->get();
         return count($data);
     }
-
     public function host()
     {
         return $this->belongsTo(Host::class, 'host_id', 'id');
     }
-
     public function users()
     {
-        return $this->belongsToMany(User::class, 'room_user');
+        return $this->belongsToMany(User::class, 'room_user')->withPivot('date_in');
     }
 
     public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany(RoomGallery::class, 'room_id', 'id');
     }
 
     public function getPriceAttribute($value)

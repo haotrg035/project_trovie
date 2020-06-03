@@ -5,7 +5,7 @@
             <x-main-card has-header="1">
                 <x-slot name="title">
                     <div class="d-flex justify-content-between w-100">
-                        QUẢN LÝ KHÁCH THUÊ
+                        XEM KHÁCH THUÊ
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -13,102 +13,80 @@
                 </x-slot>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="row row--custom modal-room-users__list">
+                        <div class="row row--custom modal-room-users__list"
+                             data-view-url="{{route('api.user.show')}}">
                             <div class="col-6 col-lg-4 col--custom">
-                                <a href="javascript:void(0)" class="list__user">
+                                <a href="javascript:void(0)" class="list__user" data-id="">
                                     <figure class="user__avatar">
-                                        <img src="https://via.placeholder.com/300x300" alt="">
+                                        <img src="" alt="">
                                     </figure>
-                                    <p class="user__name">Nguyen Van A</p>
-                                </a>
-                            </div>
-                            <div class="col-6 col-lg-4 col--custom">
-                                <a href="javascript:void(0)" class="list__user">
-                                    <figure class="user__avatar">
-                                        <img src="https://via.placeholder.com/300x300" alt="">
-                                    </figure>
-                                    <p class="user__name">Nguyen Van A</p>
-                                </a>
-                            </div>
-                            <div class="col-6 col-lg-4 col--custom">
-                                <a href="javascript:void(0)" class="list__user">
-                                    <figure class="user__avatar">
-                                        <img src="https://via.placeholder.com/300x300" alt="">
-                                    </figure>
-                                    <p class="user__name">Nguyen Van A</p>
-                                </a>
-                            </div>
-                            <div class="col-6 col-lg-4 col--custom">
-                                <a href="javascript:void(0)" class="list__user">
-                                    <figure class="user__avatar">
-                                        <img src="https://via.placeholder.com/300x300" alt="">
-                                    </figure>
-                                    <p class="user__name">Nguyen Van A</p>
+                                    <p class="user__name"></p>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="row row--custom">
-                            <div class="col-6 col--custom">
-                                <div class="form-group">
-                                    <label for="name">Họ và Tên: </label>
-                                    <input type="text" class="form-control trovie-input"
-                                           name="name" id="name" placeholder=""
-                                           value="Nguyen Van A">
+                        <form action="#" class="room-users-modal__form">
+                            <div class="row row--custom">
+                                <div class="col-6 col--custom">
+                                    <div class="form-group form-group--present">
+                                        <label for="name">Họ và Tên: </label>
+                                        <input type="text" class="form-control trovie-input" readonly
+                                               name="name" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-6 col--custom">
+                                    <div
+                                        class="form-group  form-group--unit  form-group--unit--date form-group--present">
+                                        <label for="">Ngày vào ở: </label>
+                                        <input type="text" class="form-control trovie-input trovie-input--date" readonly
+                                               name="date_in" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-6 col--custom">
+                                    <div class="form-group form-group--present">
+                                        <label for="name">Số CMND: </label>
+                                        <input type="text" class="form-control trovie-input" readonly
+                                               name="id_card" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-6 col--custom">
+                                    <div
+                                        class="form-group  form-group--unit form-group--unit--date form-group--present">
+                                        <label for="name">Ngày sinh: </label>
+                                        <input type="text" class="form-control trovie-input trovie-input--date" readonly
+                                               name="birthday" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-6 col--custom">
+                                    <div
+                                        class="form-group form-group--unit form-group--unit--phone form-group--present">
+                                        <label for="name">Số điện thoại: </label>
+                                        <input type="text" class="form-control trovie-input" readonly
+                                               name="phone" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-6 col--custom">
+                                    <div class="form-group form-group--present form-group--unit">
+                                        <label for="name">Nghề nghiệp: </label>
+                                        <input type="text" class="form-control trovie-input" readonly
+                                               name="career" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col--custom">
+                                    <div class="form-group form-group--present">
+                                        <label for="name">Quê quán: </label>
+                                        <input type="text" class="form-control trovie-input" readonly
+                                               name="address" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col--custom text-right mb-0">
+                                    <a href="/" class="btn btn-base btn-add-user-modal">
+                                        <i class="fa fa-users" aria-hidden="true"></i>&nbsp;QUẢN LÝ KHÁCH THUÊ
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col-6 col--custom">
-                                <div class="form-group  form-group--unit  form-group--unit--date">
-                                    <label for="">Ngày vào ở: </label>
-                                    <input type="text" class="form-control trovie-input trovie-input--date"
-                                           name="" id="" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-6 col--custom">
-                                <div class="form-group">
-                                    <label for="name">Số CMND: </label>
-                                    <input type="text" class="form-control trovie-input"
-                                           name="" id="" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-6 col--custom">
-                                <div class="form-group  form-group--unit form-group--unit--date">
-                                    <label for="name">Ngày sinh: </label>
-                                    <input type="text" class="form-control trovie-input trovie-input--date"
-                                           name="" id="" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-6 col--custom">
-                                <div class="form-group form-group--unit form-group--unit--phone">
-                                    <label for="name">Số điện thoại: </label>
-                                    <input type="text" class="form-control trovie-input"
-                                           name="" id="" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-6 col--custom">
-                                <div class="form-group form-group--unit">
-                                    <label for="name">Nghề nghiệp: </label>
-                                    <input type="text" class="form-control trovie-input"
-                                           name="" id="" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-12 col--custom">
-                                <div class="form-group">
-                                    <label for="name">Quê quán: </label>
-                                    <input type="text" class="form-control trovie-input"
-                                           name="" id="" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-12 col--custom text-right mb-0">
-                                <button class="btn btn-base btn-add-user-modal">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;THÊM KHÁCH THUÊ
-                                </button>
-                                <button class="btn btn-base">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;LƯU
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </x-main-card>

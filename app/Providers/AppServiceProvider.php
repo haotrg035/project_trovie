@@ -8,8 +8,10 @@ use App\Repositories\HostRepository;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
 use App\Repositories\Interfaces\ServiceEloquentRepositoryInterface;
+use App\Repositories\Interfaces\UserEloquentRepositoryInterface;
 use App\Repositories\RoomRepository;
 use App\Repositories\ServiceRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(ServiceEloquentRepositoryInterface::class, function () {
             return new ServiceRepository();
+        });
+        $this->app->bind(UserEloquentRepositoryInterface::class, function () {
+            return new UserRepository();
         });
         $this->app->singleton(TrovieHelper::class, function () {
             return new TrovieHelper();

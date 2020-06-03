@@ -888,6 +888,153 @@ try {
 
 /***/ }),
 
+/***/ "./resources/js/user/TrovieGallery.js":
+/*!********************************************!*\
+  !*** ./resources/js/user/TrovieGallery.js ***!
+  \********************************************/
+/*! exports provided: TrovieGallery */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrovieGallery", function() { return TrovieGallery; });
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var TrovieGallery = /*#__PURE__*/function () {
+  function TrovieGallery() {
+    _classCallCheck(this, TrovieGallery);
+  }
+
+  _createClass(TrovieGallery, null, [{
+    key: "initGallery",
+    value: function initGallery(gallery) {
+      var uploadUrl = gallery.getAttribute('upload-url');
+      var uploadInput = gallery.querySelector('input[type=file]');
+      var galleryItems = gallery.querySelectorAll('.gallery__item:not(.gallery__item--upload)');
+
+      if (uploadInput !== null) {
+        TrovieGallery.galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl);
+      }
+
+      if (galleryItems.length > 0) {
+        var _iterator = _createForOfIteratorHelper(galleryItems),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var item = _step.value;
+            TrovieGallery.galleryRemoveBtnHandler(item);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    }
+  }, {
+    key: "galleryInputOnChangeHandler",
+    value: function galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl) {
+      uploadInput.addEventListener('change', _.debounce(onClickHandler, 500));
+
+      function onClickHandler() {
+        var formData = new FormData(gallery.querySelector('form'));
+        var newInput = TrovieGallery.cloneGalleryInput(uploadInput);
+        formData.append('api_token', __apiToken);
+        axios.post(uploadUrl, formData).then(function (response) {
+          var item = TrovieGallery.renderGalleryItem(response.data.data);
+          TrovieGallery.galleryInputOnChangeHandler(newInput, gallery, uploadUrl);
+          gallery.querySelector('.row').append(item);
+          tata.success('Thành công', response.data.message);
+        })["catch"](function (response) {
+          tata.error('Lỗi', response.message);
+          TrovieGallery.galleryInputOnChangeHandler(newInput, gallery, uploadUrl);
+        }).then(function () {
+          // always executed
+          uploadInput.parentNode.replaceChild(newInput, uploadInput);
+        });
+      }
+    }
+  }, {
+    key: "cloneGalleryInput",
+    value: function cloneGalleryInput(oldInput) {
+      var newInput = document.createElement("input");
+      newInput.type = "file";
+      newInput.name = oldInput.name;
+      newInput.className = oldInput.className || '';
+      newInput.title = oldInput.title;
+      newInput.accept = oldInput.accept;
+      return newInput;
+    }
+  }, {
+    key: "renderGalleryItem",
+    value: function renderGalleryItem(data) {
+      var deleteUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var itemWrapper = document.createElement('a');
+      var item = document.createElement('div');
+      var item__img = document.createElement('img');
+      var item__remove = document.createElement('span');
+      itemWrapper.className = 'col-6 col-lg-4 col--custom';
+      itemWrapper.href = 'javascript:void(0)';
+      item.className = 'gallery__item';
+      item.setAttribute('delete-url', data.delete_url);
+      item__img.className = 'item__image';
+      item__img.src = data.image;
+      item__remove.className = 'item__remove';
+      item__remove.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+      item.append(item__img);
+      item.append(item__remove);
+      TrovieGallery.galleryRemoveBtnHandler(item, deleteUrl);
+      itemWrapper.append(item);
+      return itemWrapper;
+    }
+  }, {
+    key: "galleryRemoveBtnHandler",
+    value: function galleryRemoveBtnHandler(item) {
+      var deleteUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      item.querySelector('.item__remove').addEventListener('click', function () {
+        if (confirm('Bạn có chắc muốn xóa ảnh này?')) {
+          if (deleteUrl === null) {
+            deleteUrl = item.getAttribute('delete-url');
+          }
+
+          axios["delete"](deleteUrl, {
+            data: {
+              api_token: __apiToken
+            }
+          }).then(function (response) {
+            var parent = item.parentNode;
+            tata.success('Thành công', response.data.message);
+            parent.parentNode.removeChild(parent);
+          })["catch"](function (response) {
+            try {
+              tata.error('Lỗi', response.data.message);
+            } catch (e) {
+              console.log(e);
+            }
+          });
+        }
+      });
+    }
+  }]);
+
+  return TrovieGallery;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/js/user/TrovieMap.js":
 /*!****************************************!*\
   !*** ./resources/js/user/TrovieMap.js ***!
@@ -1090,6 +1237,14 @@ var TrovieMap = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TrovieMap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TrovieMap */ "./resources/js/user/TrovieMap.js");
+/* harmony import */ var _TrovieGallery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TrovieGallery */ "./resources/js/user/TrovieGallery.js");
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
 
 var avatarUploader = document.querySelector('#file-avatar');
 var updateHostFormMap = document.getElementById('form-position__map');
@@ -1123,10 +1278,22 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function initFileUploader() {
-  if (avatarUploader !== null) {// FilePond.create(avatarUploader, TrovieHelper.getOptionsForFIlepondInstance(avatarUploader, {
-    //     url: '/api/host/update-avatar/',
-    //     process: avatarUploader.getAttribute('data-host-id'),
-    // }));
+  var galleries = document.querySelectorAll('.trovie-gallery');
+
+  if (galleries.length > 0) {
+    var _iterator = _createForOfIteratorHelper(galleries),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var gallery = _step.value;
+        _TrovieGallery__WEBPACK_IMPORTED_MODULE_1__["TrovieGallery"].initGallery(gallery);
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
   }
 }
 

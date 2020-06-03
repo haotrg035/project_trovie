@@ -1,6 +1,13 @@
 @import "~flatpickr/dist/flatpickr.min.css";
 
 .form-group {
+
+    &--present {
+        input, select, textarea {
+            border-bottom: none;
+        }
+    }
+
     label {
         font-weight: 700;
         margin-bottom: 0;

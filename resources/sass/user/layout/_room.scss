@@ -224,12 +224,14 @@
         @include Rounded(9px);
         @extend %transition-section-item-fast;
 
-        &:hover {
+        &.active, &:hover {
             background: var(--color-base);
-            .user__avatar{
+
+            .user__avatar {
                 border-color: #fff;
             }
-            .user__name{
+
+            .user__name {
                 color: #fff;
             }
         }

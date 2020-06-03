@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Host;
+use App\Models\Room;
 use App\Models\Service;
 use App\Policies\HostPolicy;
+use App\Policies\RoomPolicy;
 use App\Policies\ServicetPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Host::class => HostPolicy::class,
         Service::class => ServicetPolicy::class,
+        Room::class => RoomPolicy::class
     ];
 
     /**

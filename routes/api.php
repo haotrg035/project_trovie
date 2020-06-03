@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
+    Route::prefix('user')->name('api.user')->group(function () {
+        Route::get('/{user?}', 'Api\UserController@show')->name('.show');
+    });
 
-Route::middleware(['auth:api', 'api_host_owner'])->group(function () {
+
     Route::prefix('host')->group(function () {
         Route::post('/update-avatar/{host}', 'Api\HostController@updateAvatar')->name('api.user.host.update_avatar');
         Route::post('/gallery-add/{host}', 'Api\HostController@addGalleryImage')->name('api.user.host.gallery_add');
@@ -38,6 +39,11 @@ Route::middleware(['auth:api', 'api_host_owner'])->group(function () {
 
     Route::prefix('host/{host}/room')->name('api.user.host.room')->group(function () {
         Route::get('/{room?}', 'Api\RoomController@show')->name('.show');
+        Route::get('/{room}/members', 'Api\RoomController@getMembers')->name('show_members');
+        Route::patch('/{room?}', 'Api\RoomController@update')->name('.update');
+        Route::post('/gallery-add/{room?}', 'Api\RoomController@addGalleryImage')->name('.gallery_add');
+        Route::delete('/gallery-delete/{image_id?}',
+            'Api\RoomController@removeGalleryImage')->name('.gallery_remove');
     });
 });
 

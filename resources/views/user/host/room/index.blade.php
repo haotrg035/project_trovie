@@ -61,31 +61,39 @@
                            @endswitch">
                             <p class="room-card__id">{{$room['name']}}</p>
                             <ul class="room-card__property-list list-unstyled">
-                                <li class="room-card__property-list__item" title="Giá phòng">
+                                <li class="room-card__property-list__item property-list__item--price" title="Giá phòng">
                                     <span class="room-card__property-list__item__icon">
                                         <i class="fa fa-dollar" aria-hidden="true"></i>
                                     </span>
-                                    <p class="room-card__property-list__item__value mb-0">{{$room['price']}} đ</p>
+                                    <p class="room-card__property-list__item__value mb-0">
+                                        <span class="value__content">{{$room['price']}}</span> đ
+                                    </p>
                                 </li>
-                                <li class="room-card__property-list__item" title="Tầng / Khu / Dãy">
+                                <li class="room-card__property-list__item property-list__item--floor"
+                                    title="Tầng / Khu / Dãy">
                                     <span class="room-card__property-list__item__icon">
                                         <i class="fa fa-building" aria-hidden="true"></i>
                                     </span>
-                                    <p class="room-card__property-list__item__value mb-0">Tầng/ Khu/
-                                        Dãy: {{$room['floor']}}</p>
+                                    <p class="room-card__property-list__item__value mb-0">Tầng/
+                                        Khu: <span class="value__content">{{$room['floor']}}</span>
+                                    </p>
                                 </li>
-                                <li class="room-card__property-list__item" title="Số người thuê">
+                                <li class="room-card__property-list__item property-list__item--members"
+                                    title="Số người thuê">
                                     <span class="room-card__property-list__item__icon">
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
-                                    <p class="room-card__property-list__item__value mb-0">2 / {{$room['members']}}</p>
+                                    <p class="room-card__property-list__item__value mb-0">
+                                        <span class="current-users">{{$room['total_users']}}</span>
+                                        / <span class="max-users">{{$room['members']}}</span></p>
                                 </li>
-                                <li class="room-card__property-list__item" title="Diện tích">
+                                <li class="room-card__property-list__item property-list__item--acreage"
+                                    title="Diện tích">
                                     <span class="room-card__property-list__item__icon">
                                         <i class="fa fa-expand" aria-hidden="true"></i>
                                     </span>
-                                    <p class="room-card__property-list__item__value mb-0">{{$room['acreage']}}
-                                        m<sup>2</sup></p>
+                                    <p class="room-card__property-list__item__value mb-0">
+                                        <span class="value__content">{{$room['acreage']}}</span> m<sup>2</sup></p>
                                 </li>
                             </ul>
                             <ul class="room-card__service-list list-unstyled">
@@ -99,6 +107,13 @@
                                             </p>
                                         </li>
                                     @endforeach
+                                @else
+                                    <li class="room-card__service-list__item d-none">
+                                            <span class="room-card__service-list__item__icon">
+                                                <i class="fa fa-dot-circle-o"></i></span>
+                                        <p class="room-card__service-list__item__value mb-0 text-capitalize">
+                                        </p>
+                                    </li>
                                 @endif
                             </ul>
                             <ul class="room-card__customer-list list-unstyled">
@@ -110,6 +125,12 @@
                                             </span>
                                         </li>
                                     @endforeach
+                                @else
+                                    <li class="room-card__customer-list__item d-none" title="">
+                                            <span class="room-card__customer-list__item__avatar">
+                                                <img src="" alt="">
+                                            </span>
+                                    </li>
                                 @endif
                             </ul>
                         </a>
@@ -121,7 +142,6 @@
         @include('user.host.room.modal._room-add-modal')
         @include('user.host.room.modal._invoice-modal')
         @include('user.host.room.modal._room-users-modal')
-        @include('user.host.room.modal._room-add-users-modal')
     </div>
 @endsection
 @section('script')
