@@ -104,6 +104,42 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
         return false;
     }
 
+    public function create(array $attributes)
+    {
+        $roomData = array_diff_key($attributes, ['api_token' => 1, 'services' => 1, 'user_id' => 1]);
+        if (!isset($roomData['state'])) {
+            $roomData['state'] = 1;
+        }
+        if (!isset($roomData['desc'])) {
+            $roomData['desc'] = 0;
+        }
+        $roomData['price'] = TrovieHelper::parseCurrencyString($roomData['price']);
+        try {
+            $room = $this->_model->create($roomData);
+            if ($room) {
+                if (isset($attributes['services'])) {
+                    $serviceDataSet = [];
+                    foreach ($attributes['services'] as $service) {
+                        $serviceDataSet[] = ['room_id' => $room->id, 'service_id' => $service];
+                    }
+                }
+                \DB::table('room_service')->insert($serviceDataSet);
+                $result = $this->_model->with([
+                    'services' => function ($query) {
+                        return $query->get(['id', 'name']);
+                    },
+//                    'users' => function ($query) {
+//                        return $query->get(['id', 'avatar', 'full_name']);
+//                    }
+                ])->find($room->id);
+                return $result;
+            }
+        } catch (\Exception $e) {
+            \Log::error('Creating room failed, host id: ' . $attributes['host_id'] . ' Error: ' . $e->getMessage());
+        }
+        return false;
+    }
+
     public function addGalleryImage($file, $host_id, $room_id)
     {
         $image_path = TrovieFile::storeFile($file, config('filepath.images.gallery.room'));

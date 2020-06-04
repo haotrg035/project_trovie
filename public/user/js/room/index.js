@@ -250,11 +250,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
-var roomCards = document.querySelectorAll('.panel-content--room__list-room .room-card');
+var roomCards = null;
 var roomModal = document.getElementById('panel-content--room__room-modal');
 var roomModalForm = document.querySelector('.panel-content--room__room-modal__form');
 var roomModalGallery = roomModal.querySelector('.trovie-gallery');
 var addRoomModal = document.getElementById('add-room-modal');
+var addRoomModalForm = addRoomModal.querySelector('.add-room-modal__form');
 var invoiceModal = document.getElementById('panel-content--room__invoice-modal');
 var roomUsersModal = document.getElementById('panel-content--room__room-users-modal');
 var roomUsersModalForm = roomUsersModal.querySelector('.room-users-modal__form');
@@ -262,10 +263,89 @@ var roomUsersModalList = document.querySelector('.modal-room-users__list');
 var roomUsersModalUserItem = roomUsersModalList.querySelector('div').cloneNode(true);
 document.addEventListener('DOMContentLoaded', function () {
   initRoomModalHandler();
+  initAddRoomModalHandler();
   initRoomTypeFilterHandler();
   initRoomInvoiceModalEventHandler();
   initRoomUsersModalHandler();
+  initRoomSearchHandler();
 });
+
+function initRoomSearchHandler() {
+  var searchForm = document.querySelector('.panel-content--room__filter--search');
+  var searchKey = '';
+  searchForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    searchRooms();
+  });
+  searchForm.querySelector('input[type=search]').addEventListener('keydown', function () {
+    _.delay(searchRooms, 500);
+  });
+
+  function searchRooms() {
+    var resultList = [];
+    searchKey = searchForm.querySelector('input[type=search]').value.toLowerCase();
+
+    if (searchKey !== '') {
+      var _iterator = _createForOfIteratorHelper(roomCards),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var card = _step.value;
+          var cardTitle = card.querySelector('.room-card__id').innerText.toLowerCase();
+
+          if (cardTitle.search(searchKey) !== -1) {
+            resultList.push(card);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    } else {
+      resultList = roomCards;
+    }
+
+    var _iterator2 = _createForOfIteratorHelper(roomCards),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var _card = _step2.value;
+
+        if (!_card.parentNode.classList.contains('d-none')) {
+          _card.parentNode.classList.add('d-none');
+        }
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+
+    var _iterator3 = _createForOfIteratorHelper(resultList),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var _card2 = _step3.value;
+
+        if (_card2.parentNode.classList.contains('d-none')) {
+          _card2.parentNode.classList.remove('d-none');
+        }
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+  }
+}
+
+function getAllCurrrentRoomCards() {
+  return document.querySelectorAll('.panel-content--room__list-room .room-card');
+}
 
 function resetRoomModalIdInput() {
   var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -290,18 +370,18 @@ function fillRoomModalForm(data) {
   roomModalForm.querySelector('textarea[name=announcement]').innerText = data.announcement;
   roomModalForm.querySelector('input[name=notice]').checked = data.notice === 1;
 
-  var _iterator = _createForOfIteratorHelper(roomModalFormServiceInputs),
-      _step;
+  var _iterator4 = _createForOfIteratorHelper(roomModalFormServiceInputs),
+      _step4;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var input = _step.value;
+    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+      var input = _step4.value;
       input.checked = !!data.service_ids.includes(parseInt(input.value));
     }
   } catch (err) {
-    _iterator.e(err);
+    _iterator4.e(err);
   } finally {
-    _iterator.f();
+    _iterator4.f();
   }
 }
 
@@ -309,37 +389,37 @@ function renderRoomModalGalleryItems(data) {
   var galleryListElement = roomModalGallery.querySelector('.row');
   var galleryItems = roomModalGallery.querySelectorAll('.gallery__item:not(.gallery__item--upload)');
 
-  var _iterator2 = _createForOfIteratorHelper(galleryItems),
-      _step2;
+  var _iterator5 = _createForOfIteratorHelper(galleryItems),
+      _step5;
 
   try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var _item2 = _step2.value;
+    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+      var _item2 = _step5.value;
       galleryListElement.removeChild(_item2.parentNode);
     }
   } catch (err) {
-    _iterator2.e(err);
+    _iterator5.e(err);
   } finally {
-    _iterator2.f();
+    _iterator5.f();
   }
 
   if (data.gallery.length > 0) {
     var deleteUrl = '';
 
-    var _iterator3 = _createForOfIteratorHelper(data.gallery),
-        _step3;
+    var _iterator6 = _createForOfIteratorHelper(data.gallery),
+        _step6;
 
     try {
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        var item = _step3.value;
+      for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+        var item = _step6.value;
         deleteUrl = roomModalGallery.getAttribute('data-delete-url') + '/' + item.id;
         var image = _TrovieGallery__WEBPACK_IMPORTED_MODULE_0__["TrovieGallery"].renderGalleryItem(item, deleteUrl);
         galleryListElement.append(image);
       }
     } catch (err) {
-      _iterator3.e(err);
+      _iterator6.e(err);
     } finally {
-      _iterator3.f();
+      _iterator6.f();
     }
   }
 }
@@ -382,14 +462,19 @@ function updateCardServices(targetRoomCard, services) {
     ExampleServiceItem.classList.remove('d-none');
   }
 
+  if (ExampleServiceItem.querySelector('.fa').classList.contains('fa-dollar')) {
+    ExampleServiceItem.querySelector('.fa').classList.remove('fa-dollar');
+    ExampleServiceItem.querySelector('.fa').classList.add('fa-dot-circle-o');
+  }
+
   serviceList.innerHTML = '';
 
-  var _iterator4 = _createForOfIteratorHelper(services),
-      _step4;
+  var _iterator7 = _createForOfIteratorHelper(services),
+      _step7;
 
   try {
-    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-      var service = _step4.value;
+    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+      var service = _step7.value;
 
       var _item = ExampleServiceItem.cloneNode(true);
 
@@ -397,9 +482,9 @@ function updateCardServices(targetRoomCard, services) {
       serviceList.append(_item);
     }
   } catch (err) {
-    _iterator4.e(err);
+    _iterator7.e(err);
   } finally {
-    _iterator4.f();
+    _iterator7.f();
   }
 }
 
@@ -413,12 +498,12 @@ function updateCardMembers(targetRoomCard, members) {
 
   MembersList.innerHTML = '';
 
-  var _iterator5 = _createForOfIteratorHelper(members),
-      _step5;
+  var _iterator8 = _createForOfIteratorHelper(members),
+      _step8;
 
   try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var member = _step5.value;
+    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+      var member = _step8.value;
 
       var _member = ExampleMemberItem.cloneNode(true);
 
@@ -427,9 +512,9 @@ function updateCardMembers(targetRoomCard, members) {
       MembersList.append(_member);
     }
   } catch (err) {
-    _iterator5.e(err);
+    _iterator8.e(err);
   } finally {
-    _iterator5.f();
+    _iterator8.f();
   }
 }
 
@@ -443,6 +528,7 @@ function updateCardData(data) {
   targetRoomCard.querySelector('.property-list__item--acreage p .value__content').innerText = data.acreage;
   updateCardServices(targetRoomCard, data.services);
   updateCardMembers(targetRoomCard, data.users);
+  roomCards = getAllCurrrentRoomCards();
 }
 
 function roomModalFormSubmitHandler() {
@@ -464,6 +550,7 @@ function roomModalFormSubmitHandler() {
 
 function initRoomModalHandler() {
   document.querySelector('.btn-open-add-room-modal').addEventListener('click', function () {
+    clearAddROomModalFormFields();
     showBsModal(addRoomModal);
   });
   $(roomModal).on('hidden.bs.modal', function (e) {
@@ -475,25 +562,74 @@ function initRoomModalHandler() {
     roomModalFormSubmitHandler();
   });
 
-  var _iterator6 = _createForOfIteratorHelper(roomCards),
-      _step6;
+  if (roomCards == null) {
+    roomCards = getAllCurrrentRoomCards();
+  }
+
+  var _iterator9 = _createForOfIteratorHelper(roomCards),
+      _step9;
 
   try {
     var _loop = function _loop() {
-      var roomCard = _step6.value;
+      var roomCard = _step9.value;
       roomCard.addEventListener('click', function () {
         roomCardClickHandler(roomCard);
       });
     };
 
-    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+    for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
       _loop();
     }
   } catch (err) {
-    _iterator6.e(err);
+    _iterator9.e(err);
   } finally {
-    _iterator6.f();
+    _iterator9.f();
   }
+}
+
+function clearAddROomModalFormFields() {
+  var _iterator10 = _createForOfIteratorHelper(addRoomModalForm.querySelectorAll('input[type=checkbox]')),
+      _step10;
+
+  try {
+    for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+      var checkBox = _step10.value;
+      checkBox.checked = false;
+    }
+  } catch (err) {
+    _iterator10.e(err);
+  } finally {
+    _iterator10.f();
+  }
+
+  var _iterator11 = _createForOfIteratorHelper(addRoomModalForm.querySelectorAll('input[type=text],input[type=number]')),
+      _step11;
+
+  try {
+    for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+      var textInput = _step11.value;
+      textInput.value = '';
+    }
+  } catch (err) {
+    _iterator11.e(err);
+  } finally {
+    _iterator11.f();
+  }
+}
+
+function initAddRoomModalHandler() {
+  var formData = null;
+  addRoomModalForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    formData = new FormData(addRoomModalForm);
+    formData.append('api_token', __apiToken);
+    axios.post(addRoomModalForm.getAttribute('action'), formData).then(function (response) {
+      //Render new room card!!!
+      tata.success('Thành công', response.data.message);
+    })["catch"](function (error) {
+      tata.error('Lỗi', error.response.data.message);
+    });
+  });
 }
 
 function initRoomInvoiceModalEventHandler() {
@@ -521,18 +657,18 @@ function fillRoomUserModalFormData(data) {
 function initUserItemCardClick(element) {
   var userCard = element.querySelector('.list__user');
   element.addEventListener('click', function () {
-    var _iterator7 = _createForOfIteratorHelper(roomUsersModalList.querySelectorAll('.list__user')),
-        _step7;
+    var _iterator12 = _createForOfIteratorHelper(roomUsersModalList.querySelectorAll('.list__user')),
+        _step12;
 
     try {
-      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-        var user = _step7.value;
+      for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+        var user = _step12.value;
         user.classList.remove('active');
       }
     } catch (err) {
-      _iterator7.e(err);
+      _iterator12.e(err);
     } finally {
-      _iterator7.f();
+      _iterator12.f();
     }
 
     fillRoomUserModalFormData({
@@ -588,18 +724,18 @@ function fillRoomUserModalData() {
     try {
       roomUsersModalList.innerHTML = '';
 
-      var _iterator8 = _createForOfIteratorHelper(response.data.data),
-          _step8;
+      var _iterator13 = _createForOfIteratorHelper(response.data.data),
+          _step13;
 
       try {
-        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-          var user = _step8.value;
+        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+          var user = _step13.value;
           roomUsersModalList.append(renderRoomUsersItem(user));
         }
       } catch (err) {
-        _iterator8.e(err);
+        _iterator13.e(err);
       } finally {
-        _iterator8.f();
+        _iterator13.f();
       }
 
       roomUsersModalList.querySelector('.list__user').click();
@@ -627,12 +763,12 @@ function initRoomUsersModalHandler() {
 }
 
 function initRoomTypeFilterHandler() {
-  var _iterator9 = _createForOfIteratorHelper(document.querySelectorAll('.panel-content--room__filter--room-type__item a')),
-      _step9;
+  var _iterator14 = _createForOfIteratorHelper(document.querySelectorAll('.panel-content--room__filter--room-type__item a')),
+      _step14;
 
   try {
     var _loop2 = function _loop2() {
-      var el = _step9.value;
+      var el = _step14.value;
       el.addEventListener('click', function (e) {
         (function (el) {
           var _listRoomType = ['success', 'warning', 'danger'];
@@ -642,26 +778,26 @@ function initRoomTypeFilterHandler() {
           var filterRoomType = el.getAttribute('data-room-type') || 'all';
 
           if (!_listRoomType.includes(filterRoomType)) {
-            var _iterator10 = _createForOfIteratorHelper(_roomList),
-                _step10;
+            var _iterator15 = _createForOfIteratorHelper(_roomList),
+                _step15;
 
             try {
-              for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-                var _el = _step10.value;
+              for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+                var _el = _step15.value;
                 $(_el).parent().show();
               }
             } catch (err) {
-              _iterator10.e(err);
+              _iterator15.e(err);
             } finally {
-              _iterator10.f();
+              _iterator15.f();
             }
           } else {
-            var _iterator11 = _createForOfIteratorHelper(_roomList),
-                _step11;
+            var _iterator16 = _createForOfIteratorHelper(_roomList),
+                _step16;
 
             try {
-              for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-                var _el2 = _step11.value;
+              for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+                var _el2 = _step16.value;
 
                 if (_el2.classList.contains('room-card--' + filterRoomType)) {
                   $(_el2).parent().show();
@@ -670,22 +806,22 @@ function initRoomTypeFilterHandler() {
                 }
               }
             } catch (err) {
-              _iterator11.e(err);
+              _iterator16.e(err);
             } finally {
-              _iterator11.f();
+              _iterator16.f();
             }
           }
         })(el);
       });
     };
 
-    for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+    for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
       _loop2();
     }
   } catch (err) {
-    _iterator9.e(err);
+    _iterator14.e(err);
   } finally {
-    _iterator9.f();
+    _iterator14.f();
   }
 }
 

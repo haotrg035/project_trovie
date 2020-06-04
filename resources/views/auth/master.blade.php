@@ -22,7 +22,7 @@
 </head>
 <body>
 <section class="page-wrapper">
-    <main class="main-panel">
+    <main class="main-panel trovie-scrollbar">
         @include('auth._navbar')
         <div class="main-panel__content" data-simplebar>
             @yield('content')

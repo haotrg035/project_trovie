@@ -1,10 +1,11 @@
 import {TrovieGallery} from "../TrovieGallery";
 
-let roomCards = document.querySelectorAll('.panel-content--room__list-room .room-card');
+let roomCards = null;
 let roomModal = document.getElementById('panel-content--room__room-modal');
 let roomModalForm = document.querySelector('.panel-content--room__room-modal__form');
 let roomModalGallery = roomModal.querySelector('.trovie-gallery');
 let addRoomModal = document.getElementById('add-room-modal');
+let addRoomModalForm = addRoomModal.querySelector('.add-room-modal__form');
 let invoiceModal = document.getElementById('panel-content--room__invoice-modal');
 let roomUsersModal = document.getElementById('panel-content--room__room-users-modal');
 let roomUsersModalForm = roomUsersModal.querySelector('.room-users-modal__form');
@@ -13,10 +14,54 @@ let roomUsersModalUserItem = roomUsersModalList.querySelector('div').cloneNode(t
 
 document.addEventListener('DOMContentLoaded', function () {
     initRoomModalHandler();
+    initAddRoomModalHandler();
     initRoomTypeFilterHandler();
     initRoomInvoiceModalEventHandler();
     initRoomUsersModalHandler();
+    initRoomSearchHandler();
 });
+
+function initRoomSearchHandler() {
+    let searchForm = document.querySelector('.panel-content--room__filter--search');
+    let searchKey = '';
+    searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        searchRooms();
+    });
+    searchForm.querySelector('input[type=search]').addEventListener('keydown', function () {
+        _.delay(searchRooms, 500);
+    });
+
+    function searchRooms() {
+        let resultList = [];
+
+        searchKey = searchForm.querySelector('input[type=search]').value.toLowerCase();
+        if (searchKey !== '') {
+            for (let card of roomCards) {
+                let cardTitle = card.querySelector('.room-card__id').innerText.toLowerCase();
+                if (cardTitle.search(searchKey) !== -1) {
+                    resultList.push(card);
+                }
+            }
+        } else {
+            resultList = roomCards;
+        }
+        for (let card of roomCards) {
+            if (!card.parentNode.classList.contains('d-none')) {
+                card.parentNode.classList.add('d-none');
+            }
+        }
+        for (let card of resultList) {
+            if (card.parentNode.classList.contains('d-none')) {
+                card.parentNode.classList.remove('d-none');
+            }
+        }
+    }
+}
+
+function getAllCurrrentRoomCards() {
+    return document.querySelectorAll('.panel-content--room__list-room .room-card');
+}
 
 function resetRoomModalIdInput(value = null) {
     let _value = roomModal.querySelector('input[name=old_room_id]').value;
@@ -99,6 +144,10 @@ function updateCardServices(targetRoomCard, services) {
     if (ExampleServiceItem.classList.contains('d-none')) {
         ExampleServiceItem.classList.remove('d-none')
     }
+    if (ExampleServiceItem.querySelector('.fa').classList.contains('fa-dollar')) {
+        ExampleServiceItem.querySelector('.fa').classList.remove('fa-dollar');
+        ExampleServiceItem.querySelector('.fa').classList.add('fa-dot-circle-o');
+    }
     serviceList.innerHTML = '';
     for (let service of services) {
         let _item = ExampleServiceItem.cloneNode(true);
@@ -134,7 +183,8 @@ function updateCardData(data) {
     targetRoomCard.querySelector('.property-list__item--acreage p .value__content').innerText = data.acreage;
 
     updateCardServices(targetRoomCard, data.services);
-    updateCardMembers(targetRoomCard, data.users)
+    updateCardMembers(targetRoomCard, data.users);
+    roomCards = getAllCurrrentRoomCards();
 }
 
 function roomModalFormSubmitHandler() {
@@ -157,6 +207,7 @@ function roomModalFormSubmitHandler() {
 
 function initRoomModalHandler() {
     document.querySelector('.btn-open-add-room-modal').addEventListener('click', function () {
+        clearAddROomModalFormFields();
         showBsModal(addRoomModal);
     });
 
@@ -169,12 +220,42 @@ function initRoomModalHandler() {
     roomModal.querySelector('.btn-room-modal-save').addEventListener('click', function (e) {
         roomModalFormSubmitHandler();
     });
-
+    if (roomCards == null) {
+        roomCards = getAllCurrrentRoomCards();
+    }
     for (const roomCard of roomCards) {
         roomCard.addEventListener('click', function () {
             roomCardClickHandler(roomCard);
         })
     }
+}
+
+function clearAddROomModalFormFields() {
+    for (let checkBox of addRoomModalForm.querySelectorAll('input[type=checkbox]')) {
+        checkBox.checked = false;
+    }
+    for (let textInput of addRoomModalForm.querySelectorAll('input[type=text],input[type=number]')) {
+        textInput.value = '';
+    }
+}
+
+function initAddRoomModalHandler() {
+    let formData = null;
+
+    addRoomModalForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        formData = new FormData(addRoomModalForm);
+        formData.append('api_token', __apiToken);
+        axios.post(
+            addRoomModalForm.getAttribute('action'),
+            formData
+        ).then(function (response) {
+            //Render new room card!!!
+            tata.success('Thành công', response.data.message);
+        }).catch(function (error) {
+            tata.error('Lỗi', error.response.data.message);
+        })
+    })
 }
 
 function initRoomInvoiceModalEventHandler() {
@@ -270,7 +351,7 @@ function initRoomUsersModalHandler() {
         resetRoomModalIdInput();
         showBsModal(roomModal);
     });
-    $(roomUsersModal).on('hidden.bs.modal',function () {
+    $(roomUsersModal).on('hidden.bs.modal', function () {
         fillRoomUserModalFormData({});
     });
     document.querySelector('.btn-room-users').addEventListener('click', function () {

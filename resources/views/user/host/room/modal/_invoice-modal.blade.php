@@ -133,7 +133,7 @@
                                     </tbody>
                                 </table>
                                 <div class="invoice-entries__add-entry-form">
-                                    <fieldset>
+                                    <fieldset class="trovie-fieldset">
                                         <legend>Thêm Khoản Thu</legend>
                                         <div class="d-flex flex-wrap">
                                             <div class="col-4 col--custom mb-0">
@@ -164,7 +164,7 @@
                                                 <div class="form-group form-group--unit form-group--unit--">
                                                     <label for="">Số tiền: </label>
                                                     <input type="text" class="form-control trovie-input" step="1000"
-                                                           min="0" name=""  placeholder="1.000.000">
+                                                           min="0" name="" placeholder="1.000.000">
                                                 </div>
                                             </div>
                                             <div class="col-12 col--custom d-flex justify-content-center">

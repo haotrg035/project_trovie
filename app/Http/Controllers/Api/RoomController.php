@@ -45,11 +45,14 @@ class RoomController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
+     * @param Host $host
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Host $host)
     {
-        //
+        $this->checkUpdateAuth($host);
+        $result = $this->repository->create($request->all());
+        return $this->returnResponse($result, 'create', $result);
     }
 
     /**

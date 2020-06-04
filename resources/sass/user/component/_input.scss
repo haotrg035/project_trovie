@@ -187,3 +187,14 @@
         }
     }
 }
+
+.trovie-fieldset {
+    border: 1px solid var(--color-base);
+    @include Rounded(4px);
+
+    legend {
+        font-size: 1rem;
+        width: max-content;
+        margin-left: .5rem;
+    }
+}

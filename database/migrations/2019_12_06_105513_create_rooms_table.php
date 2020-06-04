@@ -21,11 +21,11 @@ class CreateRoomsTable extends Migration
             $table->unsignedTinyInteger('acreage');
             $table->unsignedTinyInteger('members')->default(1);
             $table->unsignedTinyInteger('floor')->default(1);
-            $table->string('announcement', 250)->default('');
+            $table->string('announcement', 250)->nullable();
             $table->boolean('notice')->default(false);
-            $table->tinyInteger('state');
-            $table->tinyInteger('type')->unsigned()->default('0');
-            $table->string('desc', 500);
+            $table->unsignedTinyInteger('state')->default(1);
+            $table->unsignedTinyInteger('type')->default('0');
+            $table->string('desc', 500)->nullable();
             $table->timestamps();
             $table->index(["host_id"]);
         });

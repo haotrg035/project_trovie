@@ -18,6 +18,10 @@ class Room extends Model
         'state',
         'type',
         'desc',
+        'price',
+        'floor',
+        'acreage',
+        'members',
     ];
 
     public function getTotalUsersAttribute()
@@ -25,10 +29,12 @@ class Room extends Model
         $data = $this->users()->get();
         return count($data);
     }
+
     public function host()
     {
         return $this->belongsTo(Host::class, 'host_id', 'id');
     }
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'room_user')->withPivot('date_in');

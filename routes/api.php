@@ -39,7 +39,8 @@ Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
 
     Route::prefix('host/{host}/room')->name('api.user.host.room')->group(function () {
         Route::get('/{room?}', 'Api\RoomController@show')->name('.show');
-        Route::get('/{room}/members', 'Api\RoomController@getMembers')->name('show_members');
+        Route::get('/{room}/members', 'Api\RoomController@getMembers')->name('.show_members');
+        Route::post('/store', 'Api\RoomController@store')->name('.store');
         Route::patch('/{room?}', 'Api\RoomController@update')->name('.update');
         Route::post('/gallery-add/{room?}', 'Api\RoomController@addGalleryImage')->name('.gallery_add');
         Route::delete('/gallery-delete/{image_id?}',

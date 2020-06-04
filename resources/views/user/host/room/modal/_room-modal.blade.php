@@ -12,7 +12,7 @@
                     </div>
                 </x-slot>
                 <div class="row row--custom">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group mb-lg-0">
                             <x-trovie-gallery-uploader
                                 data-delete-url="{{route('api.user.host.room.gallery_remove',$data['data']['host_id'])}}"
@@ -21,15 +21,15 @@
                         </div>
                     </div>
                     <form method="post" action="{{route('api.user.host.room.update',$data['data']['host_id'])}}"
-                          class="col-md-8 panel-content--room__room-modal__form">
+                          class="col-md-9 panel-content--room__room-modal__form">
                         <div class="row row--custom">
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <div class="row">
                                     <div class="col-12 col--custom">
                                         <div class="form-group">
                                             <label for="price">Tiện ích: </label>
                                             <div
-                                                class="row row--custom panel-content--room__room-modal__form__services">
+                                                class="row row--custom panel-content--room__room-modal__form__services max-height-100 trovie-scrollbar h-auto">
                                                 @foreach($data['data']['service_list'] as $service)
                                                     <div class="col-6 col--custom">
                                                         <div
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="row row--custom">
                                     <input type="hidden" name="old_room_id">
                                     <input type="hidden" name="room_id">
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-6 col--custom">
                                         <div class="form-group">
-                                            <label for="price">Tầng / Khu / Dãy: </label>
+                                            <label for="price">Tầng / Khu: </label>
                                             <input type="number" class="form-control trovie-input text-center"
                                                    name="floor" placeholder="Nhập số tầng/khu/dãy" min="0">
                                         </div>
@@ -93,7 +93,7 @@
                                     <div class="col-12 col--custom">
                                         <div class="form-group">
                                             <label for="name">Thông báo: </label>
-                                            <textarea type="text" class="form-control trovie-input"
+                                            <textarea type="text" class="form-control trovie-input trovie-scrollbar"
                                                       name="announcement"></textarea>
                                         </div>
                                         <div class="custom-control custom-switch">
@@ -110,31 +110,7 @@
                                                 <li>
                                                     <a href="#" class="user-list__item">
                                                         <figure class="user-list__item__image">
-                                                            <img src="{{asset('storage/image.jpg')}}" alt="user name">
-                                                        </figure>
-                                                        <p class="user-list__item__name">Nguyễn Văn A</p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="user-list__item">
-                                                        <figure class="user-list__item__image">
-                                                            <img src="{{asset('storage/image.jpg')}}" alt="user name">
-                                                        </figure>
-                                                        <p class="user-list__item__name">Nguyễn Văn A</p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="user-list__item">
-                                                        <figure class="user-list__item__image">
-                                                            <img src="{{asset('storage/image.jpg')}}" alt="user name">
-                                                        </figure>
-                                                        <p class="user-list__item__name">Nguyễn Văn A</p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="user-list__item">
-                                                        <figure class="user-list__item__image">
-                                                            <img src="{{asset('storage/image.jpg')}}" alt="user name">
+                                                            <img src="" alt="user name">
                                                         </figure>
                                                         <p class="user-list__item__name">Nguyễn Văn A</p>
                                                     </a>
