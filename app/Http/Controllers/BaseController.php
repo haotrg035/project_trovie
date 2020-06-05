@@ -70,6 +70,11 @@ abstract class BaseController extends Controller
                     $_response['message'] = __('curd.message.failed.delete');
                     break;
                 }
+                case 'show':
+                {
+                    $_response['message'] = __('curd.message.failed.nodata');
+                    break;
+                }
                 default :
                 {
                     $_response['message'] = __('curd.message.failed.view');

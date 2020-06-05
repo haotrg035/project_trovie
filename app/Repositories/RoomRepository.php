@@ -67,7 +67,7 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
                 'gallery'
             ])
             ->where('host_id', $host_id)->where('id', $room_id)
-            ->first(['id', 'name', 'price', 'floor', 'members', 'acreage', 'announcement', 'notice']);
+            ->first(['id', 'name', 'price', 'floor', 'members', 'acreage', 'state', 'announcement', 'notice']);
         $room['service_ids'] = TrovieHelper::convertAssocIdArrayToValueIdArray($room['services']->toArray(), 'id');
         foreach ($room['gallery'] as $key => $item) {
             $room['gallery'][$key]['image'] = asset(TrovieFile::checkFile($item['image']));
@@ -90,7 +90,7 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
             }
         ])->where('id', $id)->first()->toArray();
 
-        if ($result) {
+        if (count($result) > 0) {
             $result = $result['users'];
             foreach ($result as $key => $user) {
                 $result[$key]['pivot']['date_in'] = date('d/m/Y', strtotime($user['pivot']['date_in']));
@@ -101,6 +101,11 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
             }
             return $result;
         }
+
+        if (count($result) == 0) {
+            return [];
+        }
+
         return false;
     }
 
@@ -122,8 +127,8 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
                     foreach ($attributes['services'] as $service) {
                         $serviceDataSet[] = ['room_id' => $room->id, 'service_id' => $service];
                     }
+                    \DB::table('room_service')->insert($serviceDataSet);
                 }
-                \DB::table('room_service')->insert($serviceDataSet);
                 $result = $this->_model->with([
                     'services' => function ($query) {
                         return $query->get(['id', 'name']);
@@ -214,16 +219,15 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
         }
         $attributes['price'] = TrovieHelper::parseCurrencyString($attributes['price']);
         if ($room->update($attributes)) {
-            $room = $this->_model
-                ->with([
-                    'services' => function ($query) {
-                        return $query->get(['id', 'name']);
-                    },
-                    'users' => function ($query) {
-                        return $query->get(['id', 'full_name', 'avatar']);
-                    }
-                ])
-                ->where('id', $id)->first()->toArray();
+            $instance = new $this->_model;
+            $room = $instance->with([
+                'services' => function ($query) {
+                    return $query->get(['id', 'name']);
+                },
+                'users' => function ($query) {
+                    return $query->get(['id', 'full_name', 'avatar']);
+                }
+            ])->where('id', $id)->first()->updateState()->toArray();
             foreach ($room['users'] as $key => $user) {
                 $room['users'][$key]['avatar'] = asset(TrovieFile::checkFile($user['avatar']));
             }

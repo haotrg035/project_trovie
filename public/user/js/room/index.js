@@ -243,6 +243,8 @@ var TrovieGallery = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TrovieGallery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TrovieGallery */ "./resources/js/user/TrovieGallery.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -250,7 +252,11 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
+var roomCardList = document.querySelector('.panel-content--room__list-room');
 var roomCards = null;
+var ExampleRoomCard = document.querySelector('.panel-content--room__list-room .row div').cloneNode(true);
+var ExampleRoomServiceItem = ExampleRoomCard.querySelector('.room-card__service-list li');
+var ExampleRoomCardMemberItem = ExampleRoomCard.querySelector('.room-card__customer-list li');
 var roomModal = document.getElementById('panel-content--room__room-modal');
 var roomModalForm = document.querySelector('.panel-content--room__room-modal__form');
 var roomModalGallery = roomModal.querySelector('.trovie-gallery');
@@ -344,7 +350,7 @@ function initRoomSearchHandler() {
 }
 
 function getAllCurrrentRoomCards() {
-  return document.querySelectorAll('.panel-content--room__list-room .room-card');
+  return roomCardList.querySelectorAll('.panel-content--room__list-room .room-card');
 }
 
 function resetRoomModalIdInput() {
@@ -456,17 +462,6 @@ function roomCardClickHandler(roomCard) {
 
 function updateCardServices(targetRoomCard, services) {
   var serviceList = targetRoomCard.querySelector('.room-card__service-list');
-  var ExampleServiceItem = targetRoomCard.querySelector('li');
-
-  if (ExampleServiceItem.classList.contains('d-none')) {
-    ExampleServiceItem.classList.remove('d-none');
-  }
-
-  if (ExampleServiceItem.querySelector('.fa').classList.contains('fa-dollar')) {
-    ExampleServiceItem.querySelector('.fa').classList.remove('fa-dollar');
-    ExampleServiceItem.querySelector('.fa').classList.add('fa-dot-circle-o');
-  }
-
   serviceList.innerHTML = '';
 
   var _iterator7 = _createForOfIteratorHelper(services),
@@ -476,7 +471,13 @@ function updateCardServices(targetRoomCard, services) {
     for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
       var service = _step7.value;
 
-      var _item = ExampleServiceItem.cloneNode(true);
+      var _item = ExampleRoomServiceItem.cloneNode(true);
+
+      if (_item.querySelector('.fa').classList.contains('fa-dollar')) {
+        _item.querySelector('.fa').classList.remove('fa-dollar');
+
+        _item.querySelector('.fa').classList.add('fa-dot-circle-o');
+      }
 
       _item.querySelector('p').innerText = service.name;
       serviceList.append(_item);
@@ -490,12 +491,6 @@ function updateCardServices(targetRoomCard, services) {
 
 function updateCardMembers(targetRoomCard, members) {
   var MembersList = targetRoomCard.querySelector('.room-card__customer-list');
-  var ExampleMemberItem = MembersList.querySelector('li');
-
-  if (ExampleMemberItem.classList.contains('d-none')) {
-    ExampleMemberItem.classList.remove('d-none');
-  }
-
   MembersList.innerHTML = '';
 
   var _iterator8 = _createForOfIteratorHelper(members),
@@ -505,7 +500,7 @@ function updateCardMembers(targetRoomCard, members) {
     for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
       var member = _step8.value;
 
-      var _member = ExampleMemberItem.cloneNode(true);
+      var _member = ExampleRoomCardMemberItem.cloneNode(true);
 
       _member.title = member.full_name;
       _member.querySelector('img').src = member.avatar;
@@ -526,8 +521,24 @@ function updateCardData(data) {
   targetRoomCard.querySelector('.property-list__item--members .current-users').innerText = data.total_users;
   targetRoomCard.querySelector('.property-list__item--members .max-users').innerText = data.members;
   targetRoomCard.querySelector('.property-list__item--acreage p .value__content').innerText = data.acreage;
-  updateCardServices(targetRoomCard, data.services);
-  updateCardMembers(targetRoomCard, data.users);
+  targetRoomCard.classList.remove('room-card--success', 'room-card--warning', 'room-card--danger');
+
+  if (data.state === 1) {
+    targetRoomCard.classList.add('room-card--success');
+  } else if (data.state === 2) {
+    targetRoomCard.classList.add('room-card--warning');
+  } else {
+    targetRoomCard.classList.add('room-card--danger');
+  }
+
+  if (data.services.length > 0) {
+    updateCardServices(targetRoomCard, data.services);
+  }
+
+  if (_typeof(data.users) !== undefined) {
+    updateCardMembers(targetRoomCard, data.users);
+  }
+
   roomCards = getAllCurrrentRoomCards();
 }
 
@@ -538,8 +549,8 @@ function roomModalFormSubmitHandler() {
   formData.append('api_token', __apiToken);
   axios.post(updateUrl, formData).then(function (response) {
     try {
-      updateCardData(response.data.data);
       tata.success('Thành Công', response.data.message);
+      updateCardData(response.data.data);
     } catch (e) {
       console.log(e);
     }
@@ -550,7 +561,7 @@ function roomModalFormSubmitHandler() {
 
 function initRoomModalHandler() {
   document.querySelector('.btn-open-add-room-modal').addEventListener('click', function () {
-    clearAddROomModalFormFields();
+    clearAddRoomModalFormFields();
     showBsModal(addRoomModal);
   });
   $(roomModal).on('hidden.bs.modal', function (e) {
@@ -565,6 +576,19 @@ function initRoomModalHandler() {
   if (roomCards == null) {
     roomCards = getAllCurrrentRoomCards();
   }
+
+  ExampleRoomCard.querySelector('.room-card__service-list').innerHTML = '';
+  ExampleRoomCard.querySelector('.room-card__customer-list').innerHTML = '';
+
+  if (ExampleRoomCardMemberItem.classList.contains('d-none')) {
+    ExampleRoomCardMemberItem.classList.remove('d-none');
+  }
+
+  if (ExampleRoomServiceItem.classList.contains('d-none')) {
+    ExampleRoomServiceItem.classList.remove('d-none');
+  }
+
+  ExampleRoomCard.querySelector('.room-card').classList.remove('d-none', 'room-card--success', 'room-card--warning', 'room-card--danger');
 
   var _iterator9 = _createForOfIteratorHelper(roomCards),
       _step9;
@@ -587,7 +611,7 @@ function initRoomModalHandler() {
   }
 }
 
-function clearAddROomModalFormFields() {
+function clearAddRoomModalFormFields() {
   var _iterator10 = _createForOfIteratorHelper(addRoomModalForm.querySelectorAll('input[type=checkbox]')),
       _step10;
 
@@ -617,6 +641,18 @@ function clearAddROomModalFormFields() {
   }
 }
 
+function renderNewRoomCard(data) {
+  var newCard = ExampleRoomCard.cloneNode(true);
+  newCard.querySelector('.room-card').setAttribute('data-id', data.id);
+  newCard.querySelector('.room-card').setAttribute('data-view-url', roomCardList.getAttribute('data-room-view-url') + '/' + data.id);
+  newCard.querySelector('.room-card').classList.add('room-card--success');
+  newCard.querySelector('.room-card').addEventListener('click', function () {
+    roomCardClickHandler(newCard.querySelector('.room-card'));
+  });
+  roomCardList.querySelector('.row').append(newCard);
+  updateCardData(data);
+}
+
 function initAddRoomModalHandler() {
   var formData = null;
   addRoomModalForm.addEventListener('submit', function (e) {
@@ -624,8 +660,14 @@ function initAddRoomModalHandler() {
     formData = new FormData(addRoomModalForm);
     formData.append('api_token', __apiToken);
     axios.post(addRoomModalForm.getAttribute('action'), formData).then(function (response) {
-      //Render new room card!!!
-      tata.success('Thành công', response.data.message);
+      try {
+        tata.success('Thành công', response.data.message);
+        hideBsModal(addRoomModal); //Render new room card!!!
+
+        renderNewRoomCard(response.data.data);
+      } catch (e) {
+        console.log(e);
+      }
     })["catch"](function (error) {
       tata.error('Lỗi', error.response.data.message);
     });
@@ -743,6 +785,7 @@ function fillRoomUserModalData() {
       console.log(e);
     }
   })["catch"](function (err) {
+    roomUsersModalList.innerHTML = '';
     tata.error('Lỗi', err.response.data.message);
   });
 }

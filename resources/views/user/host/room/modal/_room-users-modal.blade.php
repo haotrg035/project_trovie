@@ -80,13 +80,13 @@
                                                name="address" placeholder="">
                                     </div>
                                 </div>
-                                <div class="col-12 col--custom text-right mb-0">
-                                    <a href="/" class="btn btn-base btn-add-user-modal">
-                                        <i class="fa fa-users" aria-hidden="true"></i>&nbsp;QUẢN LÝ KHÁCH THUÊ
-                                    </a>
-                                </div>
                             </div>
                         </form>
+                    </div>
+                    <div class="col-12 col--custom text-right mb-0">
+                        <a href="/" class="btn btn-base btn-add-user-modal">
+                            <i class="fa fa-users" aria-hidden="true"></i>&nbsp;QUẢN LÝ HỢP ĐỒNG THUÊ TRỌ
+                        </a>
                     </div>
                 </div>
             </x-main-card>

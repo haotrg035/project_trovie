@@ -41,32 +41,114 @@
                 </form>
             </div>
         </x-main-card>
-        <div class="tab-content panel-content--room__list-room">
+        <div class="tab-content panel-content--room__list-room" data-room-view-url="{{route('api.user.host.room.show',$data['data']['host_id'])}}">
             <div class="row row--custom">
-                @foreach($data['data']['room_list'] as $room)
-                    <div class="col-6 col-lg-3 col--custom">
-                        <a href="javascript:void(0)" data-id="{{$room['id']}}"
-                           data-view-url="{{route('api.user.host.room.show',[$data['data']['host_id'],$room['id']])}}"
-                           class="room-card
+                @if($data['data']['room_list'])
+                    @foreach($data['data']['room_list'] as $room)
+                        <div class="col-6 col-lg-3 col--custom">
+                            <a href="javascript:void(0)" data-id="{{$room['id']}}"
+                               data-view-url="{{route('api.user.host.room.show',[$data['data']['host_id'],$room['id']])}}"
+                               class="room-card
                             @switch($room['state'])
-                           @case(1)
-                               room-card--success
-                               @break
-                           @case(2)
-                               room-card--warning
-                               @break
-                           @case(3)
-                               room-card--danger
-                               @break
-                           @endswitch">
-                            <p class="room-card__id">{{$room['name']}}</p>
+                               @case(1)
+                                   room-card--success @break
+                               @case(2)
+                                   room-card--warning @break
+                               @case(3)
+                                   room-card--danger @break
+                               @endswitch">
+                                <p class="room-card__id">{{$room['name']}}</p>
+                                <ul class="room-card__property-list list-unstyled">
+                                    <li class="room-card__property-list__item property-list__item--price"
+                                        title="Giá phòng">
+                                    <span class="room-card__property-list__item__icon">
+                                        <i class="fa fa-dollar" aria-hidden="true"></i>
+                                    </span>
+                                        <p class="room-card__property-list__item__value mb-0">
+                                            <span class="value__content">{{$room['price']}}</span> đ
+                                        </p>
+                                    </li>
+                                    <li class="room-card__property-list__item property-list__item--floor"
+                                        title="Tầng / Khu / Dãy">
+                                    <span class="room-card__property-list__item__icon">
+                                        <i class="fa fa-building" aria-hidden="true"></i>
+                                    </span>
+                                        <p class="room-card__property-list__item__value mb-0">Tầng/
+                                            Khu: <span class="value__content">{{$room['floor']}}</span>
+                                        </p>
+                                    </li>
+                                    <li class="room-card__property-list__item property-list__item--members"
+                                        title="Số người thuê">
+                                    <span class="room-card__property-list__item__icon">
+                                        <i class="fa fa-users" aria-hidden="true"></i>
+                                    </span>
+                                        <p class="room-card__property-list__item__value mb-0">
+                                            <span class="current-users">{{$room['total_users']}}</span>
+                                            / <span class="max-users">{{$room['members']}}</span></p>
+                                    </li>
+                                    <li class="room-card__property-list__item property-list__item--acreage"
+                                        title="Diện tích">
+                                    <span class="room-card__property-list__item__icon">
+                                        <i class="fa fa-expand" aria-hidden="true"></i>
+                                    </span>
+                                        <p class="room-card__property-list__item__value mb-0">
+                                            <span class="value__content">{{$room['acreage']}}</span> m<sup>2</sup></p>
+                                    </li>
+                                </ul>
+                                <ul class="room-card__service-list list-unstyled">
+                                    @if($room['services'])
+                                        @foreach($room['services'] as $service)
+                                            <li class="room-card__service-list__item">
+                                            <span class="room-card__service-list__item__icon">
+                                                <i class="fa fa-dot-circle-o"></i></span>
+                                                <p class="room-card__service-list__item__value mb-0 text-capitalize">
+                                                    {{$service['name']}}
+                                                </p>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <li class="room-card__service-list__item d-none">
+                                            <span class="room-card__service-list__item__icon">
+                                                <i class="fa fa-dot-circle-o"></i></span>
+                                            <p class="room-card__service-list__item__value mb-0 text-capitalize">
+                                            </p>
+                                        </li>
+                                    @endif
+                                </ul>
+                                <ul class="room-card__customer-list list-unstyled">
+                                    @if($room['users'])
+                                        @foreach($room['users'] as $user)
+                                            <li class="room-card__customer-list__item" title="{{$user['full_name']}}">
+                                            <span class="room-card__customer-list__item__avatar">
+                                                <img src="{{asset($user['avatar'])}}" alt="">
+                                            </span>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <li class="room-card__customer-list__item d-none" title="">
+                                            <span class="room-card__customer-list__item__avatar">
+                                                <img src="" alt="">
+                                            </span>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </a>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="col-6 col-lg-3 col--custom d-none">
+                        <a href="javascript:void(0)" data-id=""
+                           data-view-url="{{route('api.user.host.room.show',$data['data']['host_id'])}}"
+                           class="room-card">
+                            <p class="room-card__id"></p>
                             <ul class="room-card__property-list list-unstyled">
-                                <li class="room-card__property-list__item property-list__item--price" title="Giá phòng">
+                                <li class="room-card__property-list__item property-list__item--price"
+                                    title="Giá phòng">
                                     <span class="room-card__property-list__item__icon">
                                         <i class="fa fa-dollar" aria-hidden="true"></i>
                                     </span>
                                     <p class="room-card__property-list__item__value mb-0">
-                                        <span class="value__content">{{$room['price']}}</span> đ
+                                        <span class="value__content"></span> đ
                                     </p>
                                 </li>
                                 <li class="room-card__property-list__item property-list__item--floor"
@@ -75,7 +157,7 @@
                                         <i class="fa fa-building" aria-hidden="true"></i>
                                     </span>
                                     <p class="room-card__property-list__item__value mb-0">Tầng/
-                                        Khu: <span class="value__content">{{$room['floor']}}</span>
+                                        Khu: <span class="value__content"></span>
                                     </p>
                                 </li>
                                 <li class="room-card__property-list__item property-list__item--members"
@@ -84,8 +166,8 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                     <p class="room-card__property-list__item__value mb-0">
-                                        <span class="current-users">{{$room['total_users']}}</span>
-                                        / <span class="max-users">{{$room['members']}}</span></p>
+                                        <span class="current-users"></span>
+                                        / <span class="max-users"></span></p>
                                 </li>
                                 <li class="room-card__property-list__item property-list__item--acreage"
                                     title="Diện tích">
@@ -93,49 +175,27 @@
                                         <i class="fa fa-expand" aria-hidden="true"></i>
                                     </span>
                                     <p class="room-card__property-list__item__value mb-0">
-                                        <span class="value__content">{{$room['acreage']}}</span> m<sup>2</sup></p>
+                                        <span class="value__content"></span> m<sup>2</sup></p>
                                 </li>
                             </ul>
                             <ul class="room-card__service-list list-unstyled">
-                                @if($room['services'])
-                                    @foreach($room['services'] as $service)
-                                        <li class="room-card__service-list__item">
+                                <li class="room-card__service-list__item d-none">
                                             <span class="room-card__service-list__item__icon">
                                                 <i class="fa fa-dot-circle-o"></i></span>
-                                            <p class="room-card__service-list__item__value mb-0 text-capitalize">
-                                                {{$service['name']}}
-                                            </p>
-                                        </li>
-                                    @endforeach
-                                @else
-                                    <li class="room-card__service-list__item d-none">
-                                            <span class="room-card__service-list__item__icon">
-                                                <i class="fa fa-dot-circle-o"></i></span>
-                                        <p class="room-card__service-list__item__value mb-0 text-capitalize">
-                                        </p>
-                                    </li>
-                                @endif
+                                    <p class="room-card__service-list__item__value mb-0 text-capitalize">
+                                    </p>
+                                </li>
                             </ul>
                             <ul class="room-card__customer-list list-unstyled">
-                                @if($room['users'])
-                                    @foreach($room['users'] as $user)
-                                        <li class="room-card__customer-list__item" title="{{$user['full_name']}}">
-                                            <span class="room-card__customer-list__item__avatar">
-                                                <img src="{{asset($user['avatar'])}}" alt="">
-                                            </span>
-                                        </li>
-                                    @endforeach
-                                @else
-                                    <li class="room-card__customer-list__item d-none" title="">
+                                <li class="room-card__customer-list__item d-none" title="">
                                             <span class="room-card__customer-list__item__avatar">
                                                 <img src="" alt="">
                                             </span>
-                                    </li>
-                                @endif
+                                </li>
                             </ul>
                         </a>
                     </div>
-                @endforeach
+                @endif
             </div>
         </div>
         @include('user.host.room.modal._room-modal')

@@ -54,4 +54,14 @@ class Room extends Model
     {
         return TrovieHelper::currencyFormat($value);
     }
+
+    public function updateState()
+    {
+        $total_users = $this->users()->count();
+        $this->state = $total_users >= $this->members ? 3 : ($total_users < $this->members && $total_users > 0 ? 2 : 1);
+        if ($this->save()) {
+            return $this;
+        }
+        return false;
+    }
 }

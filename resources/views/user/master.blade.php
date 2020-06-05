@@ -30,7 +30,7 @@
     @include(config('app.user_theme').'._sidebar')
     <main class="main-panel">
         {{--        @include('layouts._navbar')--}}
-        <div class="main-panel__content" data-simplebar>
+        <div class="main-panel__content trovie-scrollbar" data-simplebar>
             @yield('panel-content')
         </div>
     </main>
