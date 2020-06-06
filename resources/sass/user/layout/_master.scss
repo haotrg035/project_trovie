@@ -51,6 +51,10 @@ body {
             flex-direction: column;
             flex: 1 1 auto;
             padding: 1rem;
+
+            @include Responsive(LG) {
+                padding-bottom: 48px;
+            }
         }
     }
 }
@@ -61,12 +65,18 @@ body {
         align-items: center;
         margin-bottom: 1rem;
         padding: 0;
+        @include Responsive(SM) {
+            flex-direction: column;
+        }
 
         &__title {
             margin-bottom: 0;
             font-size: 1.55rem;
             text-transform: uppercase;
             font-weight: 500;
+            @include Responsive(SM) {
+                margin-bottom: .5rem;
+            }
         }
 
         &__content {
@@ -89,7 +99,8 @@ body {
         }
     }
 }
-.trovie-scrollbar{
+
+.trovie-scrollbar {
     @include ResponsiveMin(MD) {
         height: 100vh;
         overflow-y: auto;

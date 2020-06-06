@@ -5,7 +5,7 @@
         </a>
     </li>
     <li class="main-sidebar__item">
-        <a href="{{route('user.host.index')}}" class="item__link @if(Route::is('user.host.index')) active @endif">
+        <a href="{{route('user.host.index')}}" class="item__link @if(Route::is('user.host.*')) active @endif">
             <figure class="link__icon">
                 <i class="fa fa-home" aria-hidden="true"></i>
             </figure>
@@ -17,7 +17,23 @@
             <figure class="link__icon">
                 <i class="fa fa-cubes" aria-hidden="true"></i>
             </figure>
-            <p class="link__text">Dịch Vụ</p>
+            <p class="link__text">Tiện ích</p>
+        </a>
+    </li>
+    <li class="main-sidebar__item">
+        <a href="{{route('user.service.index')}}" class="item__link @if(Route::is('/')) active @endif">
+            <figure class="link__icon">
+                <i class="fa fa-id-card" aria-hidden="true"></i>
+            </figure>
+            <p class="link__text">Hợp Đồng Thuê</p>
+        </a>
+    </li>
+    <li class="main-sidebar__item">
+        <a href="{{route('user.service.index')}}" class="item__link @if(Route::is('/')) active @endif">
+            <figure class="link__icon">
+                <i class="fa fa-line-chart" aria-hidden="true"></i>
+            </figure>
+            <p class="link__text">Hóa Đơn</p>
         </a>
     </li>
     <li class="main-sidebar__item">

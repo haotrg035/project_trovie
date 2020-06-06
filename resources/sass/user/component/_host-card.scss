@@ -45,8 +45,15 @@
                 margin-bottom: 1rem;
             }
 
+
             p {
                 margin-bottom: 1rem;
+                @include Responsive(1366px) {
+                    font-size: .9rem;
+                }
+                @include Responsive(1024px) {
+
+                }
                 @include Responsive(MD) {
                     margin-bottom: .5rem;
                     font-size: .75rem;
@@ -82,6 +89,14 @@
             width: calc(100% / 3);
             display: flex;
 
+            p {
+                @include Responsive(1366px) {
+                    font-size: .85rem;
+                }
+                @include Responsive(LG) {
+                    font-size: .75rem;
+                }
+            }
 
             .item {
                 &__label {
@@ -104,7 +119,6 @@
                 &__value {
                     margin-bottom: 0;
                     font-weight: bold;
-                    margin-bottom: 0;
                 }
             }
 

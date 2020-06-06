@@ -65,6 +65,11 @@
             @content
         }
     }
+    @else {
+        @media only screen and (max-width: $breakpoint) {
+            @content
+        }
+    }
 }
 
 @mixin ResponsiveMin($breakpoint) {

@@ -22,7 +22,7 @@
         <div class="host-list">
             <div class="row row--custom">
                 @foreach($data['data'] as $host)
-                    <div class="col-md-4 col--custom">
+                    <div class="col-sm-6 col-md-6 col-xl-4 col--custom">
                         <x-main-card body-class="" class="host-card-wrapper">
                             <a href="{{route('user.host.show',$host['id'])}}" class="host-card">
                                 <p class="host-card__name line-clamp" title="{{$host['name']}}"
@@ -33,28 +33,28 @@
                                     <li class="attribute-list__item">
                                         <p class="item__label">
                                             <i class="fa fa-bolt" aria-hidden="true"></i>
-                                            <span>&nbsp;Tiền điện:</span>
+                                            <span>&nbsp;Điện:</span>
                                         </p>
                                         <p class="item__value">{{$host['cost_electric']}}đ / Kv</p>
                                     </li>
-                                    <li class="attribute-list__item">
+                                    <li class="attribute-list__item" title="Ngày ghi số điện">
                                         <p class="item__label">
                                             <i class="fa fa-calendar" aria-hidden="true"></i>
-                                            <span>&nbsp;Ngày ghi điện:</span>
+                                            <span>&nbsp;Ghi điện:</span>
                                         </p>
                                         <p class="item__value">{{$host['date_note_electric']}}</p>
                                     </li>
                                     <li class="attribute-list__item">
                                         <p class="item__label">
                                             <i class="fa fa-tint" aria-hidden="true"></i>
-                                            <span>&nbsp;Tiền nước:</span>
+                                            <span>&nbsp;Nước:</span>
                                         </p>
                                         <p class="item__value">{{$host['cost_water']}}đ / m<sup>3</sup></p>
                                     </li>
-                                    <li class="attribute-list__item">
+                                    <li class="attribute-list__item" title="Ngày ghi số nước">
                                         <p class="item__label">
                                             <i class="fa fa-calendar" aria-hidden="true"></i>
-                                            <span>&nbsp;Ngày ghi nước:</span>
+                                            <span>&nbsp;Ghi nước:</span>
                                         </p>
                                         <p class="item__value">{{$host['date_note_water']}}</p>
                                     </li>
@@ -73,10 +73,10 @@
                                         </p>
                                         <p class="item__value">{{$host['countable_info']['users']}}</p>
                                     </li>
-                                    <li class="attribute-list__item">
+                                    <li class="attribute-list__item" title="Ngày thu tiền trọ">
                                         <p class="item__label">
                                             <i class="fa fa-calendar" aria-hidden="true"></i>
-                                            <span>&nbsp;Ngày thu tiền trọ:</span>
+                                            <span>&nbsp;Thu tiền trọ:</span>
                                         </p>
                                         <p class="item__value">{{$host['date_payment']}}</p>
                                     </li>
@@ -99,7 +99,7 @@
                                 </ul>
                                 <ul class="host-card__room-states mb-0 list-unstyled">
                                     <li class="room-states__item room-states__item--success">
-                                        <p class="item__label">Phòng trống:</p>
+                                        <p class="item__label">Trống:</p>
                                         <p class="item__value">{{$host['countable_info']['room_type']['free']}}</p>
                                     </li>
                                     <li class="room-states__item room-states__item--warning justify-content-center">

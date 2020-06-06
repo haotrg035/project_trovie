@@ -14,8 +14,8 @@
                 <form action="{{route('api.user.host.room.store',$data['data']['host_id'])}}"
                       class="add-room-modal__form">
                     <div class="row row--custom">
-                        <div class="col-md-6">
-                            <fieldset class="trovie-fieldset px-3 rounded-0"
+                        <div class="col-md-6 col--custom">
+                            <fieldset class="trovie-fieldset px-3"
                                       style="padding-top: .8rem;padding-bottom: .8rem;">
                                 <legend>TIỆN ÍCH</legend>
                                 <div class="form-group mb-md-0">
@@ -42,8 +42,8 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col-md-6">
-                            <fieldset class="trovie-fieldset px-3 rounded-0">
+                        <div class="col-md-6 col--custom">
+                            <fieldset class="trovie-fieldset px-3">
                                 <legend>THÔNG TIN PHÒNG TRỌ</legend>
                                 <div class="row row--custom">
                                     <input type="hidden" name="host_id" value="{{$data['data']['host_id']}}">

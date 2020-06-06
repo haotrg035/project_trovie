@@ -16,8 +16,10 @@ class CreateRoomUserTable extends Migration
         Schema::create('room_user', function (Blueprint $table) {
             $table->integer('room_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->datetime('date_in');
-            $table->boolean('active')->default(true);
+            $table->date('date_in');
+            $table->unsignedBigInteger('contract_id');
+            $table->unsignedTinyInteger('active')->default(1);
+
             $table->primary(['room_id', 'user_id', 'date_in']);
         });
     }

@@ -223,7 +223,7 @@
                             </x-trovie-avatar-upload>
                         </x-main-card>
                     </div>
-                    <div class="col-lg-12 col--custom">
+                    <div class="col-lg-12 col--custom mb-0">
                         <x-main-card has-header="1" class="host-gallery" body-class="pb-0">
                             <x-slot name="title">Album Ảnh</x-slot>
                             <x-trovie-gallery-uploader :gallery-items="$data['data']['gallery']"

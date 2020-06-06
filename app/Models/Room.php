@@ -39,7 +39,9 @@ class Room extends Model
     {
         return $this->belongsToMany(User::class, 'room_user')->withPivot('date_in');
     }
+    public function guestUsers(){
 
+    }
     public function services()
     {
         return $this->belongsToMany(Service::class);

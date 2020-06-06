@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoomguestuserTable extends Migration
+class CreateRoomGuestUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,13 @@ class CreateRoomguestuserTable extends Migration
     public function up()
     {
         Schema::create('room_guest_user', function (Blueprint $table) {
-            $table->integer('room_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->datetime('date_in');
-            $table->index(['room_id', 'user_id', 'date_in']);
+            $table->unsignedInteger('room_id');
+            $table->unsignedInteger('user_id');
+            $table->date('date_in');
+            $table->unsignedBigInteger('contract_id');
+            $table->unsignedTinyInteger('active')->default(1);
+
+            $table->primary(['room_id', 'user_id', 'date_in']);
         });
     }
 

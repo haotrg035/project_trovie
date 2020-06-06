@@ -12,10 +12,24 @@
     top: 0;
     left: 0;
     @extend %transition-section-item-fast;
+    @include Responsive(MD) {
+        background: rgba(255, 255, 255, 0.7);
+    }
 
     .main-sidebar__item {
+        @include Responsive(LG) {
+            flex: 1 1 auto;
+        }
+
+        &:nth-child(2) {
+            margin-top: auto;
+        }
+
+        &:last-child {
+            margin-top: auto;
+        }
+
         &--logo {
-            margin-bottom: 4rem;
 
             .item__link {
                 font-size: 1.4rem;
@@ -30,16 +44,16 @@
             }
         }
 
-        &:last-child {
-            margin-top: auto;
-        }
-
         .item__link {
             display: flex;
             flex-direction: row;
             height: 4rem;
             align-items: center;
             color: var(--color-base);
+            @include Responsive(LG) {
+                height: 3rem;
+                justify-content: center;
+            }
 
             &:hover, &.active {
                 background: var(--color-base);
@@ -85,7 +99,7 @@
 
     &:hover {
         @include ResponsiveMin(MD) {
-            width: 15rem;
+            width: 20rem;
         }
 
         .main-sidebar__item {
