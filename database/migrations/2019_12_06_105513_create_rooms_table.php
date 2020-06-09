@@ -21,7 +21,7 @@ class CreateRoomsTable extends Migration
             $table->unsignedTinyInteger('acreage');
             $table->unsignedTinyInteger('members')->default(1);
             $table->unsignedTinyInteger('floor')->default(1);
-            $table->string('announcement', 250)->nullable();
+            $table->string('announcement', 255)->nullable();
             $table->boolean('notice')->default(false);
             $table->unsignedTinyInteger('state')->default(1);
             $table->unsignedTinyInteger('type')->default('0');

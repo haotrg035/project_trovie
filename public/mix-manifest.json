@@ -1,6 +1,7 @@
 {
     "/user/js/app.js": "/user/js/app.js",
     "/user/css/app.css": "/user/css/app.css",
+    "/user/js/contract/index.js": "/user/js/contract/index.js",
     "/user/js/host/detail.js": "/user/js/host/detail.js",
     "/user/js/host/index.js": "/user/js/host/index.js",
     "/user/js/room/index.js": "/user/js/room/index.js",

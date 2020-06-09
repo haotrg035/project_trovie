@@ -47,4 +47,38 @@ class  TrovieHelper
             return $val->$key;
         }, $assocArray);
     }
+
+    /**
+     * @param int $length expected string length
+     * @param int $type Type of expected string 0 for full, 1 for number only, 2 for alphabet only
+     * @return string
+     */
+    public static function generateRandomString($length = 10, $type = 0)
+    {
+        $numbers = '0123456789';
+        $alphabets = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = '';
+        switch ($type) {
+            case 0:
+            {
+                $characters = $numbers . $alphabets;
+                break;
+            }
+            case 1:
+            {
+                $characters = $numbers;
+                break;
+            }
+            case 2:
+            {
+                $characters = $alphabets;
+            }
+        }
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 }

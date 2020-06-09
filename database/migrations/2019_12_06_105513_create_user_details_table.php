@@ -19,6 +19,7 @@ class CreateUserdetailsTable extends Migration
             $table->string('phone', 11)->unique()->nullable();
             $table->string('id_card', 13)->unique()->nullable();
             $table->datetime('id_card_date')->nullable();
+            $table->string('id_card_address')->nullable();
             $table->string('career', 60)->nullable();
             $table->string('desc', 250)->nullable();
             $table->timestamps();

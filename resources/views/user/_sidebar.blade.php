@@ -1,4 +1,4 @@
-<ul class="main-sidebar list-unstyled">
+<ul class="main-sidebar list-unstyled no-print">
     <li class="main-sidebar__item main-sidebar__item--logo">
         <a href="{{route('user.dashboard.index')}}" class="item__link">
             {{config('app.name')}}
@@ -21,7 +21,7 @@
         </a>
     </li>
     <li class="main-sidebar__item">
-        <a href="{{route('user.service.index')}}" class="item__link @if(Route::is('/')) active @endif">
+        <a href="{{route('user.contract.index')}}" class="item__link @if(Route::is('user.contract.*')) active @endif">
             <figure class="link__icon">
                 <i class="fa fa-id-card" aria-hidden="true"></i>
             </figure>

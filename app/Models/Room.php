@@ -39,14 +39,22 @@ class Room extends Model
     {
         return $this->belongsToMany(User::class, 'room_user')->withPivot('date_in');
     }
-    public function guestUsers(){
+
+    public function guestUsers()
+    {
 
     }
+
     public function services()
     {
         return $this->belongsToMany(Service::class);
     }
 
+    public function contracts()
+    {
+        return $this->belongsToMany(Contract::class, 'room_user')->withPivot(['active','user_id']);
+    }
+    
     public function gallery()
     {
         return $this->hasMany(RoomGallery::class, 'room_id', 'id');

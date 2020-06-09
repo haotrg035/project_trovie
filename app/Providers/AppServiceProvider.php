@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Helper\TrovieFile;
 use App\Helper\TrovieHelper;
+use App\Repositories\ContractRepository;
 use App\Repositories\HostRepository;
+use App\Repositories\Interfaces\ContractEloquentRepositoryInterface;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
 use App\Repositories\Interfaces\ServiceEloquentRepositoryInterface;
@@ -32,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(ServiceEloquentRepositoryInterface::class, function () {
             return new ServiceRepository();
+        });
+        $this->app->bind(ContractEloquentRepositoryInterface::class, function () {
+            return new ContractRepository();
         });
         $this->app->bind(UserEloquentRepositoryInterface::class, function () {
             return new UserRepository();

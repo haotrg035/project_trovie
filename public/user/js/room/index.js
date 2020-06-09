@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initRoomTypeFilterHandler();
   initRoomInvoiceModalEventHandler();
   initRoomUsersModalHandler();
-  initRoomSearchHandler();
+  initRoomSearchHandler(); //    TODO: update room filter amount after update room data
 });
 
 function initRoomSearchHandler() {
