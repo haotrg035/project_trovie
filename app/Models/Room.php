@@ -22,27 +22,41 @@ class Room extends Model
         'floor',
         'acreage',
         'members',
+        'cost_electric',
+        'cost_water'
     ];
 
     public function getTotalUsersAttribute()
     {
-        $data = $this->users()->get();
-        return count($data);
+        $users = $this->users()->get();
+        $guest_users = $this->guestUsers()->get();
+        return count($users) + count($guest_users);
     }
 
     public function host()
     {
-        return $this->belongsTo(Host::class, 'host_id', 'id');
+        return $this->belongsTo(Host::class, 'host_id');
     }
-
+//    public function getUsersAttribute(){
+//        return
+//    }
     public function users()
     {
-        return $this->belongsToMany(User::class, 'room_user')->withPivot('date_in');
+        return $this->belongsToMany(User::class, 'room_user')
+            ->withPivot('date_in')
+            ->wherePivot('active', 1);
     }
 
     public function guestUsers()
     {
+        return $this->belongsToMany(GuestUser::class, 'room_guest_user')
+            ->withPivot('date_in')
+            ->wherePivot('active', 1);
+    }
 
+    public function allKindUsers()
+    {
+        return $this->belongsToMany(User::class, 'room_user')->withPivot('date_in');
     }
 
     public function services()
@@ -52,9 +66,14 @@ class Room extends Model
 
     public function contracts()
     {
-        return $this->belongsToMany(Contract::class, 'room_user')->withPivot(['active','user_id']);
+        return $this->belongsToMany(Contract::class, 'room_user')->withPivot(['active', 'user_id']);
     }
-    
+
+    public function guestContracts()
+    {
+        return $this->belongsToMany(Contract::class, 'room_guest_user')->withPivot(['active', 'guest_user_id']);
+    }
+
     public function gallery()
     {
         return $this->hasMany(RoomGallery::class, 'room_id', 'id');
@@ -65,7 +84,18 @@ class Room extends Model
         return TrovieHelper::currencyFormat($value);
     }
 
-    public function updateState()
+    public function getCostElectricAttribute($value)
+    {
+        return TrovieHelper::currencyFormat($value);
+    }
+
+    public function getCostWaterAttribute($value)
+    {
+        return TrovieHelper::currencyFormat($value);
+    }
+
+    public
+    function updateState()
     {
         $total_users = $this->users()->count();
         $this->state = $total_users >= $this->members ? 3 : ($total_users < $this->members && $total_users > 0 ? 2 : 1);

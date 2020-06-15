@@ -81,4 +81,12 @@ class  TrovieHelper
         }
         return $randomString;
     }
+
+    public static function converDateFormat($date, $from = 'dmY')
+    {
+        if ($from === 'Ymd') {
+            return implode('/', array_reverse(explode('-', $date)));
+        }
+        return implode('-', array_reverse(explode('/', $date . '')));
+    }
 }

@@ -50,7 +50,8 @@ class ContractController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $result = $this->repository->createContract($request->all());
+        return $this->returnResponse($result['data'], 'create', $result['data'], $result['error']);
     }
 
     /**
@@ -61,19 +62,35 @@ class ContractController extends BaseController
      */
     public function show(Contract $contract)
     {
-        //
+        $result = $this->repository->getContract($contract->id);
+        return $this->returnResponse($result, 'show', $result);
     }
 
     public function getContractsByHost(Request $request, Host $host)
     {
-
+        $this->checkViewAuth($host);
         $result = $this->repository->getAllByHost($host->id);
         return $this->returnResponse($result, 'show', $result);
     }
 
     public function getContractsByRoom(Request $request, Room $room)
     {
+        $this->checkViewAuth($room);
+        $result = $this->repository->getAllByRoom($room->id);
+        return $this->returnResponse($result, 'show', $result);
+    }
 
+    public function renewContract(Request $request, Contract $contract)
+    {
+        $this->checkUpdateAuth($contract);
+        $result = $this->repository->renewContract($contract->id, $request->expired_at);
+        return $this->returnResponse($result['data'], 'update', $result['data'], $result['error']);
+    }
+
+    public function cancel(Request $request)
+    {
+        $result = $this->repository->cancelContract($request->id);
+        return $this->returnResponse($result['data'], 'update', $result['data'], $result['error']);
     }
 
     /**

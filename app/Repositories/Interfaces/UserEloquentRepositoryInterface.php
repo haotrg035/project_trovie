@@ -9,4 +9,6 @@ interface UserEloquentRepositoryInterface
 
 
     public function getUser($id);
+
+    public function getUserByInviteToken($token);
 }

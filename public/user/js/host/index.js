@@ -1817,8 +1817,6 @@ function clear() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrovieHelper", function() { return TrovieHelper; });
 /* harmony import */ var tata_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tata-js */ "./node_modules/tata-js/src/tata.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1832,174 +1830,7 @@ var TrovieHelper = /*#__PURE__*/function () {
     _classCallCheck(this, TrovieHelper);
   }
 
-  _createClass(TrovieHelper, [{
-    key: "initGoogleMap",
-    value: function initGoogleMap(element) {
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'window.initMap';
-      var addressInput = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var latitudeInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var longitudeInput = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-
-      if ((typeof google === "undefined" ? "undefined" : _typeof(google)) !== 'object') {
-        var script = document.createElement("script");
-        var apiKey = document.querySelector('meta[name=ggmap-api-key]').getAttribute('content');
-        script.type = "text/javascript";
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&libraries=places&callback=' + callback;
-        script.defer = true;
-        script.async = true;
-        document.body.appendChild(script);
-      }
-
-      window.initMap = function () {
-        var current = {
-          lat: 10.1235905,
-          lng: 105.2519962
-        };
-        var map = new google.maps.Map(element, {
-          zoom: 10,
-          center: current
-        }); // The marker, positioned at current
-
-        var marker = new google.maps.Marker({
-          position: current,
-          map: map
-        });
-        return map;
-      };
-
-      window.initialize = function () {
-        // $('form').on('keyup keypress', function (e) {
-        //     var keyCode = e.keyCode || e.which;
-        //     if (keyCode === 13) {
-        //         e.preventDefault();
-        //         return false;
-        //     }
-        // });
-        var locationInputs = document.getElementById("address");
-        var autocompletes = [];
-        var geocoder = new google.maps.Geocoder();
-        var input = locationInputs;
-        var fieldKey = input.id.replace("-input", "");
-        var isEdit = latitudeInput.value != '' && longitudeInput.value != '';
-        var latitude = parseFloat(latitudeInput.value) || 10.1235905;
-        var longitude = parseFloat(longitudeInput.value) || 105.2519962;
-        var map = new google.maps.Map(element, {
-          center: {
-            lat: latitude,
-            lng: longitude
-          },
-          zoom: 13
-        });
-        var marker = new google.maps.Marker({
-          map: map,
-          position: {
-            lat: latitude,
-            lng: longitude
-          }
-        });
-        marker.setVisible(isEdit);
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.key = fieldKey;
-        autocompletes.push({
-          input: input,
-          map: map,
-          marker: marker,
-          autocomplete: autocomplete
-        });
-
-        var _loop = function _loop(i) {
-          var input = autocompletes[i].input;
-          var autocomplete = autocompletes[i].autocomplete;
-          var map = autocompletes[i].map;
-          var marker = autocompletes[i].marker;
-          google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            marker.setVisible(false);
-            var place = autocomplete.getPlace();
-            geocoder.geocode({
-              'placeId': place.place_id
-            }, function (results, status) {
-              if (status === google.maps.GeocoderStatus.OK) {
-                var lat = results[0].geometry.location.lat();
-                var lng = results[0].geometry.location.lng();
-                setLocationCoordinates(autocomplete.key, lat, lng);
-              }
-            });
-
-            if (!place.geometry) {
-              window.alert("No details available for input: '" + place.name + "'");
-              input.value = "";
-              return;
-            }
-
-            if (place.geometry.viewport) {
-              map.fitBounds(place.geometry.viewport);
-            } else {
-              map.setCenter(place.geometry.location);
-              map.setZoom(17);
-            }
-
-            marker.setPosition(place.geometry.location);
-            marker.setVisible(true);
-          });
-        };
-
-        for (var i = 0; i < autocompletes.length; i++) {
-          _loop(i);
-        }
-      };
-
-      function setLocationCoordinates(key, lat, lng) {
-        latitudeInput.value = lat;
-        longitudeInput.value = lng;
-      }
-    }
-  }], [{
-    key: "getOptionsForFIlepondInstance",
-    value: function getOptionsForFIlepondInstance(element) {
-      var serverObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var options = {
-        labelIdle: '<span class="btn btn-sm btn-base"> <i class="fa fa-upload" aria-hidden="true"></i> Duyệt ảnh </span>',
-        labelFileLoading: 'Đang tải',
-        labelFileProcessing: 'Đang upload',
-        labelFileProcessingComplete: 'Upload thành công',
-        labelFileProcessingAborted: 'Đã hủy upload',
-        labelTapToCancel: 'Nhấn vào để hủy',
-        labelTapToRetry: 'Nhấn để tải lại',
-        labelFileLoadError: 'Có lỗi trong quá trình upload',
-        stylePanelLayout: element.getAttribute('data-style-panel') || '',
-        allowFilePoster: true,
-        server: {
-          url: serverObj.url || '/filepond/api',
-          process: serverObj.process || '/process',
-          headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value,
-            api_token: __apiToken
-          }
-        }
-      };
-
-      if (element.hasAttribute('data-poster-src')) {
-        options.files = [{
-          source: '12345',
-          options: {
-            type: 'local',
-            file: {
-              name: element.getAttribute('data-poster-name') || 'Ảnh',
-              size: element.getAttribute('data-poster-size') || '',
-              type: 'image/jpg'
-            },
-            metadata: {
-              poster: element.getAttribute('data-poster-src')
-            }
-          }
-        }];
-      } else {
-        options.files = null;
-      }
-
-      return options;
-    }
-  }, {
+  _createClass(TrovieHelper, null, [{
     key: "_datatableGetLang",
     value: function _datatableGetLang() {
       var lang = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'vi';
@@ -2059,19 +1890,21 @@ var TrovieHelper = /*#__PURE__*/function () {
   }, {
     key: "formatCurrencyForm",
     value: function formatCurrencyForm(str) {
-      var array = [];
-      var arraystr = [];
-      var x = str;
+      var letter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
+      var __arrayStr = [];
+      var x = str + '';
       x = x.replace(/[^0-9]/g, '');
       var $j = 0;
 
       for (var $i = x.length - 1; $i >= 0; $i--) {
         if ($j === 3) {
-          arraystr.push('.');
-          arraystr.push(x[$i]);
+          __arrayStr.push(letter);
+
+          __arrayStr.push(x[$i]);
+
           $j = 0;
         } else {
-          arraystr.push(x[$i]);
+          __arrayStr.push(x[$i]);
         }
 
         $j++;
@@ -2079,8 +1912,8 @@ var TrovieHelper = /*#__PURE__*/function () {
 
       var temp = '';
 
-      for (var _$i = arraystr.length - 1; _$i >= 0; _$i--) {
-        temp = temp + arraystr[_$i];
+      for (var _$i = __arrayStr.length - 1; _$i >= 0; _$i--) {
+        temp = temp + __arrayStr[_$i];
       }
 
       return temp;
@@ -2089,6 +1922,31 @@ var TrovieHelper = /*#__PURE__*/function () {
     key: "parseCurrencyFormat",
     value: function parseCurrencyFormat(str) {
       return str.replace(/\./gi, '');
+    }
+  }, {
+    key: "splitDate",
+    value: function splitDate(dateString) {
+      var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'dmY';
+      var result = null;
+
+      if (format === 'dmY') {
+        var d = dateString.split(/[-,\/]/);
+        result = {
+          date: d[0],
+          month: d[1],
+          year: d[2]
+        };
+      } else {
+        var _d = new Date(dateString);
+
+        result = {
+          date: _d.getUTCDate(),
+          month: _d.getUTCMonth() + 1,
+          year: _d.getUTCFullYear()
+        };
+      }
+
+      return result;
     }
   }]);
 

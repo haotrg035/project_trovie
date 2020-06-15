@@ -10,6 +10,7 @@ use App\Models\RoomGallery;
 use App\Models\Service;
 use App\Models\User;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
+use function foo\func;
 
 class RoomRepository extends EloquentRepository implements RoomEloquentRepositoryInterface
 {
@@ -56,22 +57,28 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
 
     public function getRoom($host_id, $room_id)
     {
+
         $room = $this->_model
             ->with([
+                'host',
 //                'users' => function ($query) {
 //                    return $query->get(['id', 'full_name', 'avatar']);
 //                },
                 'services' => function ($query) {
-                    return $query->get(['id', 'cost', 'name']);
+                    return $query->with(['unit'])->get();
                 },
-                'gallery'
+                'gallery',
             ])
             ->where('host_id', $host_id)->where('id', $room_id)
-            ->first(['id', 'name', 'price', 'floor', 'members', 'acreage', 'state', 'announcement', 'notice']);
+            ->first();
+//        ['id', 'name', 'price', 'floor', 'members', 'acreage', 'state', 'announcement', 'notice']
         $room['service_ids'] = TrovieHelper::convertAssocIdArrayToValueIdArray($room['services']->toArray(), 'id');
+        $room['host']['cost_electric'] = TrovieHelper::currencyFormat($room['host']['cost_electric']);
+        $room['host']['cost_water'] = TrovieHelper::currencyFormat($room['host']['cost_water']);
         foreach ($room['gallery'] as $key => $item) {
             $room['gallery'][$key]['image'] = asset(TrovieFile::checkFile($item['image']));
         }
+
         if ($room) {
             return $room->toArray();
         }

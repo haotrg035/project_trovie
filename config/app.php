@@ -42,6 +42,8 @@ return [
     ],
 
     'default_service_units' => ['Tháng', 'kV', 'm3', 'Cái'],
+    'user_invitation_token_length' => 6,
+    'user_invitation_token_minutes' => 15,
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -94,7 +96,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Ho_Chi_Minh',
 
     /*
     |--------------------------------------------------------------------------

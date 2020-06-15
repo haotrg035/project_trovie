@@ -1,55 +1,74 @@
-<!-- Modal -->
-<style media="print">
-    .no-print {
-        display: none;
-    }
-    .contract__body p{
-        margin-bottom: .35rem;
-    }
-    .modal-dialog{
-        max-width: 100vw !important;
-    }
-</style>
 <div class="modal fade" id="contract-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content border-0">
+        <div class="modal-content border-0 rounded">
             <div class="modal-header no-print">
-                <h5 class="modal-title">HỢP ĐỒNG THUÊ TRỌ</h5>
+                <div>
+                    <button class="btn btn-info rounded contract-modal__print">
+                        <i class="fa fa-print" aria-hidden="true"></i> IN
+                    </button>
+                    <button class="btn btn-base rounded contract-modal__renew" data-toggle="collapse"
+                            data-target="#collapse_contract_renew">
+                        <i class="fa fa-file-o" aria-hidden="true"></i> GIA HẠN HỢP ĐỒNG
+                    </button>
+                    <button class="btn btn-danger rounded contract-modal__cancel">KẾT THÚC HỢP ĐỒNG</button>
+                </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div id="collapse_contract_renew" class="collapse in border-bottom">
+                <div class="card-body">
+                    <form action="" method="post" class="form-inline">
+                        <div class="d-flex align-items-start">
+                            <label class="mr-3 font-weight-bold">Thời hạn mới: </label>
+                            <div>
+                                <div class="form-group form-group--unit form-group--unit--date d-flex">
+                                    <input type="text" class="form-control trovie-input" required name="expired_date">
+                                </div>
+                                <div class="invalid-feedback">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                    Vui lòng nhập đầy đủ thông tin
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-base btn-sm ml-3">GIA HẠN</button>
+                    </form>
+                </div>
+            </div>
             <div class="modal-body">
-                <article class="template-contract mx-auto" style="font-family: 'Arial'; width: 8.3in">
-                    <header class="contract__header mb-4">
+                <article class="template-contract mx-auto"
+                         style="font-family: Arial; width: 8.3in;">
+                    <header class="contract__header mb-5">
                         <div class="header__swear">
                             <h5 class="w-100 text-center font-weight-bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h5>
                             <h5 class="w-100 text-center">Độc lập – Tự do – Hạnh phúc</h5>
                         </div>
-                        <h5 class="header__title w-100 mt-4 text-center font-weight-bold">HỢP ĐỒNG THUÊ PHÒNG TRỌ</h5>
+                        <h4 class="header__title w-100 mt-4 text-center font-weight-bold">HỢP ĐỒNG THUÊ PHÒNG TRỌ</h4>
                     </header>
                     <section class="contract__body">
                         <p>Hôm nay ngày
-                            <span class="contract__content__day">....</span> tháng <span
+                            <span class="contract__content__date">....</span> tháng <span
                                 class="contract__content__month">....</span> năm <span
                                 class="contract__content__year">....</span>, tại địa chỉ: <span
                                 class="contract__content__address">...............................................................................................</span>
                         </p>
                         <p class="font-weight-bold">Chúng tôi gồm</p>
                         <p>1. Đại diện bên cho thuê phòng trọ (Bên A):</p>
-                        <p>Ông/bà: <span class="contract__content__a_full_name">……………………………………………</span>Sinh ngày: <span
+                        <p>Ông/bà: <span class="contract__content__a_full_name">……………………………………………</span> sinh ngày:
+                            <span
                                 class="contract__content__a_birthday">..../..../......</span></p>
                         <p>Nơi đăng ký HK: <span class="contract__content__a_address">……………………………………………</span></p>
-                        <p>CMND số: <span class="contract__content__a_id_card">.....</span> cấp ngày <span
-                                class="contract__content__a_id_card_date">......</span> tại: <span
+                        <p>CMND số: <span class="contract__content__a_id_card">.....</span>, cấp ngày <span
+                                class="contract__content__a_id_card_date">......</span>, tại: <span
                                 class="contract__content__a_id_card_address">......</span></p>
                         <p>Số điện thoại: <span class="contract__content__a_phone">......</span></p>
                         <p>2. Bên thuê phòng trọ (Bên B):</p>
-                        <p>Ông/bà: <span class="contract__content__b_full_name">……………………………………………</span>Sinh ngày: <span
+                        <p>Ông/bà: <span class="contract__content__b_full_name">……………………………………………</span> sinh ngày:
+                            <span
                                 class="contract__content__b_birthday">..../..../......</span></p>
                         <p>Nơi đăng ký HK: <span class="contract__content__b_address">……………………………………………</span></p>
-                        <p>CMND số: <span class="contract__content__b_id_card">.....</span> cấp ngày <span
-                                class="contract__content__b_id_card_date">......</span> tại: <span
+                        <p>CMND số: <span class="contract__content__b_id_card">.....</span>, cấp ngày <span
+                                class="contract__content__b_id_card_date">......</span>, tại: <span
                                 class="contract__content__b_id_card_address">......</span></p>
                         <p>Số điện thoại: <span class="contract__content__b_phone">......</span></p>
                         <p class="font-weight-bold">Chúng tôi tự nguyện thỏa thuận, cam kết và chịu trách nhiệm trước
@@ -65,12 +84,12 @@
                             toán vào đầu
                             các tháng.</p>
                         <p>Tiền đặt cọc: <span class="contract__content__room-deposit">Không</span></p>
-                        <p>Hợp đồng có giá trị kể từ ngày <span class="contract__content__created_at-day">...</span>
+                        <p>Hợp đồng có giá trị kể từ ngày <span class="contract__content__created_at-date">...</span>
                             tháng <span class="contract__content__created_at-month">...</span> năm <span
                                 class="contract__content__created_at-year">...</span> đến ngày <span
-                                class="contract__content__expire_date-day">...</span> tháng <span
-                                class="contract__content__expire_date-month">...</span> năm <span
-                                class="contract__content__expire_date-year">...</span></p>
+                                class="contract__content__expired_at-date">...</span> tháng <span
+                                class="contract__content__expired_at-month">...</span> năm <span
+                                class="contract__content__expired_at-year">...</span></p>
                         <p class="font-weight-bold">Điều 2. TRÁCH NHIỆM CỦA CÁC BÊN</p>
                         <ul>
                             <li>
@@ -128,10 +147,6 @@
                         </div>
                     </section>
                 </article>
-            </div>
-            <div class="modal-footer no-print">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>

@@ -5,12 +5,16 @@ namespace App\Providers;
 use App\Helper\TrovieFile;
 use App\Helper\TrovieHelper;
 use App\Repositories\ContractRepository;
+use App\Repositories\GuestUserRepository;
 use App\Repositories\HostRepository;
 use App\Repositories\Interfaces\ContractEloquentRepositoryInterface;
+use App\Repositories\Interfaces\GuestUserEloquentRepositoryInterface;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
+use App\Repositories\Interfaces\InvoiceEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
 use App\Repositories\Interfaces\ServiceEloquentRepositoryInterface;
 use App\Repositories\Interfaces\UserEloquentRepositoryInterface;
+use App\Repositories\InvoiceRepository;
 use App\Repositories\RoomRepository;
 use App\Repositories\ServiceRepository;
 use App\Repositories\UserRepository;
@@ -38,8 +42,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ContractEloquentRepositoryInterface::class, function () {
             return new ContractRepository();
         });
+        $this->app->bind(InvoiceEloquentRepositoryInterface::class, function () {
+            return new InvoiceRepository();
+        });
         $this->app->bind(UserEloquentRepositoryInterface::class, function () {
             return new UserRepository();
+        });
+        $this->app->bind(GuestUserEloquentRepositoryInterface::class, function () {
+            return new GuestUserRepository();
         });
         $this->app->singleton(TrovieHelper::class, function () {
             return new TrovieHelper();

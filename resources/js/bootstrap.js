@@ -12,12 +12,18 @@ try {
 
     require('bootstrap');
 
-    window.showBsModal = function (modal) {
+    window.showBsModal = (modal) => {
         $(modal).modal('show');
     };
-    window.hideBsModal = function (modal) {
+    window.hideBsModal = (modal) => {
         $(modal).modal('hide');
-    }
+    };
+    window.showBsCollapse = (collapse) => {
+        $(collapse).collapse('show');
+    };
+    window.hideBsCollapse = (collapse) => {
+        $(collapse).collapse('hide');
+    };
 } catch (e) {
     console.log(e);
 }

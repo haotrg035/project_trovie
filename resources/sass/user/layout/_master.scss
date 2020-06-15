@@ -117,3 +117,17 @@ body {
         }
     }
 }
+
+div.dataTables_wrapper div.dataTables_filter input {
+    @include Rounded(0);
+}
+
+.page-item.disabled .page-link {
+    @include Rounded(0);
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}

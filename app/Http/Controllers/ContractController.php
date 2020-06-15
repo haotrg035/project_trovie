@@ -27,7 +27,7 @@ class ContractController extends BaseController
      */
     public function index()
     {
-        $this->data['list_host'] = $this->repository->getHostIds(auth()->id());
+        $this->data['list_host'] = $this->repository->getListHostByUser(auth()->id());
         return view('user.contracts.index', ['data' => $this->data]);
     }
 
@@ -49,7 +49,7 @@ class ContractController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        return false;
     }
 
     /**

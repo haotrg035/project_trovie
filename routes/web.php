@@ -42,10 +42,14 @@ Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])
 
     });
 
-    Route::resource('/service','ServiceController')->names('service');
+    Route::resource('/service', 'ServiceController')->names('service');
 
     Route::prefix('/contract')->name('contract')->group(function () {
         Route::get('/', 'ContractController@index')->name('.index');
+    });
+
+    Route::prefix('/invoice')->name('invoice')->group(function () {
+        Route::get('/', 'InvoiceController@index')->name('.index');
     });
 });
 

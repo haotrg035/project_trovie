@@ -34,6 +34,7 @@ class ContractSeeder extends Seeder
                 'a_phone' => $hostUser->detail->phone,
                 'a_id_card' => $hostUser->detail->id_card,
                 'a_id_card_date' => $hostUser->detail->id_card_date,
+                'a_id_card_address' => $hostUser->detail->id_card_address,
                 'b_full_name' => $b_party->full_name,
                 'b_birthday' => $b_party->birthday,
                 'b_gender' => $b_party->gender,
@@ -41,6 +42,7 @@ class ContractSeeder extends Seeder
                 'b_phone' => $b_party->detail->phone,
                 'b_id_card' => $b_party->detail->id_card,
                 'b_id_card_date' => $b_party->detail->id_card_date,
+                'b_id_card_address' => $b_party->detail->id_card_address,
             ];
             $room = DB::table('rooms')->where('id', $roomIds[array_rand($roomIds)])->first();
             $host = DB::table('hosts')->where('id', $room->host_id)->first();

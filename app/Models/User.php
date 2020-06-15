@@ -83,4 +83,36 @@ class User extends Authenticatable
         }, $host_ids);
         return in_array($host_id, $host_ids);
     }
+
+    public function isOwnRoom($room_id)
+    {
+        $room = \DB::table('rooms')->where('id', $room_id)->first();
+        if ($room) {
+            return $this->isOwnHost($room->host_id);
+        }
+        return false;
+    }
+
+    public function isOwnContract($contract_id)
+    {
+        $contract = null;
+
+        if (\DB::table('room_user')->where(['active' => 1, 'contract_id' => $contract_id,])->exists()) {
+            $contract = \DB::table('room_user')->where([
+                'active' => 1,
+                'contract_id' => $contract_id,
+            ])->first();
+        }
+        if (\DB::table('room_guest_user')->where(['active' => 1, 'contract_id' => $contract_id,])->exists()) {
+            $contract = \DB::table('room_user')->where([
+                'active' => 1,
+                'contract_id' => $contract_id,
+            ])->first();
+        }
+
+        if (!$contract) {
+            return false;
+        }
+        return $this->isOwnRoom($contract->room_id);
+    }
 }

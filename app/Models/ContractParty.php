@@ -18,22 +18,21 @@ class ContractParty extends Model
         'a_phone',
         'a_id_card',
         'a_id_card_date',
+        'a_id_card_address',
         'b_full_name',
         'b_birthday',
         'b_gender',
         'b_address',
         'b_phone',
         'b_id_card',
-        'b_id_card_date'
+        'b_id_card_date',
+        'b_id_card_address'
     ];
-    protected $hidden = [
-        'a_birthday',
-        'a_address',
-        'a_phone',
-        'a_id_card',
-        'a_id_card_date',
-        'b_birthday',
-        'b_id_card',
-        'b_id_card_date'
+
+    protected $casts = [
+        'a_birthday' => 'datetime:d / m / Y',
+        'a_id_card_date' => 'datetime:d / m / Y',
+        'b_birthday' => 'datetime:d / m / Y',
+        'b_id_card_date' => 'datetime:d / m / Y',
     ];
 }

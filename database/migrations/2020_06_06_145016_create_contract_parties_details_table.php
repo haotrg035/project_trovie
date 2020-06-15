@@ -22,6 +22,7 @@ class CreateContractPartiesDetailsTable extends Migration
             $table->string('a_phone', 11);
             $table->string('a_id_card', 13);
             $table->datetime('a_id_card_date');
+            $table->string('a_id_card_address',250);
             $table->string('b_full_name', 60);
             $table->date('b_birthday');
             $table->tinyInteger('b_gender')->default(0);
@@ -29,7 +30,7 @@ class CreateContractPartiesDetailsTable extends Migration
             $table->string('b_phone', 11);
             $table->string('b_id_card', 13);
             $table->datetime('b_id_card_date');
-
+            $table->string('b_id_card_address',250);
         });
     }
 

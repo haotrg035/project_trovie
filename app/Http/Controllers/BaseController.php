@@ -16,10 +16,6 @@ abstract class BaseController extends Controller
         $this->setViewName();
     }
 
-    /**
-     * set view name
-     * @return mixed
-     */
     abstract protected function viewName();
 
     protected function setViewName()
@@ -27,26 +23,35 @@ abstract class BaseController extends Controller
         $this->data['view_name'] = $this->viewName();
     }
 
-    private function getResponse($result, $messageType, $data = null)
-    {
+    private function getResponse(
+        $result,
+        $messageType,
+        $data = null,
+        $customFailedMessage = null,
+        $successMessage = null
+    ) {
         $_response = [];
         if ($result) {
             $_response['status'] = 'success';
-            switch ($messageType) {
-                case 'create':
-                {
-                    $_response['message'] = __('curd.message.success.create');
-                    break;
-                }
-                case 'update':
-                {
-                    $_response['message'] = __('curd.message.success.update');
-                    break;
-                }
-                case 'delete':
-                {
-                    $_response['message'] = __('curd.message.success.delete');
-                    break;
+            if ($successMessage) {
+                $_response['message'] = $successMessage;
+            } else {
+                switch ($messageType) {
+                    case 'create':
+                    {
+                        $_response['message'] = __('curd.message.success.create');
+                        break;
+                    }
+                    case 'update':
+                    {
+                        $_response['message'] = __('curd.message.success.update');
+                        break;
+                    }
+                    case 'delete':
+                    {
+                        $_response['message'] = __('curd.message.success.delete');
+                        break;
+                    }
                 }
             }
             if (!empty($data)) {
@@ -54,44 +59,48 @@ abstract class BaseController extends Controller
             }
         } else {
             $_response['status'] = 'error';
-            switch ($messageType) {
-                case 'create':
-                {
-                    $_response['message'] = __('curd.message.failed.create');
-                    break;
-                }
-                case 'update':
-                {
-                    $_response['message'] = __('curd.message.failed.update');
-                    break;
-                }
-                case 'delete':
-                {
-                    $_response['message'] = __('curd.message.failed.delete');
-                    break;
-                }
-                case 'show':
-                {
-                    $_response['message'] = __('curd.message.failed.nodata');
-                    break;
-                }
-                default :
-                {
-                    $_response['message'] = __('curd.message.failed.view');
-                    break;
+            if ($customFailedMessage) {
+                $_response['message'] = $customFailedMessage;
+            } else {
+                switch ($messageType) {
+                    case 'create':
+                    {
+                        $_response['message'] = __('curd.message.failed.create');
+                        break;
+                    }
+                    case 'update':
+                    {
+                        $_response['message'] = __('curd.message.failed.update');
+                        break;
+                    }
+                    case 'delete':
+                    {
+                        $_response['message'] = __('curd.message.failed.delete');
+                        break;
+                    }
+                    case 'show':
+                    {
+                        $_response['message'] = __('curd.message.failed.nodata');
+                        break;
+                    }
+                    default :
+                    {
+                        $_response['message'] = __('curd.message.failed.view');
+                        break;
+                    }
                 }
             }
         }
         return $_response;
     }
 
-    protected function returnResponse($result, $messageType, $data = null)
+    protected function returnResponse($result, $messageType, $data = null, $customFailedMessage = null)
     {
-        $_response = $this->getResponse($result, $messageType, $data);
+        $_response = $this->getResponse($result, $messageType, $data, $customFailedMessage);
         if ($result) {
             return response($_response, 200);
         }
-        return response($_response, 500);
+        return response($_response, 404);
     }
 
     protected function returnRedirect($result, $messageType, $route)

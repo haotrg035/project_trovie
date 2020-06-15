@@ -24,6 +24,11 @@ class UserController extends BaseController
         $this->repository = $repository;
     }
 
+    protected function viewName()
+    {
+        return 'Người Dùng';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -101,11 +106,9 @@ class UserController extends BaseController
         //
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function viewName()
+    public function getUserByInviteToken(Request $request)
     {
-        return 'Người Dùng';
+        $result = $this->repository->getUserByInviteToken($request->token);
+        return $this->returnResponse($result, 'show', $result,'Mã mời không hợp lệ');
     }
 }

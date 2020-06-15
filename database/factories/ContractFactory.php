@@ -9,7 +9,8 @@ $factory->define(\App\Models\Contract::class, function (Faker $faker) {
         'created_at' => date('y-m-d', time()),
         'updated_at' => date('y-m-d', time()),
 //        'updated_at' => date('y-m-d', time()),
-        'expire_date' => date('y-m-d', time() + 86400),
+        'expired_at' => date('y-m-d', time() + 86400),
+        'address' => $faker->streetAddress,
         'deposit' => random_int(0, 1000) * 1000
     ];
 });

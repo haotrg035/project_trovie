@@ -124,9 +124,14 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         return false;
     }
 
-    public function getHostsByUserId($id)
+    public function getHostsByUserId($id, $attachRoomList = false)
     {
-        $hosts = $this->_model->where('user_id', $id)->get();
+        $hosts = '';
+        if ($attachRoomList) {
+            $hosts = $this->_model->with(['rooms'])->where('user_id', $id)->get();
+        } else {
+            $hosts = $this->_model->where('user_id', $id)->get();
+        }
         if ($hosts) {
             return $hosts;
         }

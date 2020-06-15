@@ -21,11 +21,12 @@ class UserSeeder extends Seeder
         ]);
 
         $userDetails = [];
+        $userInviteTokens = [];
         for ($i = 1; $i <= 20; $i++) {
             $userDetails[] = [
                 'user_id' => $i,
                 'phone' => '033210488' . $i,
-                'id_card' => \App\Helper\TrovieHelper::generateRandomString(13, 1),
+                'id_card' => \App\Helper\TrovieHelper::generateRandomString(12, 1),
                 'id_card_date' => date('y-m-d', time() - (86400 * 30 * 12 * 10)),
                 'id_card_address' => $faker->address,
                 'address' => $faker->address,
@@ -34,7 +35,15 @@ class UserSeeder extends Seeder
                 'created_at' => date(now()),
                 'updated_at' => date(now())
             ];
+
+            $token = $i . \App\Helper\TrovieHelper::generateRandomString(config('app.user_invitation_token_length') - strlen($i . ''));
+            $userInviteTokens[] = [
+                'user_id' => $i,
+                'invite_token' => $token,
+                'expired_at' => date('Y-m-d H:i:s', time() + (config('app.user_invitation_token_minutes') * 60))
+            ];
         }
+        DB::table('user_invite_tokens')->insert($userInviteTokens);
         DB::table('user_details')->insert($userDetails);
     }
 }

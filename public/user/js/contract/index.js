@@ -1767,8 +1767,6 @@ function clear() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrovieHelper", function() { return TrovieHelper; });
 /* harmony import */ var tata_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tata-js */ "./node_modules/tata-js/src/tata.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1782,174 +1780,7 @@ var TrovieHelper = /*#__PURE__*/function () {
     _classCallCheck(this, TrovieHelper);
   }
 
-  _createClass(TrovieHelper, [{
-    key: "initGoogleMap",
-    value: function initGoogleMap(element) {
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'window.initMap';
-      var addressInput = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var latitudeInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var longitudeInput = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-
-      if ((typeof google === "undefined" ? "undefined" : _typeof(google)) !== 'object') {
-        var script = document.createElement("script");
-        var apiKey = document.querySelector('meta[name=ggmap-api-key]').getAttribute('content');
-        script.type = "text/javascript";
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&libraries=places&callback=' + callback;
-        script.defer = true;
-        script.async = true;
-        document.body.appendChild(script);
-      }
-
-      window.initMap = function () {
-        var current = {
-          lat: 10.1235905,
-          lng: 105.2519962
-        };
-        var map = new google.maps.Map(element, {
-          zoom: 10,
-          center: current
-        }); // The marker, positioned at current
-
-        var marker = new google.maps.Marker({
-          position: current,
-          map: map
-        });
-        return map;
-      };
-
-      window.initialize = function () {
-        // $('form').on('keyup keypress', function (e) {
-        //     var keyCode = e.keyCode || e.which;
-        //     if (keyCode === 13) {
-        //         e.preventDefault();
-        //         return false;
-        //     }
-        // });
-        var locationInputs = document.getElementById("address");
-        var autocompletes = [];
-        var geocoder = new google.maps.Geocoder();
-        var input = locationInputs;
-        var fieldKey = input.id.replace("-input", "");
-        var isEdit = latitudeInput.value != '' && longitudeInput.value != '';
-        var latitude = parseFloat(latitudeInput.value) || 10.1235905;
-        var longitude = parseFloat(longitudeInput.value) || 105.2519962;
-        var map = new google.maps.Map(element, {
-          center: {
-            lat: latitude,
-            lng: longitude
-          },
-          zoom: 13
-        });
-        var marker = new google.maps.Marker({
-          map: map,
-          position: {
-            lat: latitude,
-            lng: longitude
-          }
-        });
-        marker.setVisible(isEdit);
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.key = fieldKey;
-        autocompletes.push({
-          input: input,
-          map: map,
-          marker: marker,
-          autocomplete: autocomplete
-        });
-
-        var _loop = function _loop(i) {
-          var input = autocompletes[i].input;
-          var autocomplete = autocompletes[i].autocomplete;
-          var map = autocompletes[i].map;
-          var marker = autocompletes[i].marker;
-          google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            marker.setVisible(false);
-            var place = autocomplete.getPlace();
-            geocoder.geocode({
-              'placeId': place.place_id
-            }, function (results, status) {
-              if (status === google.maps.GeocoderStatus.OK) {
-                var lat = results[0].geometry.location.lat();
-                var lng = results[0].geometry.location.lng();
-                setLocationCoordinates(autocomplete.key, lat, lng);
-              }
-            });
-
-            if (!place.geometry) {
-              window.alert("No details available for input: '" + place.name + "'");
-              input.value = "";
-              return;
-            }
-
-            if (place.geometry.viewport) {
-              map.fitBounds(place.geometry.viewport);
-            } else {
-              map.setCenter(place.geometry.location);
-              map.setZoom(17);
-            }
-
-            marker.setPosition(place.geometry.location);
-            marker.setVisible(true);
-          });
-        };
-
-        for (var i = 0; i < autocompletes.length; i++) {
-          _loop(i);
-        }
-      };
-
-      function setLocationCoordinates(key, lat, lng) {
-        latitudeInput.value = lat;
-        longitudeInput.value = lng;
-      }
-    }
-  }], [{
-    key: "getOptionsForFIlepondInstance",
-    value: function getOptionsForFIlepondInstance(element) {
-      var serverObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var options = {
-        labelIdle: '<span class="btn btn-sm btn-base"> <i class="fa fa-upload" aria-hidden="true"></i> Duyệt ảnh </span>',
-        labelFileLoading: 'Đang tải',
-        labelFileProcessing: 'Đang upload',
-        labelFileProcessingComplete: 'Upload thành công',
-        labelFileProcessingAborted: 'Đã hủy upload',
-        labelTapToCancel: 'Nhấn vào để hủy',
-        labelTapToRetry: 'Nhấn để tải lại',
-        labelFileLoadError: 'Có lỗi trong quá trình upload',
-        stylePanelLayout: element.getAttribute('data-style-panel') || '',
-        allowFilePoster: true,
-        server: {
-          url: serverObj.url || '/filepond/api',
-          process: serverObj.process || '/process',
-          headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').attributes.content.value,
-            api_token: __apiToken
-          }
-        }
-      };
-
-      if (element.hasAttribute('data-poster-src')) {
-        options.files = [{
-          source: '12345',
-          options: {
-            type: 'local',
-            file: {
-              name: element.getAttribute('data-poster-name') || 'Ảnh',
-              size: element.getAttribute('data-poster-size') || '',
-              type: 'image/jpg'
-            },
-            metadata: {
-              poster: element.getAttribute('data-poster-src')
-            }
-          }
-        }];
-      } else {
-        options.files = null;
-      }
-
-      return options;
-    }
-  }, {
+  _createClass(TrovieHelper, null, [{
     key: "_datatableGetLang",
     value: function _datatableGetLang() {
       var lang = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'vi';
@@ -2009,19 +1840,21 @@ var TrovieHelper = /*#__PURE__*/function () {
   }, {
     key: "formatCurrencyForm",
     value: function formatCurrencyForm(str) {
-      var array = [];
-      var arraystr = [];
-      var x = str;
+      var letter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
+      var __arrayStr = [];
+      var x = str + '';
       x = x.replace(/[^0-9]/g, '');
       var $j = 0;
 
       for (var $i = x.length - 1; $i >= 0; $i--) {
         if ($j === 3) {
-          arraystr.push('.');
-          arraystr.push(x[$i]);
+          __arrayStr.push(letter);
+
+          __arrayStr.push(x[$i]);
+
           $j = 0;
         } else {
-          arraystr.push(x[$i]);
+          __arrayStr.push(x[$i]);
         }
 
         $j++;
@@ -2029,8 +1862,8 @@ var TrovieHelper = /*#__PURE__*/function () {
 
       var temp = '';
 
-      for (var _$i = arraystr.length - 1; _$i >= 0; _$i--) {
-        temp = temp + arraystr[_$i];
+      for (var _$i = __arrayStr.length - 1; _$i >= 0; _$i--) {
+        temp = temp + __arrayStr[_$i];
       }
 
       return temp;
@@ -2039,6 +1872,31 @@ var TrovieHelper = /*#__PURE__*/function () {
     key: "parseCurrencyFormat",
     value: function parseCurrencyFormat(str) {
       return str.replace(/\./gi, '');
+    }
+  }, {
+    key: "splitDate",
+    value: function splitDate(dateString) {
+      var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'dmY';
+      var result = null;
+
+      if (format === 'dmY') {
+        var d = dateString.split(/[-,\/]/);
+        result = {
+          date: d[0],
+          month: d[1],
+          year: d[2]
+        };
+      } else {
+        var _d = new Date(dateString);
+
+        result = {
+          date: _d.getUTCDate(),
+          month: _d.getUTCMonth() + 1,
+          year: _d.getUTCFullYear()
+        };
+      }
+
+      return result;
     }
   }]);
 
@@ -2074,18 +1932,28 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
-var hostSelect = document.querySelector('.form-contract-select-host select');
-var modalContract = document.querySelector('#contract-modal');
+var contractListHostSelect = document.querySelector('.form-contract-select-host select[name=host]');
+var contractListRoomSelect = document.querySelector('.form-contract-select-host select[name=room]');
 var tableContractList = document.querySelector('#table-contract-list');
+var contractTemplate = document.querySelector('.template-contract');
+var modalContract = document.querySelector('#contract-modal');
+var collapseRenewContract = document.querySelector('#collapse_contract_renew');
+var contractCreate__infoModal = document.querySelector('#contract-create__info-modal');
+var contractCreate__roomModal = document.querySelector('#contract-create__room-modal');
 var dataTableContractList = null;
 var dataTableOptions = {
+  responsive: false,
+  autoWidth: false,
   language: _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"]._datatableGetLang(),
   columns: [{
     data: 'id'
-  }, {
+  }, // {data: 'avatar'},
+  {
     data: 'created_date'
   }, {
-    data: 'expire_date'
+    data: 'updated_date'
+  }, {
+    data: 'expired_date'
   }, {
     data: 'deposit'
   }, {
@@ -2093,23 +1961,165 @@ var dataTableOptions = {
   }, {
     data: 'b_phone'
   }, {
+    data: 'active'
+  }, {
     data: 'options'
+  }],
+  order: [// [0, 'desc'],
+  [7, 'asc'], [0, 'desc']],
+  columnDefs: [{
+    targets: 1,
+    // your case first column
+    className: 'text-center'
+  }, {
+    targets: 2,
+    // your case first column
+    className: 'text-center'
+  }, {
+    targets: 3,
+    // your case first column
+    className: 'text-center'
+  }, {
+    targets: 7,
+    // your case first column
+    className: 'text-center'
+  }, {
+    targets: 8,
+    // your case first column
+    className: 'text-center',
+    order: false
   }]
 };
 document.addEventListener('DOMContentLoaded', function () {
   initTableContract();
+  contractsListSelectHandler(contractListHostSelect, true);
+  contractsListSelectHandler(contractListRoomSelect);
+  initContractCreateModal();
 
-  if (hostSelect.querySelectorAll('option').length > 1) {
-    hostSelect.click();
+  if (contractListHostSelect.querySelectorAll('option').length > 1) {
+    contractListHostSelect.onchange();
   }
+
+  window.onresize = function () {
+    var w = window.innerWidth;
+    dataTableContractList.column(1).visible(w > 768);
+    dataTableContractList.column(2).visible(w > 425);
+    dataTableContractList.column(4).visible(w > 768);
+    dataTableContractList.column(6).visible(w > 425);
+  };
+
+  $(window).trigger('resize');
 });
 
 function initTableContract() {
   dataTableContractList = $(tableContractList).DataTable(dataTableOptions);
-  hostSelectHandler();
+
+  modalContract.querySelector('.contract-modal__print').onclick = function () {
+    _.debounce(window.print(), 500);
+  };
+
+  modalContract.querySelector('.contract-modal__cancel').onclick = function () {
+    if (confirm('Bạn có chắc muốn kết thúc hợp đồng này?')) {
+      var data = {
+        _method: 'PATCH',
+        api_token: __apiToken,
+        id: modalContract.getAttribute('data-contract-id')
+      };
+      axios.post(tableContractList.getAttribute('data-cancel-url'), data).then(function (response) {
+        modalContract.querySelector('.contract-modal__cancel').classList.add('d-none');
+        modalContract.querySelector('.contract-modal__renew').classList.add('d-none');
+        tata.success('Thành công', response.data.message);
+        contractListRoomSelect.onchange();
+      })["catch"](function (err) {
+        tata.error('Lỗi', response.data.message);
+      });
+    }
+  };
+
+  collapseRenewContract.querySelector('form').onsubmit = function (e) {
+    e.preventDefault();
+    var expired_date = collapseRenewContract.querySelector('input').value;
+
+    if (expired_date === '') {
+      collapseRenewContract.querySelector('input').parentNode.classList.add('is-invalid');
+      return false;
+    } else {
+      collapseRenewContract.querySelector('input').parentNode.classList.remove('is-invalid');
+    }
+
+    var url = tableContractList.getAttribute('data-renew-url') + '/' + modalContract.getAttribute('data-contract-id');
+    var data = {
+      _method: 'PATCH',
+      api_token: __apiToken,
+      expired_at: expired_date
+    };
+    axios.post(url, data).then(function (response) {
+      hideBsModal(modalContract);
+      contractListRoomSelect.onchange();
+      tata.success('Thông Báo', response.data.message);
+    })["catch"](function (err) {
+      tata.error('Thông Báo', err.response.data.message);
+    });
+  };
+}
+
+function fillContractInformation(data) {
+  var createdAt = _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].splitDate(data.created_at);
+  var updatedAt = _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].splitDate(data.updated_at);
+  var expiredAt = _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].splitDate(data.expired_at);
+  modalContract.setAttribute('data-contract-id', data.id);
+  collapseRenewContract.querySelector('input').value = data.expired_at;
+
+  function fillItem(selector, data) {
+    var item = contractTemplate.querySelector(selector);
+
+    if (item !== null) {
+      item.innerText = data;
+    }
+  }
+
+  fillItem('.contract__content__address', data.address);
+
+  for (var _key in createdAt) {
+    fillItem('.contract__content__created_at-' + _key, updatedAt[_key]);
+  }
+
+  for (var _key2 in updatedAt) {
+    fillItem('.contract__content__' + _key2, updatedAt[_key2]);
+  }
+
+  for (var _key3 in expiredAt) {
+    fillItem('.contract__content__expired_at-' + _key3, expiredAt[_key3]);
+  }
+
+  for (var _key4 in data['parties']) {
+    fillItem('.contract__content__' + _key4, data['parties'][_key4]);
+  }
+
+  fillItem('.contract__content__room-address', data.room_detail.address);
+  fillItem('.contract__content__room-price', _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].formatCurrencyForm(data.room_detail.price));
+  fillItem('.contract__content__room-cost_electric', _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].formatCurrencyForm(data.room_detail.cost_electric));
+  fillItem('.contract__content__room-cost_water', _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].formatCurrencyForm(data.room_detail.cost_water));
+  fillItem('.contract__content__room-deposit', data.deposit === '0' ? 'Không' : _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].formatCurrencyForm(data.deposit) + ' đ');
 }
 
 function showContract(id) {
+  axios.get(tableContractList.getAttribute('data-view-url') + '/' + id, {
+    params: {
+      api_token: __apiToken
+    }
+  }).then(function (response) {
+    if (response.data.data.active === 0) {
+      modalContract.querySelector('.contract-modal__cancel').classList.add('d-none');
+      modalContract.querySelector('.contract-modal__renew').classList.add('d-none');
+    } else {
+      modalContract.querySelector('.contract-modal__cancel').classList.remove('d-none');
+      modalContract.querySelector('.contract-modal__renew').classList.remove('d-none');
+    }
+
+    fillContractInformation(response.data.data);
+  });
+  hideBsCollapse(collapseRenewContract);
   showBsModal(modalContract);
 }
 
@@ -2146,78 +2156,483 @@ function loadDataTableContent(data) {
 }
 
 function renderRowOptionButtons(id) {
-  var editBtn = '<button class=" mx-auto btn d-flex btn-sm btn-base rounded btn-edit" data-id="' + id + '">' + '<i class="fa fa-eye" aria-hidden="true"></i>' + '</button>';
-  return editBtn;
+  return '<button class=" mx-auto btn d-flex btn-sm btn-base rounded btn-edit" data-id="' + id + '">' + '<i class="fa fa-eye" aria-hidden="true"></i>' + '</button>';
 }
 
-function hostSelectHandler() {
-  hostSelect.addEventListener('click', function () {
-    getContractsData(hostSelect.value).then(function (response) {
-      if (response.data.data.length > 0) {
-        try {
-          var data = [];
-
-          var _iterator2 = _createForOfIteratorHelper(response.data.data),
-              _step2;
-
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var _contract = _step2.value;
-              data.push({
-                id: _contract.id,
-                created_date: _contract.created_at,
-                expire_date: _contract.expire_date,
-                deposit: _contract.deposit + ' đ',
-                b_full_name: _contract.b_full_name,
-                b_phone: _contract.b_phone,
-                options: renderRowOptionButtons(_contract.id)
-              });
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
-
-          loadDataTableContent(data);
-          initEventViewContract();
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    })["catch"](function (err) {// tata.warn('Trống','Chưa có hợp đồng nào!')
-    });
-  });
+function renderRowAvatar(data) {
+  return '<img src="' + data.avatar + '" alt="' + data.b_full_name + '">';
 }
 
-function getContractsData(_x) {
-  return _getContractsData.apply(this, arguments);
+function updateRoomSelectByHostSelect(_hostSelect, _roomSelect) {
+  var currentHostId = _hostSelect.value;
+
+  var valueRoomSelect = _roomSelect.querySelectorAll('option:not([value="0"])');
+
+  var _iterator2 = _createForOfIteratorHelper(valueRoomSelect),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var option = _step2.value;
+      option.style.display = 'none';
+      option.setAttribute('selected', false);
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+
+  var _iterator3 = _createForOfIteratorHelper(_roomSelect.querySelectorAll("option[data-host-id=\"".concat(currentHostId, "\"]"))),
+      _step3;
+
+  try {
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var _option = _step3.value;
+      _option.style.display = 'block';
+    }
+  } catch (err) {
+    _iterator3.e(err);
+  } finally {
+    _iterator3.f();
+  }
+
+  _roomSelect.selectedIndex = 0;
 }
 
-function _getContractsData() {
-  _getContractsData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee($url) {
+function getContractListData(_x) {
+  return _getContractListData.apply(this, arguments);
+}
+
+function _getContractListData() {
+  _getContractListData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(select) {
+    var url;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return axios.get($url, {
+            url = '';
+
+            if (select.value === '0') {
+              url = contractListHostSelect.getAttribute('data-get-contracts-url') + '/' + contractListHostSelect.value;
+            } else {
+              url = select.getAttribute('data-get-contracts-url') + '/' + select.value;
+            }
+
+            _context.next = 4;
+            return axios.get(url, {
               params: {
                 api_token: __apiToken
               }
             });
 
-          case 2:
+          case 4:
             return _context.abrupt("return", _context.sent);
 
-          case 3:
+          case 5:
           case "end":
             return _context.stop();
         }
       }
     }, _callee);
   }));
-  return _getContractsData.apply(this, arguments);
+  return _getContractListData.apply(this, arguments);
+}
+
+function renderRowRecords(_data, refreshRoomSelect) {
+  var data = [];
+
+  if (_data.length > 0) {
+    var _iterator4 = _createForOfIteratorHelper(_data),
+        _step4;
+
+    try {
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var _contract = _step4.value;
+        // let state = _contract.active === 0 ? 'Kết thúc' : (_contract.active === 1 && _contract.state === true ? 'Hiệu lực' : 'Quá hạn');
+        var state = null;
+
+        if (_contract.active === 0) {
+          state = '<div class="contract-state"><i title="Kết thúc" class="fa fa-dot-circle-o text-secondary"></i><span class="text-secondary"> Kết thúc</span></div>';
+        } else if (_contract.active === 1 && _contract.state === true) {
+          state = '<div class="contract-state"><i title="Hiệu lực" class="fa fa-dot-circle-o text-success"></i><span class="text-success"> Hiệu lực</span></div>';
+        } else {
+          state = '<div class="contract-state""><i title="Quá hạn" class="fa fa-dot-circle-o text-danger"></i><span class="text-danger"> Quá hạn</span></div>';
+        }
+
+        data.push({
+          id: _contract.id,
+          // avatar:_contract.avatar,
+          created_date: _contract.created_at,
+          updated_date: _contract.updated_at,
+          expired_date: _contract.expired_at,
+          deposit: _contract.deposit === '0' ? 'Không' : _contract.deposit + ' đ',
+          b_full_name: _contract.b_full_name,
+          b_phone: _contract.b_phone,
+          active: state,
+          options: renderRowOptionButtons(_contract.id)
+        });
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+  }
+
+  loadDataTableContent(data);
+  initEventViewContract();
+
+  if (refreshRoomSelect) {
+    updateRoomSelectByHostSelect(contractListHostSelect, contractListRoomSelect);
+  }
+}
+
+function contractsListSelectHandler(select) {
+  var resetRoomSelect = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  select.onchange = function () {
+    getContractListData(select).then(function (response) {
+      try {
+        renderRowRecords(response.data.data, resetRoomSelect);
+      } catch (e) {
+        console.log(e);
+      }
+    })["catch"](function (err) {
+      tata.warn('Trống', 'Chưa có hợp đồng nào!');
+      renderRowRecords([], resetRoomSelect);
+    });
+  };
+}
+
+function initContractCreateModal() {
+  var collapseUserSearch = contractCreate__infoModal.querySelector('#collapse-user-search');
+  var formUserSearch = contractCreate__infoModal.querySelector('form');
+  var collapseUserInfo = contractCreate__infoModal.querySelector('#collapse-user-info');
+  var formUserInfo = collapseUserInfo.querySelector('form');
+  var formRoomInfo = contractCreate__roomModal.querySelector('form');
+  var roomModalHostSelect = contractCreate__roomModal.querySelector('select[name=host]');
+  var roomModalRoomSelect = contractCreate__roomModal.querySelector('select[name=room]');
+  var formRoomInfoServiceList = formRoomInfo.querySelector('.room-info__services');
+  var expiredDatePicker = contractCreate__roomModal.querySelector('#expire_date_picker');
+  var depositInput = contractCreate__roomModal.querySelector('#deposit_input');
+  var exampleRoomInfoServiceItem = formRoomInfoServiceList.querySelector('.col--custom');
+  formRoomInfoServiceList.innerHTML = '';
+
+  document.querySelector('#btn-collapse-user-search').onclick = function () {};
+
+  formUserInfo.querySelector('button[type=reset]').onclick = function () {
+    enableFormUserInfo();
+    formUserInfo.querySelector('input[name=user_type]').value = 2;
+
+    var _iterator5 = _createForOfIteratorHelper(formUserInfo.querySelectorAll('.is-invalid')),
+        _step5;
+
+    try {
+      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+        var input = _step5.value;
+        input.classList.remove('is-invalid');
+      }
+    } catch (err) {
+      _iterator5.e(err);
+    } finally {
+      _iterator5.f();
+    }
+
+    hideBsCollapse(collapseUserInfo);
+    hideBsCollapse(collapseUserSearch);
+  };
+
+  document.querySelector('#show-contract-create-modal').onclick = function () {
+    contractCreate__infoModal.querySelector('input[name=user_type]').value = 2;
+    formUserInfo.querySelector('button[type=reset]').click(); // formRoomInfo.querySelector('select[name=room]').onchange();
+
+    showBsModal(contractCreate__infoModal);
+  };
+
+  formUserSearch.onsubmit = function (e) {
+    e.preventDefault();
+
+    var _token = formUserSearch.querySelector('input').value.trim();
+
+    axios.get(formUserSearch.action, {
+      params: {
+        token: _token,
+        api_token: __apiToken
+      }
+    }).then(function (response) {
+      try {
+        fillFormUserInfoData(response.data.data);
+        disableFormUserInfo();
+        showBsCollapse(collapseUserInfo);
+      } catch (e) {
+        console.log(e);
+      }
+    })["catch"](function (err) {
+      tata.error('Thông báo', err.response.data.message);
+    });
+  };
+
+  formUserInfo.onsubmit = function (e) {
+    e.preventDefault();
+
+    if (validateFormUserInfo()) {
+      hideBsModal(contractCreate__infoModal);
+      showBsModal(contractCreate__roomModal);
+    }
+  };
+
+  formRoomInfo.querySelector('.btn-back').onclick = function () {
+    hideBsModal(contractCreate__roomModal);
+    showBsModal(contractCreate__infoModal);
+  };
+
+  roomModalHostSelect.onchange = function () {
+    updateRoomSelectByHostSelect(roomModalHostSelect, roomModalRoomSelect);
+  };
+
+  roomModalHostSelect.onchange();
+
+  roomModalRoomSelect.onchange = function () {
+    formRoomInfo.querySelector('input[name=room_id]').value = roomModalRoomSelect.value;
+
+    if (roomModalHostSelect.value !== '' && roomModalHostSelect.value !== '0') {
+      formRoomInfo.querySelector('input[name=host_id]').value = roomModalHostSelect.value;
+    }
+
+    if (roomModalRoomSelect.value !== '0') {
+      var url = roomModalRoomSelect.querySelector('option[value="' + roomModalRoomSelect.value + '"]').getAttribute('data-get-url');
+      axios.get(url, {
+        params: {
+          api_token: __apiToken
+        }
+      }).then(function (response) {
+        fillFormRoomInfoData(response.data.data);
+      });
+    }
+  };
+
+  expiredDatePicker.oninput = function () {
+    formRoomInfo.querySelector('input[name=expired_at]').value = expiredDatePicker.value;
+  };
+
+  depositInput.oninput = function () {
+    formRoomInfo.querySelector('input[name=deposit]').value = depositInput.value;
+  };
+
+  formRoomInfo.onsubmit = function (e) {
+    e.preventDefault();
+
+    if (validateFOrmRoomInfo()) {
+      var data;
+      data = new FormData(formUserInfo);
+      data.append('host_id', formRoomInfo.querySelector('input[name=host_id]').value);
+      data.append('room_id', formRoomInfo.querySelector('input[name=room_id]').value);
+      data.append('expired_at', formRoomInfo.querySelector('input[name=expired_at]').value);
+      data.append('deposit', formRoomInfo.querySelector('input[name=deposit]').value);
+      data.append('api_token', __apiToken);
+      axios.post(formRoomInfo.getAttribute('action'), data).then(function (response) {
+        try {
+          contractListRoomSelect.onchange();
+          hideBsModal(contractCreate__roomModal);
+          tata.success('Thông báo', response.data.message);
+
+          _.delay(function () {
+            showContract(response.data.data.id);
+          }, 300);
+        } catch (e) {
+          console.log(e);
+        }
+      })["catch"](function (err) {
+        tata.error('Thông báo', err.response.data.message);
+      });
+    }
+
+    return false;
+  };
+
+  function fillFormUserInfoData(data) {
+    formUserInfo.querySelector('input[name=user_type]').value = 1;
+    formUserInfo.querySelector('input[name=customer_user_id]').value = data.id;
+    formUserInfo.querySelector('select[name=b_gender]').selectedIndex = formUserInfo.querySelector('select[name=b_gender] option[value="' + data.gender + '"]').index;
+
+    for (var key in data) {
+      if (key !== 'gender' && key !== 'id') {
+        if (key === 'birthday' || key === 'id_card_date') {
+          formUserInfo.querySelector('input[name=b_' + key + ']').parentNode.querySelector('.flatpickr-input').value = data['key'];
+        }
+
+        formUserInfo.querySelector('input[name=b_' + key + ']').value = data[key];
+      }
+    }
+  }
+
+  function validateFormUserInfo() {
+    var idCardInput = formUserInfo.querySelector('input[name=b_id_card]');
+    var dateInputs = formUserInfo.querySelectorAll('.form-group--unit--date .trovie-input');
+
+    if (idCardInput.value.trim().length !== 12) {
+      idCardInput.parentNode.classList.add('is-invalid', 'mb-0');
+      return false;
+    } else {
+      idCardInput.parentNode.classList.remove('is-invalid', 'mb-0');
+    }
+
+    var _iterator6 = _createForOfIteratorHelper(dateInputs),
+        _step6;
+
+    try {
+      for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+        var input = _step6.value;
+
+        if (input.value.trim() === '') {
+          input.parentNode.classList.add('is-invalid', 'mb-0');
+          return false;
+        } else {
+          input.parentNode.classList.remove('is-invalid', 'mb-0');
+        }
+      }
+    } catch (err) {
+      _iterator6.e(err);
+    } finally {
+      _iterator6.f();
+    }
+
+    return true;
+  }
+
+  function changeStateFormUserInfoInput() {
+    var prop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'readOnly';
+    var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+    var _iterator7 = _createForOfIteratorHelper(formUserInfo.querySelectorAll('input,textarea')),
+        _step7;
+
+    try {
+      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+        var input = _step7.value;
+
+        if (!input.classList.contains('form-group--unit--date')) {
+          input[prop] = value;
+        }
+      }
+    } catch (err) {
+      _iterator7.e(err);
+    } finally {
+      _iterator7.f();
+    }
+  }
+
+  function disableFormUserInfo() {
+    changeStateFormUserInfoInput('readOnly', true);
+
+    var _iterator8 = _createForOfIteratorHelper(collapseUserInfo.querySelectorAll('fieldset > .row')),
+        _step8;
+
+    try {
+      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+        var row = _step8.value;
+        row.classList.add('disabled');
+      }
+    } catch (err) {
+      _iterator8.e(err);
+    } finally {
+      _iterator8.f();
+    }
+
+    var _iterator9 = _createForOfIteratorHelper(formUserInfo.querySelectorAll('input.form-group--unit--date')),
+        _step9;
+
+    try {
+      for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+        var input = _step9.value;
+        input.disabled = true;
+      }
+    } catch (err) {
+      _iterator9.e(err);
+    } finally {
+      _iterator9.f();
+    }
+  }
+
+  function enableFormUserInfo() {
+    changeStateFormUserInfoInput('readOnly', false);
+
+    var _iterator10 = _createForOfIteratorHelper(collapseUserInfo.querySelectorAll('fieldset > .row')),
+        _step10;
+
+    try {
+      for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+        var row = _step10.value;
+        row.classList.remove('disabled');
+      }
+    } catch (err) {
+      _iterator10.e(err);
+    } finally {
+      _iterator10.f();
+    }
+
+    var _iterator11 = _createForOfIteratorHelper(formUserInfo.querySelectorAll('input.form-group--unit--date')),
+        _step11;
+
+    try {
+      for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+        var input = _step11.value;
+        input.disabled = false;
+      }
+    } catch (err) {
+      _iterator11.e(err);
+    } finally {
+      _iterator11.f();
+    }
+  }
+
+  function fillFormRoomInfoData(data) {
+    formRoomInfo.querySelector('input[name=price]').value = data.price;
+    formRoomInfo.querySelector('input[name=cost_electric]').value = data.host.cost_electric;
+    formRoomInfo.querySelector('input[name=cost_water]').value = data.host.cost_water;
+    formRoomInfo.querySelector('input[name=date_payment]').value = data.host.date_payment;
+    formRoomInfo.querySelector('input[name=date_note_electric]').value = data.host.date_note_electric;
+    formRoomInfo.querySelector('input[name=date_note_water]').value = data.host.date_note_water;
+    formRoomInfo.querySelector('input[name=current_members]').value = data.total_users + ' / ' + data.members;
+
+    if (data.services.length > 0) {
+      formRoomInfoServiceList.innerHTML = '';
+
+      var _iterator12 = _createForOfIteratorHelper(data.services),
+          _step12;
+
+      try {
+        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+          var service = _step12.value;
+          var newItem = exampleRoomInfoServiceItem.cloneNode(true);
+          newItem.querySelector('span.service-name').innerText = service.name;
+          newItem.querySelector('span.service-price').innerText = service.cost <= 0 ? 'Miễn phí' : service.cost + 'đ / ' + service.unit.name;
+          formRoomInfoServiceList.append(newItem);
+        }
+      } catch (err) {
+        _iterator12.e(err);
+      } finally {
+        _iterator12.f();
+      }
+    }
+  }
+
+  function validateFOrmRoomInfo() {
+    if (formRoomInfo.querySelector('input[name=room_id]').value === '0' || formRoomInfo.querySelector('input[name=room_id]').value === '') {
+      roomModalRoomSelect.parentNode.classList.add('is-invalid', 'mb-0');
+      return false;
+    }
+
+    if (formRoomInfo.querySelector('input[name=expired_at]').value.trim() === '') {
+      expiredDatePicker.parentNode.classList.add('is-invalid', 'mb-0');
+      return false;
+    }
+
+    expiredDatePicker.parentNode.classList.remove('is-invalid', 'mb-0');
+    roomModalRoomSelect.parentNode.classList.remove('is-invalid', 'mb-0');
+    return true;
+  }
 }
 
 /***/ }),

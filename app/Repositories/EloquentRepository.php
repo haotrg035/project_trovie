@@ -51,11 +51,12 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
     /**
      * Get one
      * @param $id
+     * @param array $relations
      * @return mixed
      */
-    public function find($id)
+    function find($id, $relations = [])
     {
-        return $this->_model->find($id);
+        return $this->_model->with($relations)->where('id', $id)->first();
     }
 
     /**
@@ -100,5 +101,15 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
             return true;
         }
         return false;
+    }
+
+    public function getListHostByUser($id)
+    {
+        $hostRepository = new HostRepository();
+        $hosts = $hostRepository->getHostsByUserId($id, true);
+        if ($hosts) {
+            return $hosts;
+        }
+        return [];
     }
 }

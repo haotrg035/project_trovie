@@ -23,6 +23,7 @@ mix.js([
     .js('resources/js/user/room/index.js', 'public/user/js/room')
     .js('resources/js/user/service/index.js', 'public/user/js/service')
     .js('resources/js/user/contract/index.js', 'public/user/js/contract')
+    .js('resources/js/user/invoice/index.js', 'public/user/js/invoice')
     // .sass('resources/sass/user/libs.scss', 'public/user/css/libs.css')
     .sass('resources/sass/user/app.scss', 'public/user/css');
 

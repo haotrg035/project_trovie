@@ -25,7 +25,6 @@ class CreateUsersTable extends Migration
             $table->datetime('birthday')->nullable();
             $table->tinyInteger('role')->unsigned()->default('0');
             $table->integer('state')->unsigned()->default('0');
-            $table->string('invite_key', 50)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

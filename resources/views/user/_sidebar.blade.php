@@ -29,7 +29,7 @@
         </a>
     </li>
     <li class="main-sidebar__item">
-        <a href="{{route('user.service.index')}}" class="item__link @if(Route::is('/')) active @endif">
+        <a href="{{route('user.invoice.index')}}" class="item__link @if(Route::is('/')) active @endif">
             <figure class="link__icon">
                 <i class="fa fa-line-chart" aria-hidden="true"></i>
             </figure>

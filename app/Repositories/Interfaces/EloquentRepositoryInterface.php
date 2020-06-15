@@ -40,4 +40,6 @@ interface EloquentRepositoryInterface
      * @return mixed
      */
     public function delete($id);
+
+    public function getListHostByUser($id);
 }

@@ -15,12 +15,12 @@ class CreateRoomGuestUserTable extends Migration
     {
         Schema::create('room_guest_user', function (Blueprint $table) {
             $table->unsignedInteger('room_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('guest_user_id');
             $table->date('date_in');
             $table->unsignedBigInteger('contract_id');
             $table->unsignedTinyInteger('active')->default(1);
 
-            $table->primary(['room_id', 'user_id', 'date_in']);
+            $table->primary(['room_id', 'guest_user_id', 'date_in']);
         });
     }
 

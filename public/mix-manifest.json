@@ -4,6 +4,7 @@
     "/user/js/contract/index.js": "/user/js/contract/index.js",
     "/user/js/host/detail.js": "/user/js/host/detail.js",
     "/user/js/host/index.js": "/user/js/host/index.js",
+    "/user/js/invoice/index.js": "/user/js/invoice/index.js",
     "/user/js/room/index.js": "/user/js/room/index.js",
     "/user/js/service/index.js": "/user/js/service/index.js"
 }

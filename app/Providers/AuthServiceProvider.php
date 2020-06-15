@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Contract;
 use App\Models\Host;
 use App\Models\Room;
 use App\Models\Service;
+use App\Policies\ContractPolicy;
 use App\Policies\HostPolicy;
 use App\Policies\RoomPolicy;
 use App\Policies\ServicetPolicy;
@@ -22,7 +24,8 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Host::class => HostPolicy::class,
         Service::class => ServicetPolicy::class,
-        Room::class => RoomPolicy::class
+        Room::class => RoomPolicy::class,
+        Contract::class => ContractPolicy::class
     ];
 
     /**

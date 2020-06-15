@@ -31,6 +31,11 @@ class Host extends Model
         'floors'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function rooms()
     {
         return $this->hasMany(Room::class, 'host_id', 'id');
@@ -77,13 +82,13 @@ class Host extends Model
         ];
     }
 
-    public function setCostElectricAttribute($value)
-    {
-        $this->attributes['cost_electric'] = TrovieHelper::parseCurrencyString($value);
-    }
-
-    public function setCostWaterAttribute($value)
-    {
-        $this->attributes['cost_water'] = TrovieHelper::parseCurrencyString($value);
-    }
+//    public function setCostElectricAttribute($value)
+//    {
+//        $this->attributes['cost_electric'] = TrovieHelper::parseCurrencyString($value);
+//    }
+//
+//    public function setCostWaterAttribute($value)
+//    {
+//        $this->attributes['cost_water'] = TrovieHelper::parseCurrencyString($value);
+//    }
 }

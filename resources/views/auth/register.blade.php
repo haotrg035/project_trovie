@@ -90,7 +90,7 @@
                                             <div class="custom-control custom-radio col-6 pl-4">
                                                 <input type="radio" name="gender"
                                                        class="custom-control-input trovie-input @error('gender') is-invalid @enderror"
-                                                       value="0" required {{ old('gender') == "0" ? 'checked' : '' }}>
+                                                       value="2" required {{ old('gender') == "2" ? 'checked' : '' }}>
                                                 <label class="custom-control-label p-0" for="gender">Nữ</label>
                                             </div>
                                         </div>

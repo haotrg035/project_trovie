@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let priceInputs = document.querySelectorAll('.form-group--unit--price .trovie-input,.form-group--unit--water .trovie-input,.form-group--unit--electric .trovie-input');
     let dateInputs = document.querySelectorAll('.form-group--unit--date .trovie-input');
     let inlineEditInputs = document.querySelectorAll('.form-group--edit');
+    let numberOnlyInputs = document.querySelectorAll('.form-group--numeric .trovie-input');
     if (priceInputs.length > 0) {
         for (let input of priceInputs) {
             input.addEventListener('input', function () {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 enableTime: false,
                 dateFormat: 'd/m/Y',
                 locale: Vietnamese,
+                disableMobile: true
             });
         }
     }
@@ -44,6 +46,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     stateToggleBtn.querySelector('.fa').classList.remove('fa-times');
                 }
             })
+        }
+    }
+    if (numberOnlyInputs.length > 0) {
+        for (let input of numberOnlyInputs) {
+            input.addEventListener('input', function () {
+                this.value = TrovieHelper.formatCurrencyForm(this.value, '');
+            });
         }
     }
 });
