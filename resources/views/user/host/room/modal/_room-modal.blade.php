@@ -138,7 +138,7 @@
                             <button class="btn btn-base btn-room-users mr-3" type="button">
                                 <i class="fa fa-users   " aria-hidden="true"></i> XEM KHÁCH THUÊ
                             </button>
-                            <button class="btn btn-base btn-create-room-invoice mr-3" type="button">
+                            <button class="btn btn-base btn-create-room-invoice mr-3 d-none" type="button">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i> LẬP PHIẾU THU
                             </button>
                             <button class="btn btn-base btn-room-modal-save" type="submit">

@@ -100,7 +100,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css":
 /*!***************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/tata-js/src/tata.css ***!
+  !*** ./node_modules/css-loader??ref--8-1!./node_modules/postcss-loader/src??ref--8-2!./node_modules/tata-js/src/tata.css ***!
   \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1461,7 +1461,7 @@ module.exports = function (css) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./tata.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css");
+var content = __webpack_require__(/*! !../../css-loader??ref--8-1!../../postcss-loader/src??ref--8-2!./tata.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1871,7 +1871,7 @@ var TrovieHelper = /*#__PURE__*/function () {
   }, {
     key: "parseCurrencyFormat",
     value: function parseCurrencyFormat(str) {
-      return str.replace(/\./gi, '');
+      return parseInt(str.replace(/\./gi, ''));
     }
   }, {
     key: "splitDate",
@@ -1932,9 +1932,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
-var dataListHostSelect = document.querySelector('.form-contract-select-host select[name=host]');
-var dataListRoomSelect = document.querySelector('.form-contract-select-host select[name=room]');
+var dataListHostSelect = document.querySelector('.form-data-select-host select[name=host]');
+var dataListRoomSelect = document.querySelector('.form-data-select-host select[name=room]');
 var modalInvoice = document.querySelector('#invoice-modal');
+var modalInvoiceCreate = document.querySelector('#invoice-create-modal');
+var dataTableCreateInvoice = modalInvoiceCreate.querySelector('#invoice-entries__table');
+var dataTableListDataElement = document.querySelector('#table-invoice-list');
 var dataTableListData = null;
 var dataTableOptions = {
   responsive: false,
@@ -1952,22 +1955,14 @@ var dataTableOptions = {
   }, {
     data: 'total_amount'
   }, {
-    data: 'b_full_name'
-  }, {
-    data: 'b_phone'
-  }, {
-    data: 'active'
+    data: 'state'
   }, {
     data: 'options'
   }],
   order: [// [0, 'desc'],
-  [7, 'asc'], [0, 'desc']],
+  [5, 'asc'], [0, 'desc']],
   columnDefs: [{
     targets: 1,
-    // your case first column
-    className: 'text-center'
-  }, {
-    targets: 2,
     // your case first column
     className: 'text-center'
   }, {
@@ -1975,31 +1970,136 @@ var dataTableOptions = {
     // your case first column
     className: 'text-center'
   }, {
-    targets: 7,
+    targets: 2,
     // your case first column
     className: 'text-center'
   }, {
-    targets: 8,
+    targets: 4,
+    // your case first column
+    className: 'text-center'
+  }, {
+    targets: 5,
     // your case first column
     className: 'text-center',
     order: false
   }]
 };
 document.addEventListener('DOMContentLoaded', function () {
-  initTableContract();
+  initTableDataList();
   initInvoiceListSelect();
+  initInvoiceCreateModal();
 });
 
-function initTableContract() {
-  var createModalButton = document.querySelector('#btn-show-create-modal');
-  dataTableListData = $('#table-invoice-list').DataTable(dataTableOptions);
+function fillInvoiceTemplate(data) {
+  var template = modalInvoice.querySelector('.invoice-template');
+  template.querySelector('.invoice-created_at').innerText = data.created_at;
+  template.querySelector('.invoice-name').innerText = data.room.name;
+  template.querySelector('.invoice-total_amount').innerText = data.total_amount + ' đ';
+  var stt = 1;
+  template.querySelector('tbody').innerHTML = '';
 
-  modalInvoice.querySelector('.contract-modal__print').onclick = function () {
+  var _iterator = _createForOfIteratorHelper(data.details),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var item = _step.value;
+      var row = document.createElement('tr');
+      row.innerHTML = '<td>' + stt++ + '</td>' + '<td>' + item.service + '</td>' + '<td>' + item.quantity + '</td>' + '<td>' + item.price + 'đ / ' + item.unit + '</td>' + '<td>' + _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].formatCurrencyForm(_TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].parseCurrencyFormat(item.price) * item.quantity) + 'đ</td>';
+      template.querySelector('tbody').append(row);
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+}
+
+function showInvoiceModal(id) {
+  axios.get(dataTableListDataElement.getAttribute('data-view-url') + '/' + id, {
+    params: {
+      api_token: __apiToken
+    }
+  }).then(function (response) {
+    if (response.data.data.state === 1) {
+      modalInvoice.querySelector('.invoice-modal__paid').classList.remove('d-none');
+      modalInvoice.querySelector('.invoice-modal__cancel').classList.remove('d-none');
+    } else {
+      modalInvoice.querySelector('.invoice-modal__paid').classList.add('d-none');
+      modalInvoice.querySelector('.invoice-modal__cancel').classList.add('d-none');
+    }
+
+    fillInvoiceTemplate(response.data.data);
+    showBsModal(modalInvoice);
+  });
+}
+
+function initEventViewTemplate() {
+  var editBtns = document.querySelectorAll('.btn-edit');
+
+  if (editBtns.length > 0) {
+    var _iterator2 = _createForOfIteratorHelper(editBtns),
+        _step2;
+
+    try {
+      var _loop = function _loop() {
+        var btn = _step2.value;
+        btn.addEventListener('click', function () {
+          modalInvoice.setAttribute('data-invoice-id', btn.getAttribute('data-id'));
+          showInvoiceModal(btn.getAttribute('data-id'));
+        });
+      };
+
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  }
+}
+
+function initTableDataList() {
+  dataTableListData = $(dataTableListDataElement).DataTable(dataTableOptions);
+
+  modalInvoice.querySelector('.invoice-modal__print').onclick = function () {
     _.debounce(window.print(), 500);
   };
 
-  createModalButton.onclick = function () {
-    alert('show create modal');
+  modalInvoice.querySelector('.invoice-modal__paid').onclick = function () {
+    if (confirm('Thanh toán hóa đơn này?')) {
+      var url = dataTableListDataElement.getAttribute('data-paid-url') + '/' + modalInvoice.getAttribute('data-invoice-id');
+      var data = {
+        _method: 'PATCH',
+        api_token: __apiToken
+      };
+      axios.post(url, data).then(function (response) {
+        hideBsModal(modalInvoice);
+        dataListRoomSelect.onchange();
+        tata.success('Thông báo', response.data.message);
+      })["catch"](function (err) {
+        tata.error('Thông báo', err.response.data.message);
+      });
+    }
+  };
+
+  modalInvoice.querySelector('.invoice-modal__cancel').onclick = function () {
+    if (confirm('Hủy hóa đơn này?')) {
+      var url = dataTableListDataElement.getAttribute('data-cancel-url') + '/' + modalInvoice.getAttribute('data-invoice-id');
+      var data = {
+        _method: 'PATCH',
+        api_token: __apiToken
+      };
+      axios.post(url, data).then(function (response) {
+        hideBsModal(modalInvoice);
+        dataListRoomSelect.onchange();
+        tata.success('Thông báo', response.data.message);
+      })["catch"](function (err) {
+        tata.error('Thông báo', err.response.data.message);
+      });
+    }
   };
 }
 
@@ -2008,33 +2108,33 @@ function updateRoomSelectByHostSelect(_hostSelect, _roomSelect) {
 
   var valueRoomSelect = _roomSelect.querySelectorAll('option:not([value="0"])');
 
-  var _iterator = _createForOfIteratorHelper(valueRoomSelect),
-      _step;
+  var _iterator3 = _createForOfIteratorHelper(valueRoomSelect),
+      _step3;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var option = _step.value;
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var option = _step3.value;
       option.style.display = 'none';
       option.setAttribute('selected', false);
     }
   } catch (err) {
-    _iterator.e(err);
+    _iterator3.e(err);
   } finally {
-    _iterator.f();
+    _iterator3.f();
   }
 
-  var _iterator2 = _createForOfIteratorHelper(_roomSelect.querySelectorAll("option[data-host-id=\"".concat(currentHostId, "\"]"))),
-      _step2;
+  var _iterator4 = _createForOfIteratorHelper(_roomSelect.querySelectorAll("option[data-host-id=\"".concat(currentHostId, "\"]"))),
+      _step4;
 
   try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var _option = _step2.value;
+    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+      var _option = _step4.value;
       _option.style.display = 'block';
     }
   } catch (err) {
-    _iterator2.e(err);
+    _iterator4.e(err);
   } finally {
-    _iterator2.f();
+    _iterator4.f();
   }
 
   _roomSelect.selectedIndex = 0;
@@ -2049,39 +2149,198 @@ function initInvoiceListSelect() {
   }
 }
 
-function showInvoiceModal(id) {
-  axios.get(dataTableListData.getAttribute('data-view-url') + '/' + id, {
-    params: {
-      api_token: __apiToken
+function initInvoiceCreateModal() {
+  var invoiceForm = modalInvoiceCreate.querySelector('form');
+  var invoiceTypeSelect = invoiceForm.querySelector('select[name=invoiceType]');
+  var invoiceTable = invoiceForm.querySelector('table');
+  var createModalButton = document.querySelector('#btn-show-create-modal');
+  var invoiceTableAddRowForm = document.querySelector('.invoice-table-add-row-form');
+
+  invoiceTypeSelect.onchange = function () {
+    invoiceTable.querySelector('tbody').innerHTML = '';
+
+    if (invoiceTypeSelect.value === '1') {
+      var room_id = modalInvoiceCreate.querySelector('input[name=room_id]').value;
+      var url = dataListRoomSelect.querySelector('option[value="' + room_id + '"]').getAttribute('data-view-url');
+      axios.get(url, {
+        params: {
+          api_token: __apiToken
+        }
+      }).then(function (response) {
+        var _iterator5 = _createForOfIteratorHelper(response.data.data.services),
+            _step5;
+
+        try {
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var item = _step5.value;
+
+            if (_TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].parseCurrencyFormat(item.cost) > 0) {
+              invoiceTable.querySelector('tbody').append(renderInvoiceTableRow(item));
+            }
+          }
+        } catch (err) {
+          _iterator5.e(err);
+        } finally {
+          _iterator5.f();
+        }
+
+        updateInvoiceTotal();
+      });
     }
-  }).then(function (response) {
-    showBsModal(modalInvoice);
-  });
-}
 
-function initEventViewContract() {
-  var editBtns = document.querySelectorAll('.btn-edit');
+    updateInvoiceTotal();
+  };
 
-  if (editBtns.length > 0) {
-    var _iterator3 = _createForOfIteratorHelper(editBtns),
-        _step3;
+  createModalButton.onclick = function () {
+    if (dataListRoomSelect.value != 0) {
+      modalInvoiceCreate.querySelector('form input[name=room_id]').value = dataListRoomSelect.value;
+      invoiceTable.querySelector('tbody').innerHTML = '';
+      updateInvoiceTotal();
+      showBsModal(modalInvoiceCreate);
+    } else {
+      tata.warn('Thông báo', 'Vui lòng chọn 1 phòng!');
+    }
+  };
 
-    try {
-      var _loop = function _loop() {
-        var btn = _step3.value;
-        btn.addEventListener('click', function () {
-          showInvoiceModal(btn.getAttribute('data-id'));
-        });
+  invoiceForm.onsubmit = function (e) {
+    e.preventDefault();
+
+    if (invoiceTable.querySelectorAll('tbody tr').length > 0) {
+      var data = {
+        api_token: __apiToken,
+        room_id: invoiceForm.querySelector('input[name=room_id]').value,
+        total_amount: invoiceTable.querySelector('.invoice-total').getAttribute('data-price'),
+        created_at: invoiceForm.querySelector('input[name=created_at]').value,
+        updated_at: invoiceForm.querySelector('input[name=created_at]').value,
+        details: []
       };
 
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        _loop();
+      var _iterator6 = _createForOfIteratorHelper(invoiceTable.querySelectorAll('tbody tr')),
+          _step6;
+
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var row = _step6.value;
+          data.details.push({
+            service: row.querySelector('.cell-name').innerText,
+            quantity: row.querySelector('.cell-quantity input').value,
+            price: parseInt(row.querySelector('.cell-quantity input').getAttribute('data-price')),
+            unit: row.querySelector('.cell-price').getAttribute('data-unit')
+          });
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+
+      axios.post(invoiceForm.action, data).then(function (response) {
+        hideBsModal(modalInvoiceCreate);
+        dataListRoomSelect.onchange();
+        tata.success('Thông báo', response.data.message);
+      })["catch"](function (err) {
+        tata.error('Thông báo', err.response.data.message);
+      });
+    } else {
+      tata.warn('Thông báo', 'Chưa có khoản thu nào trong hóa đơn!');
+    }
+  };
+
+  invoiceTableAddRowForm.querySelector('.btn-add-service').onclick = function () {
+    var data = {
+      cost: invoiceTableAddRowForm.querySelector('input[name=cost]').value,
+      name: invoiceTableAddRowForm.querySelector('input[name=name]').value.trim(),
+      unit: {
+        name: invoiceTableAddRowForm.querySelector('select[name=unit]').value
+      }
+    };
+
+    if (data.cost !== '' && data.name !== '' && data.unit.name !== '') {
+      invoiceTable.querySelector('tbody').append(renderInvoiceTableRow(data));
+      updateInvoiceTotal();
+    } else {
+      tata.error('Thông báo', 'Vui lòng điền đầy đủ thông tin!');
+    }
+  };
+
+  function renderInvoiceTableRow(item) {
+    var row = document.createElement('tr');
+    var cellName = document.createElement('td');
+    var cellQuantity = document.createElement('td');
+    var inputQuantity = document.createElement('input');
+    var cellPrice = document.createElement('td');
+    var cellTotal = document.createElement('td');
+    var cellOptions = document.createElement('td');
+    var removeButton = document.createElement('button');
+    cellName.classList.add('cell-name');
+    cellName.innerText = item.name;
+    cellPrice.setAttribute('data-unit', item.unit.name);
+    cellPrice.classList.add('cell-price');
+    cellPrice.innerText = item.cost + 'đ/' + item.unit.name;
+    inputQuantity.classList.add('trovie-input');
+    inputQuantity.type = 'number';
+    inputQuantity.min = 1;
+    inputQuantity.value = 1;
+    inputQuantity.style.width = '120px';
+    inputQuantity.setAttribute('data-price', _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].parseCurrencyFormat(item.cost) + '');
+    updateRecordPriceOnChange(inputQuantity);
+    cellQuantity.classList.add('cell-quantity');
+    cellQuantity.append(inputQuantity);
+    cellTotal.innerText = item.cost + ' đ';
+    cellTotal.setAttribute('data-price', _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].parseCurrencyFormat(item.cost));
+    cellTotal.classList.add('cell-total');
+    removeButton.classList.add('btn', 'btn-sm', 'btn-danger');
+    removeButton.innerHTML = '<i class="fa fa-trash"></i>';
+    removeButtonHandler(removeButton);
+    cellOptions.classList.add('text-center');
+    cellOptions.append(removeButton);
+    row.append(cellName);
+    row.append(cellQuantity);
+    row.append(cellPrice);
+    row.append(cellTotal);
+    row.append(cellOptions);
+    return row;
+  }
+
+  function updateRecordPriceOnChange(element) {
+    element.onchange = function () {
+      var total = parseInt(element.getAttribute('data-price')) * element.value;
+      element.parentNode.parentNode.querySelector('.cell-total').innerText = _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].formatCurrencyForm(total) + 'đ';
+      updateInvoiceTotal();
+    };
+  }
+
+  function updateInvoiceTotal() {
+    var total = 0;
+
+    var _iterator7 = _createForOfIteratorHelper(invoiceTable.querySelectorAll('tbody tr')),
+        _step7;
+
+    try {
+      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+        var tr = _step7.value;
+        var price = parseInt(tr.querySelector('.cell-quantity input').getAttribute('data-price'));
+        var quantity = tr.querySelector('.cell-quantity input').value;
+        total += price * quantity;
       }
     } catch (err) {
-      _iterator3.e(err);
+      _iterator7.e(err);
     } finally {
-      _iterator3.f();
+      _iterator7.f();
     }
+
+    invoiceTable.querySelector('.invoice-total').setAttribute('data-price', total);
+    invoiceTable.querySelector('.invoice-total').innerText = _TrovieHelper__WEBPACK_IMPORTED_MODULE_1__["TrovieHelper"].formatCurrencyForm(total);
+  }
+
+  function removeButtonHandler(element) {
+    element.onclick = function () {
+      if (confirm('Xóa dòng này?')) {
+        var parentTr = element.parentNode.parentNode;
+        parentTr.parentNode.removeChild(parentTr);
+        updateInvoiceTotal();
+      }
+    };
   }
 }
 
@@ -2093,6 +2352,53 @@ function loadDataTableContent(data) {
 
 function renderRowOptionButtons(id) {
   return '<button class=" mx-auto btn d-flex btn-sm btn-base rounded btn-edit" data-id="' + id + '">' + '<i class="fa fa-eye" aria-hidden="true"></i>' + '</button>';
+}
+
+function renderRowRecords(_data, refreshRoomSelect) {
+  var data = [];
+
+  if (_data.length > 0) {
+    var _iterator8 = _createForOfIteratorHelper(_data),
+        _step8;
+
+    try {
+      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+        var _item = _step8.value;
+        // let state = _item.active === 0 ? 'Kết thúc' : (_item.active === 1 && _item.state === true ? 'Hiệu lực' : 'Quá hạn');
+        var state = null;
+
+        if (_item.state === 1) {
+          state = '<div class="d-none">1</div><div class="contract-state"><i title="Đang chờ" class="fa fa-dot-circle-o text-secondary"></i><span class="text-secondary"> Đang chờ</span></div>';
+        } else if (_item.state === 2) {
+          state = '<div class="d-none">2</div><div class="contract-state"><i title="Đã thu" class="fa fa-dot-circle-o text-success"></i><span class="text-success"> Thanh toán</span></div>';
+        } else {
+          state = '<div class="d-none">3</div><div class="contract-state""><i title="Đã hủy" class="fa fa-dot-circle-o text-danger"></i><span class="text-danger"> Đã Hủy</span></div>';
+        }
+
+        data.push({
+          id: _item.id,
+          // avatar:_item.avatar,
+          created_date: _item.created_at,
+          updated_date: _item.updated_at,
+          name: _item.name,
+          total_amount: _item.total_amount + ' đ',
+          state: state,
+          options: renderRowOptionButtons(_item.id)
+        });
+      }
+    } catch (err) {
+      _iterator8.e(err);
+    } finally {
+      _iterator8.f();
+    }
+  }
+
+  loadDataTableContent(data);
+  initEventViewTemplate();
+
+  if (refreshRoomSelect) {
+    updateRoomSelectByHostSelect(dataListHostSelect, dataListRoomSelect);
+  }
 }
 
 function getListData(_x) {
@@ -2109,9 +2415,9 @@ function _getListData() {
             url = '';
 
             if (select.value === '0') {
-              url = dataListHostSelect.getAttribute('data-get-contracts-url') + '/' + dataListHostSelect.value;
+              url = dataListHostSelect.getAttribute('data-get-all-url') + '/' + dataListHostSelect.value;
             } else {
-              url = select.getAttribute('data-get-contracts-url') + '/' + select.value;
+              url = select.getAttribute('data-get-all-url') + '/' + select.value;
             }
 
             _context.next = 4;
@@ -2134,55 +2440,6 @@ function _getListData() {
   return _getListData.apply(this, arguments);
 }
 
-function renderRowRecords(_data, refreshRoomSelect) {
-  var data = [];
-
-  if (_data.length > 0) {
-    var _iterator4 = _createForOfIteratorHelper(_data),
-        _step4;
-
-    try {
-      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-        var _contract = _step4.value;
-        // let state = _contract.active === 0 ? 'Kết thúc' : (_contract.active === 1 && _contract.state === true ? 'Hiệu lực' : 'Quá hạn');
-        var state = null;
-
-        if (_contract.active === 0) {
-          state = '<div class="contract-state"><i title="Kết thúc" class="fa fa-dot-circle-o text-secondary"></i><span class="text-secondary"> Kết thúc</span></div>';
-        } else if (_contract.active === 1 && _contract.state === true) {
-          state = '<div class="contract-state"><i title="Hiệu lực" class="fa fa-dot-circle-o text-success"></i><span class="text-success"> Hiệu lực</span></div>';
-        } else {
-          state = '<div class="contract-state""><i title="Quá hạn" class="fa fa-dot-circle-o text-danger"></i><span class="text-danger"> Quá hạn</span></div>';
-        }
-
-        data.push({
-          id: _contract.id,
-          // avatar:_contract.avatar,
-          created_date: _contract.created_at,
-          updated_date: _contract.updated_at,
-          expired_date: _contract.expired_at,
-          deposit: _contract.deposit === '0' ? 'Không' : _contract.deposit + ' đ',
-          b_full_name: _contract.b_full_name,
-          b_phone: _contract.b_phone,
-          active: state,
-          options: renderRowOptionButtons(_contract.id)
-        });
-      }
-    } catch (err) {
-      _iterator4.e(err);
-    } finally {
-      _iterator4.f();
-    }
-  }
-
-  loadDataTableContent(data);
-  initEventViewContract();
-
-  if (refreshRoomSelect) {
-    updateRoomSelectByHostSelect(dataListHostSelect, dataListRoomSelect);
-  }
-}
-
 function dataListSelectHandler(select) {
   var resetRoomSelect = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -2194,7 +2451,7 @@ function dataListSelectHandler(select) {
         console.log(e);
       }
     })["catch"](function (err) {
-      tata.warn('Trống', 'Chưa có hóa đơn nào!');
+      tata.warn('Thông báo', err.response.data.message);
       renderRowRecords([], resetRoomSelect);
     });
   };

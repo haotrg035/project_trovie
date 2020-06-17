@@ -1,7 +1,16 @@
 <ul class="main-sidebar list-unstyled no-print">
     <li class="main-sidebar__item main-sidebar__item--logo">
-        <a href="{{route('user.dashboard.index')}}" class="item__link">
+        <a href="/" class="item__link">
             {{config('app.name')}}
+        </a>
+    </li>
+    <li class="main-sidebar__item">
+        <a href="{{route('user.profile.show')}}"
+           class="item__link @if(Route::is('user.user.*')) active @endif">
+            <figure class="link__icon">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </figure>
+            <p class="link__text">Cá Nhân</p>
         </a>
     </li>
     <li class="main-sidebar__item">
@@ -31,7 +40,7 @@
     <li class="main-sidebar__item">
         <a href="{{route('user.invoice.index')}}" class="item__link @if(Route::is('/')) active @endif">
             <figure class="link__icon">
-                <i class="fa fa-line-chart" aria-hidden="true"></i>
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
             </figure>
             <p class="link__text">Hóa Đơn</p>
         </a>

@@ -32,7 +32,7 @@ class  TrovieHelper
         }
     }
 
-    public static function stripAddressCompoentName($name)
+    public static function stripAddressComponentName($name)
     {
         $name = strtolower($name);
         return trim(str_replace(['huyện', 'quận', 'thành phố',], '', $name));
@@ -82,11 +82,21 @@ class  TrovieHelper
         return $randomString;
     }
 
-    public static function converDateFormat($date, $from = 'dmY')
+    public static function convertDateFormat($date, $from = 'dmY')
     {
         if ($from === 'Ymd') {
             return implode('/', array_reverse(explode('-', $date)));
         }
         return implode('-', array_reverse(explode('/', $date . '')));
+    }
+
+    public static function getMinuteToTimeStamp($minutes)
+    {
+        return $minutes * (60);
+    }
+
+    public static function getDayToTimeStamp($day)
+    {
+        return $day * 60 * 60 * 24;
     }
 }

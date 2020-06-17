@@ -27,6 +27,7 @@ class InvoiceController extends BaseController
     public function index()
     {
         $this->data['list_host'] = $this->repository->getListHostByUser(auth()->id());
+        $this->data['unit_list'] = $this->repository->getUnits();
         return view('user.invoice.index', ['data' => $this->data]);
     }
 

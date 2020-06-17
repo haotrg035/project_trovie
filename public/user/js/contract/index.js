@@ -100,7 +100,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css":
 /*!***************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/tata-js/src/tata.css ***!
+  !*** ./node_modules/css-loader??ref--8-1!./node_modules/postcss-loader/src??ref--8-2!./node_modules/tata-js/src/tata.css ***!
   \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1461,7 +1461,7 @@ module.exports = function (css) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./tata.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css");
+var content = __webpack_require__(/*! !../../css-loader??ref--8-1!../../postcss-loader/src??ref--8-2!./tata.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1871,7 +1871,7 @@ var TrovieHelper = /*#__PURE__*/function () {
   }, {
     key: "parseCurrencyFormat",
     value: function parseCurrencyFormat(str) {
-      return str.replace(/\./gi, '');
+      return parseInt(str.replace(/\./gi, ''));
     }
   }, {
     key: "splitDate",
@@ -2436,8 +2436,12 @@ function initContractCreateModal() {
           contractListRoomSelect.onchange();
           hideBsModal(contractCreate__roomModal);
           tata.success('Thông báo', response.data.message);
+          contractListHostSelect.selectedIndex = contractListHostSelect.querySelector('option[value="' + response.data.data.host_id + '"]').index;
+          contractListHostSelect.onchange();
 
           _.delay(function () {
+            // contractListRoomSelect.selectedIndex = contractListRoomSelect.querySelector('option[value="' + response.data.data.room_id + '"]').index;
+            // contractListRoomSelect.onchange();
             showContract(response.data.data.id);
           }, 300);
         } catch (e) {

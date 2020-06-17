@@ -219,6 +219,18 @@ a:hover {
   padding-top: 0.25rem;
 }
 
+@media only screen and (max-width: 576px) {
+  .form-group label {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .form-group label {
+    font-size: 12px;
+  }
+}
+
 .form-group--edit {
   position: relative;
 }
@@ -302,13 +314,14 @@ a:hover {
 }
 
 .form-group--unit--phone::after {
-  content: "(+84)";
+  content: "\F095";
+  font-family: FontAwesome, serif;
   right: auto;
   left: 0;
 }
 
 .form-group--unit--phone .form-control {
-  padding-left: 3rem;
+  padding-left: 1.25rem;
   padding-right: 0;
 }
 
@@ -1041,7 +1054,13 @@ a:hover {
   width: 100%;
   position: relative;
   padding-bottom: 50%;
-  border: 1px solid lightgray;
+  border: 2px solid var(--color-base);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.trovie-avatar-upload.square {
+  padding-bottom: 100%;
 }
 
 .trovie-avatar-upload .upload__image {
@@ -1269,6 +1288,7 @@ div.dataTables_wrapper div.dataTables_filter input {
   position: fixed;
   top: 0;
   left: 0;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 768px) {

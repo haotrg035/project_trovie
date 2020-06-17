@@ -1,10 +1,4 @@
 {
-    "/user/js/app.js": "/user/js/app.js",
-    "/user/css/app.css": "/user/css/app.css",
-    "/user/js/contract/index.js": "/user/js/contract/index.js",
-    "/user/js/host/detail.js": "/user/js/host/detail.js",
-    "/user/js/host/index.js": "/user/js/host/index.js",
-    "/user/js/invoice/index.js": "/user/js/invoice/index.js",
-    "/user/js/room/index.js": "/user/js/room/index.js",
-    "/user/js/service/index.js": "/user/js/service/index.js"
+    "/frontend/js/app.js": "/frontend/js/app.js",
+    "/frontend/css/app.css": "/frontend/css/app.css"
 }

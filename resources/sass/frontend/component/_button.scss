@@ -1,0 +1,19 @@
+.btn {
+    @include Rounded(0);
+
+    &-base {
+        @include makeButton(var(--color-base), #ffffff);
+
+        &-outline {
+            @include makeButtonOutline(#ffffff, var(--color-base));
+        }
+    }
+
+    &-variant {
+        @include makeButton(var(--color-variant), #ffffff);
+
+        &-outline {
+            @include makeButtonOutline(#ffffff, var(--color-variant));
+        }
+    }
+}

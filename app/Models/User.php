@@ -23,8 +23,10 @@ class User extends Authenticatable
         'email',
         'gender',
         'birthday',
-        'role'
+        'role',
+        'api_token'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -33,7 +35,10 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'api_token',
         'remember_token',
+        'email_verified_at',
+        'role'
     ];
 
     /**
@@ -60,6 +65,11 @@ class User extends Authenticatable
         return $value ? $value : '';
     }
 
+    public function getStateAttribute()
+    {
+        return $this->room()->count();
+    }
+
     public function detail()
     {
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
@@ -67,7 +77,12 @@ class User extends Authenticatable
 
     public function room()
     {
-        $this->belongsToMany(Room::class, 'room_user');
+        return $this->belongsToMany(Room::class, 'room_user')->wherePivot('active', 1);
+    }
+
+    public function inviteToken()
+    {
+        return $this->hasOne(UserInviteToken::class, 'user_id', 'id');
     }
 
     public function isHostOwner()

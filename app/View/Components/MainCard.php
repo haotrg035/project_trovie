@@ -15,16 +15,23 @@ class MainCard extends Component
      * @var string
      */
     public $bodyClass;
+    /**
+     * @var string
+     */
+    public $headerClass;
 
     /**
      * Create a new component instance.
      *
-     * @return void
+     * @param bool $hasHeader
+     * @param string $bodyClass
+     * @param string $headerClass
      */
-    public function __construct( $hasHeader = false, $bodyClass = '')
+    public function __construct($hasHeader = false, $bodyClass = '', $headerClass = '')
     {
         $this->hasHeader = $hasHeader;
         $this->bodyClass = $bodyClass;
+        $this->headerClass = $headerClass;
     }
 
     /**

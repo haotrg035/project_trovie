@@ -18,6 +18,8 @@ Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
     Route::prefix('user')->name('api.user')->group(function () {
         Route::get('/get-by-invite-token', 'Api\UserController@getUserByInviteToken')->name('.get_by_token');
         Route::get('/show', 'Api\UserController@show')->name('.show');
+        Route::get('/generate-invite-token/{user:username}', 'Api\UserController@generateInviteToken')
+            ->name('.generate_invite_token');
     });
 
     Route::name('api.user')->group(function () {
@@ -61,6 +63,9 @@ Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
                 Route::get('/room/{room?}', 'Api\InvoiceController@getAllByRoom')->name('.room');
             });
             Route::get('/{invoice?}', 'Api\InvoiceController@show')->name('.show');
+            Route::patch('/paid/{invoice?}', 'Api\InvoiceController@paidInvoice')->name('.paid');
+            Route::patch('/cancel/{invoice?}', 'Api\InvoiceController@cancelInvoice')->name('.cancel');
+            Route::post('/store/', 'Api\InvoiceController@store')->name('.store');
         });
     });
 

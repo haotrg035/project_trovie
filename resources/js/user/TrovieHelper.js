@@ -86,7 +86,7 @@ class TrovieHelper {
     }
 
     static parseCurrencyFormat(str) {
-        return str.replace(/\./gi, '');
+        return parseInt(str.replace(/\./gi, ''));
     }
 
     static splitDate(dateString, format = 'dmY') {

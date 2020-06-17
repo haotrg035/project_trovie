@@ -41,8 +41,8 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
 
     public function create(array $attributes)
     {
-        $city = ucwords(TrovieHelper::stripAddressCompoentName($attributes['city_name']));
-        $district = ucwords(TrovieHelper::stripAddressCompoentName($attributes['district_name']));
+        $city = ucwords(TrovieHelper::stripAddressComponentName($attributes['city_name']));
+        $district = ucwords(TrovieHelper::stripAddressComponentName($attributes['district_name']));
 
         $attributes['cost_electric'] = TrovieHelper::parseCurrencyString($attributes['cost_electric']);
         $attributes['cost_water'] = TrovieHelper::parseCurrencyString($attributes['cost_water']);
@@ -56,11 +56,11 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
     public function update($id, array $attributes)
     {
         if (isset($attributes['city_name'])) {
-            $city = ucwords(TrovieHelper::stripAddressCompoentName($attributes['city_name']));
+            $city = ucwords(TrovieHelper::stripAddressComponentName($attributes['city_name']));
             $attributes['city_id'] = \DB::table('cities')->where('name', $city)->first()->id;
         }
         if (isset($attributes['district_name'])) {
-            $district = ucwords(TrovieHelper::stripAddressCompoentName($attributes['district_name']));
+            $district = ucwords(TrovieHelper::stripAddressComponentName($attributes['district_name']));
             $attributes['district_id'] = \DB::table('districts')->where('name', $district)->first()->id;
         }
 

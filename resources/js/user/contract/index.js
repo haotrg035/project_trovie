@@ -396,7 +396,11 @@ function initContractCreateModal() {
                     contractListRoomSelect.onchange();
                     hideBsModal(contractCreate__roomModal);
                     tata.success('Thông báo', response.data.message);
+                    contractListHostSelect.selectedIndex = contractListHostSelect.querySelector('option[value="' + response.data.data.host_id + '"]').index;
+                    contractListHostSelect.onchange();
                     _.delay(() => {
+                        // contractListRoomSelect.selectedIndex = contractListRoomSelect.querySelector('option[value="' + response.data.data.room_id + '"]').index;
+                        // contractListRoomSelect.onchange();
                         showContract(response.data.data.id);
                     }, 300);
                 } catch (e) {

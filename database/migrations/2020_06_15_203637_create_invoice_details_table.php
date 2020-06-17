@@ -18,8 +18,7 @@ class CreateInvoiceDetailsTable extends Migration
             $table->unsignedBigInteger('invoice_id');
             $table->string('service');
             $table->unsignedTinyInteger('quantity')->default(1);
-            $table->unsignedInteger('price_per_unit');
-            $table->unsignedInteger('total_price');
+            $table->unsignedInteger('price');
             $table->string('unit');
 
             $table->foreign('invoice_id')->references('id')->on('invoices');

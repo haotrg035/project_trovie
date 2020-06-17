@@ -1,4 +1,4 @@
-<div class="trovie-avatar-upload" data-upload-url="{{$uploadUrl}}">
+<div {{$attributes->merge(['class' => 'trovie-avatar-upload '. ($class ?? '')])}} data-upload-url="{{$uploadUrl}}">
     <form action="{{$uploadUrl}}" method="POST"
           enctype="multipart/form-data">
         @method($method)

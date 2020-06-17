@@ -92,7 +92,7 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
             'id_card_date',
             'id_card_address'
         ];
-        $expired_at = TrovieHelper::converDateFormat($data['expired_at']);
+        $expired_at = TrovieHelper::convertDateFormat($data['expired_at']);
         if (strtotime($expired_at) < (time() + 86400 * 30)) {
             $result['error'] = 'Thời hạn hợp đồng phải dài hơn 1 tháng kể từ thời điểm hiện tại!';
             return $result;
@@ -123,7 +123,7 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
                     return false;
                 }
                 $user = $userRepository->find($data['customer_user_id'], ['detail'])->toArray();
-                $user['birthday'] = TrovieHelper::converDateFormat($user['birthday']);
+                $user['birthday'] = TrovieHelper::convertDateFormat($user['birthday']);
             }
             // Khách vãn lai
             if ($data['user_type'] == 2) {
@@ -146,8 +146,8 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
                 foreach ($user_info_keys as $key) {
                     $user_info[$key] = $data['b_' . $key];
                 }
-                $user_info['birthday'] = TrovieHelper::converDateFormat($user_info['birthday']);
-                $user_info['id_card_date'] = TrovieHelper::converDateFormat($user_info['id_card_date']);
+                $user_info['birthday'] = TrovieHelper::convertDateFormat($user_info['birthday']);
+                $user_info['id_card_date'] = TrovieHelper::convertDateFormat($user_info['id_card_date']);
                 $user = $userRepository->create($user_info);
                 if (!$user) {
                     $result['error'] = 'Khởi tạo người dùng thất bại!';
@@ -169,17 +169,17 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
                     $contract_parties_info['b_' . $key] = $user['detail'][$key];
                 }
             }
-            $contract_parties_info['a_birthday'] = TrovieHelper::converDateFormat($contract_parties_info['a_birthday']);
-            $contract_parties_info['b_id_card_date'] = TrovieHelper::converDateFormat($contract_parties_info['b_id_card_date']);
+            $contract_parties_info['a_birthday'] = TrovieHelper::convertDateFormat($contract_parties_info['a_birthday']);
+            $contract_parties_info['b_id_card_date'] = TrovieHelper::convertDateFormat($contract_parties_info['b_id_card_date']);
             $contract_room_info = [
                 'price' => TrovieHelper::parseCurrencyString($room->price),
                 'cost_water' => TrovieHelper::parseCurrencyString($host->cost_water),
                 'cost_electric' => TrovieHelper::parseCurrencyString($host->cost_electric),
-                'date_payment' => TrovieHelper::converDateFormat($host->date_payment),
+                'date_payment' => TrovieHelper::convertDateFormat($host->date_payment),
                 'address' => $host->address
             ];
             $contract_info = [
-                'expired_at' => TrovieHelper::converDateFormat($data['expired_at']),
+                'expired_at' => TrovieHelper::convertDateFormat($data['expired_at']),
                 'deposit' => TrovieHelper::parseCurrencyString($data['deposit']),
                 'address' => $host->address
             ];
@@ -213,8 +213,10 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
                 ]);
             }
             if ($result['data']) {
-                $roomRepository->find($room->id);
+//                $roomRepository->find($room->id);
                 $result['data'] = $contract->toArray();
+                $result['data']['room_id'] = $room['id'];
+                $result['data']['host_id'] = $host['id'];
                 return $result;
             }
         } catch (\Exception $e) {
@@ -263,14 +265,14 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
             return $result;
         }
         if (
-            strtotime(TrovieHelper::converDateFormat($expired_at))
-            <= strtotime(TrovieHelper::converDateFormat($contract->expired_at)) + (86400 * 30)
+            strtotime(TrovieHelper::convertDateFormat($expired_at))
+            <= strtotime(TrovieHelper::convertDateFormat($contract->expired_at)) + (86400 * 30)
         ) {
             $result['error'] = 'Thời hạn hợp đồng mới phải lâu hơn thời hạn cũ ít nhât 1 tháng!';
             return $result;
         }
         $result['data'] = $this->update($id, [
-            'expired_at' => TrovieHelper::converDateFormat($expired_at),
+            'expired_at' => TrovieHelper::convertDateFormat($expired_at),
             'updated_at' => date('Y-m-d', time())
         ]);
         return $result;

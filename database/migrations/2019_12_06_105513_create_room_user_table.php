@@ -20,7 +20,7 @@ class CreateRoomUserTable extends Migration
             $table->unsignedBigInteger('contract_id');
             $table->unsignedTinyInteger('active')->default(1);
 
-            $table->primary(['room_id', 'user_id', 'date_in']);
+            $table->primary(['room_id', 'user_id', 'date_in', 'contract_id']);
         });
     }
 

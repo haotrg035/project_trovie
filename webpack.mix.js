@@ -11,19 +11,31 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js([
-    'resources/js/app.js',
-    'resources/js/user/sidebar.js',
-    'resources/js/components/input.js',
-    // 'resources/js/components/trovie_gallery_uploader.js',
-    'resources/js/components/trovie_avatar_upload.js',
-], 'public/user/js/app.js')
-    .js('resources/js/user/host/detail.js', 'public/user/js/host')
-    .js('resources/js/user/host/index.js', 'public/user/js/host/index.js')
-    .js('resources/js/user/room/index.js', 'public/user/js/room')
-    .js('resources/js/user/service/index.js', 'public/user/js/service')
-    .js('resources/js/user/contract/index.js', 'public/user/js/contract')
-    .js('resources/js/user/invoice/index.js', 'public/user/js/invoice')
+mix
+    // .js(
+    // [
+    //     'resources/js/app.js',
+    //     'resources/js/user/sidebar.js',
+    //     'resources/js/components/input.js',
+    //     'resources/js/components/trovie_avatar_upload.js',
+    // ], 'public/user/js/app.js')
+    // .js('resources/js/user/host/detail.js', 'public/user/js/host')
+    // .js('resources/js/user/host/index.js', 'public/user/js/host/index.js')
+    // .js('resources/js/user/room/index.js', 'public/user/js/room')
+    // .js('resources/js/user/service/index.js', 'public/user/js/service')
+    // .js('resources/js/user/contract/index.js', 'public/user/js/contract')
+    // .js('resources/js/user/invoice/index.js', 'public/user/js/invoice')
+    // .js('resources/js/user/profile/show.js', 'public/user/js/profile')
+
     // .sass('resources/sass/user/libs.scss', 'public/user/css/libs.css')
-    .sass('resources/sass/user/app.scss', 'public/user/css');
+
+    // .sass('resources/sass/user/app.scss', 'public/user/css')
+    .js([
+        'resources/js/app.js',
+        'resources/js/components/input.js',
+        'resources/js/components/trovie_avatar_upload.js',
+        'resources/js/frontend/_header.js'
+    ], 'public/frontend/js/app.js')
+    // .sass('resources/sass/frontend/libs.scss', 'public/frontend/css/libs.css')
+    .sass('resources/sass/frontend/app.scss', 'public/frontend/css');
 

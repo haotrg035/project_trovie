@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Trovie'),
     'user_theme' => env('APP_USER_THEME', 'user'),
+    'frontend_theme' => env('APP_FRONTEND_THEME', 'frontend'),
 
     'api_key' => [
         'google_map' => env('GOOGLE_MAP_API_KEY', 'AIzaSyCqujlXita6oAQSltFFA-J_qcALc2WwNDU'),
@@ -44,6 +45,13 @@ return [
     'default_service_units' => ['Tháng', 'kV', 'm3', 'Cái'],
     'user_invitation_token_length' => 6,
     'user_invitation_token_minutes' => 15,
+    'user_invitation_token_regen_at' => 3,
+
+    'invoice_state' => [
+        'pending' => 1,
+        'paid' => 2,
+        'cancel' => 3
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Environment

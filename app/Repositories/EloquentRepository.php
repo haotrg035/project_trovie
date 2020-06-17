@@ -112,4 +112,10 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
         }
         return [];
     }
+
+    public function getUnits()
+    {
+       $units = \DB::table('service_units')->get()->toArray();
+       return $units;
+    }
 }

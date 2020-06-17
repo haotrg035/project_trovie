@@ -42,4 +42,6 @@ interface EloquentRepositoryInterface
     public function delete($id);
 
     public function getListHostByUser($id);
+
+    public function getUnits();
 }

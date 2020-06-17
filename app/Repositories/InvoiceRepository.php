@@ -19,45 +19,35 @@ class InvoiceRepository extends EloquentRepository implements InvoiceEloquentRep
     public function getAllByRoom($ids)
     {
         $rooms = [];
-        $result = [];
+        $result = ['data' => false, 'error' => ''];
         if (!is_array($ids)) {
             $ids = [$ids];
         }
         try {
             $roomRepository = new RoomRepository();
-            $rooms = $roomRepository->_model->with([
-                'contracts' => function ($query) {
-                    return $query->with(['parties'])->get();
-                },
-                'guestContracts' => function ($query) {
-                    return $query->with(['parties'])->get();
-                }
-            ])->whereIn('id', $ids)->get()->toArray();
-//            return dd($rooms);
+            $rooms = $roomRepository->_model->with(['invoices'])->whereIn('id', $ids)->get()->toArray();
         } catch (\Exception $e) {
-            \Log::error('get Contract failed, Error: ' . $e->getMessage());
+            \Log::error('get invoices failed, Error: ' . $e->getMessage());
         }
-
         if ($rooms) {
             foreach ($rooms as $room) {
-                if (!empty($room['contracts'])) {
-                    foreach ($room['contracts'] as $contract) {
-                        $_contract = array_diff_key($contract, ['parties' => 1, 'room' => 1, 'pivot' => 1]);
-                        $_parties = array_diff_key($contract['parties'], ['contract_id' => 1]);
-                        $result[] = array_merge($_contract, $_parties);
-                    }
-                }
-                if (!empty($room['guest_contracts'])) {
-                    foreach ($room['guest_contracts'] as $contract) {
-                        $_contract = array_diff_key($contract, ['parties' => 1, 'room' => 1, 'pivot' => 1]);
-                        $_parties = array_diff_key($contract['parties'], ['contract_id' => 1]);
-                        $result[] = array_merge($_contract, $_parties);
+                if (!empty($room['invoices'])) {
+                    foreach ($room['invoices'] as $invoice) {
+                        $result['data'][] = [
+                            'id' => $invoice['id'],
+                            'name' => $room['name'],
+                            'total_amount' => $invoice['total_amount'],
+                            'state' => $invoice['state'],
+                            'created_at' => $invoice['created_at'],
+                            'updated_at' => $invoice['updated_at'],
+                        ];
                     }
                 }
             }
             return $result;
         }
-        return false;
+        $result['error'] = 'Không tìm thấy hóa đơn nào.';
+        return $result;
     }
 
     public function getAllByHost($id)
@@ -69,210 +59,59 @@ class InvoiceRepository extends EloquentRepository implements InvoiceEloquentRep
         return $this->getAllByRoom($list_room_id);
     }
 
-    public function getContract($id)
+    public function getDetail($id)
     {
-        return $this->_model->with(['parties', 'room_detail'])->where('id', $id)->first();
+        return $this->find($id, ['parties', 'room_detail']);
     }
 
-    public function createContract($data)
+    public function paidInvoice($id)
     {
-        $result = ['data' => null, 'error' => ''];
-        $room = null;
-        $user = null;
-        $userRepository = null;
-        $roomRepository = new RoomRepository();
-        $hostRepository = new HostRepository();
-        $user_info_keys = [
-            'full_name',
-            'birthday',
-            'gender',
-            'address',
-            'phone',
-            'id_card',
-            'id_card_date',
-            'id_card_address'
-        ];
-        $expired_at = TrovieHelper::converDateFormat($data['expired_at']);
-        if (strtotime($expired_at) < (time() + 86400 * 30)) {
-            $result['error'] = 'Thời hạn hợp đồng phải dài hơn 1 tháng kể từ thời điểm hiện tại!';
+        $result = ['data' => false, 'error' => ''];
+        if ($this->find($id)->state !== config('app.invoice_state.pending')) {
+            $result['error'] = 'Phiếu thu này đã được thanh toán hoặc bị hủy!';
             return $result;
         }
-        $room = $roomRepository->find($data['room_id']);
-        if ($room->total_users >= $room->members) {
-            $result['error'] = 'Số lượng khách trọ của phòng đã đạt giới hạn!';
-            return $result;
+        if ($this->update($id, ['updated_at' => time(), 'state' => config('app.invoice_state.paid')])) {
+            $result['data'] = $id;
         }
-        try {
-            $listRoomId = TrovieHelper::convertAssocIdArrayToValueIdArray(
-                $roomRepository->getAllRoomsByHost($data['host_id'])['room_list'], 'id'
-            );
-
-            // Người dùng có tài khoản
-            if ($data['user_type'] == 1) {
-                $userRepository = new UserRepository();
-                $listActiveUser = TrovieHelper::convertAssocIdArrayToValueIdArray(
-                    \DB::table('room_user')
-                        ->whereIn('room_id', $listRoomId)
-                        ->where('active', 1)
-                        ->get()->toArray(),
-                    'user_id'
-                );
-                // User đã và đang ở trọ
-                if (in_array($data['customer_user_id'], $listActiveUser)) {
-                    $result['error'] = 'Tài khoản người dùng đang trọ tại một nhà trọ / phòng trọ khác!';
-                    return false;
-                }
-                $user = $userRepository->find($data['customer_user_id'], ['detail'])->toArray();
-                $user['birthday'] = TrovieHelper::converDateFormat($user['birthday']);
-            }
-            // Khách vãn lai
-            if ($data['user_type'] == 2) {
-                $userRepository = new GuestUserRepository();
-                $listActiveUser = TrovieHelper::convertAssocIdArrayToValueIdArray(
-                    \DB::table('room_guest_user')
-                        ->whereIn('room_id', $listRoomId)
-                        ->where('active', 1)
-                        ->get()->toArray(),
-                    'guest_user_id'
-                );
-                $duplicateIdCardUserActivating = $userRepository->_model
-                    ->whereIn('id', $listActiveUser)
-                    ->where('id_card', $data['b_id_card'])
-                    ->get()->count();
-                if ($duplicateIdCardUserActivating) {
-                    $result['error'] = 'Số CMND/Căn Cước đang được đăng ký tại một nhà trọ / phòng trọ khác!';
-                }
-                $user_info = [];
-                foreach ($user_info_keys as $key) {
-                    $user_info[$key] = $data['b_' . $key];
-                }
-                $user_info['birthday'] = TrovieHelper::converDateFormat($user_info['birthday']);
-                $user_info['id_card_date'] = TrovieHelper::converDateFormat($user_info['id_card_date']);
-                $user = $userRepository->create($user_info);
-                if (!$user) {
-                    $result['error'] = 'Khởi tạo người dùng thất bại!';
-                }
-            }
-
-
-            $host = $hostRepository->_model->with(['user', 'user.detail'])->where('id', $data['host_id'])->first();
-            $contract_parties_info = [];
-            foreach ($user_info_keys as $key) {
-                if (isset($host->user[$key]) && !empty($host->user[$key])) {
-                    $contract_parties_info['a_' . $key] = $host->user[$key];
-                } else {
-                    $contract_parties_info['a_' . $key] = $host->user->detail[$key];
-                }
-                if (isset($user[$key]) && !empty($user[$key])) {
-                    $contract_parties_info['b_' . $key] = $user[$key];
-                } else {
-                    $contract_parties_info['b_' . $key] = $user['detail'][$key];
-                }
-            }
-            $contract_parties_info['a_birthday'] = TrovieHelper::converDateFormat($contract_parties_info['a_birthday']);
-            $contract_parties_info['b_id_card_date'] = TrovieHelper::converDateFormat($contract_parties_info['b_id_card_date']);
-            $contract_room_info = [
-                'price' => TrovieHelper::parseCurrencyString($room->price),
-                'cost_water' => TrovieHelper::parseCurrencyString($host->cost_water),
-                'cost_electric' => TrovieHelper::parseCurrencyString($host->cost_electric),
-                'date_payment' => TrovieHelper::converDateFormat($host->date_payment),
-                'address' => $host->address
-            ];
-            $contract_info = [
-                'expired_at' => TrovieHelper::converDateFormat($data['expired_at']),
-                'deposit' => TrovieHelper::parseCurrencyString($data['deposit']),
-                'address' => $host->address
-            ];
-            $contract = $this->create($contract_info);
-            $contract->parties()->create($contract_parties_info);
-            $contract->room_detail()->create($contract_room_info);
-            // Người dùng có tài khoản
-            if ($data['user_type'] == 1) {
-                if (!$contract) {
-                    return false;
-                }
-                \DB::table('user_invite_tokens')->where('user_id', $data['customer_user_id'])->delete();
-                $result['data'] = \DB::table('room_user')->insert([
-                    'room_id' => $room->id,
-                    'user_id' => $user['id'],
-                    'date_in' => date('Y-m-d', time()),
-                    'contract_id' => $contract->id
-                ]);
-            }
-            // Khách vãn lai
-            if ($data['user_type'] == 2) {
-                if (!$contract) {
-                    $user->delete();
-                    return false;
-                }
-                $result['data'] = \DB::table('room_guest_user')->insert([
-                    'room_id' => $room->id,
-                    'guest_user_id' => $user['id'],
-                    'date_in' => date('Y-m-d', time()),
-                    'contract_id' => $contract->id
-                ]);
-            }
-            if ($result['data']) {
-                $roomRepository->find($room->id);
-                $result['data'] = $contract->toArray();
-                return $result;
-            }
-        } catch (\Exception $e) {
-            \Log::error('Fail to create contract, Error: ' . $e->getMessage());
-        }
-        return false;
-    }
-
-    public function cancelContract($id)
-    {
-        $result = ['data' => null, 'error' => ''];
-//        return dd(\DB::table('room_user')->where(['active' => 1, 'contract_id' => $id])->update(['active' => 1]));
-        try {
-            if (\DB::table('room_user')->where(['active' => 1, 'contract_id' => $id])->exists()) {
-                if (
-                    \DB::table('room_user')->where(['active' => 1, 'contract_id' => $id])->update(['active' => 0])
-                    && $this->find($id)->update(['active' => 0])
-                ) {
-
-                    $result['data'] = true;
-                    return $result;
-                }
-            }
-            if (\DB::table('room_guest_user')->where(['active' => 1, 'contract_id' => $id])->exists()) {
-                if (
-                    \DB::table('room_guest_user')->where(['active' => 1, 'contract_id' => $id])->update(['active' => 0])
-                    && $this->find($id)->update(['active' => 0])
-                ) {
-                    $result['data'] = true;
-                    return $result;
-                }
-            }
-        } catch (\Exception $e) {
-            \Log::error('Can\'t update active column of contract id:' . $id . ' Error: ' . $e->getMessage());
-        }
-        $result['data'] = false;
         return $result;
     }
 
-    public function renewContract($id, $expired_at)
+    public function cancelInvoice($id)
     {
         $result = ['data' => false, 'error' => ''];
-        $contract = $this->find($id);
-        if ($contract->active !== 1) {
-            $result['error'] = 'Hợp đồng này đã kết thúc, không thể gia hạn!';
+        if ($this->find($id)->state !== config('app.invoice_state.pending')) {
+            $result['error'] = 'Phiếu thu này đã được thanh toán hoặc bị hủy!';
             return $result;
         }
-        if (
-            strtotime(TrovieHelper::converDateFormat($expired_at))
-            <= strtotime(TrovieHelper::converDateFormat($contract->expired_at)) + (86400 * 30)
-        ) {
-            $result['error'] = 'Thời hạn hợp đồng mới phải lâu hơn thời hạn cũ ít nhât 1 tháng!';
-            return $result;
+        if ($this->update($id, ['updated_at' => time(), 'state' => config('app.invoice_state.cancel')])) {
+            $result['data'] = $id;
         }
-        $result['data'] = $this->update($id, [
-            'expired_at' => TrovieHelper::converDateFormat($expired_at),
-            'updated_at' => date('Y-m-d', time())
-        ]);
+        return $result;
+    }
+
+    public function createInvoice($attributes)
+    {
+        $result = ['data' => false, 'error' => ''];
+        $invoice_keys = ['room_id', 'total_amount', 'created_at', 'updated_at'];
+        $invoice_info = [];
+        foreach ($attributes as $key => $value) {
+            if (in_array($key, $invoice_keys)) {
+                if (in_array($key, ['created_at', 'updated_at'])) {
+                    $invoice_info[$key] = TrovieHelper::convertDateFormat($value);
+                } else {
+                    $invoice_info[$key] = $value;
+                }
+            }
+        }
+        $result['data'] = $this->create($invoice_info);
+        if ($result['data']) {
+            \DB::table('invoice_details')->insert(
+                array_map(function ($value) use ($result) {
+                    return array_merge($value, ['invoice_id' => $result['data']->id]);
+                }, $attributes['details'])
+            );
+        }
         return $result;
     }
 }

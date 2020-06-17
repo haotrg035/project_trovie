@@ -39,8 +39,11 @@ class UserSeeder extends Seeder
             $token = $i . \App\Helper\TrovieHelper::generateRandomString(config('app.user_invitation_token_length') - strlen($i . ''));
             $userInviteTokens[] = [
                 'user_id' => $i,
-                'invite_token' => $token,
-                'expired_at' => date('Y-m-d H:i:s', time() + (config('app.user_invitation_token_minutes') * 60))
+                'token' => $token,
+                'expired_at' => date('Y-m-d H:i:s',
+                    time() + \App\Helper\TrovieHelper::getMinuteToTimeStamp(config('app.user_invitation_token_minutes'))),
+                'next_generate_at' => date('Y-m-d H:i:s',
+                    time() + \App\Helper\TrovieHelper::getMinuteToTimeStamp(3)),
             ];
         }
         DB::table('user_invite_tokens')->insert($userInviteTokens);

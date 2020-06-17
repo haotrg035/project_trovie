@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use function GuzzleHttp\Psr7\str;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {

@@ -72,6 +72,12 @@ class UserController extends BaseController
         return $this->returnResponse($result, 'show', $result);
     }
 
+    public function generateInviteToken(User $user, Request $request)
+    {
+        $result = $this->repository->generateInviteToken($user->id);
+        return $this->returnResponse($result['data'], 'update', $result['data'], $result['error']);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -109,6 +115,6 @@ class UserController extends BaseController
     public function getUserByInviteToken(Request $request)
     {
         $result = $this->repository->getUserByInviteToken($request->token);
-        return $this->returnResponse($result, 'show', $result,'Mã mời không hợp lệ');
+        return $this->returnResponse($result, 'show', $result, 'Mã mời không hợp lệ');
     }
 }

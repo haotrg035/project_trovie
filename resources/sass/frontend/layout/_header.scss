@@ -1,0 +1,135 @@
+.top-header {
+    ul {
+        li {
+            a {
+                color: #ffffff;
+                display: block;
+                padding: .65rem .85rem;
+                @extend %transition-section-item-fast;
+
+                &:hover {
+                    background: #ffffff;
+                    color: var(--color-base);
+                }
+            }
+        }
+    }
+}
+
+.main-header {
+    background: #ffffff;
+    @extend .shadow-xs;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2rem;
+            margin-right: 0;
+            padding: 0;
+            @include gradient-text(45deg, var(--color-base), var(--color-variant));
+        }
+    }
+
+    #main-header__menu {
+        @extend %transition-section-item;
+        @include Responsive(LG) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            @include TransformTranslate(-100%, 0);
+            &.show {
+                opacity: 1;
+                @include TransformTranslate(0, 0);
+            }
+        }
+
+        .close-menu-btn {
+            position: absolute;
+            right: 0;
+        }
+
+        ul.navbar-nav {
+            display: flex;
+            align-items: center;
+            @include Responsive(LG) {
+                background: white;
+                width: 80%;
+                height: 100%;
+            }
+
+            .nav-item {
+                @include Responsive(LG) {
+                    width: 100%;
+                }
+
+                &.home {
+                    .nav-link {
+                        font-size: 1.4rem;
+                        padding: .7rem 1.8rem;
+                    }
+                }
+
+                .nav-link {
+                    color: var(--color-base);
+                    font-size: .95rem;
+                    padding: 1rem 1.8rem;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    @extend %transition-section-item-fast;
+                }
+
+                .dropdown-menu {
+                    @include Rounded(0);
+                    @extend .shadow-xs;
+                    margin: 0;
+                    padding: 0;
+                    @include Responsive(LG) {
+                        position: relative;
+                        top: 0;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        border: none;
+                    }
+
+                    .menu-item {
+                        .nav-link {
+                            color: var(--color-variant-3);
+                            background: #ffffff;
+                            padding: .65rem 1.5rem;
+                            font-size: .9rem;
+
+                            @include Responsive(LG) {
+                                padding-left: 3rem;
+                            }
+
+                            &:hover {
+                                background: var(--color-base);
+                                color: white;
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    .nav-link {
+                        background: var(--color-base);
+                        color: white;
+                    }
+
+                    & > .dropdown-menu {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

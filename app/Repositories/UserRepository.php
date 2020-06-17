@@ -3,8 +3,12 @@
 
 namespace App\Repositories;
 
+use App\Helper\TrovieHelper;
 use App\Models\User;
+use App\Models\UserDetail;
+use App\Models\UserInviteToken;
 use App\Repositories\Interfaces\UserEloquentRepositoryInterface;
+use Illuminate\Support\Str;
 
 class UserRepository extends EloquentRepository implements UserEloquentRepositoryInterface
 {
@@ -14,20 +18,70 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
         return User::class;
     }
 
-    public function getUser($id)
+    public function getUser($id, $relations = [])
     {
-        $user = $this->_model->where('id', $id)->first(['id', 'avatar', 'birthday', 'email', 'full_name', 'gender']);
-
+        $user = $this->find($id, $relations);
+        if (!empty($user['inviteToken'])) {
+            if (time() > strtotime($user['inviteToken']['expired_at'])) {
+                $user['inviteToken']['token'] = '';
+            }
+        }
         if ($user) {
             return $user->toArray();
         }
         return false;
     }
 
+    public function generateInviteToken($id)
+    {
+        $result = ['data' => false, 'error' => ''];
+        $user = $this->find($id)->toArray();
+        $token = '';
+
+        if ($user['state'] !== 0) {
+            $result['error'] = 'Bạn đang ở trọ. Không thể tạo mã mời!';
+            return $result;
+        }
+        $userToken = UserInviteToken::where('user_id', $user['id'])->first();
+        if ($userToken) {
+            if (time() < strtotime($userToken->next_generate_at)) {
+                $result['error'] = 'Vui lòng chờ ' . config('app.user_invitation_token_regen_at') . ' phút trước khi tạo một mã mời mới!';
+                return $result;
+            }
+            if ($userToken->count() > 0) {
+                UserInviteToken::destroy($userToken->token);
+            }
+        }
+        do {
+            $token = Str::random(config('app.user_invitation_token_length'));
+        } while (
+            UserInviteToken::where('expired_at', '>=', date('Y-m-d H:i:s', time()))
+                ->where('token', $token)->count() > 0
+        );
+        $token_info = [
+            'token' => $token,
+            'user_id' => $user['id'],
+            'expired_at' => date(
+                'Y-m-d H:i:s',
+                time() + TrovieHelper::getMinuteToTimeStamp(config('app.user_invitation_token_minutes'))
+            ),
+            'next_generate_at' => date(
+                'Y-m-d H:i:s',
+                time() + TrovieHelper::getMinuteToTimeStamp(config('app.user_invitation_token_regen_at'))
+            ),
+        ];
+
+        if (UserInviteToken::create($token_info)->toArray()) {
+            $result['data'] = $token_info;
+            return $result;
+        }
+        return $result;
+    }
+
     public function getUserByInviteToken($token)
     {
         $user = \DB::table('user_invite_tokens')
-            ->where('invite_token', $token)->first();
+            ->where('token', $token)->first();
         $userHasRoom = \DB::table('room_user')->where('active', 1)->where('user_id', $user->user_id)->exists();
         if ($user && !$userHasRoom) {
             $userRepository = new UserRepository();
@@ -55,6 +109,31 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
                 return $result;
             }
             return false;
+        }
+        return false;
+    }
+
+    public function updateUser($id, $attributes)
+    {
+        $user_info_keys = ['full_name', 'email', 'gender', 'birthday'];
+        $user_detail_keys = ['address', 'phone', 'id_card', 'id_card_date', 'id_card_address', 'desc'];
+        $user_info = [];
+        $user_detail_info = [];
+        foreach ($attributes as $key => $attribute) {
+            if (in_array($key, ['birthday', 'id_card_date'])) {
+                $attribute = TrovieHelper::convertDateFormat($attribute);
+            }
+            if (in_array($key, $user_info_keys)) {
+                $user_info[$key] = $attribute;
+            }
+            if (in_array($key, $user_detail_keys)) {
+                $user_detail_info[$key] = $attribute;
+            }
+        }
+
+        $userUpdated = $this->update($id, $user_info);
+        if ($userUpdated && UserDetail::find($id)->update($user_detail_info)) {
+            return true;
         }
         return false;
     }

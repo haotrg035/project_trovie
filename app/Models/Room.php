@@ -79,6 +79,11 @@ class Room extends Model
         return $this->hasMany(RoomGallery::class, 'room_id', 'id');
     }
 
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'room_id', 'id');
+    }
+
     public function getPriceAttribute($value)
     {
         return TrovieHelper::currencyFormat($value);
