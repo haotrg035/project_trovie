@@ -2133,7 +2133,8 @@ room_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ColNames>room_id
 user_id
-date_in</ColNames>
+date_in
+contract_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="469" parent="258" name="room_user_room_id_foreign">

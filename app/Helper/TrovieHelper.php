@@ -15,16 +15,16 @@ class  TrovieHelper
         return str_replace('.', '', $string);
     }
 
-    public static function shortCurrencyFormat($int)
+    public static function currencyFormatWord($int)
     {
         if (is_numeric($int)) {
             if ($int >= 1000000000) {
                 return round($int / 1000000000, 2) . " tỷ";
             } else {
                 if ($int >= 1000000) {
-                    return round($int / 1000000, 2) . " triệu";
+                    return round($int / 1000000, 2) . " tr";
                 } else {
-                    return tien($int);
+                    return TrovieHelper::currencyFormat($int) . ' đ';
                 }
             }
         } else {

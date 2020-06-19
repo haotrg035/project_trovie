@@ -21,12 +21,17 @@
     <!--     Fonts and icons     -->
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="{{asset('user/css/libs.css')}}"/>
+    <link rel="stylesheet" href="{{asset(config('app.frontend_theme').'/css/libs.css')}}"/>
     <link rel="stylesheet" href="{{mix(config('app.frontend_theme').'/css/app.css')}}"/>
     @yield('style')
 </head>
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=2030381217235124&autoLogAppEvents=1"
+        nonce="p2z5ZUJr"></script>
 @include('front-end._header')
+@include('front-end._banner-search')
 @yield('body')
 @include('front-end._footer')
 <!--   Core JS Files   -->

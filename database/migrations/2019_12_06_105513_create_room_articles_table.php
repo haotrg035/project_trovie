@@ -1,5 +1,3 @@
-
-
 <?php
 
 use Illuminate\Support\Facades\Schema;
@@ -16,13 +14,11 @@ class CreateRoomarticlesTable extends Migration
     public function up()
     {
         Schema::create('room_articles', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
-            $table->string('title', 60);
-            $table->datetime('date_post');
-            $table->integer('host_id')->unsigned();
+            $table->id();
+            $table->string('title', 255);
+            $table->text('content');
             $table->integer('room_id')->unsigned();
             $table->timestamps();
-            $table->index(["host_id"]);
             $table->index(["room_id"]);
         });
     }

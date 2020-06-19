@@ -20,6 +20,7 @@ Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
         Route::get('/show', 'Api\UserController@show')->name('.show');
         Route::get('/generate-invite-token/{user:username}', 'Api\UserController@generateInviteToken')
             ->name('.generate_invite_token');
+        Route::post('/update-avatar/{user}', 'Api\UserController@updateAvatar')->name('.update_avatar');
     });
 
     Route::name('api.user')->group(function () {

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
+use App\Models\RoomArticle;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class RoomArticleController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('front-end.index.index');
+        //
     }
 
     /**
@@ -30,7 +31,7 @@ class IndexController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,21 +42,26 @@ class IndexController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param \App\Models\RoomArticle $roomArticle
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(RoomArticle $roomArticle)
     {
+        return view('front-end.room-article.detail');
+    }
 
+    public function search(Request $request)
+    {
+        return view('front-end.room-article.search');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param \App\Models\RoomArticle $roomArticle
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RoomArticle $roomArticle)
     {
         //
     }
@@ -63,11 +69,11 @@ class IndexController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\RoomArticle $roomArticle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RoomArticle $roomArticle)
     {
         //
     }
@@ -75,11 +81,16 @@ class IndexController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param \App\Models\RoomArticle $roomArticle
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RoomArticle $roomArticle)
     {
         //
+    }
+
+    protected function viewName()
+    {
+       return 'Tin Đăng';
     }
 }

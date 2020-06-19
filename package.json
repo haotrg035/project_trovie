@@ -31,7 +31,9 @@
         "flatpickr": "^4.6.3",
         "font-awesome": "^4.7.0",
         "jszip": "^3.4.0",
+        "lightslider": "^1.1.6",
         "pdfmake": "^0.1.65",
+        "swiper": "^5.4.5",
         "tata-js": "^0.1.5"
     }
 }

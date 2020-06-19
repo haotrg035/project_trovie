@@ -38,8 +38,7 @@ return [
         'truyền hình cáp',
         'máy giặt',
         'bãi đổ xe',
-        'có lầu',
-        'nam nữ ở chung'
+        'có gác',
     ],
 
     'default_service_units' => ['Tháng', 'kV', 'm3', 'Cái'],

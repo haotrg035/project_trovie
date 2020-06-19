@@ -117,4 +117,12 @@ class UserController extends BaseController
         $result = $this->repository->getUserByInviteToken($request->token);
         return $this->returnResponse($result, 'show', $result, 'Mã mời không hợp lệ');
     }
+
+    public function updateAvatar(Request $request, User $user)
+    {
+//        $this->checkUpdateAuth($user);
+        $result = $this->repository->updateAvatar($request->file('avatar'), $user->id);
+        return $this->returnResponse($result, 'update', ['image' => asset($result)]);
+    }
+
 }

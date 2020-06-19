@@ -2,84 +2,52 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50936285-61d7-4bf1-ada2-6d577016bf8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/frontend/_header.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/user/profile/show.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/_animation.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/_mixin.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/app.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_address-result-list.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_button.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_host-card.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_input.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_invoice-entries.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_main-card.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_room-card.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_trovie-avatar-upload.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_trovie-gallery-uploader.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_master.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/libs.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front-end/_footer.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front-end/_header.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front-end/index/_index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front-end/master.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/invoice/modal/create-modal.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/profile/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/frontend/_lib.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/frontend/_roomArticle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_footer.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_room_article.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/front-end/_banner-search.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/front-end/index/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/front-end/room-article/detail.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/front-end/room-article/search.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Helper/TrovieHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helper/TrovieHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/InvoiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/InvoiceController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InvoiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InvoiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Invoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/InvoiceDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/InvoiceDetail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Room.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Room.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/UserDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/UserDetail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/ContractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/ContractRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/EloquentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/EloquentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/HostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/HostRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Interfaces/EloquentRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Interfaces/EloquentRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Interfaces/InvoiceEloquentRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Interfaces/InvoiceEloquentRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontEnd/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontEnd/IndexController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/Interfaces/UserEloquentRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Interfaces/UserEloquentRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/InvoiceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/InvoiceRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/View/Components/MainCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/Components/MainCard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/InvoiceFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/InvoiceFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_user_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_user_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_06_13_020926_create_user_invite_tokens.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_06_13_020926_create_user_invite_tokens.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_06_15_203637_create_invoice_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_06_15_203637_create_invoice_details_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/InvoiceSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/InvoiceSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/UserSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UserSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/filepath.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filepath.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_articles_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_06_06_150528_create_genaral_foreign_key.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_06_06_150528_create_genaral_foreign_key.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/RoomSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/RoomSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/css/libs.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/css/libs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/contract/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/contract/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/host/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/host/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/invoice/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/invoice/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/user/js/service/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/service/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/user/TrovieHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/TrovieHelper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/user/contract/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/contract/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/user/invoice/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/invoice/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/vi/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vi/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/user/component/_input.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/component/_input.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/user/component/_main-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/component/_main-card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/user/component/_trovie-avatar-upload.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/component/_trovie-avatar-upload.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/user/layout/_sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/layout/_sidebar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/main-card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/main-card.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/panel-header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/panel-header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/trovie-avatar-upload.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/trovie-avatar-upload.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/_sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/host/room/modal/_room-modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/host/room/modal/_room-modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/invoice/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/invoice/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/invoice/modal/invoice-modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/invoice/modal/invoice-modal.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/component/_host-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_host-card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/component/_invoice-entries.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_invoice-entries.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/component/_main-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_main-card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/component/_room-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_room-card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/layout/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/layout/_index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/libs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/libs.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front-end/_footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/_footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front-end/_header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/_header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front-end/index/_index.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front-end/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/profile/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/profile/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
@@ -121,6 +89,34 @@
         <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="hosts: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="room_articles: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="rooms: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="users: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -267,25 +263,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/sass/frontend/layout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/front-end/room-article" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/front-end/room-article" />
+      <recent name="$PROJECT_DIR$/resources/sass/frontend/component" />
+      <recent name="$PROJECT_DIR$/resources/js/frontend" />
+      <recent name="$PROJECT_DIR$/resources/sass/frontend/layout" />
+      <recent name="$PROJECT_DIR$/storage/app/public" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/storage/app/public" />
+      <recent name="$PROJECT_DIR$/storage/app/public/app/banner" />
       <recent name="$PROJECT_DIR$/resources/js/user/profile" />
       <recent name="$PROJECT_DIR$/resources/views/user/profile" />
       <recent name="$PROJECT_DIR$/resources/views/user/contracts" />
-      <recent name="$PROJECT_DIR$/resources/js/user" />
-      <recent name="$PROJECT_DIR$/resources/js/user/service" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/sass/frontend/layout" />
-      <recent name="$PROJECT_DIR$/resources/views/front-end" />
-      <recent name="$PROJECT_DIR$/resources/sass/frontend" />
-      <recent name="$PROJECT_DIR$/resources/views/user/host" />
-      <recent name="$PROJECT_DIR$/resources/views/user/invoice/modal" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -390,7 +386,8 @@
       <workItem from="1592036491689" duration="18598000" />
       <workItem from="1592155496093" duration="1333000" />
       <workItem from="1592194732716" duration="37931000" />
-      <workItem from="1592277304724" duration="35707000" />
+      <workItem from="1592277304724" duration="43343000" />
+      <workItem from="1592447679175" duration="34624000" />
     </task>
     <servers />
   </component>
@@ -430,11 +427,11 @@
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="561" y="24" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.24.1600.831@0.24.1600.831" timestamp="1589987153534" />
-    <state x="644" y="219" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590828534724">
+    <state x="644" y="219" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592446268058">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="537" y="184" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.24.1600.831@0.24.1600.831" timestamp="1589531633107" />
-    <state x="644" y="219" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1590828534724" />
+    <state x="644" y="219" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592446268058" />
     <state x="531" y="291" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#1" timestamp="1589009028085">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
@@ -467,11 +464,11 @@
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="513" y="224" key="NewPhpClassDialog/0.24.1600.831@0.24.1600.831" timestamp="1589574038897" />
-    <state x="695" y="418" key="NewPhpFileDialog" timestamp="1592412700989">
+    <state x="695" y="418" key="NewPhpFileDialog" timestamp="1592586556484">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="579" y="348" key="NewPhpFileDialog/0.24.1600.831@0.24.1600.831" timestamp="1589376911731" />
-    <state x="695" y="418" key="NewPhpFileDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592412700989" />
+    <state x="695" y="418" key="NewPhpFileDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592586556484" />
     <state x="0" y="24" width="1600" height="831" key="SettingsEditor" timestamp="1590496212434">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
@@ -497,11 +494,11 @@
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="463" y="22" width="1724" height="869" maximized="true" key="dock-window-1/0.24.1920.1011@0.24.1920.1011" timestamp="1590840651995" />
-    <state x="380" y="24" width="1160" height="1011" key="find.popup" timestamp="1592403730681">
+    <state x="380" y="24" width="1160" height="1011" key="find.popup" timestamp="1592588119746">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="317" y="24" width="966" height="831" key="find.popup/0.24.1600.831@0.24.1600.831" timestamp="1590244136299" />
-    <state x="380" y="24" width="1160" height="1011" key="find.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592403730680" />
+    <state x="380" y="24" width="1160" height="1011" key="find.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592588119746" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1590496316522">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
@@ -510,20 +507,20 @@
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="708" y="160" key="refactoring.ChangeSignatureDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592385222364" />
-    <state x="556" y="226" width="807" height="824" key="run.anything.popup" timestamp="1592246185219">
+    <state x="556" y="226" width="807" height="824" key="run.anything.popup" timestamp="1592588665691">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="463" y="190" width="672" height="677" key="run.anything.popup/0.24.1600.831@0.24.1600.831" timestamp="1590245282846" />
-    <state x="556" y="226" width="807" height="824" key="run.anything.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592246185219" />
+    <state x="556" y="226" width="807" height="824" key="run.anything.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592588665691" />
     <state x="556" y="209" width="807" height="825" key="search.everywhere.popup" timestamp="1592385592678">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="463" y="176" width="672" height="678" key="search.everywhere.popup/0.24.1600.831@0.24.1600.831" timestamp="1589794236562" />
     <state x="556" y="209" width="807" height="825" key="search.everywhere.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592385592678" />
-    <state x="635" y="387" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1590738593611">
+    <state x="635" y="387" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1592448875073">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="529" y="322" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.24.1600.831@0.24.1600.831" timestamp="1589987180393" />
-    <state x="635" y="387" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1590738593611" />
+    <state x="635" y="387" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592448875073" />
   </component>
 </project>

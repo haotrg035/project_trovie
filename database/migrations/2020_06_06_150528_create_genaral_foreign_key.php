@@ -31,5 +31,9 @@ class CreateGenaralForeignKey extends Migration
         Schema::table('contract_room_details', function (Blueprint $table) {
             $table->foreign('contract_id')->references('id')->on('contracts');
         });
+
+        Schema::table('room_articles',function (Blueprint $table){
+            $table->foreign('room_id')->references('id')->on('rooms');
+        });
     }
 }

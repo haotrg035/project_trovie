@@ -19,6 +19,9 @@
 .main-header {
     background: #ffffff;
     @extend .shadow-xs;
+    position: sticky;
+    top: 0;
+    z-index: 99999;
 
     nav {
         display: flex;
@@ -79,18 +82,25 @@
 
                 .nav-link {
                     color: var(--color-base);
-                    font-size: .95rem;
-                    padding: 1rem 1.8rem;
+                    font-size: .9rem;
+                    padding: .65rem 1.3rem;
                     font-weight: bold;
                     text-transform: uppercase;
                     @extend %transition-section-item-fast;
+                    @include ResponsiveMin(LG) {
+                        @include Rounded(20px);
+                    }
                 }
 
                 .dropdown-menu {
-                    @include Rounded(0);
+                    @include Rounded(0px);
                     @extend .shadow-xs;
                     margin: 0;
                     padding: 0;
+                    @include ResponsiveMin(LG) {
+                        padding: .25rem;
+                        @include Rounded(8px);
+                    }
                     @include Responsive(LG) {
                         position: relative;
                         top: 0;
@@ -104,8 +114,17 @@
                         .nav-link {
                             color: var(--color-variant-3);
                             background: #ffffff;
-                            padding: .65rem 1.5rem;
+                            padding: .35rem 1.35rem;
                             font-size: .9rem;
+
+                            @include ResponsiveMin(LG) {
+                                @include Rounded(8px);
+                                margin-bottom: .25rem;
+
+                                &:last-child {
+                                    margin-bottom: 0;
+                                }
+                            }
 
                             @include Responsive(LG) {
                                 padding-left: 3rem;

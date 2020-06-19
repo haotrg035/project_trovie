@@ -10,11 +10,11 @@
                 {{--                <x-slot name="title">Ảnh Đại Diện</x-slot>--}}
                 <x-trovie-avatar-upload image="{{$data['data']['avatar']}}" method="POST" title="Ảnh đại diện"
                                         class="square rounded-circle"
-                                        upload-url="{{route('api.user.host.update_avatar',$data['data']['id'])}}">
+                                        upload-url="{{route('api.user.update_avatar',$data['data']['id'])}}">
                 </x-trovie-avatar-upload>
             </x-main-card>
             <div class=" mt-3 d-flex flex-column align-items-center">
-                <h3 class="color-base-text mb-3">{{$data['data']['full_name']}}</h3>
+                <h3 class="color-base-text text-center mb-3">{{$data['data']['full_name']}}</h3>
                 <div class="font-weight-bold d-flex w-100 justify-content-center">
                     <p class="mr-3">
                         <i class="fa fa-intersex color-base-text"

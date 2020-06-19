@@ -1,0 +1,47 @@
+.page-section__footer {
+    background: #ddd;
+    //color: #ffffff;
+    padding: 2rem 0;
+}
+
+.footer-item {
+    &--logo {
+        @include Responsive(MD) {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .footer-item__title {
+        font-size: 1.15rem;
+        margin-bottom: .65rem;
+        color: var(--color-base);
+        font-weight: bold;
+    }
+
+    .footer-item__list {
+        .list__item {
+            margin-top: .35rem;
+            line-height: 1.25em;
+
+            a {
+                color: var(--color-variant-3);
+                padding-left: 1rem;
+                position: relative;
+                display: block;
+
+                &:hover {
+                    color: var(--color-base);
+                }
+
+                &::after {
+                    position: absolute;
+                    content: '\f105';
+                    font-family: FontAwesome, serif;
+                    top: 0;
+                    left: 0;
+
+                }
+            }
+        }
+    }
+}

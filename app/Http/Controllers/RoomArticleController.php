@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\RoomArticle;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class RoomArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('front-end.index.index');
+        //
     }
 
     /**
@@ -41,21 +41,21 @@ class IndexController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\RoomArticle  $roomArticle
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(RoomArticle $roomArticle)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\RoomArticle  $roomArticle
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RoomArticle $roomArticle)
     {
         //
     }
@@ -64,10 +64,10 @@ class IndexController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\RoomArticle  $roomArticle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RoomArticle $roomArticle)
     {
         //
     }
@@ -75,10 +75,10 @@ class IndexController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\RoomArticle  $roomArticle
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RoomArticle $roomArticle)
     {
         //
     }

@@ -3,6 +3,7 @@
 
 namespace App\Repositories;
 
+use App\Helper\TrovieFile;
 use App\Helper\TrovieHelper;
 use App\Models\User;
 use App\Models\UserDetail;
@@ -134,6 +135,22 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
         $userUpdated = $this->update($id, $user_info);
         if ($userUpdated && UserDetail::find($id)->update($user_detail_info)) {
             return true;
+        }
+        return false;
+    }
+
+    public function updateAvatar($file, $id)
+    {
+        $current_user = $this->find($id);
+        $new_name = '';
+        if (!empty($current_user->avatar)) {
+            $new_name = TrovieFile::updateFIle($file, $current_user->avatar, config('filepath.images.avatar.user'));
+        } else {
+            $new_name = TrovieFile::storeFile($file, config('filepath.images.avatar.user'));
+        }
+        $current_user->avatar = $new_name;
+        if ($current_user->save()) {
+            return 'storage/' . $new_name;
         }
         return false;
     }

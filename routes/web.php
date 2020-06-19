@@ -10,8 +10,10 @@
 |
 */
 
-Route::prefix('/')->name('frontend')->group(function () {
-    Route::get('/', 'FrontEnd\IndexController@index')->name('.index');
+Route::prefix('/')->name('frontend')->namespace('FrontEnd')->group(function () {
+    Route::get('/', 'IndexController@index')->name('.index');
+    Route::get('/phong', 'RoomArticleController@show')->name('.detail');
+    Route::get('/tim-kiem', 'RoomArticleController@search')->name('.search');
 });
 
 Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])->group(function () {

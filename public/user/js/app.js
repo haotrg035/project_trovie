@@ -6432,7 +6432,7 @@ module.exports = {
 
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css":
 /*!***************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--8-1!./node_modules/postcss-loader/src??ref--8-2!./node_modules/tata-js/src/tata.css ***!
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/postcss-loader/src??ref--7-2!./node_modules/tata-js/src/tata.css ***!
   \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -40569,7 +40569,7 @@ module.exports = function (css) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--8-1!../../postcss-loader/src??ref--8-2!./tata.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css");
+var content = __webpack_require__(/*! !../../css-loader??ref--7-1!../../postcss-loader/src??ref--7-2!./tata.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/tata-js/src/tata.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -41422,17 +41422,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
-/***/ "./resources/sass/frontend/libs.scss":
-/*!*******************************************!*\
-  !*** ./resources/sass/frontend/libs.scss ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "./resources/sass/user/app.scss":
 /*!**************************************!*\
   !*** ./resources/sass/user/app.scss ***!
@@ -41445,9 +41434,9 @@ document.addEventListener('DOMContentLoaded', function () {
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/js/user/sidebar.js ./resources/js/components/input.js ./resources/js/components/trovie_avatar_upload.js ./resources/sass/user/app.scss ./resources/sass/frontend/libs.scss ./resources/sass/frontend/app.scss ***!
-  \*************************************************************************************************************************************************************************************************************************************************************/
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/js/user/sidebar.js ./resources/js/components/input.js ./resources/js/components/trovie_avatar_upload.js ./resources/sass/user/app.scss ./resources/sass/frontend/app.scss ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41456,7 +41445,6 @@ __webpack_require__(/*! /var/www/html/trovie/resources/js/user/sidebar.js */"./r
 __webpack_require__(/*! /var/www/html/trovie/resources/js/components/input.js */"./resources/js/components/input.js");
 __webpack_require__(/*! /var/www/html/trovie/resources/js/components/trovie_avatar_upload.js */"./resources/js/components/trovie_avatar_upload.js");
 __webpack_require__(/*! /var/www/html/trovie/resources/sass/user/app.scss */"./resources/sass/user/app.scss");
-__webpack_require__(/*! /var/www/html/trovie/resources/sass/frontend/libs.scss */"./resources/sass/frontend/libs.scss");
 module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/sass/frontend/app.scss */"./resources/sass/frontend/app.scss");
 
 

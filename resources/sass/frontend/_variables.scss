@@ -63,7 +63,12 @@ a {
     box-orient: vertical;
     overflow: hidden;
 }
-
+.rounded-card {
+    background: white;
+    padding: 1rem;
+    @extend .shadow-xs;
+    @include Rounded(16px);
+}
 %transition-section-item-fast {
     -webkit-transition: var(--transition-section-item-fast);
     -moz-transition: var(--transition-section-item-fast);
