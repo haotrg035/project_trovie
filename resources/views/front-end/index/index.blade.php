@@ -1,20 +1,24 @@
 @extends('front-end.master')
 @section('body')
-    <section class="page-products page-section">
-        <div class="container">
-            <div class="page-section__header">
-                <p class="header__title">PHÒNG TRỌ</p>
-                <a href="#" class="header__more">Xem thêm <i class="fa fa-angle-double-right"
-                                                             aria-hidden="true"></i></a>
-            </div>
-            <div class="row row--custom">
-                <div class="col-12 col-md-6 col-xl-3 col--custom">
-                    <x-front-end.room-card></x-front-end.room-card>
+    @if(!empty($data['recent_articles']))
+        <section class="page-products page-section">
+            <div class="container">
+                <div class="page-section__header">
+                    <p class="header__title">PHÒNG TRỌ VỪA ĐĂNG</p>
+                    <a href="#" class="header__more">Xem thêm <i class="fa fa-angle-double-right"
+                                                                 aria-hidden="true"></i></a>
+                </div>
+                <div class="row row--custom">
+                    @foreach($data['recent_articles'] as $article)
+                        <div class="col-12 col-md-6 col-xl-3 col--custom">
+                            <x-front-end.room-card :article-detail="$article"></x-front-end.room-card>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="page-place page-section">
+        </section>
+    @endif
+    <section class="page-place page-section mt-3">
         <div class="container">
             <div class="page-section__header">
                 <p class="header__title">TÌM THEO ĐỊA ĐIỂM</p>

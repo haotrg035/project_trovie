@@ -1,15 +1,4 @@
 #table-contract-list {
-    @include Responsive(MD) {
-        th {
-            font-size: 11px;
-        }
-
-        th, td {
-            padding: .5rem .25rem;
-            font-size: 12px;
-        }
-
-    }
     @include Responsive(XL) {
         .contract-state {
             span {

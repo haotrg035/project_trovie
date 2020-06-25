@@ -14,13 +14,14 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
      * @var Model
      */
     protected $_model;
-
+    protected $_result;
     /**
      * EloquentRepository constructor.
      */
     public function __construct()
     {
         $this->setModel();
+        $this->_result = ['data' => false,'error' =>''];
     }
 
     /**
@@ -115,7 +116,7 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
 
     public function getUnits()
     {
-       $units = \DB::table('service_units')->get()->toArray();
-       return $units;
+        $units = \DB::table('service_units')->get()->toArray();
+        return $units;
     }
 }

@@ -5,10 +5,12 @@ namespace App\Providers;
 use App\Models\Contract;
 use App\Models\Host;
 use App\Models\Room;
+use App\Models\RoomArticle;
 use App\Models\Service;
 use App\Models\UserInviteToken;
 use App\Policies\ContractPolicy;
 use App\Policies\HostPolicy;
+use App\Policies\RoomArticlePolicy;
 use App\Policies\RoomPolicy;
 use App\Policies\ServicetPolicy;
 use App\Policies\UserInviteTokenPolicy;
@@ -29,6 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         Room::class => RoomPolicy::class,
         Contract::class => ContractPolicy::class,
         UserInviteToken::class => UserInviteTokenPolicy::class,
+        RoomArticle::class => RoomArticlePolicy::class,
     ];
 
     /**

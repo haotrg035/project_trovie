@@ -13,6 +13,7 @@
             <p class="link__text">Cá Nhân</p>
         </a>
     </li>
+    <li class="main-sidebar__item--separator"></li>
     <li class="main-sidebar__item">
         <a href="{{route('user.host.index')}}" class="item__link @if(Route::is('user.host.*')) active @endif">
             <figure class="link__icon">
@@ -38,11 +39,19 @@
         </a>
     </li>
     <li class="main-sidebar__item">
-        <a href="{{route('user.invoice.index')}}" class="item__link @if(Route::is('/')) active @endif">
+        <a href="{{route('user.invoice.index')}}" class="item__link @if(Route::is('user.invoice.*')) active @endif">
             <figure class="link__icon">
                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
             </figure>
             <p class="link__text">Hóa Đơn</p>
+        </a>
+    </li>
+    <li class="main-sidebar__item">
+        <a href="{{route('user.room_article.index')}}" class="item__link @if(Route::is('user.room_article.*')) active @endif">
+            <figure class="link__icon">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </figure>
+            <p class="link__text">Đăng Tin</p>
         </a>
     </li>
     <li class="main-sidebar__item">

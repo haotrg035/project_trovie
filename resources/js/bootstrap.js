@@ -65,6 +65,7 @@ window.axios = require('axios');
  * import tata toast js
  */
 window.tata = require('tata-js');
+
 window.__csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 if (document.querySelector('meta[name="access_token"]') !== null) {
     window.__apiToken = document.querySelector('meta[name="access_token"]').getAttribute('content');

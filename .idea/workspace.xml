@@ -2,26 +2,177 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50936285-61d7-4bf1-ada2-6d577016bf8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/frontend/_lib.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/frontend/_roomArticle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_footer.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_room_article.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front-end/_banner-search.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front-end/index/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front-end/room-article/detail.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front-end/room-article/search.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Repositories/Interfaces/RoomArticleEloquentRepositoryInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Repositories/RoomArticleRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/base.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/bubble.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/bubble/toolbar.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/bubble/tooltip.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/core.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/align-center.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/align-justify.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/align-left.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/align-right.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/attachment.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/audio.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/authorship.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/background.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/blockquote.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/bold.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/clean.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/code.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/color.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/comment.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/direction-ltr.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/direction-rtl.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/dropdown.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/embed.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/emoji.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/float-center.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/float-full.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/float-left.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/float-right.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/font.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/formula.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/hashtag.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/header-2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/header-3.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/header-4.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/header-5.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/header-6.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/header.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/horizontal-rule.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/image.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/indent.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/italic.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/link.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/list-bullet.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/list-check.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/list-ordered.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/map.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/mention.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/more.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/outdent.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/redo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/size-decrease.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/size-increase.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/size.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/spacing.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/speech.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/strike.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/subscript.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/superscript.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-border-all.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-border-bottom.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-border-left.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-border-none.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-border-outside.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-border-right.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-border-top.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-delete-cells.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-delete-columns.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-delete-rows.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-insert-cells.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-insert-columns.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-insert-rows.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-merge-cells.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table-unmerge-cells.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/table.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/underline.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/undo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/icons/video.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/snow.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/snow/toolbar.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/assets/snow/tooltip.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/blots/block.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/blots/break.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/blots/container.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/blots/cursor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/blots/embed.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/blots/inline.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/blots/scroll.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/blots/text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core/editor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core/emitter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core/logger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core/module.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core/polyfill.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core/quill.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core/selection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/core/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/dist/quill.bubble.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/dist/quill.core.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/dist/quill.core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/dist/quill.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/dist/quill.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/dist/quill.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/dist/quill.snow.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/align.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/background.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/blockquote.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/bold.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/color.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/direction.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/font.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/image.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/indent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/italic.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/link.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/list.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/size.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/strike.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/underline.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/formats/video.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/modules/clipboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/modules/formula.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/modules/history.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/modules/keyboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/modules/syntax.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/modules/toolbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/quill.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/themes/base.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/themes/bubble.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/themes/snow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/ui/color-picker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/ui/icon-picker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/ui/icons.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/ui/picker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/lib/quill/ui/tooltip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/user/roomArticle/create.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/user/roomArticle/edit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/user/roomArticle/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/roomArticle/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/roomArticle/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f3522b7e-ab7c-4814-a3ee-5f4b922afd8b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helper/TrovieHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helper/TrovieHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/RoomArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/RoomArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontEnd/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontEnd/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Interfaces/UserEloquentRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Interfaces/UserEloquentRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontEnd/RoomArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontEnd/RoomArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RoomArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RoomArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/GuestUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/GuestUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Host.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Host.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Room.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Room.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/RoomArticle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/RoomArticle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/RoomGallery.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/RoomGallery.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/EloquentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/EloquentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/RoomRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/RoomRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filepath.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filepath.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/View/Components/FrontEnd/RoomCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/Components/FrontEnd/RoomCard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_06_105513_create_room_articles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_06_06_150528_create_genaral_foreign_key.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_06_06_150528_create_genaral_foreign_key.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/RoomSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/RoomSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
@@ -29,24 +180,23 @@
       <change beforePath="$PROJECT_DIR$/public/frontend/css/libs.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/css/libs.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/frontend/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/contract/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/contract/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/host/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/host/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/invoice/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/invoice/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/user/js/service/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/service/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/component/_host-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_host-card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/component/_invoice-entries.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_invoice-entries.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/component/_main-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_main-card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/user/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/user/css/libs.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/css/libs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/user/js/room/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/user/js/room/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/user/room/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/user/room/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/frontend/component/_room-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/component/_room-card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/layout/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/frontend/layout/_index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/layout/_index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/frontend/libs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/frontend/libs.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front-end/_footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/_footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front-end/_header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/_header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front-end/index/_index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front-end/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/user/component/_room-card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/component/_room-card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/user/layout/_contract.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/layout/_contract.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/user/layout/_master.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/layout/_master.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/user/layout/_sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/layout/_sidebar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/user/libs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/user/libs.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/front-end/room-card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/front-end/room-card.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front-end/index/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/index/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/host/room/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/host/room/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/host/room/modal/_room-modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/host/room/modal/_room-modal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/profile/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/profile/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
@@ -95,13 +245,6 @@
         <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="hosts: table" type="dbc44a63:MariaImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
         <item name="room_articles: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
       <path>
@@ -109,14 +252,7 @@
         <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="rooms: table" type="dbc44a63:MariaImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="trovie@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="trovie: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="users: table" type="dbc44a63:MariaImplModel$Table" />
+        <item name="user_details: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -263,25 +399,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/front-end/room-article" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/lib" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/front-end/room-article" />
-      <recent name="$PROJECT_DIR$/resources/sass/frontend/component" />
-      <recent name="$PROJECT_DIR$/resources/js/frontend" />
-      <recent name="$PROJECT_DIR$/resources/sass/frontend/layout" />
-      <recent name="$PROJECT_DIR$/storage/app/public" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/storage/app/public" />
       <recent name="$PROJECT_DIR$/storage/app/public/app/banner" />
       <recent name="$PROJECT_DIR$/resources/js/user/profile" />
       <recent name="$PROJECT_DIR$/resources/views/user/profile" />
       <recent name="$PROJECT_DIR$/resources/views/user/contracts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/lib" />
+      <recent name="$PROJECT_DIR$/resources/js/user/roomArticle" />
+      <recent name="$PROJECT_DIR$/resources/views/user/RoomArticle" />
+      <recent name="$PROJECT_DIR$/app/Repositories" />
+      <recent name="$PROJECT_DIR$/app/Repositories/Interfaces" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -387,7 +523,9 @@
       <workItem from="1592155496093" duration="1333000" />
       <workItem from="1592194732716" duration="37931000" />
       <workItem from="1592277304724" duration="43343000" />
-      <workItem from="1592447679175" duration="34624000" />
+      <workItem from="1592447679175" duration="34825000" />
+      <workItem from="1592632840084" duration="34000" />
+      <workItem from="1592632941923" duration="65975000" />
     </task>
     <servers />
   </component>
@@ -427,11 +565,11 @@
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="561" y="24" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.24.1600.831@0.24.1600.831" timestamp="1589987153534" />
-    <state x="644" y="219" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592446268058">
+    <state x="644" y="219" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592643583927">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="537" y="184" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.24.1600.831@0.24.1600.831" timestamp="1589531633107" />
-    <state x="644" y="219" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592446268058" />
+    <state x="644" y="219" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592643583927" />
     <state x="531" y="291" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#1" timestamp="1589009028085">
       <screen x="0" y="24" width="1600" height="831" />
     </state>
@@ -464,11 +602,11 @@
       <screen x="0" y="24" width="1600" height="831" />
     </state>
     <state x="513" y="224" key="NewPhpClassDialog/0.24.1600.831@0.24.1600.831" timestamp="1589574038897" />
-    <state x="695" y="418" key="NewPhpFileDialog" timestamp="1592586556484">
+    <state x="695" y="418" key="NewPhpFileDialog" timestamp="1592636960396">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="579" y="348" key="NewPhpFileDialog/0.24.1600.831@0.24.1600.831" timestamp="1589376911731" />
-    <state x="695" y="418" key="NewPhpFileDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592586556484" />
+    <state x="695" y="418" key="NewPhpFileDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592636960396" />
     <state x="0" y="24" width="1600" height="831" key="SettingsEditor" timestamp="1590496212434">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
@@ -494,11 +632,11 @@
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="463" y="22" width="1724" height="869" maximized="true" key="dock-window-1/0.24.1920.1011@0.24.1920.1011" timestamp="1590840651995" />
-    <state x="380" y="24" width="1160" height="1011" key="find.popup" timestamp="1592588119746">
+    <state x="380" y="24" width="1160" height="1011" key="find.popup" timestamp="1592640903886">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="317" y="24" width="966" height="831" key="find.popup/0.24.1600.831@0.24.1600.831" timestamp="1590244136299" />
-    <state x="380" y="24" width="1160" height="1011" key="find.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592588119746" />
+    <state x="380" y="24" width="1160" height="1011" key="find.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592640903886" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1590496316522">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
@@ -507,11 +645,11 @@
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="708" y="160" key="refactoring.ChangeSignatureDialog/0.24.1920.1011@0.24.1920.1011" timestamp="1592385222364" />
-    <state x="556" y="226" width="807" height="824" key="run.anything.popup" timestamp="1592588665691">
+    <state x="556" y="226" width="807" height="824" key="run.anything.popup" timestamp="1592859702063">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>
     <state x="463" y="190" width="672" height="677" key="run.anything.popup/0.24.1600.831@0.24.1600.831" timestamp="1590245282846" />
-    <state x="556" y="226" width="807" height="824" key="run.anything.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592588665691" />
+    <state x="556" y="226" width="807" height="824" key="run.anything.popup/0.24.1920.1011@0.24.1920.1011" timestamp="1592859702063" />
     <state x="556" y="209" width="807" height="825" key="search.everywhere.popup" timestamp="1592385592678">
       <screen x="0" y="24" width="1920" height="1011" />
     </state>

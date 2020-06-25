@@ -3,6 +3,7 @@ $room_breakpoint: SM;
 .room-card {
     background: #fff;
     font-size: 14px;
+    overflow: hidden;
     @include Rounded(8px);
     @extend .shadow-xs;
     @extend %transition-section-item-fast;
@@ -41,6 +42,11 @@ $room_breakpoint: SM;
             object-fit: cover;
 
         }
+
+        @include ResponsiveMin(LG) {
+            height: 12rem;
+        }
+
     }
 
     &__body {
@@ -93,6 +99,10 @@ $room_breakpoint: SM;
                     color: var(--color-base);
                     font-weight: bold;
                 }
+            }
+
+            &--acreage {
+                flex: 1 1 auto;
             }
         }
     }

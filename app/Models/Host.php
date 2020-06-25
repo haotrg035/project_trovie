@@ -45,7 +45,9 @@ class Host extends Model
     {
         return $this->hasMany(HostGallery::class, 'host_id', 'id');
     }
-
+    public function getImageAttribute($value){
+        return asset(TrovieFile::checkFile($value));
+    }
     function getCountableInfoAttribute()
     {
         $totalUsers = 0;

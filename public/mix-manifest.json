@@ -9,5 +9,8 @@
     "/user/js/invoice/index.js": "/user/js/invoice/index.js",
     "/user/js/profile/show.js": "/user/js/profile/show.js",
     "/user/js/room/index.js": "/user/js/room/index.js",
+    "/user/js/roomArticle/create.js": "/user/js/roomArticle/create.js",
+    "/user/js/roomArticle/edit.js": "/user/js/roomArticle/edit.js",
+    "/user/js/roomArticle/index.js": "/user/js/roomArticle/index.js",
     "/user/js/service/index.js": "/user/js/service/index.js"
 }

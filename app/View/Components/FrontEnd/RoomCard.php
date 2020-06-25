@@ -10,15 +10,21 @@ class RoomCard extends Component
      * @var bool
      */
     public $horizon;
+    /**
+     * @var array
+     */
+    public $articleDetail;
 
     /**
      * Create a new component instance.
      *
-     * @return void
+     * @param bool $horizon
+     * @param array $articleDetail
      */
-    public function __construct($horizon = false)
+    public function __construct($horizon = false, $articleDetail = [])
     {
         $this->horizon = $horizon;
+        $this->articleDetail = $articleDetail;
     }
 
     /**

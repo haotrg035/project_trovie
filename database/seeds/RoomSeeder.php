@@ -15,11 +15,11 @@ class RoomSeeder extends Seeder
         $faker = \Faker\Factory::create();
         for ($i = 1; $i <= 10; $i++) {
             DB::table('room_articles')->insert([
-                'title' => $faker->title,
+                'title' => $faker->name,
                 'room_id' => $i,
                 'content' => $faker->paragraph,
-                'created_at' => date('Y-m-d', time()),
-                'updated_at' => date('Y-m-d', time()),
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
             ]);
         }
 //        for ($i = 1; $i <= 20; $i++) {

@@ -113,7 +113,7 @@ abstract class BaseController extends Controller
         return $this->authorize('view', $model);
     }
 
-    public function checkCreateAuth(Model $model)
+    public function checkCreateAuth($model)
     {
         return $this->authorize('create', $model);
     }

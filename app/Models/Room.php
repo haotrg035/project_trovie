@@ -54,6 +54,11 @@ class Room extends Model
             ->wherePivot('active', 1);
     }
 
+    public function articles()
+    {
+        return $this->hasMany(RoomArticle::class, 'room_id', 'id');
+    }
+
     public function allKindUsers()
     {
         return $this->belongsToMany(User::class, 'room_user')->withPivot('date_in');

@@ -21,14 +21,14 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
 
     public function getUser($id, $relations = [])
     {
-        $user = $this->find($id, $relations);
-        if (!empty($user['inviteToken'])) {
-            if (time() > strtotime($user['inviteToken']['expired_at'])) {
-                $user['inviteToken']['token'] = '';
+        $user = $this->find($id, $relations)->toArray();
+        if (!empty($user['invite_token'])) {
+            if (time() > strtotime($user['invite_token']['expired_at'])) {
+                $user['invite_token'] = [];
             }
         }
         if ($user) {
-            return $user->toArray();
+            return $user;
         }
         return false;
     }

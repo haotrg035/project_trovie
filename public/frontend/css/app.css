@@ -468,6 +468,7 @@ a:hover {
 .room-card {
   background: #fff;
   font-size: 14px;
+  overflow: hidden;
   border-radius: 8px;
 }
 
@@ -497,6 +498,12 @@ a:hover {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+}
+
+@media only screen and (min-width: 993px) {
+  .room-card__image {
+    height: 12rem;
+  }
 }
 
 .room-card__body {
@@ -551,6 +558,10 @@ a:hover {
 .room-card__prop-list .prop-list__item--price span {
   color: var(--color-base);
   font-weight: bold;
+}
+
+.room-card__prop-list .prop-list__item--acreage {
+  flex: 1 1 auto;
 }
 
 .room-card__host {

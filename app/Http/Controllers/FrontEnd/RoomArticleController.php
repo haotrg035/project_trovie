@@ -4,10 +4,22 @@ namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\BaseController;
 use App\Models\RoomArticle;
+use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
 class RoomArticleController extends BaseController
 {
+    /**
+     * @var RoomArticleEloquentRepositoryInterface
+     */
+    private $repository;
+
+    public function __construct(RoomArticleEloquentRepositoryInterface $repository)
+    {
+        parent::__construct();
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,11 +55,12 @@ class RoomArticleController extends BaseController
      * Display the specified resource.
      *
      * @param \App\Models\RoomArticle $roomArticle
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(RoomArticle $roomArticle)
     {
-        return view('front-end.room-article.detail');
+        $this->data['article'] = $this->repository->getArticles(1)->toArray()['data'];
+        return view('front-end.room-article.detail', ['data' => $this->data]);
     }
 
     public function search(Request $request)
@@ -91,6 +104,6 @@ class RoomArticleController extends BaseController
 
     protected function viewName()
     {
-       return 'Tin Đăng';
+        return 'Tin Đăng';
     }
 }

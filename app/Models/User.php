@@ -40,7 +40,7 @@ class User extends Authenticatable
         'email_verified_at',
         'role'
     ];
-
+    protected $appends = ['phone'];
     /**
      * The attributes that should be cast to native types.
      *
@@ -83,6 +83,11 @@ class User extends Authenticatable
     public function inviteToken()
     {
         return $this->hasOne(UserInviteToken::class, 'user_id', 'id');
+    }
+
+    public function getPhoneAttribute()
+    {
+        return $this->detail()->get()->first()->phone;
     }
 
     public function isHostOwner()
@@ -129,5 +134,11 @@ class User extends Authenticatable
             return false;
         }
         return $this->isOwnRoom($contract->room_id);
+    }
+
+    public function isOwnArticle($id)
+    {
+        $article = \DB::table('room_articles')->where('id', $id)->first();
+        return $this->isOwnRoom($article->room_id);
     }
 }

@@ -41,7 +41,8 @@
                 </form>
             </div>
         </x-main-card>
-        <div class="tab-content panel-content--room__list-room" data-room-view-url="{{route('api.user.host.room.show',$data['data']['host_id'])}}">
+        <div class="tab-content panel-content--room__list-room"
+             data-room-view-url="{{route('api.user.host.room.show',$data['data']['host_id'])}}">
             <div class="row row--custom">
                 @if($data['data']['room_list'])
                     @foreach($data['data']['room_list'] as $room)
@@ -118,6 +119,21 @@
                                 <ul class="room-card__customer-list list-unstyled">
                                     @if($room['users'])
                                         @foreach($room['users'] as $user)
+                                            <li class="room-card__customer-list__item" title="{{$user['full_name']}}">
+                                            <span class="room-card__customer-list__item__avatar">
+                                                <img src="{{asset($user['avatar'])}}" alt="">
+                                            </span>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <li class="room-card__customer-list__item d-none" title="">
+                                            <span class="room-card__customer-list__item__avatar">
+                                                <img src="" alt="">
+                                            </span>
+                                        </li>
+                                    @endif
+                                    @if($room['guest_users'])
+                                        @foreach($room['guest_users'] as $user)
                                             <li class="room-card__customer-list__item" title="{{$user['full_name']}}">
                                             <span class="room-card__customer-list__item__avatar">
                                                 <img src="{{asset($user['avatar'])}}" alt="">

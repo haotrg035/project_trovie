@@ -36,7 +36,7 @@
                             <input type="text" name="token" style="font-size: 1.35rem;"
                                    class="form-control text-center font-weight-bold rounded bg-white border shadow-sm trovie-input"
                                    readonly
-                                   @if($data['data']['invite_token'])
+                                   @if(!empty($data['data']['invite_token']))
                                    value="{{!empty($data['data']['invite_token']['token']) ? $data['data']['invite_token']['token'] : ''}}"
                                 @endif>
                             <p class="text-center mt-3">Mã mời còn hiệu lực trong <span class="invite_token_timeout">

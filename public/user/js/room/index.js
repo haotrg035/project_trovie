@@ -739,7 +739,11 @@ function renderRoomUsersItem(data) {
 
   _userItem.querySelector('.list__user').setAttribute('data-birthday', data.birthday);
 
-  _userItem.querySelector('.list__user').setAttribute('data-career', data.detail.career);
+  if (data.detail.career !== null) {
+    _userItem.querySelector('.list__user').setAttribute('data-career', data.detail.career);
+  } else {
+    _userItem.querySelector('.list__user').setAttribute('data-career', 'N/A');
+  }
 
   _userItem.querySelector('.list__user').setAttribute('data-email', data.email);
 

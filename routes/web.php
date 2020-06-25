@@ -12,8 +12,10 @@
 
 Route::prefix('/')->name('frontend')->namespace('FrontEnd')->group(function () {
     Route::get('/', 'IndexController@index')->name('.index');
-    Route::get('/phong', 'RoomArticleController@show')->name('.detail');
-    Route::get('/tim-kiem', 'RoomArticleController@search')->name('.search');
+    Route::prefix('phong')->name('.article')->group(function () {
+        Route::get('/{room_article}', 'RoomArticleController@show')->name('.detail');
+        Route::get('/tim-kiem', 'RoomArticleController@search')->name('.search');
+    });
 });
 
 Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])->group(function () {
@@ -39,6 +41,11 @@ Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])
     Route::prefix('/invoice')->name('invoice')->group(function () {
         Route::get('/', 'InvoiceController@index')->name('.index');
     });
+    Route::prefix('/article')->name('article')->group(function () {
+        Route::get('/edit/{room_article?}', 'Api\RoomArticleController@edit')->name('.edit');
+
+    });
+    Route::resource('/room-article', 'RoomArticleController')->except(['edit'])->names('room_article');
 });
 
 Auth::routes();

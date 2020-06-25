@@ -1872,52 +1872,54 @@
     </index>
     <column id="421" parent="253" name="id">
       <Position>1</Position>
-      <DataType>int(10) unsigned|0s</DataType>
+      <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="422" parent="253" name="title">
       <Position>2</Position>
-      <DataType>varchar(60)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="423" parent="253" name="date_post">
+    <column id="423" parent="253" name="content">
       <Position>3</Position>
-      <DataType>datetime|0s</DataType>
+      <DataType>varchar(600)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="424" parent="253" name="host_id">
+    <column id="424" parent="253" name="room_id">
       <Position>4</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="425" parent="253" name="room_id">
+    <column id="425" parent="253" name="created_at">
       <Position>5</Position>
-      <DataType>int(10) unsigned|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>timestamp|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="426" parent="253" name="created_at">
+    <column id="426" parent="253" name="updated_at">
       <Position>6</Position>
       <DataType>timestamp|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="427" parent="253" name="updated_at">
-      <Position>7</Position>
-      <DataType>timestamp|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="428" parent="253" name="room_articles_host_id_index">
-      <ColNames>host_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="429" parent="253" name="room_articles_room_id_index">
+    <index id="427" parent="253" name="room_articles_room_id_index">
       <ColNames>room_id</ColNames>
       <Type>btree</Type>
     </index>
+    <key id="428" parent="253" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="429" parent="253" name="room_articles_room_id_foreign">
+      <ColNames>room_id</ColNames>
+      <RefTableName>rooms</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
     <column id="430" parent="254" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned|0s</DataType>

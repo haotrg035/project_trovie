@@ -28,7 +28,11 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
             },
             'users' => function ($query) {
                 return $query->get(['id', 'full_name', 'avatar']);
+            },
+            'guestUsers' => function ($query) {
+                return $query->get(['id', 'full_name', 'avatar']);
             }
+
         ])->get();
         $service_list = Service::where('user_id', auth()->id())->get()->toArray();
         $room_count['total'] = $room_list->count();
@@ -94,18 +98,38 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
                         return $q->get(['user_id', 'career', 'id_card', 'address', 'phone']);
                     }
                 ])->get(['id', 'full_name', 'avatar', 'email', 'birthday', 'gender']);
+            },
+            'guestUsers' => function ($query) {
+                return $query->get(['id', 'full_name', 'avatar', 'birthday', 'gender', 'id_card', 'address', 'phone']);
             }
         ])->where('id', $id)->first()->toArray();
 
         if (count($result) > 0) {
-            $result = $result['users'];
-            foreach ($result as $key => $user) {
-                $result[$key]['pivot']['date_in'] = date('d/m/Y', strtotime($user['pivot']['date_in']));
-                $result[$key]['detail'] = array_diff_key(
-                    $user['detail'],
-                    ['created_at' => 1, 'desc' => 1, 'id_card_date' => 1, 'updated_at' => 1, 'user_id' => 1]
-                );
+            $users = $result['users'];
+            if (count($users) > 0) {
+                foreach ($users as $key => $user) {
+                    $users[$key]['detail'] = array_merge(
+                        array_diff_key(
+                            $user,
+                            ['detail']
+                        ),
+                        array_diff_key(
+                            $user['detail'],
+                            ['created_at' => 1, 'desc' => 1, 'id_card_date' => 1, 'updated_at' => 1, 'user_id' => 1]
+                        )
+                    );
+                    $users[$key]['pivot']['date_in'] = date('d/m/Y', strtotime($user['pivot']['date_in']));
+                }
             }
+            $guest_users = $result['guest_users'];
+            if (count($guest_users) > 0) {
+                foreach ($result['guest_users'] as $key => $user) {
+                    $guest_users[$key]['pivot']['date_in'] = date('d/m/Y', strtotime($user['pivot']['date_in']));
+                    $guest_users[$key]['detail'] = $user;
+                }
+            }
+
+            $result = array_merge($users, $guest_users);
             return $result;
         }
 

@@ -35,7 +35,9 @@ a:hover {
   text-decoration: none;
 }
 
-.line-clamp {
+.line-clamp,
+.frontend-room-card .room-card__address,
+.frontend-room-card .room-card__title {
   display: flex;
   display: -ms-flexbox;
   display: -moz-box;
@@ -58,6 +60,10 @@ a:hover {
 .trovie-gallery .gallery__item::before,
 .address-result-list__item .item__icon,
 .address-result-list__item,
+.frontend-room-card .room-card__host .host__call,
+.frontend-room-card .room-card__title,
+.frontend-room-card .room-card__image img,
+.frontend-room-card .room-card,
 .room-card,
 .host-card-wrapper,
 .btn-variant-outline,
@@ -70,11 +76,13 @@ a:hover {
 
 .shadow-xs,
 .address-result-list,
+.frontend-room-card .room-card,
 .room-card {
   box-shadow: var(--shadow-xs);
 }
 
-.shadow-sm {
+.shadow-sm,
+.frontend-room-card .room-card:hover {
   box-shadow: var(--shadow-sm);
 }
 
@@ -895,6 +903,351 @@ a:hover {
   object-fit: cover;
 }
 
+.frontend-room-card .room-card {
+  background: #fff;
+  font-size: 14px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+@media only screen and (min-width: 993px) {
+  .frontend-room-card .room-card:hover .room-card__image img {
+    transform: scale(1.2);
+  }
+}
+
+.frontend-room-card .room-card .fa {
+  color: var(--color-base);
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-right: 0.6rem;
+}
+
+.frontend-room-card .room-card__image {
+  margin-bottom: 0;
+  display: block;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.frontend-room-card .room-card__image img {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.frontend-room-card .room-card__body {
+  padding-top: 0.5rem;
+}
+
+.frontend-room-card .room-card__title {
+  padding: 0 0.5rem;
+  font-size: 1.1em;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--color-base);
+  text-transform: uppercase;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 1.25em;
+  height: 2.5em;
+}
+
+.frontend-room-card .room-card__title:hover {
+  color: var(--color-variant-3) !important;
+}
+
+.frontend-room-card .room-card__address {
+  padding: 0 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-variant-3);
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  line-height: 1.25em;
+  height: 1.25em;
+}
+
+.frontend-room-card .room-card__prop-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.frontend-room-card .room-card__prop-list .prop-list__item {
+  display: flex;
+  align-items: center;
+  flex: 0 0 50%;
+  padding: 0.5rem 0.25rem 0.5rem 0.5rem;
+  border-top: 1px solid lightgray;
+  color: var(--color-variant-3);
+}
+
+.frontend-room-card .room-card__prop-list .prop-list__item:nth-child(2n) {
+  padding-left: 0.25rem;
+  padding-right: 0.5rem;
+}
+
+.frontend-room-card .room-card__prop-list .prop-list__item--price span {
+  color: var(--color-base);
+  font-weight: bold;
+}
+
+.frontend-room-card .room-card__host {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid lightgray;
+}
+
+.frontend-room-card .room-card__host .host__link {
+  display: flex;
+  align-items: center;
+}
+
+.frontend-room-card .room-card__host .host__link .host__avatar {
+  margin-bottom: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--color-base);
+}
+
+.frontend-room-card .room-card__host .host__link .host__avatar img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.frontend-room-card .room-card__host .host__link .host__name {
+  margin-bottom: 0;
+  color: var(--color-variant-3);
+  margin-left: 0.5rem;
+  text-transform: capitalize;
+}
+
+.frontend-room-card .room-card__host .host__link .host__name:hover {
+  color: var(--color-base);
+}
+
+.frontend-room-card .room-card__host .host__call {
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--color-base);
+  background: var(--color-base);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frontend-room-card .room-card__host .host__call .fa {
+  font-size: 1.2rem;
+  color: white;
+  margin: 0;
+}
+
+.frontend-room-card .room-card__host .host__call:hover {
+  background: white;
+}
+
+.frontend-room-card .room-card__host .host__call:hover .fa {
+  color: var(--color-base);
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon {
+    display: flex;
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon {
+    display: flex;
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .fa {
+    font-size: 1em;
+    margin-right: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .fa {
+    font-size: 1em;
+    margin-right: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__image {
+    display: flex;
+    flex: 0 0 35%;
+    padding: 0.25rem;
+  }
+
+  .frontend-room-card .room-card--mobile-horizon .room-card__image img {
+    border-radius: 6px;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__image {
+    display: flex;
+    flex: 0 0 35%;
+    padding: 0.25rem;
+  }
+
+  .frontend-room-card .room-card--mobile-horizon .room-card__image img {
+    border-radius: 6px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__body {
+    padding-top: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__body {
+    padding-top: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__title {
+    font-size: 1em;
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__title {
+    font-size: 1em;
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__address {
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__address {
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__prop-list .prop-list__item {
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__prop-list .prop-list__item {
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__host {
+    padding: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__host {
+    padding: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__host .host__avatar {
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__host .host__avatar {
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__host .host__call {
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+}
+
+@media only screen and (max-width: SM) {
+  .frontend-room-card .room-card--mobile-horizon .room-card__host .host__call {
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+}
+
+.frontend-room-card .room-card--horizon {
+  display: flex;
+  font-size: 13px;
+}
+
+.frontend-room-card .room-card--horizon .fa {
+  font-size: 1em;
+  margin-right: 0.25rem;
+}
+
+.frontend-room-card .room-card--horizon .room-card__image {
+  display: flex;
+  flex: 0 0 35%;
+  border-radius: 6px 0 0 6px;
+}
+
+.frontend-room-card .room-card--horizon .room-card__body {
+  padding-top: 0.25rem;
+}
+
+.frontend-room-card .room-card--horizon .room-card__title {
+  font-size: 1em;
+  margin-bottom: 0.25rem;
+}
+
+.frontend-room-card .room-card--horizon .room-card__address {
+  margin-bottom: 0.25rem;
+}
+
+.frontend-room-card .room-card--horizon .room-card__prop-list .prop-list__item {
+  padding: 0.25rem 0.5rem;
+}
+
+.frontend-room-card .room-card--horizon .room-card__host {
+  padding: 0.25rem;
+}
+
+.frontend-room-card .room-card--horizon .room-card__host .host__avatar {
+  width: 1.85rem;
+  height: 1.85rem;
+}
+
+.frontend-room-card .room-card--horizon .room-card__host .host__call {
+  width: 1.85rem;
+  height: 1.85rem;
+}
+
 .invoice-entries__table {
   border: 1px solid var(--color-base);
   position: relative;
@@ -1130,6 +1483,30 @@ body {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .table th {
+    font-size: 11px;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem 0.25rem;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: MD) {
+  .table th {
+    font-size: 11px;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem 0.25rem;
+    font-size: 12px;
+  }
+}
+
 .page-wrapper {
   height: 100vh;
   width: 100vw;
@@ -1321,6 +1698,34 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 .main-sidebar .main-sidebar__item:last-child {
   margin-top: auto;
+}
+
+.main-sidebar .main-sidebar__item--separator {
+  width: 100%;
+  position: relative;
+}
+
+@media only screen and (max-width: 992px) {
+  .main-sidebar .main-sidebar__item--separator {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: LG) {
+  .main-sidebar .main-sidebar__item--separator {
+    display: none;
+  }
+}
+
+.main-sidebar .main-sidebar__item--separator::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0.25rem;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  background: linear-gradient(to left, rgba(0, 0, 0, 0), var(--color-base), rgba(0, 0, 0, 0));
 }
 
 .main-sidebar .main-sidebar__item--logo .item__link {
@@ -1930,30 +2335,6 @@ div.dataTables_wrapper div.dataTables_filter input {
   font-size: 1rem;
   color: #333333;
   margin-bottom: 0;
-}
-
-@media only screen and (max-width: 768px) {
-  #table-contract-list th {
-    font-size: 11px;
-  }
-
-  #table-contract-list th,
-  #table-contract-list td {
-    padding: 0.5rem 0.25rem;
-    font-size: 12px;
-  }
-}
-
-@media only screen and (max-width: MD) {
-  #table-contract-list th {
-    font-size: 11px;
-  }
-
-  #table-contract-list th,
-  #table-contract-list td {
-    padding: 0.5rem 0.25rem;
-    font-size: 12px;
-  }
 }
 
 @media only screen and (max-width: 1200px) {

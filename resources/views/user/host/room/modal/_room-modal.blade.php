@@ -130,9 +130,10 @@
                                         </div>
                                     </div>
                                 </fieldset>
+
                             </div>
                         </div>
-                    </form>
+                    </form
                     <div class="col-12 col--custom mb-0">
                         <div class="form-group d-flex justify-content-end pt-3 mb-0 border-top">
                             <button class="btn btn-base btn-room-users mr-3" type="button">

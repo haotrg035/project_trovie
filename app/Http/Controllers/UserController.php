@@ -68,7 +68,7 @@ class UserController extends BaseController
 //            return redirect('/');
 //        }
         $this->data['data'] = $this->repository->getUser(auth()->id(), ['detail', 'inviteToken', 'room']);
-        if (!empty($this->data['data']['room'])) {
+        if (!empty($this->data['data']['room']) && count($this->data['data']['room']) > 0) {
             $this->data['data']['room'] = $this->data['data']['room'][0];
         }
         return view('user.profile.index', ['data' => $this->data]);

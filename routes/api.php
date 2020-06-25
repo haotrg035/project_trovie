@@ -68,6 +68,18 @@ Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
             Route::patch('/cancel/{invoice?}', 'Api\InvoiceController@cancelInvoice')->name('.cancel');
             Route::post('/store/', 'Api\InvoiceController@store')->name('.store');
         });
+
+        Route::prefix('/room-article')->name('.article')->group(function () {
+            Route::prefix('/get-articles')->name('.get_articles')->group(function () {
+                Route::get('/host/{host?}', 'Api\RoomArticleController@getAllByHost')->name('.host');
+                Route::get('/room/{room?}', 'Api\RoomArticleController@getAllByRoom')->name('.room');
+            });
+            Route::get('/{room_article}', 'Api\RoomArticleController@show')->name('.show');
+            Route::post('/create', 'Api\RoomArticleController@store')->name('.store');
+            Route::patch('/update/{room_article?}', 'Api\RoomArticleController@update')->name('.update');
+            Route::delete('/delete/{room_article?}', 'Api\RoomArticleController@destroy')->name('.delete');
+            Route::patch('/refresh/{room_article?}', 'Api\RoomArticleController@refresh')->name('.refresh');
+        });
     });
 
     Route::apiResource('host', 'Api\HostController')->except(['update'])->names('api.user.host');

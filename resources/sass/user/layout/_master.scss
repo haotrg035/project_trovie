@@ -18,6 +18,20 @@ body {
     }
 }
 
+.table {
+    @include Responsive(MD) {
+        th {
+            font-size: 11px;
+        }
+
+        th, td {
+            padding: .5rem .25rem;
+            font-size: 12px;
+        }
+
+    }
+}
+
 .page-wrapper {
     height: 100vh;
     width: 100vw;

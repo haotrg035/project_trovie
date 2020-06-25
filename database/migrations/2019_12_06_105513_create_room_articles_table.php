@@ -16,7 +16,7 @@ class CreateRoomarticlesTable extends Migration
         Schema::create('room_articles', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
-            $table->text('content');
+            $table->string('content', 600)->default('');
             $table->integer('room_id')->unsigned();
             $table->timestamps();
             $table->index(["room_id"]);
