@@ -22,6 +22,7 @@ class CreateHostsTable extends Migration
             $table->string('image')->nullable();
             $table->boolean('notice')->default(false);
             $table->string('address', 250)->default('');
+            $table->string('phone', 11)->nullable();
             $table->unsignedInteger('district_id')->default(0);
             $table->unsignedInteger('city_id')->default(0);
             $table->double('latitude')->nullable();

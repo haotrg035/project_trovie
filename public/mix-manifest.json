@@ -1,5 +1,6 @@
 {
     "/frontend/js/app.js": "/frontend/js/app.js",
+    "/frontend/js/mapSearch/mapSearch.js": "/frontend/js/mapSearch/mapSearch.js",
     "/user/js/app.js": "/user/js/app.js",
     "/user/css/app.css": "/user/css/app.css",
     "/frontend/css/app.css": "/frontend/css/app.css",

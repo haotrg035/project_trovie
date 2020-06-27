@@ -24,7 +24,7 @@ class IndexController extends BaseController
      */
     public function index()
     {
-        $this->data['recent_articles'] = $this->roomArticleRepository->getArticles(8)->toArray()['data'];
+        $this->data['recent_articles'] = $this->roomArticleRepository->getArticles(8)->toArray();
         return view('front-end.index.index', ['data' => $this->data]);
     }
 

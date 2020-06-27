@@ -13,7 +13,7 @@
                 {{$articleDetail['title']}}
             </a>
             <p class="room-card__address" title="{{$articleDetail['room']['host']['address']}}">
-                <i class="fa fa-map-marker" aria-hidden="true"></i> {{$articleDetail['room']['host']['address']}}
+                <i class="fa fa-map-marker" aria-hidden="true"></i>{{$articleDetail['room']['host']['address']}}
             </p>
             <ul class="room-card__prop-list list-unstyled">
                 <li class="prop-list__item prop-list__item--price" title="Giá phòng">

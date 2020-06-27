@@ -12,9 +12,10 @@
 
 Route::prefix('/')->name('frontend')->namespace('FrontEnd')->group(function () {
     Route::get('/', 'IndexController@index')->name('.index');
-    Route::prefix('phong')->name('.article')->group(function () {
-        Route::get('/{room_article}', 'RoomArticleController@show')->name('.detail');
+    Route::prefix('/phong')->name('.article')->group(function () {
         Route::get('/tim-kiem', 'RoomArticleController@search')->name('.search');
+        Route::get('/map', 'RoomArticleController@searchMap')->name('.map_search');
+        Route::get('/{room_article}', 'RoomArticleController@show')->name('.detail');
     });
 });
 

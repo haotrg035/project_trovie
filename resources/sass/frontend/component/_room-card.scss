@@ -10,12 +10,19 @@ $room_breakpoint: SM;
 
     &:hover {
         @extend .shadow-sm;
-
         .room-card__image {
             @include ResponsiveMin(LG) {
                 img {
                     @include TrasnformScale(1.2);
                 }
+            }
+        }
+    }
+
+    &:not(.room-card--horizon) {
+        @include ResponsiveMin(LG) {
+            .room-card__image{
+                height: 12rem;
             }
         }
     }
@@ -41,10 +48,6 @@ $room_breakpoint: SM;
             -o-object-fit: cover;
             object-fit: cover;
 
-        }
-
-        @include ResponsiveMin(LG) {
-            height: 12rem;
         }
 
     }

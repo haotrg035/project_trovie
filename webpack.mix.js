@@ -37,8 +37,10 @@ mix
         'resources/js/components/trovie_avatar_upload.js',
         'resources/js/frontend/_lib.js',
         'resources/js/frontend/_header.js',
-        'resources/js/frontend/_roomArticle.js'
+        'resources/js/frontend/_roomArticle.js',
     ], 'public/frontend/js/app.js')
+    .js('resources/js/frontend/mapSearch/mapSearch.js', 'public/frontend/js/mapSearch/')
+
     // .sass('resources/sass/frontend/libs.scss', 'public/frontend/css/libs.css')
     .sass('resources/sass/frontend/app.scss', 'public/frontend/css');
 

@@ -53,7 +53,6 @@ class HostController extends BaseController
     public function store(StoreRequest $request)
     {
         $result = $this->repository->create($request->all());
-
         return $this->returnRedirect($result, 'create', route('user.host.index'));
     }
 

@@ -110,22 +110,33 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
     }
 
     // Front end
-    public function getArticles($total = 4)
+    public function getArticles($total = 4, $conditions = [], $isWhereIn = false, $whereInColumn = 'id')
     {
         $data = $this->_model->with([
             'room' => function ($query) {
                 return $query->with([
                     'gallery',
+                    'services',
                     'host' => function ($query) {
                         return $query->with([
                             'user' => function ($query) {
                                 return $query->get()->append('phone');
                             }
                         ])->get();
-                    }
+                    },
                 ])->get();
             }
-        ])->orderBy('created_at', 'desc')->paginate($total);
+        ])->orderBy('created_at', 'desc')->limit($total);
+        if (!empty($conditions)) {
+            if ($isWhereIn) {
+                $data = $data->whereIn($whereInColumn, $conditions);
+            } else {
+                foreach ($conditions as $condition) {
+                    $data = $data->where($condition[0], $condition[1], $condition[2]);
+                }
+            }
+        }
+        $data = $data->get();
         foreach ($data as $key => $val) {
             if (count($val['room']['gallery']) > 0) {
                 foreach ($val['room']['gallery'] as $key2 => $image) {
@@ -134,5 +145,35 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
             }
         }
         return $data;
+    }
+
+    public function getArticle($id)
+    {
+        return $this->getArticles(1, [['id', '=', $id]])->toArray()[0];
+    }
+
+    public function getNearArticles($currentHost)
+    {
+        $hostRepository = new HostRepository();
+        $result = [];
+        $nearestHosts = $hostRepository->getClosestHostAround(
+            [
+                'lat' => $currentHost['latitude'],
+                'long' => $currentHost['longitude'],
+            ],
+            300
+        )->toArray();
+        if (count($nearestHosts) > 0) {
+            $listIds = [];
+            foreach ($nearestHosts as $nearHost) {
+                $listIds = array_merge(
+                    $listIds,
+                    $this->getAllByHost($nearHost->id)
+                );
+            }
+            $listIds = TrovieHelper::convertAssocIdArrayToValueIdArray($listIds, 'id');
+            $result = $this->getArticles(10, $listIds, true)->toArray();
+        }
+        return $result;
     }
 }

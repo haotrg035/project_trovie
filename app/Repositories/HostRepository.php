@@ -31,8 +31,13 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
 
     public function getHostDetail($id)
     {
-        $data = $this->_model->with('gallery')->find($id)->toArray();
-        $data['image'] = TrovieFile::checkFile($data['image']);
+        $data = $this->_model->with([
+            'gallery',
+            'user' => function ($query) {
+                return $query->get()->append(['phone']);
+            }
+        ])->find($id)->toArray();
+//        $data['image'] = TrovieFile::checkFile($data['image']);
         foreach ($data['gallery'] as $key => $image) {
             $data['gallery'][$key]['image'] = TrovieFile::checkFile($image['image']);
         }
@@ -49,7 +54,6 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         $attributes['user_id'] = auth()->id();
         $attributes['city_id'] = \DB::table('cities')->where('name', $city)->first()->id;
         $attributes['district_id'] = \DB::table('districts')->where('name', $district)->first()->id;
-
         return $this->_model->create($attributes);
     }
 
@@ -69,7 +73,12 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         } else {
             $attributes['notice'] = 0;
         }
-
+        if (isset($attributes['cost_electric'])) {
+            $attributes['cost_electric'] = TrovieHelper::parseCurrencyString($attributes['cost_electric']);
+        }
+        if (isset($attributes['cost_water'])) {
+            $attributes['cost_water'] = TrovieHelper::parseCurrencyString($attributes['cost_water']);
+        }
         $result = $this->find($id);
         if ($result) {
             $result->update($attributes);
@@ -136,5 +145,24 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
             return $hosts;
         }
         return false;
+    }
+
+    public function getClosestHostAround(array $locate, $distance = 5, $total = 5)
+    {
+        $kilometer_cont = 6371;
+        $mile_cont = 3959;
+
+        return \DB::table('hosts')->selectRaw('*,
+                 (3959 * acos ( cos ( radians(' . $locate['lat'] . ') )
+                  * cos( radians( latitude ) )
+                  * cos( radians( longitude )
+                  - radians(' . $locate['long'] . ') )
+                  + sin ( radians(' . $locate['lat'] . ') )
+                  * sin( radians( latitude ) ) ) )
+                  AS distance')
+            ->having('distance', '>', 0)
+            ->having('distance', '<', $distance)
+            ->orderBy('distance')
+            ->limit($total)->get();
     }
 }

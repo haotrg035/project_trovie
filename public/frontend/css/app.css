@@ -478,6 +478,12 @@ a:hover {
   }
 }
 
+@media only screen and (min-width: 993px) {
+  .room-card:not(.room-card--horizon) .room-card__image {
+    height: 12rem;
+  }
+}
+
 .room-card .fa {
   color: var(--color-base);
   font-weight: bold;
@@ -498,12 +504,6 @@ a:hover {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
-}
-
-@media only screen and (min-width: 993px) {
-  .room-card__image {
-    height: 12rem;
-  }
 }
 
 .room-card__body {
@@ -1616,6 +1616,43 @@ body {
   border-top-left-radius: 14px;
 }
 
+.room-article-detail .gallery__list > li {
+  height: 100%;
+}
+
+.room-article-detail .lSSlideOuter .lSPager.lSGallery li {
+  height: 130px !important;
+  border-radius: 0;
+}
+
+.room-article-detail .lSSlideOuter .lSPager.lSGallery li img {
+  height: 100% !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .room-article-detail .lSSlideOuter .lSPager.lSGallery li {
+    height: 110px !important;
+  }
+}
+
+@media only screen and (max-width: LG) {
+  .room-article-detail .lSSlideOuter .lSPager.lSGallery li {
+    height: 110px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .room-article-detail .lSSlideOuter .lSPager.lSGallery li {
+    height: 90px !important;
+  }
+}
+
+@media only screen and (max-width: MD) {
+  .room-article-detail .lSSlideOuter .lSPager.lSGallery li {
+    height: 90px !important;
+  }
+}
+
 .room-article-detail-info {
   margin-bottom: 1rem;
 }
@@ -1649,15 +1686,6 @@ body {
 .room-article-detail-info .info__prop-list .prop-list__item {
   width: 50%;
   margin-top: 0.25rem;
-}
-
-.room-article-detail-info .info__prop-list .prop-list__item:nth-child(n) {
-  padding-right: 0.25rem;
-}
-
-.room-article-detail-info .info__prop-list .prop-list__item:nth-child(2n) {
-  padding-left: 0.25rem;
-  padding-right: 0;
 }
 
 .room-article-detail-info .info__prop-list .prop-list__item b {

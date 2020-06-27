@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\Helper\TrovieFile;
 use App\Http\Controllers\BaseController;
 use App\Models\RoomArticle;
 use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
@@ -59,8 +60,18 @@ class RoomArticleController extends BaseController
      */
     public function show(RoomArticle $roomArticle)
     {
-        $this->data['article'] = $this->repository->getArticles(1)->toArray()['data'];
+        $this->data['article'] = $this->repository->getArticle($roomArticle->id);
+        $this->data['recent_articles'] = $this->repository->getArticles(3)->toArray();
+        $this->data['near_articles'] = $this->repository->getNearArticles(
+            $this->data['article']['room']['host']
+        );
+
         return view('front-end.room-article.detail', ['data' => $this->data]);
+    }
+
+    public function searchMap(Request $request)
+    {
+        return view('front-end.room-article.map-search');
     }
 
     public function search(Request $request)
@@ -106,4 +117,5 @@ class RoomArticleController extends BaseController
     {
         return 'Tin Đăng';
     }
+
 }

@@ -1,5 +1,6 @@
 @extends('front-end.master')
 @section('body')
+    @include('front-end._banner-search')
     @if(!empty($data['recent_articles']))
         <section class="page-products page-section">
             <div class="container">
@@ -18,6 +19,7 @@
             </div>
         </section>
     @endif
+    <a href="{{route('frontend.article.search')}}">click here</a>
     <section class="page-place page-section mt-3">
         <div class="container">
             <div class="page-section__header">

@@ -50,6 +50,20 @@
                                 <div class="row row--custom">
                                     <div class="col-lg-4 col--custom">
                                         <div class="form-group">
+                                            <label for="date_payment">Ngày Thu Tiền:</label>
+                                            <input type="number" min="1" max="31" required
+                                                   class="form-control trovie-input @if($errors->first('date_payment')) is-invalid  @endif"
+                                                   name="date_payment" value="{{$data['data']['date_payment']}}"
+                                                   id="date_payment" placeholder="">
+                                            @if($errors->first('date_payment'))
+                                                <div class="invalid-feedback">
+                                                    {{$errors->first('date_payment')}}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col--custom">
+                                        <div class="form-group">
                                             <label for="date_note_electric">Ngày Ghi Điện:</label>
                                             <input type="number" min="1" max="31"
                                                    class="form-control trovie-input @if($errors->first('date_note_electric')) is-invalid  @endif"
@@ -78,15 +92,14 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col--custom">
-                                        <div class="form-group">
-                                            <label for="date_payment">Ngày Thu Tiền:</label>
-                                            <input type="number" min="1" max="31" required
-                                                   class="form-control trovie-input @if($errors->first('date_payment')) is-invalid  @endif"
-                                                   name="date_payment" value="{{$data['data']['date_payment']}}"
-                                                   id="date_payment" placeholder="">
-                                            @if($errors->first('date_payment'))
+                                        <div class="form-group form-group--unit form-group--unit--phone">
+                                            <label for="date_note_water">Số điện thoại:</label>
+                                            <input type="text" required name="phone" name="phone" id="phone"
+                                                   class="form-control trovie-input @if($errors->first('phone')) is-invalid  @endif"
+                                                   value="{{!empty($data['data']['phone']) ? $data['data']['phone'] : $data['data']['user']['phone']}}">
+                                            @if($errors->first('phone'))
                                                 <div class="invalid-feedback">
-                                                    {{$errors->first('date_payment')}}
+                                                    {{$errors->first('phone')}}
                                                 </div>
                                             @endif
                                         </div>
@@ -218,7 +231,8 @@
                     <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1" class="host-avatar">
                             <x-slot name="title">Ảnh Đại Diện</x-slot>
-                            <x-trovie-avatar-upload image="{{$data['data']['image']}}" method="POST" title="Ảnh đại diện"
+                            <x-trovie-avatar-upload image="{{$data['data']['image']}}" method="POST"
+                                                    title="Ảnh đại diện"
                                                     upload-url="{{route('api.user.host.update_avatar',$data['data']['id'])}}">
                             </x-trovie-avatar-upload>
                         </x-main-card>

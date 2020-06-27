@@ -31,7 +31,6 @@
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=2030381217235124&autoLogAppEvents=1"
         nonce="p2z5ZUJr"></script>
 @include('front-end._header')
-@include('front-end._banner-search')
 @yield('body')
 @include('front-end._footer')
 <!--   Core JS Files   -->
