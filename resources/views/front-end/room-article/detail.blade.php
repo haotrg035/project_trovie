@@ -65,11 +65,15 @@
                         </div>
                         <div class="room-article-detail-host">
                             <div class="host__info">
-                                <figure class="info__image">
-                                    <img src="{{$data['article']['room']['host']['image']}}" alt="">
-                                </figure>
+                                <a href="{{route('frontend.article.search')}}?host={{$data['article']['room']['host']['id']}}">
+                                    <figure class="info__image">
+                                        <img src="{{$data['article']['room']['host']['image']}}" alt="">
+                                    </figure>
+                                </a>
                                 <div class="info__contact">
-                                    <p class="contact__name">{{$data['article']['room']['host']['name']}}</p>
+                                    <a href="{{route('frontend.article.search')}}?host={{$data['article']['room']['host']['id']}}">
+                                        <p class="contact__name text-dark">{{$data['article']['room']['host']['name']}}</p>
+                                    </a>
                                     <ul class="contact__list list-unstyled mb-0">
                                         <li class="list__item">
                                             <a href="tel:{{$data['article']['room']['host']['phone']}}"
@@ -93,6 +97,11 @@
             @if(!empty($data['article']['content']))
                 <div class="row row--custom">
                     <div class="col-12 col-lg-7 col-xl-8 col--custom">
+                        <div
+                            style="height: 300px; width: 100%; border-radius: 16px;margin-bottom: 1rem; border: 1px solid var(--color-base)"
+                            id="room-article-detail-map"
+                            data-lng="{{$data['article']['room']['host']['longitude']}}"
+                            data-lat="{{$data['article']['room']['host']['latitude']}}"></div>
                         <div class="room-article-detail-general rounded-card">
                             <p class="general__title">TỔNG QUAN</p>
                             <div class="general__content">
@@ -123,7 +132,7 @@
                 <div class="row row--custom mb-0">
                     <div class="col-12 col--custom">
                         <div class="page-section__header">
-                            <p class="header__title">CÁC TIN ĐĂNG KHÁC</p>
+                            <p class="header__title">CÁC PHÒNG GẦN ĐÂY</p>
                         </div>
                     </div>
                     <div class="col-12 col--custom mb-0">

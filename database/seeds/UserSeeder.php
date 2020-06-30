@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'user_id' => $i,
                 'phone' => '033210488' . $i,
                 'id_card' => \App\Helper\TrovieHelper::generateRandomString(12, 1),
-                'id_card_date' => date('y-m-d', time() - (86400 * 30 * 12 * 10)),
+                'id_card_date' => date('Y-m-d', time() - (86400 * 30 * 12 * 10)),
                 'id_card_address' => $faker->address,
                 'address' => $faker->address,
                 'career' => $faker->jobTitle,

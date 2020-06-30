@@ -945,7 +945,9 @@ var TrovieGallery = /*#__PURE__*/function () {
   }, {
     key: "galleryInputOnChangeHandler",
     value: function galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl) {
-      uploadInput.addEventListener('change', _.debounce(onClickHandler, 500));
+      uploadInput.onchange = function () {
+        onClickHandler();
+      };
 
       function onClickHandler() {
         var formData = new FormData(gallery.querySelector('form'));
@@ -1081,7 +1083,7 @@ var TrovieMap = /*#__PURE__*/function () {
     this._map = null;
     this._marker = null;
     this.options = options;
-    this.options.marker = options.marker === null ? true : options.marker;
+    this.options.marker = options.marker === null ? false : options.marker;
     this.options.draggaleMarkder = options.draggaleMarkder || false;
     this.options.apiKey = document.querySelector('meta[name=goong-map-api-key]').getAttribute('content');
     this.options.mapTitlesKey = document.querySelector('meta[name=goong-map-titles-key]').getAttribute('content');
@@ -1272,7 +1274,8 @@ var addressResultList = document.querySelector('.host-info__form-position .addre
 window.goongjs = __webpack_require__(/*! @goongmaps/goong-js */ "./node_modules/@goongmaps/goong-js/dist/goong-js.js");
 var mapOptions = {
   map: updateHostFormMap,
-  addressInput: addressInput
+  addressInput: addressInput,
+  marker: true
 };
 var is_edit_address = false;
 var trovieMap;

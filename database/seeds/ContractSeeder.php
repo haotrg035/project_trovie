@@ -58,7 +58,7 @@ class ContractSeeder extends Seeder
             $room_user[] = [
                 'room_id' => $room->id,
                 'user_id' => $i,
-                'date_in' => date('y-m-d', time() - (84600 * 30 - random_int(1, 12))),
+                'date_in' => date('Y-m-d', time() - (84600 * 30 - random_int(1, 12))),
                 'contract_id' => $i - 1,
             ];
         }

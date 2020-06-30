@@ -2003,7 +2003,7 @@ var TrovieMap = /*#__PURE__*/function () {
     this._map = null;
     this._marker = null;
     this.options = options;
-    this.options.marker = options.marker === null ? true : options.marker;
+    this.options.marker = options.marker === null ? false : options.marker;
     this.options.draggaleMarkder = options.draggaleMarkder || false;
     this.options.apiKey = document.querySelector('meta[name=goong-map-api-key]').getAttribute('content');
     this.options.mapTitlesKey = document.querySelector('meta[name=goong-map-titles-key]').getAttribute('content');

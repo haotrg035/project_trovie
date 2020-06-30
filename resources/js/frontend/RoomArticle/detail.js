@@ -1,6 +1,9 @@
+import {TrovieMap} from "../../user/TrovieMap";
+
 document.addEventListener('DOMContentLoaded', () => {
     initImageGallery();
     initRelatedArticleSlider()
+    initRoomMap();
 });
 
 function initImageGallery() {
@@ -46,5 +49,18 @@ function initRelatedArticleSlider() {
                 }
             ],
         });
+    }
+}
+
+function initRoomMap() {
+    let mapElement = document.querySelector('#room-article-detail-map');
+    if (mapElement !== null) {
+        window.goongjs = require('@goongmaps/goong-js');
+        let mapOptions = {
+            map: mapElement,
+            marker: true,
+            center: [mapElement.dataset.lng, mapElement.dataset.lat]
+        };
+        new TrovieMap(mapOptions).initGoongMap();
     }
 }

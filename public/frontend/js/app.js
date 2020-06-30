@@ -42417,10 +42417,11 @@ function initMenu() {
 
 function initSearchForm() {
   var searchForm = document.querySelector('.page-banner .search-form');
-  var selectCity = searchForm.querySelector('select[name=city]');
-  var selectDistrict = searchForm.querySelector('select[name=district]');
 
   if (searchForm !== null) {
+    var selectCity = searchForm.querySelector('select[name=city]');
+    var selectDistrict = searchForm.querySelector('select[name=district]');
+
     selectCity.onchange = function () {
       selectDistrict.querySelectorAll('option').forEach(function (option) {
         return option.style.display = 'none';

@@ -51,9 +51,10 @@
             <figure class="link__icon">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </figure>
-            <p class="link__text">Đăng Tin</p>
+            <p class="link__text">Tin Đăng</p>
         </a>
     </li>
+    <li class="main-sidebar__item--separator"></li>
     <li class="main-sidebar__item">
         <a href="javascript:void(0)" class="item__link sign-out-point">
             <figure class="link__icon">

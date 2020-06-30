@@ -143,7 +143,9 @@ var TrovieGallery = /*#__PURE__*/function () {
   }, {
     key: "galleryInputOnChangeHandler",
     value: function galleryInputOnChangeHandler(uploadInput, gallery, uploadUrl) {
-      uploadInput.addEventListener('change', _.debounce(onClickHandler, 500));
+      uploadInput.onchange = function () {
+        onClickHandler();
+      };
 
       function onClickHandler() {
         var formData = new FormData(gallery.querySelector('form'));

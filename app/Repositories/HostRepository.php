@@ -159,7 +159,7 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
                   + sin ( radians(' . $locate['lat'] . ') )
                   * sin( radians( latitude ) ) ) )
                   AS distance')
-            ->having('distance', '>', 0)
+            ->having('distance', '>=', 0)
             ->orderBy('distance')
             ->limit($total);
         if ($distance > 0) {

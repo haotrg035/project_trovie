@@ -12,6 +12,7 @@ window.goongjs = require('@goongmaps/goong-js');
 let mapOptions = {
     map: updateHostFormMap,
     addressInput: addressInput,
+    marker: true
 };
 let is_edit_address = false;
 let trovieMap;

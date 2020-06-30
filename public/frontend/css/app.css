@@ -1651,8 +1651,7 @@ body {
 }
 
 .room-article-detail .lSSlideWrapper {
-  border-top-right-radius: 14px;
-  border-top-left-radius: 14px;
+  border-radius: 14px;
 }
 
 .room-article-detail .gallery__list > li {
@@ -1666,6 +1665,7 @@ body {
 
 .room-article-detail .lSSlideOuter .lSPager.lSGallery li img {
   height: 100% !important;
+  border-radius: 14px;
 }
 
 @media only screen and (max-width: 992px) {
