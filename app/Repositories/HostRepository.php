@@ -147,12 +147,11 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         return false;
     }
 
-    public function getClosestHostAround(array $locate, $distance = 5, $total = 5)
+    public function getClosestHostAround(array $locate, $distance = 0, $total = 5)
     {
         $kilometer_cont = 6371;
         $mile_cont = 3959;
-
-        return \DB::table('hosts')->selectRaw('*,
+        $result = \DB::table('hosts')->selectRaw('*,
                  (3959 * acos ( cos ( radians(' . $locate['lat'] . ') )
                   * cos( radians( latitude ) )
                   * cos( radians( longitude )
@@ -161,8 +160,11 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
                   * sin( radians( latitude ) ) ) )
                   AS distance')
             ->having('distance', '>', 0)
-            ->having('distance', '<', $distance)
             ->orderBy('distance')
-            ->limit($total)->get();
+            ->limit($total);
+        if ($distance > 0) {
+            $result = $result->having('distance', '<', $distance);
+        }
+        return $result->get();
     }
 }

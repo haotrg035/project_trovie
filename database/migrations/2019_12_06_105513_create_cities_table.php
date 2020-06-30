@@ -19,6 +19,8 @@ class CreateCitiesTable extends Migration
             $table->unsignedInteger('id')->unique();
             $table->string('name', 120)->unique();
             $table->string('type', 20);
+            $table->boolean('active')->default(true);
+            $table->string('avatar')->nullable();
         });
     }
 

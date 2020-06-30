@@ -14,4 +14,8 @@ interface RoomArticleEloquentRepositoryInterface
     public function getRoomArticle($id);
 
     public function updateArticle($attributes, $id);
+
+    public function search(array $params, $totalResultItems, $isPaginatedResult);
+
+    public function getAvailableHosts();
 }

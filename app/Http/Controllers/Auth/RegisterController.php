@@ -70,7 +70,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $data['birthday'] = date_create_from_format('d/m/Y', $data['birthday'])->format('Y-m-d');
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'full_name' => $data['full_name'],
             'email' => $data['email'],
@@ -80,5 +80,7 @@ class RegisterController extends Controller
             'role' => $data['role'],
             'api_token' => Str::random(80),
         ]);
+        \DB::table('user_details')->insert(['user_id' => $user->id]);
+        return  $user;
     }
 }

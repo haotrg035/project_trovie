@@ -19,7 +19,6 @@
             </div>
         </section>
     @endif
-    <a href="{{route('frontend.article.search')}}">click here</a>
     <section class="page-place page-section mt-3">
         <div class="container">
             <div class="page-section__header">

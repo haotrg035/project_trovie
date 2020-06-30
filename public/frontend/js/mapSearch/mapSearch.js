@@ -104,7 +104,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/js/frontend/mapSearch/mapSearch.js */"./resources/js/frontend/mapSearch/mapSearch.js");
+module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/frontend/mapSearch/mapSearch.js */"./resources/js/frontend/mapSearch/mapSearch.js");
 
 
 /***/ })

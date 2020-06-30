@@ -10,7 +10,6 @@ use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
 
 class RoomArticleRepository extends EloquentRepository implements RoomArticleEloquentRepositoryInterface
 {
-
     public function getModel()
     {
         return RoomArticle::class;
@@ -110,7 +109,7 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
     }
 
     // Front end
-    public function getArticles($total = 4, $conditions = [], $isWhereIn = false, $whereInColumn = 'id')
+    public function getArticles($total = 4, $conditions = [], $isResultPaginated = false, $isWhereIn = false, $whereInColumn = 'id')
     {
         $data = $this->_model->with([
             'room' => function ($query) {
@@ -126,33 +125,36 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
                     },
                 ])->get();
             }
-        ])->orderBy('created_at', 'desc')->limit($total);
+        ])->orderBy('created_at', 'desc');
         if (!empty($conditions)) {
             if ($isWhereIn) {
                 $data = $data->whereIn($whereInColumn, $conditions);
             } else {
-                foreach ($conditions as $condition) {
-                    $data = $data->where($condition[0], $condition[1], $condition[2]);
+                $data = $data->where($conditions);
+            }
+        }
+        if ($isResultPaginated) {
+            $data = $data->paginate($total);
+        } else {
+            $data = $data->limit($total)->get()->toArray();
+            foreach ($data as $key => $val) {
+                if (count($val['room']['gallery']) > 0) {
+                    foreach ($val['room']['gallery'] as $key2 => $image) {
+                        $data[$key]['room']['gallery'][$key2]['image'] = asset(TrovieFile::checkFile($image['image']));
+                    }
                 }
             }
         }
-        $data = $data->get();
-        foreach ($data as $key => $val) {
-            if (count($val['room']['gallery']) > 0) {
-                foreach ($val['room']['gallery'] as $key2 => $image) {
-                    $data[$key]['room']['gallery'][$key2]['image'] = asset(TrovieFile::checkFile($image['image']));
-                }
-            }
-        }
+
         return $data;
     }
 
     public function getArticle($id)
     {
-        return $this->getArticles(1, [['id', '=', $id]])->toArray()[0];
+        return $this->getArticles(1, [['id', '=', $id]], false)[0];
     }
 
-    public function getNearArticles($currentHost)
+    public function getNearArticles($currentHost, $distance = 0)
     {
         $hostRepository = new HostRepository();
         $result = [];
@@ -161,7 +163,7 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
                 'lat' => $currentHost['latitude'],
                 'long' => $currentHost['longitude'],
             ],
-            300
+            $distance
         )->toArray();
         if (count($nearestHosts) > 0) {
             $listIds = [];
@@ -172,8 +174,107 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
                 );
             }
             $listIds = TrovieHelper::convertAssocIdArrayToValueIdArray($listIds, 'id');
-            $result = $this->getArticles(10, $listIds, true)->toArray();
+            $result = $this->getArticles(10, $listIds, false, true);
         }
         return $result;
+    }
+
+    protected function getArticlesByHosts($id, $total = 8, $paginateResult = false)
+    {
+        if (!is_array($id)) {
+            $id = [$id];
+        }
+        $roomRepository = new RoomRepository();
+        $rooms = $roomRepository->_model->whereIn('host_id', $id)->get('id')->toArray();
+        if (!empty($rooms)) {
+            return $this->getArticles($total,
+                TrovieHelper::convertAssocIdArrayToValueIdArray($rooms),
+                $paginateResult,
+                true,
+                'room_id');
+        }
+        return [];
+    }
+
+    public function search(array $params, $totalResultItems = 8, $isPaginatedResult = false)
+    {
+        $availableParams = ['city', 'district', 'q', 'host'];
+        $placeParams = [];
+        $hostParams = [];
+//        $roomParams = [];
+        $articleParams = [];
+        $relatedRooms = [];
+        $result = null;
+        foreach ($params as $key => $param) {
+            if (in_array($key, $availableParams) && $param !== null) {
+                switch ($key) {
+                    case $availableParams[0]:
+                    case $availableParams[1]:
+                    {
+                        $placeParams[] = [$key . '_id', '=', $param];
+                        break;
+                    }
+                    case $availableParams[2]:
+                    {
+                        $articleParams[] = ['title', 'LIKE', '%' . $param . '%'];
+                    }
+                    case $availableParams[3]:
+                    {
+                        $hostParams[] = $param;
+                    }
+                }
+            }
+        }
+        if (!empty($hostParams)) {
+            return $this->getArticlesByHosts($hostParams, $totalResultItems, $isPaginatedResult);
+        }
+        if (!empty($placeParams)) {
+            $hostRepository = new HostRepository();
+            $relatedHosts = $hostRepository->_model->with([
+                'rooms' => function ($query) {
+                    return $query->get('id')->toArray();
+                }
+            ])->where($placeParams)->get(['id'])->toArray();
+            if (!empty($relatedHosts)) {
+                foreach ($relatedHosts as $host) {
+                    $relatedRooms = array_merge($relatedRooms, TrovieHelper::convertAssocIdArrayToValueIdArray($host['rooms'], 'id'));
+                }
+                if (!empty($relatedRooms)) {
+                    if (!empty($articleParams)) {
+                        $relatedArticles = $this->_model->whereIn('room_id', $relatedRooms)->where($articleParams)->get('id')->toArray();
+                        $relatedArticles = TrovieHelper::convertAssocIdArrayToValueIdArray($relatedArticles);
+                        if (!empty($relatedArticles)) {
+                            return $this->getArticles(
+                                $totalResultItems,
+                                $relatedArticles,
+                                $isPaginatedResult,
+                                true, 'id'
+                            );
+                        }
+                        return [];
+                    }
+                    return $this->getArticles($totalResultItems, $relatedRooms, $isPaginatedResult, true, 'room_id');
+                }
+            }
+            return [];
+        }
+        if (!empty($articleParams)) {
+            return $this->getArticles($totalResultItems, $articleParams, $isPaginatedResult);
+        }
+        return $this->getArticles($totalResultItems, [], $isPaginatedResult);
+    }
+
+    public function getAvailableHosts()
+    {
+        $hostRepository = new HostRepository();
+        $roomRepository = new RoomRepository();
+        $activeArticles = $this->_model->distinct('room_id')->get(['room_id'])->toArray();
+        $activeHosts = $roomRepository->_model
+            ->whereIn('id', TrovieHelper::convertAssocIdArrayToValueIdArray($activeArticles, 'room_id'))
+            ->distinct('host_id')->get('host_id')->toArray();
+
+        return $hostRepository->_model
+            ->whereIn('id', TrovieHelper::convertAssocIdArrayToValueIdArray($activeHosts, 'host_id'))
+            ->get(['id', 'name', 'longitude', 'image', 'latitude'])->toArray();
     }
 }

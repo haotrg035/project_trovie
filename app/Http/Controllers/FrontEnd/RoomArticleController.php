@@ -5,6 +5,8 @@ namespace App\Http\Controllers\FrontEnd;
 use App\Helper\TrovieFile;
 use App\Http\Controllers\BaseController;
 use App\Models\RoomArticle;
+use App\Repositories\CityRepository;
+use App\Repositories\Interfaces\CityEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -14,11 +16,19 @@ class RoomArticleController extends BaseController
      * @var RoomArticleEloquentRepositoryInterface
      */
     private $repository;
+    /**
+     * @var CityEloquentRepositoryInterface
+     */
+    private $cityRepository;
 
-    public function __construct(RoomArticleEloquentRepositoryInterface $repository)
+    public function __construct(
+        RoomArticleEloquentRepositoryInterface $repository,
+        CityEloquentRepositoryInterface $cityRepository
+    )
     {
         parent::__construct();
         $this->repository = $repository;
+        $this->cityRepository = $cityRepository;
     }
 
     /**
@@ -61,7 +71,7 @@ class RoomArticleController extends BaseController
     public function show(RoomArticle $roomArticle)
     {
         $this->data['article'] = $this->repository->getArticle($roomArticle->id);
-        $this->data['recent_articles'] = $this->repository->getArticles(3)->toArray();
+        $this->data['recent_articles'] = $this->repository->getArticles(3);
         $this->data['near_articles'] = $this->repository->getNearArticles(
             $this->data['article']['room']['host']
         );
@@ -76,7 +86,10 @@ class RoomArticleController extends BaseController
 
     public function search(Request $request)
     {
-        return view('front-end.room-article.search');
+        $this->data['cities'] = $this->cityRepository->getAllCitiesAndDistricts();
+        $this->data['data'] = $this->repository->search($request->all(), 8, true);
+        $this->data['availableHosts'] = json_encode($this->repository->getAvailableHosts());
+        return view('front-end.room-article.search', ['data' => $this->data]);
     }
 
     /**

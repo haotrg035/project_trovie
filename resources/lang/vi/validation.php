@@ -45,9 +45,9 @@ return [
     'file' => 'The :attribute must be a file.',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
-        'numeric' => 'The :attribute must be greater than :value.',
+        'numeric' => ':attribute phải lớn hơn :value.',
         'file' => 'The :attribute must be greater than :value kilobytes.',
-        'string' => 'The :attribute must be greater than :value characters.',
+        'string' => 'The :attribute phải dài hơn :value kí tự.',
         'array' => 'The :attribute must have more than :value items.',
     ],
     'gte' => [
@@ -150,6 +150,7 @@ return [
         'password' => 'Mật khẩu',
         'username' => 'Tài khoản',
         'host' => 'Khu trọ',
+        'id_card' => 'Số thẻ căn cước'
     ],
 
 ];

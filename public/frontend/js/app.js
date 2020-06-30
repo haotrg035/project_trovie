@@ -42399,6 +42399,7 @@ function cloneFileInput(oldInput) {
 
 document.addEventListener('DOMContentLoaded', function () {
   initMenu();
+  initSearchForm();
 });
 
 function initMenu() {
@@ -42412,6 +42413,24 @@ function initMenu() {
   menuContent.querySelector('.close-menu-btn').onclick = function () {
     menuContent.classList.remove('show');
   };
+}
+
+function initSearchForm() {
+  var searchForm = document.querySelector('.page-banner .search-form');
+  var selectCity = searchForm.querySelector('select[name=city]');
+  var selectDistrict = searchForm.querySelector('select[name=district]');
+
+  if (searchForm !== null) {
+    selectCity.onchange = function () {
+      selectDistrict.querySelectorAll('option').forEach(function (option) {
+        return option.style.display = 'none';
+      });
+      selectDistrict.querySelectorAll('option[data-city="' + selectCity.value + '"]').forEach(function (option) {
+        return option.style.display = 'block';
+      });
+      selectDistrict.selectedIndex = 0;
+    };
+  }
 }
 
 /***/ }),
@@ -42428,62 +42447,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lightslider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lightslider */ "./node_modules/lightslider/dist/js/lightslider.js");
 /* harmony import */ var lightslider__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lightslider__WEBPACK_IMPORTED_MODULE_0__);
 
-
-/***/ }),
-
-/***/ "./resources/js/frontend/_roomArticle.js":
-/*!***********************************************!*\
-  !*** ./resources/js/frontend/_roomArticle.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-document.addEventListener('DOMContentLoaded', function () {
-  initImageGallery();
-  initRelatedArticleSlider();
-});
-
-function initImageGallery() {
-  var slider = document.querySelector('#gallery__list');
-
-  if (slider !== null) {
-    $(slider).lightSlider({
-      gallery: true,
-      item: 1,
-      loop: true,
-      slideMargin: 0,
-      thumbItem: 3
-    });
-  }
-}
-
-function initRelatedArticleSlider() {
-  var slider = document.querySelector('#related-room-articles');
-
-  if (slider !== null) {
-    $(slider).lightSlider({
-      item: 4,
-      loop: false,
-      slideMargin: 16,
-      responsive: [{
-        breakpoint: 1200,
-        settings: {
-          item: 3
-        }
-      }, {
-        breakpoint: 769,
-        settings: {
-          item: 2
-        }
-      }, {
-        breakpoint: 520,
-        settings: {
-          item: 1
-        }
-      }]
-    });
-  }
-}
 
 /***/ }),
 
@@ -42639,18 +42602,17 @@ var TrovieHelper = /*#__PURE__*/function () {
 /***/ }),
 
 /***/ 11:
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/js/components/input.js ./resources/js/components/trovie_avatar_upload.js ./resources/js/frontend/_lib.js ./resources/js/frontend/_header.js ./resources/js/frontend/_roomArticle.js ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/js/components/input.js ./resources/js/components/trovie_avatar_upload.js ./resources/js/frontend/_lib.js ./resources/js/frontend/_header.js ***!
+  \*******************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/trovie/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /var/www/html/trovie/resources/js/components/input.js */"./resources/js/components/input.js");
-__webpack_require__(/*! /var/www/html/trovie/resources/js/components/trovie_avatar_upload.js */"./resources/js/components/trovie_avatar_upload.js");
-__webpack_require__(/*! /var/www/html/trovie/resources/js/frontend/_lib.js */"./resources/js/frontend/_lib.js");
-__webpack_require__(/*! /var/www/html/trovie/resources/js/frontend/_header.js */"./resources/js/frontend/_header.js");
-module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/js/frontend/_roomArticle.js */"./resources/js/frontend/_roomArticle.js");
+__webpack_require__(/*! /var/www/html/project_trovie/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /var/www/html/project_trovie/resources/js/components/input.js */"./resources/js/components/input.js");
+__webpack_require__(/*! /var/www/html/project_trovie/resources/js/components/trovie_avatar_upload.js */"./resources/js/components/trovie_avatar_upload.js");
+__webpack_require__(/*! /var/www/html/project_trovie/resources/js/frontend/_lib.js */"./resources/js/frontend/_lib.js");
+module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/frontend/_header.js */"./resources/js/frontend/_header.js");
 
 
 /***/ })

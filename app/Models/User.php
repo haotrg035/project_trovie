@@ -87,7 +87,7 @@ class User extends Authenticatable
 
     public function getPhoneAttribute()
     {
-        return $this->detail()->get()->first()->phone;
+        return $this->detail()->get()->toArray()['phone'] ?? false;
     }
 
     public function isHostOwner()

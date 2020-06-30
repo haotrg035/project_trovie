@@ -35,7 +35,7 @@
             </ul>
         </div>
         <div class="room-card__host">
-            <a href="#" class="host__link d-flex" title="Xem nhà trọ">
+            <a href="{{route('frontend.article.search')}}?host={{$articleDetail['room']['host']['id']}}" class="host__link d-flex" title="Xem nhà trọ">
                 <figure class="host__avatar mb-0">
                     <img src="{{$articleDetail['room']['host']['image']}}" alt="{{$articleDetail['room']['host']['name']}}">
                 </figure>

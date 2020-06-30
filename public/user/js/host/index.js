@@ -2003,6 +2003,7 @@ var TrovieMap = /*#__PURE__*/function () {
     this._map = null;
     this._marker = null;
     this.options = options;
+    this.options.marker = options.marker === null ? true : options.marker;
     this.options.draggaleMarkder = options.draggaleMarkder || false;
     this.options.apiKey = document.querySelector('meta[name=goong-map-api-key]').getAttribute('content');
     this.options.mapTitlesKey = document.querySelector('meta[name=goong-map-titles-key]').getAttribute('content');
@@ -2066,9 +2067,12 @@ var TrovieMap = /*#__PURE__*/function () {
         //[lng,lat]
         zoom: 17
       });
-      this._marker = new goongjs.Marker({
-        draggale: this.options.draggaleMarkder
-      }).setLngLat(this.options.center).addTo(this._map);
+
+      if (this.options.marker === true) {
+        this._marker = new goongjs.Marker({
+          draggale: this.options.draggaleMarkder
+        }).setLngLat(this.options.center).addTo(this._map);
+      }
 
       this._map.addControl(new goongjs.GeolocateControl({
         positionOptions: {
@@ -2085,6 +2089,19 @@ var TrovieMap = /*#__PURE__*/function () {
         map: this._map,
         marker: this._marker
       };
+    }
+  }, {
+    key: "drawMarker",
+    value: function drawMarker(lngLat, hostName) {
+      var imgSrc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '/public/no_image.jpg';
+      var markerElement = document.createElement('div');
+      var hostNameElement = document.createElement('p');
+      markerElement.style.backgroundImage = 'url(' + imgSrc + ')';
+      markerElement.classList.add('host-marker');
+      hostNameElement.innerText = hostName;
+      hostNameElement.classList.add('host-marker__name');
+      markerElement.append(hostNameElement);
+      return markerElement;
     }
   }, {
     key: "renderSearchResultItems",
@@ -2172,7 +2189,8 @@ var currentCoords = null;
 var mapOptions = {
   map: createHostFormMap,
   addressInput: addressInput,
-  center: [100, 20]
+  center: [100, 20],
+  marker: true
 };
 var is_edit_address = true;
 var trovieMap = null;
@@ -2210,9 +2228,16 @@ function initAddHostFormMap() {
       var mapPromise = trovieMap.initGoongMapCenterCurrentGeo();
       mapPromise.then(function (val) {
         mapElement = val;
+
+        if (mapElement === undefined) {
+          mapElement = trovieMap.initGoongMap();
+        }
+
+        addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
       });
     } else {
       mapElement = trovieMap.initGoongMap();
+      addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
     } //Bat su kien click ngoai result list
     // window.addEventListener('click', function (e) {
     //     if (addressResultList.contains(e.target) === false) {
@@ -2221,8 +2246,6 @@ function initAddHostFormMap() {
     // });
 
   }
-
-  addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
 }
 
 function _addressInputOnKeyDown() {
@@ -2296,7 +2319,7 @@ function searchResultItemClickHandler(item) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/js/user/host/index.js */"./resources/js/user/host/index.js");
+module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/host/index.js */"./resources/js/user/host/index.js");
 
 
 /***/ })

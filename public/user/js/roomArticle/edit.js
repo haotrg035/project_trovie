@@ -2129,7 +2129,7 @@ function selectFormHandler(select) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/js/user/roomArticle/edit.js */"./resources/js/user/roomArticle/edit.js");
+module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/roomArticle/edit.js */"./resources/js/user/roomArticle/edit.js");
 
 
 /***/ })

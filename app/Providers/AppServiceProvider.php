@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Helper\TrovieFile;
 use App\Helper\TrovieHelper;
+use App\Repositories\CityRepository;
 use App\Repositories\ContractRepository;
 use App\Repositories\GuestUserRepository;
 use App\Repositories\HostRepository;
+use App\Repositories\Interfaces\CityEloquentRepositoryInterface;
 use App\Repositories\Interfaces\ContractEloquentRepositoryInterface;
 use App\Repositories\Interfaces\GuestUserEloquentRepositoryInterface;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
@@ -56,6 +58,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoomArticleEloquentRepositoryInterface::class, function () {
             return new RoomArticleRepository();
         });
+        $this->app->bind(CityEloquentRepositoryInterface::class, function () {
+            return new CityRepository();
+        });
+
         $this->app->singleton(TrovieHelper::class, function () {
             return new TrovieHelper();
         });

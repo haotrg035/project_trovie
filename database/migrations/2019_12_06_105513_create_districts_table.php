@@ -19,6 +19,8 @@ class CreateDistrictsTable extends Migration
             $table->unsignedInteger('id')->unique();
             $table->string('name', 120);
             $table->string('type', 20);
+            $table->boolean('active')->default(true);
+            $table->string('avatar')->nullable();
             $table->unsignedInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities')->onUpdate('CASCADE');
         });

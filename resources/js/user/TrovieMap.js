@@ -12,6 +12,7 @@ class TrovieMap {
         this._map = null;
         this._marker = null;
         this.options = options;
+        this.options.marker = options.marker === null ? true : options.marker;
         this.options.draggaleMarkder = options.draggaleMarkder || false;
         this.options.apiKey = document.querySelector('meta[name=goong-map-api-key]').getAttribute('content');
         this.options.mapTitlesKey = document.querySelector('meta[name=goong-map-titles-key]').getAttribute('content');
@@ -45,10 +46,11 @@ class TrovieMap {
             zoom: 17
         });
 
-        this._marker = new goongjs.Marker({
-            draggale: this.options.draggaleMarkder
-        }).setLngLat(this.options.center).addTo(this._map);
-
+        if (this.options.marker === true) {
+            this._marker = new goongjs.Marker({
+                draggale: this.options.draggaleMarkder
+            }).setLngLat(this.options.center).addTo(this._map);
+        }
         this._map.addControl(
             new goongjs.GeolocateControl({
                 positionOptions: {
@@ -66,6 +68,19 @@ class TrovieMap {
             marker: this._marker
         };
     }
+
+    drawMarker(lngLat, hostName, imgSrc = '/public/no_image.jpg') {
+        let markerElement = document.createElement('div');
+        let hostNameElement = document.createElement('p');
+
+        markerElement.style.backgroundImage = 'url(' + imgSrc + ')';
+        markerElement.classList.add('host-marker');
+        hostNameElement.innerText = hostName;
+        hostNameElement.classList.add('host-marker__name');
+        markerElement.append(hostNameElement);
+        return markerElement;
+    }
+
 
     renderSearchResultItems(resultList, data, callback = null) {
         resultList.innerHtml = '';

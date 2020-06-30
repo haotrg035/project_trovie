@@ -32,7 +32,6 @@
             background: rgba(0, 0, 0, 0.4);
             width: max-content;
             margin: 0 auto;
-            @extend .shadow-sm;
 
             @include Responsive(MD) {
                 flex-wrap: wrap;

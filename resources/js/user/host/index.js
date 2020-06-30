@@ -11,7 +11,8 @@ let currentCoords = null;
 let mapOptions = {
     map: createHostFormMap,
     addressInput: addressInput,
-    center: [100, 20]
+    center: [100, 20],
+    marker: true
 };
 let is_edit_address = true;
 let trovieMap = null;
@@ -44,15 +45,21 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function initAddHostFormMap() {
+
     if (createHostFormMap !== null) {
         trovieMap = new TrovieMap(mapOptions);
         if (navigator.geolocation) {
             let mapPromise = trovieMap.initGoongMapCenterCurrentGeo();
             mapPromise.then(function (val) {
                 mapElement = val;
-            });
+                if (mapElement === undefined) {
+                    mapElement = trovieMap.initGoongMap();
+                }
+                addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
+            })
         } else {
             mapElement = trovieMap.initGoongMap();
+            addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
         }
         //Bat su kien click ngoai result list
         // window.addEventListener('click', function (e) {
@@ -61,7 +68,6 @@ function initAddHostFormMap() {
         //     }
         // });
     }
-    addressInput.addEventListener('keydown', _.debounce(_addressInputOnKeyDown, 500));
 }
 
 function _addressInputOnKeyDown() {

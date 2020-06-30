@@ -92,7 +92,6 @@ a:hover {
 }
 
 .shadow-sm,
-.page-banner form.search-form .search-form--wrapper,
 .room-card:hover {
   box-shadow: var(--shadow-sm);
 }
@@ -1011,6 +1010,46 @@ a:hover {
 
 body {
   background: #ebebeb;
+}
+
+.pagination {
+  margin-bottom: 0;
+}
+
+.pagination .page-item .page-link {
+  color: var(--color-base);
+}
+
+.pagination .page-item.active .page-link {
+  background: var(--color-base) !important;
+  border-color: var(--color-base) !important;
+  color: white !important;
+}
+
+.host-marker {
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  width: 3.4rem;
+  height: 3.4rem;
+  position: relative;
+  border: 2px solid var(--color-base);
+}
+
+.host-marker__name {
+  position: absolute;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  color: var(--color-base);
+  background: rgba(255, 255, 255, 0.75);
+  left: 50%;
+  top: 95%;
+  transform: translateX(-50%);
+  padding: 0.1rem 0.25rem;
+  font-weight: bold;
+  border-radius: 6px;
+  opacity: 0.85;
 }
 
 .top-header ul li a {

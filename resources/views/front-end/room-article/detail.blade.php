@@ -141,3 +141,6 @@
         </div>
     </div>
 @endsection
+@section('script')
+    <script src="{{asset('/frontend/js/RoomArticle/detail.js')}}"></script>
+@endsection

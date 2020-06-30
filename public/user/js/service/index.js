@@ -1356,7 +1356,7 @@ function updateService(formData) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/trovie/resources/js/user/service/index.js */"./resources/js/user/service/index.js");
+module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/service/index.js */"./resources/js/user/service/index.js");
 
 
 /***/ })
