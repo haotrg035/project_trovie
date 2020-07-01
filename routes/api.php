@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+//Route::middleware(['auth:api', 'api_is_admin'])->group(function () {
+//    Route::prefix('admin')->name('api.admin')->group(function () {
+//        Route::prefix('setting')->name('.setting')->group(function () {
+//            Route::post('')
+//        });
+//    });
+//});
 Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
     Route::prefix('user')->name('api.user')->group(function () {
         Route::get('/get-by-invite-token', 'Api\UserController@getUserByInviteToken')->name('.get_by_token');

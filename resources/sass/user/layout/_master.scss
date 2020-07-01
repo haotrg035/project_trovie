@@ -100,6 +100,10 @@ body {
     }
 }
 
+div.dataTables_wrapper div.dataTables_filter input {
+    border-radius: 8px !important;
+}
+
 .page-item {
     .page-link {
         //border-color: var(--color-base);
@@ -110,6 +114,18 @@ body {
         .page-link {
             background: var(--color-base) !important;
             border-color: var(--color-base) !important;
+        }
+    }
+
+    &.next {
+        a {
+            border-radius: 0 8px 8px 0 !important;
+        }
+    }
+
+    &.previous {
+        a {
+            border-radius: 8px 0px 0px 8px !important;
         }
     }
 }

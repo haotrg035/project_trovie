@@ -1,5 +1,5 @@
 .btn {
-    @include Rounded(0);
+    @include Rounded(6px);
 
     &-base {
         @include makeButton(var(--color-base), #ffffff);

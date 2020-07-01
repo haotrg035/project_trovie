@@ -52,7 +52,7 @@
 
         </div>
         <p class="mb-0 mt-5 text-center w-100">
-            &copy;{{config('app.name')}} 2020, bản quyền thuộc về Trovie. Thiết kế bởi&nbsp;
+            &copy;{{config('global.app_name') ?? config('app.name')}} 2020, bản quyền thuộc về Trovie. Thiết kế bởi&nbsp;
             <a class="text-dark" href="mailto:haotrg035@gmail.com">Hao Truong</a></p>
     </div>
 </footer>

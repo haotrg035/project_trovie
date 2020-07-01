@@ -21,7 +21,7 @@
 <header class="main-header">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="/">{{config('app.name')}}</a>
+            <a class="navbar-brand" href="/">{{config('global.app_name') ?? config('app.name')}}</a>
             <button class="navbar-toggler d-lg-none" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -19,6 +19,14 @@ Route::prefix('/')->name('frontend')->namespace('FrontEnd')->group(function () {
     });
 });
 
+Route::prefix('/admin')->name('admin')->middleware(['auth', 'web', 'is_admin'])->group(function () {
+    Route::prefix('setting')->name('.setting')->group(function () {
+        Route::get('/', 'SettingController@setting')->name('.index');
+        Route::patch('/update','SettingController@update')->name('.update');
+        Route::post('/update-banner','SettingController@updateBanner')->name('.update_banner');
+    });
+});
+
 Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])->group(function () {
     Route::prefix('/profile')->name('profile')->group(function () {
         Route::get('/', 'UserController@show')->name('.show');

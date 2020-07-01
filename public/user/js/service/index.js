@@ -1349,14 +1349,40 @@ function updateService(formData) {
 
 /***/ }),
 
+/***/ "./resources/js/user/service/unit.js":
+/*!*******************************************!*\
+  !*** ./resources/js/user/service/unit.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+document.addEventListener('DOMContentLoaded', function () {
+  initUnitModal();
+});
+
+function initUnitModal() {
+  var modalUnit = document.getElementById('unit-modal');
+
+  if (modalUnit !== null) {
+    var renderUnitRowItem = function renderUnitRowItem(data) {
+      var tr = document.createElement('tr');
+    };
+
+    var tableUnit = modalUnit.querySelector('table');
+  }
+}
+
+/***/ }),
+
 /***/ 4:
-/*!**************************************************!*\
-  !*** multi ./resources/js/user/service/index.js ***!
-  \**************************************************/
+/*!**************************************************************************************!*\
+  !*** multi ./resources/js/user/service/index.js ./resources/js/user/service/unit.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/service/index.js */"./resources/js/user/service/index.js");
+__webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/service/index.js */"./resources/js/user/service/index.js");
+module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/service/unit.js */"./resources/js/user/service/unit.js");
 
 
 /***/ })

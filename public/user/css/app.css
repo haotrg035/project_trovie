@@ -100,8 +100,7 @@ a:hover {
 
 .shadow-md-light,
 .card-total,
-.main-sidebar,
-.main-card {
+.main-sidebar {
   box-shadow: var(--shadow-md-light);
 }
 
@@ -411,7 +410,7 @@ a:hover {
 }
 
 .btn {
-  border-radius: 0;
+  border-radius: 6px;
 }
 
 .btn-base {
@@ -460,6 +459,8 @@ a:hover {
 
 .main-card {
   background: #ffffff;
+  box-shadow: 0 1px 2px #00000033;
+  border-radius: 24px;
 }
 
 .main-card__header {
@@ -1611,6 +1612,10 @@ body {
   flex: 1 1 auto;
 }
 
+div.dataTables_wrapper div.dataTables_filter input {
+  border-radius: 8px !important;
+}
+
 .page-item .page-link {
   color: var(--color-base);
 }
@@ -1618,6 +1623,14 @@ body {
 .page-item.active .page-link {
   background: var(--color-base) !important;
   border-color: var(--color-base) !important;
+}
+
+.page-item.next a {
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.page-item.previous a {
+  border-radius: 8px 0px 0px 8px !important;
 }
 
 @media only screen and (min-width: 769px) {

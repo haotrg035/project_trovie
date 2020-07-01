@@ -13,6 +13,17 @@
             <p class="link__text">Cá Nhân</p>
         </a>
     </li>
+    @if(auth()->user()->isAdmin())
+        <li class="main-sidebar__item--separator"></li>
+        <li class="main-sidebar__item">
+            <a href="{{route('admin.setting.index')}}" class="item__link @if(Route::is('admin.setting.*')) active @endif">
+                <figure class="link__icon">
+                    <i class="fa fa-gear" aria-hidden="true"></i>
+                </figure>
+                <p class="link__text">Cài Đặt</p>
+            </a>
+        </li>
+    @endif
     <li class="main-sidebar__item--separator"></li>
     <li class="main-sidebar__item">
         <a href="{{route('user.host.index')}}" class="item__link @if(Route::is('user.host.*')) active @endif">
@@ -47,7 +58,8 @@
         </a>
     </li>
     <li class="main-sidebar__item">
-        <a href="{{route('user.room_article.index')}}" class="item__link @if(Route::is('user.room_article.*')) active @endif">
+        <a href="{{route('user.room_article.index')}}"
+           class="item__link @if(Route::is('user.room_article.*')) active @endif">
             <figure class="link__icon">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </figure>

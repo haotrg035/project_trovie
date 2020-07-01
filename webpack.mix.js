@@ -22,7 +22,8 @@ mix
     .js('resources/js/user/host/detail.js', 'public/user/js/host')
     .js('resources/js/user/host/index.js', 'public/user/js/host/index.js')
     .js('resources/js/user/room/index.js', 'public/user/js/room')
-    .js('resources/js/user/service/index.js', 'public/user/js/service')
+    .js(['resources/js/user/service/index.js',
+        'resources/js/user/service/unit.js'], 'public/user/js/service')
     .js('resources/js/user/contract/index.js', 'public/user/js/contract')
     .js('resources/js/user/invoice/index.js', 'public/user/js/invoice')
     .js('resources/js/user/profile/show.js', 'public/user/js/profile')

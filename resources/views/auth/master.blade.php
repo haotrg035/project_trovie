@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="ggmap-api-key" content="{{config('app.api_key.google_map')}}">
     <title>
-        @hasSection('site-title') @yield('site-title') - @endif {{config('app.name')}}
+        @hasSection('site-title') @yield('site-title') - @endif {{config('global.app_name') ?? config('app.name')}}
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>

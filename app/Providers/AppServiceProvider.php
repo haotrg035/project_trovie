@@ -16,11 +16,13 @@ use App\Repositories\Interfaces\InvoiceEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
 use App\Repositories\Interfaces\ServiceEloquentRepositoryInterface;
+use App\Repositories\Interfaces\SettingEloquentRepositoryInterface;
 use App\Repositories\Interfaces\UserEloquentRepositoryInterface;
 use App\Repositories\InvoiceRepository;
 use App\Repositories\RoomArticleRepository;
 use App\Repositories\RoomRepository;
 use App\Repositories\ServiceRepository;
+use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
@@ -61,6 +63,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CityEloquentRepositoryInterface::class, function () {
             return new CityRepository();
         });
+        $this->app->bind(SettingEloquentRepositoryInterface::class, function () {
+            return new SettingRepository();
+        });
 
         $this->app->singleton(TrovieHelper::class, function () {
             return new TrovieHelper();
@@ -78,5 +83,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Builder::defaultStringLength(191);
+        config([
+            'global' => \DB::table('settings')->get()->keyBy('name')->transform(function ($setting) {
+                return $setting->value;
+            })->toArray()
+        ]);
     }
 }
