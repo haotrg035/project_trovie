@@ -150,7 +150,10 @@ return [
         'password' => 'Mật khẩu',
         'username' => 'Tài khoản',
         'host' => 'Khu trọ',
-        'id_card' => 'Số thẻ căn cước'
+        'id_card' => 'Số thẻ căn cước',
+        'birthday' => 'Ngày sinh',
+        'phone' => 'Số điện thoại',
+        'room' => 'Phòng'
     ],
 
 ];

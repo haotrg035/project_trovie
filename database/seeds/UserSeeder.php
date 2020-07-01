@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
 
         DB::table('users')->where('id', 1)->update([
             'username' => 'haotrg035',
-            'role' => 1
+            'role' => config('app.role.host.hostOwner'),
+            'admin_role' => config('app.role.web.admin'),
         ]);
 
         $userDetails = [];

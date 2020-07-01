@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoomSeeder::class);
 
 
-        $hostUsers = DB::table('users')->where('role', 1)->get('id')->toArray();
+        $hostUsers = DB::table('users')->where('role', config('app.role.host.hostOwner'))->get('id')->toArray();
         $hostUsers = array_map(function ($val) {
             return $val->id;
         }, $hostUsers);

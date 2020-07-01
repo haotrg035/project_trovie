@@ -11,6 +11,10 @@
                         data-toggle="modal" data-target="#service-modal">
                     <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Thêm Tiện Ích
                 </button>
+                <button class="btn btn-base rounded-0 service-add-btn ml-3"
+                        data-toggle="modal" data-target="#unit-modal">
+                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Đơn Vị
+                </button>
             </div>
         </x-panel-header>
         <x-main-card body-class="half-padding">
@@ -52,6 +56,7 @@
             </table>
         </x-main-card>
         @include('user.service.modal.service-modal')
+        @include('user.service.modal.unit-modal')
     </div>
 @endsection
 @section('script')

@@ -28,6 +28,7 @@ $factory->define(User::class, function (Faker $faker) {
         'api_token' => Str::random(80),
         'gender' => random_int(1, 2),
         'birthday' => $faker->date(),
-        'role' => random_int(1, 2),
+        'role' => random_int(config('app.role.host.user'), config('app.role.host.hostOwner')),
+        'admin_role' => random_int(config('app.role.web.user'), config('app.role.web.admin'))
     ];
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helper\TrovieHelper;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -56,8 +57,16 @@ class RegisterController extends Controller
             'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
             'gender' => ['required'],
-            'birthday' => ['required', 'date_format:d/m/Y'],
-            'role' => ['required'],
+            'birthday' => [
+                'required',
+                'date_format:d/m/Y',
+                function ($attribute, $value, $fail) {
+                    if (strtotime(TrovieHelper::convertDateFormat($value)) > (time() - TrovieHelper::getDayToTimeStamp(30 * 12 * 14))) {
+                        return $fail(' người dùng phải từ 14 tuổi trở lên');
+                    }
+                }
+            ],
+            'role' => ['required', 'between:' . config('app.role.host.user') . ',' . config('app.role.host.hostOwner')],
         ]);
     }
 
@@ -81,6 +90,6 @@ class RegisterController extends Controller
             'api_token' => Str::random(80),
         ]);
         \DB::table('user_details')->insert(['user_id' => $user->id]);
-        return  $user;
+        return $user;
     }
 }

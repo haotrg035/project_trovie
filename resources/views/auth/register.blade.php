@@ -1,6 +1,7 @@
 @extends('auth.master')
 
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -101,7 +102,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <div class="form-group form-group--unit form-group--unit--date">
+                                    <div class="form-group form-group--unit form-group--unit--date @error('birthday') is-invalid @enderror">
                                         <label for="birthday"
                                                class="col-form-label text-md-right">Ngày sinh:</label>
                                         <input id="birthday" type="text" name="birthday"
@@ -119,15 +120,16 @@
                                                class="col-form-label text-md-right">Loại tài khoản:</label>
                                         <div class="d-flex">
                                             <div class="custom-control custom-radio col-6 pl-4">
-                                                <input type="radio" name="role" value="1"
+                                                <input type="radio" name="role" value="{{config('app.role.host.user')}}"
                                                        class="custom-control-input trovie-input @error('gender') is-invalid @enderror"
-                                                       required {{ ((old('role') === "1") || empty(old('role'))) ? 'checked' : '' }}>
+                                                       required {{ ((old('role') === config('app.role.host.user')."") || empty(old('role'))) ? 'checked' : '' }}>
                                                 <label class="custom-control-label p-0" for="gender">Khách thuê</label>
                                             </div>
                                             <div class="custom-control custom-radio col-6 pl-4">
                                                 <input type="radio" name="role"
                                                        class="custom-control-input trovie-input @error('role') is-invalid @enderror"
-                                                       value="0" required {{ old('role') === "2" ? 'checked' : '' }}>
+                                                       value="{{config('app.role.host.hostOwner')}}"
+                                                       required {{ old('role') === config('app.role.host.hostOwner')."" ? 'checked' : '' }}>
                                                 <label class="custom-control-label p-0" for="gender">Chủ trọ</label>
                                             </div>
                                         </div>
@@ -154,7 +156,5 @@
     </div>
 @endsection
 @section('script')
-    <script !src="">
 
-    </script>
 @endsection

@@ -42,7 +42,7 @@ class HostPolicy
      */
     public function create(User $user)
     {
-        return $user->role < 2 ? Response::allow() : Response::deny('Bạn không có quyền tạo nhà trọ!');
+        return $user->role >= config('app.role.host.hostOwner')? Response::allow() : Response::deny('Bạn không có quyền tạo nhà trọ!');
     }
 
     /**
@@ -54,7 +54,7 @@ class HostPolicy
      */
     public function update(User $user, Host $host)
     {
-        return ($user->role < 2 && $user->id === $host->user_id) ? Response::allow() : Response::deny('Bạn không thể sửa nhà trọ này');
+        return ($user->role >= config('app.role.host.hostOwner') && $user->id === $host->user_id) ? Response::allow() : Response::deny('Bạn không thể sửa nhà trọ này');
     }
 
     /**
@@ -66,7 +66,7 @@ class HostPolicy
      */
     public function delete(User $user, Host $host)
     {
-        return $user->role < 2 && $user->id === $host->user_id;
+        return $user->role >= config('app.role.host.hostOwner') && $user->id === $host->user_id;
     }
 
     /**

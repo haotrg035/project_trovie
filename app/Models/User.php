@@ -90,9 +90,14 @@ class User extends Authenticatable
         return $this->detail()->get()->toArray()['phone'] ?? false;
     }
 
+    public function isAdmin()
+    {
+        return $this->admin_role >= config('app.role.web.admin');
+    }
+
     public function isHostOwner()
     {
-        return $this->role < 2;
+        return $this->role >= config('app.role.host.hostOwner');
     }
 
     public function isOwnHost($host_id)

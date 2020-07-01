@@ -54,7 +54,34 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
         $attributes['user_id'] = auth()->id();
         $attributes['city_id'] = \DB::table('cities')->where('name', $city)->first()->id;
         $attributes['district_id'] = \DB::table('districts')->where('name', $district)->first()->id;
-        return $this->_model->create($attributes);
+        $hostCreated = $this->_model->create($attributes);
+        if ($hostCreated) {
+//            $defaultUnits = config('app.default_service_units');
+//            if (!empty($defaultUnits)) {
+//                $defaultUnits = array_map(function ($unit) use ($hostCreated) {
+//                    return ['name' => $unit, 'user_id' => $hostCreated->user_id];
+//                }, $defaultUnits);
+//                \DB::table('service_units')->insert($defaultUnits);
+//            }
+            $defaultServices = config('app.default_services');
+            $units = \DB::table('service_units')->where('user_id', $hostCreated->user_id)->get()->toArray();
+            $units = TrovieHelper::convertAssocIdArrayToValueIdArray($units, 'id');
+            if (!empty($defaultServices)) {
+                $array_map = [];
+                foreach ($defaultServices as $key => $service) {
+                    $array_map[$key] = [
+                        'name' => $service,
+                        'user_id' => $hostCreated->user_id,
+                        'unit_id' => $units[array_rand($units)],
+                        'cost' => 0
+                    ];
+                }
+                $defaultServices = $array_map;
+            }
+            \DB::table('services')->insert($defaultServices);
+            return  $defaultServices;
+        }
+        return false;
     }
 
     public function update($id, array $attributes)

@@ -22,7 +22,16 @@ return [
         'goong_map_api' => env('GOONG_MAP_API_KEY', 'eWFXafQR0oI29SWsgs4P1aStUFKIxMIE2A3nA9Rq'),
         'goong_map_titles' => env('GOONG_MAP_API_KEY', 'jsCUi41ZeIUwlaBHHMJzU72vb7VkImiwdZgGtk7l')
     ],
-
+    'role' => [
+        'web' => [
+            'user' => 1,
+            'admin' => 2
+        ],
+        'host' => [
+            'user' => 1,
+            'hostOwner' => 2
+        ]
+    ],
     'room_state' => [
         'unavailable' => 0,
         'free' => 1,
@@ -34,7 +43,6 @@ return [
         'ban công',
         'nuôi thú cưng',
         'máy lạnh',
-        'tivi',
         'truyền hình cáp',
         'máy giặt',
         'bãi đổ xe',
@@ -42,6 +50,7 @@ return [
     ],
 
     'default_service_units' => ['Tháng', 'kV', 'm3', 'Cái'],
+
     'user_invitation_token_length' => 6,
     'user_invitation_token_minutes' => 15,
     'user_invitation_token_regen_at' => 3,

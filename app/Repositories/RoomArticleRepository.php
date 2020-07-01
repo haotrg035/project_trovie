@@ -135,6 +135,13 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
         }
         if ($isResultPaginated) {
             $data = $data->paginate($total);
+            foreach ($data as $key => $val) {
+                if (count($val->room->gallery) > 0) {
+                    foreach ($val->room->gallery as $key2 => $image) {
+                        $data[$key]->room->gallery[$key2]->image = asset(TrovieFile::checkFile($image->image));
+                    }
+                }
+            }
         } else {
             $data = $data->limit($total)->get()->toArray();
             foreach ($data as $key => $val) {
@@ -168,9 +175,10 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
         if (count($nearestHosts) > 0) {
             $listIds = [];
             foreach ($nearestHosts as $nearHost) {
+                $_nearArticles = $this->getAllByHost($nearHost->id);
                 $listIds = array_merge(
                     $listIds,
-                    $this->getAllByHost($nearHost->id)
+                    $_nearArticles ? $_nearArticles : []
                 );
             }
             $listIds = TrovieHelper::convertAssocIdArrayToValueIdArray($listIds, 'id');
