@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -42407,12 +42407,17 @@ function initMenu() {
   var menuContent = menu.querySelector('#main-header__menu');
 
   menu.querySelector('.navbar-toggler').onclick = function () {
-    menuContent.classList.add('show');
+    menuContent.classList.toggle('show');
   };
 
-  menuContent.querySelector('.close-menu-btn').onclick = function () {
-    menuContent.classList.remove('show');
-  };
+  menuContent.querySelectorAll('.nav-item.dropdown').forEach(function (el) {
+    el.onclick = function (e) {
+      e.preventDefault();
+      el.querySelector('.dropdown-menu').classList.toggle('show');
+    };
+  }); // menuContent.querySelector('.close-menu-btn').onclick = () => {
+  //     menuContent.classList.remove('show');
+  // }
 }
 
 function initSearchForm() {
@@ -42602,7 +42607,7 @@ var TrovieHelper = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 11:
+/***/ 13:
 /*!*******************************************************************************************************************************************************************************************!*\
   !*** multi ./resources/js/app.js ./resources/js/components/input.js ./resources/js/components/trovie_avatar_upload.js ./resources/js/frontend/_lib.js ./resources/js/frontend/_header.js ***!
   \*******************************************************************************************************************************************************************************************/

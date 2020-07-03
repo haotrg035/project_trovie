@@ -161,7 +161,7 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
         return $this->getArticles(1, [['id', '=', $id]], false)[0];
     }
 
-    public function getNearArticles($currentHost, $distance = 0)
+    public function getNearArticles($currentHost, $total = 8, $distance = 0)
     {
         $hostRepository = new HostRepository();
         $result = [];
@@ -182,7 +182,7 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
                 );
             }
             $listIds = TrovieHelper::convertAssocIdArrayToValueIdArray($listIds, 'id');
-            $result = $this->getArticles(10, $listIds, false, true);
+            $result = $this->getArticles($total, $listIds, false, true);
         }
         return $result;
     }

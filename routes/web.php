@@ -22,8 +22,23 @@ Route::prefix('/')->name('frontend')->namespace('FrontEnd')->group(function () {
 Route::prefix('/admin')->name('admin')->middleware(['auth', 'web', 'is_admin'])->group(function () {
     Route::prefix('setting')->name('.setting')->group(function () {
         Route::get('/', 'SettingController@setting')->name('.index');
-        Route::patch('/update','SettingController@update')->name('.update');
-        Route::post('/update-banner','SettingController@updateBanner')->name('.update_banner');
+        Route::patch('/update', 'SettingController@update')->name('.update');
+        Route::post('/update-banner', 'SettingController@updateBanner')->name('.update_banner');
+        Route::post('/update-no-image', 'SettingController@updateNoImage')->name('.update_no_image');
+    });
+    Route::prefix('menu')->name('.menu')->group(function () {
+        Route::get('/', 'MenuController@index')->name('.index');
+        Route::get('/get-menu/{menu?}', 'MenuController@show')->name('.show');
+        Route::patch('/update-menu-pos', 'MenuController@updatePos')->name('.update_pos');
+        Route::patch('/update-menu-info/{menu?}', 'MenuController@updateInfo')->name('.update_info');
+        Route::post('/create-menu', 'MenuController@store')->name('.store');
+        Route::delete('/delete-menu/{menu?}', 'MenuController@destroy')->name('.destroy');
+    });
+    Route::prefix('place')->name('.place')->group(function () {
+        Route::get('/', 'CityController@index')->name('.index');
+        Route::get('/get-city/{city?}', 'CityController@show')->name('.show_city');
+        Route::post('/update-city/{city?}', 'CityController@update')->name('.update_city');
+        Route::post('/update-city-avatar/{city?}', 'CityController@updateAvatar')->name('.update_city_avatar');
     });
 });
 

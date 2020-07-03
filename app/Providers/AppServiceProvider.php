@@ -13,12 +13,14 @@ use App\Repositories\Interfaces\ContractEloquentRepositoryInterface;
 use App\Repositories\Interfaces\GuestUserEloquentRepositoryInterface;
 use App\Repositories\Interfaces\HostEloquentRepositoryInterface;
 use App\Repositories\Interfaces\InvoiceEloquentRepositoryInterface;
+use App\Repositories\Interfaces\MenuEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
 use App\Repositories\Interfaces\ServiceEloquentRepositoryInterface;
 use App\Repositories\Interfaces\SettingEloquentRepositoryInterface;
 use App\Repositories\Interfaces\UserEloquentRepositoryInterface;
 use App\Repositories\InvoiceRepository;
+use App\Repositories\MenuRepository;
 use App\Repositories\RoomArticleRepository;
 use App\Repositories\RoomRepository;
 use App\Repositories\ServiceRepository;
@@ -65,6 +67,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(SettingEloquentRepositoryInterface::class, function () {
             return new SettingRepository();
+        });
+        $this->app->bind(MenuEloquentRepositoryInterface::class, function () {
+            return new MenuRepository();
         });
 
         $this->app->singleton(TrovieHelper::class, function () {

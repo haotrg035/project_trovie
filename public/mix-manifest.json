@@ -2,6 +2,8 @@
     "/frontend/js/RoomArticle/detail.js": "/frontend/js/RoomArticle/detail.js",
     "/frontend/js/RoomArticle/search.js": "/frontend/js/RoomArticle/search.js",
     "/frontend/js/app.js": "/frontend/js/app.js",
+    "/user/admin/menu/index.js": "/user/admin/menu/index.js",
+    "/user/admin/place/index.js": "/user/admin/place/index.js",
     "/user/js/app.js": "/user/js/app.js",
     "/user/css/app.css": "/user/css/app.css",
     "/frontend/css/app.css": "/frontend/css/app.css",

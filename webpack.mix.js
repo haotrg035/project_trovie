@@ -30,6 +30,8 @@ mix
     .js('resources/js/user/roomArticle/index.js', 'public/user/js/roomArticle')
     .js('resources/js/user/roomArticle/create.js', 'public/user/js/roomArticle')
     .js('resources/js/user/roomArticle/edit.js', 'public/user/js/roomArticle')
+    .js('resources/js/user/admin/menu/index.js', 'public/user/admin/menu')
+    .js('resources/js/user/admin/place/index.js', 'public/user/admin/place/')
     // .sass('resources/sass/user/libs.scss', 'public/user/css/libs.css')
     .sass('resources/sass/user/app.scss', 'public/user/css')
     .js([

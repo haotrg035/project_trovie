@@ -41,10 +41,10 @@
         @extend %transition-section-item;
         @include Responsive(LG) {
             position: fixed;
-            top: 0;
+            top: 48px;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: calc(100% - 48px);
             background: rgba(0, 0, 0, 0.2);
             opacity: 0;
             @include TransformTranslate(-100%, 0);
@@ -66,11 +66,29 @@
                 background: white;
                 width: 80%;
                 height: 100%;
+                overflow-y: auto;
             }
 
             .nav-item {
                 @include Responsive(LG) {
                     width: 100%;
+                }
+
+                &.dropdown {
+                    .nav-link {
+                        @include Responsive(LG) {
+                            display: flex;
+                            justify-content: space-between;
+
+                            .fa {
+                                font-weight: bold;
+                                font-size: 16px;
+                                display: flex;
+                                justify-content: center;
+                                align-content: center;
+                            }
+                        }
+                    }
                 }
 
                 &.home {
@@ -110,6 +128,30 @@
                         border: none;
                     }
 
+                    &--wide {
+                        width: 80vw;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        flex-wrap: wrap;
+
+                        .menu-item {
+                            width: calc(100% / 4);
+
+                            @include Responsive(MD) {
+                                width: calc(100% / 2);
+
+                                .nav-link {
+                                    font-size: 13px !important;
+                                    padding: .5rem .85rem !important;
+                                }
+                            }
+                        }
+
+                        &.show {
+                            display: flex;
+                        }
+                    }
+
                     .menu-item {
                         .nav-link {
                             color: var(--color-variant-3);
@@ -145,7 +187,15 @@
                     }
 
                     & > .dropdown-menu {
-                        display: block;
+                        @include ResponsiveMin(LG) {
+                            display: block;
+                        }
+                    }
+
+                    & > .dropdown-menu--wide {
+                        @include ResponsiveMin(LG) {
+                            display: flex;
+                        }
                     }
                 }
             }

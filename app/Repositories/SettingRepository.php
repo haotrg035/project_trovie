@@ -45,12 +45,32 @@ class SettingRepository extends EloquentRepository implements SettingEloquentRep
         });
         if (isset($settings['app_banner'])) {
             $new_name = TrovieFile::updateFIle($file, $settings['app_banner'], config('filepath.images.web.logo'));
-            $result = $this->_model->where('name' , 'app_banner')->update(['value' => $new_name]);
+            $result = $this->_model->where('name', 'app_banner')->update(['value' => $new_name]);
         } else {
             $new_name = TrovieFile::storeFile($file, config('filepath.images.web.logo'));
             $result = $this->_model->insert(['name' => 'app_banner', 'value' => $new_name]);
         }
-        if ($result){
+        if ($result) {
+            return asset(TrovieFile::checkFile($new_name));
+        }
+        return false;
+    }
+
+    public function updateNoImage($file)
+    {
+        $result = null;
+        $new_name = '';
+        $settings = $this->_model->get()->keyBy('name')->transform(function ($setting) {
+            return $setting->value;
+        });
+        if (isset($settings['app_no_image'])) {
+            $new_name = TrovieFile::updateFIle($file, $settings['app_no_image'], '/');
+            $result = $this->_model->where('name', 'app_no_image')->update(['value' => $new_name]);
+        } else {
+            $new_name = TrovieFile::storeFile($file, '/');
+            $result = $this->_model->insert(['name' => 'app_no_image', 'value' => $new_name]);
+        }
+        if ($result) {
             return asset(TrovieFile::checkFile($new_name));
         }
         return false;

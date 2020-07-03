@@ -1,0 +1,63 @@
+.dd{
+    .dd-list {
+        margin-bottom: 0;
+
+        .dd-list {
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 1px;
+                height: 100%;
+                background: var(--color-base);
+            }
+        }
+
+        .dd-item {
+            display: flex;
+            flex-direction: column;
+            list-style-type: none;
+            position: relative;
+
+            .btn {
+                position: absolute;
+                right: .5rem;
+                top: .75rem;
+                height: 1.7rem;
+                width: 1.7rem;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+
+                .fa {
+                    font-size: .9rem;
+                }
+
+                &-delete {
+                    right: 2.75rem;
+                }
+
+                &-edit {
+                    right: 4.95rem;
+                }
+            }
+
+            .dd-handle {
+                padding: .5em 1rem;
+                border: 1px solid var(--color-base);
+                @include Rounded(4px);
+                margin: .25rem 0;
+                font-weight: bold;
+            }
+
+        }
+
+        .dd-placeholder {
+            border: 1px dashed var(--color-base);
+            border-radius: 4px;
+        }
+    }
+}

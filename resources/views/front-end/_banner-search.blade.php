@@ -1,5 +1,5 @@
 <section class="page-banner"
-         style="background-image: url('{{asset('storage/banner.jpg')}}')">
+         style="background-image: url('{{asset(\App\Helper\TrovieFile::checkFile(config('global.app_banner')))}}')">
     <div class="container">
         <form action="/phong/tim-kiem" class="search-form">
             <div class="search-form--wrapper">

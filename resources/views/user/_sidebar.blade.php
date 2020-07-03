@@ -23,6 +23,22 @@
                 <p class="link__text">Cài Đặt</p>
             </a>
         </li>
+        <li class="main-sidebar__item">
+            <a href="{{route('admin.menu.index')}}" class="item__link @if(Route::is('admin.menu.*')) active @endif">
+                <figure class="link__icon">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </figure>
+                <p class="link__text">Menu</p>
+            </a>
+        </li>
+        <li class="main-sidebar__item">
+            <a href="{{route('admin.place.index')}}" class="item__link @if(Route::is('admin.place.*')) active @endif">
+                <figure class="link__icon">
+                    <i class="fa fa-building" aria-hidden="true"></i>
+                </figure>
+                <p class="link__text">Tỉnh Thành</p>
+            </a>
+        </li>
     @endif
     <li class="main-sidebar__item--separator"></li>
     <li class="main-sidebar__item">

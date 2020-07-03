@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(HostSeeder::class);
         $this->call(RoomSeeder::class);
-
+        $this->call(MenuSeeder::class);
 
         $hostUsers = DB::table('users')->where('role', config('app.role.host.hostOwner'))->get('id')->toArray();
         $hostUsers = array_map(function ($val) {

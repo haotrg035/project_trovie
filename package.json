@@ -32,6 +32,7 @@
         "font-awesome": "^4.7.0",
         "jszip": "^3.4.0",
         "lightslider": "^1.1.6",
+        "nestable": "^0.2.0",
         "pdfmake": "^0.1.65",
         "tata-js": "^0.1.5"
     }

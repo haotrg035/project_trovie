@@ -4,7 +4,8 @@ return [
         'avatar' => [
             'host' => 'avatars/host',
             'room' => 'avatars/room',
-            'user' => 'avatars/user'
+            'user' => 'avatars/user',
+            'city' => 'avatars/city'
         ],
         'gallery' => [
             'host' => 'gallery/host',

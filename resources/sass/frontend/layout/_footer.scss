@@ -1,7 +1,7 @@
 .page-section__footer {
     background: #ddd;
     //color: #ffffff;
-    padding: 2rem 0;
+    padding: 3rem 0 0rem 0;
 }
 
 .footer-item {
@@ -20,27 +20,41 @@
 
     .footer-item__list {
         .list__item {
-            margin-top: .35rem;
+            margin-top: .55rem;
             line-height: 1.25em;
 
-            a {
-                color: var(--color-variant-3);
-                padding-left: 1rem;
-                position: relative;
-                display: block;
+            &--link {
+                a {
+                    color: var(--color-variant-3);
+                    padding-left: 1rem;
+                    position: relative;
+                    display: block;
 
+                    &::after {
+                        position: absolute;
+                        content: '\f105';
+                        font-family: FontAwesome, serif;
+                        top: 0;
+                        left: 0;
+
+                    }
+                }
+            }
+
+            a {
+                color: var(--color-base);
                 &:hover {
                     color: var(--color-base);
                 }
+            }
 
-                &::after {
-                    position: absolute;
-                    content: '\f105';
-                    font-family: FontAwesome, serif;
-                    top: 0;
-                    left: 0;
-
-                }
+            .fa {
+                color: var(--color-base);
+                font-weight: bold;
+                width: 1.3rem;
+                display: inline-flex;
+                justify-content: center;
+                align-content: center;
             }
         }
     }

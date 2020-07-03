@@ -99,4 +99,30 @@ class  TrovieHelper
     {
         return $day * 60 * 60 * 24;
     }
+
+    /**
+     * @param $data
+     * @param int $parent_id
+     * @param int $level
+     * @param string $result_type how result was rendered, 'tree' or 'flat'
+     * @return array
+     */
+    public static function dataTree($data, $parent_id = 0, $level = 0, $result_type = 'tree')
+    {
+        $result = [];
+        foreach ($data as $key => $item) {
+            if ($item['parent_id'] === $parent_id) {
+                $item['level'] = $level;
+                $children = self::dataTree($data, $item['id'], ++$level, $result_type);
+                if ($result_type === 'flat') {
+                    $result[] = $item;
+                    $result = array_merge($result, $children);
+                } else {
+                    $item['children'] = $children;
+                    $result[] = $item;
+                }
+            }
+        }
+        return $result;
+    }
 }

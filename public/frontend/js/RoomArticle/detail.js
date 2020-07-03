@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1172,7 +1172,7 @@ var TrovieMap = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 12:
+/***/ 14:
 /*!***********************************************************!*\
   !*** multi ./resources/js/frontend/RoomArticle/detail.js ***!
   \***********************************************************/

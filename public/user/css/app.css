@@ -1447,6 +1447,67 @@ a:hover {
   cursor: pointer;
 }
 
+.dd .dd-list {
+  margin-bottom: 0;
+}
+
+.dd .dd-list .dd-list {
+  position: relative;
+}
+
+.dd .dd-list .dd-list::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--color-base);
+}
+
+.dd .dd-list .dd-item {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  position: relative;
+}
+
+.dd .dd-list .dd-item .btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.75rem;
+  height: 1.7rem;
+  width: 1.7rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.dd .dd-list .dd-item .btn .fa {
+  font-size: 0.9rem;
+}
+
+.dd .dd-list .dd-item .btn-delete {
+  right: 2.75rem;
+}
+
+.dd .dd-list .dd-item .btn-edit {
+  right: 4.95rem;
+}
+
+.dd .dd-list .dd-item .dd-handle {
+  padding: 0.5em 1rem;
+  border: 1px solid var(--color-base);
+  border-radius: 4px;
+  margin: 0.25rem 0;
+  font-weight: bold;
+}
+
+.dd .dd-list .dd-placeholder {
+  border: 1px dashed var(--color-base);
+  border-radius: 4px;
+}
+
 html,
 body {
   scroll-behavior: smooth;

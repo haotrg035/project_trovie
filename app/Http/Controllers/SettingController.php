@@ -41,4 +41,9 @@ class SettingController extends BaseController
         $result = $this->repository->updateBanner($request->file('avatar'));
         return $this->returnResponse($result, 'update', ['image' => $result]);
     }
+    public function updateNoImage(Request $request)
+    {
+        $result = $this->repository->updateNoImage($request->file('avatar'));
+        return $this->returnResponse($result, 'update', ['image' => $result]);
+    }
 }

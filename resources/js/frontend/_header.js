@@ -8,11 +8,17 @@ function initMenu() {
     let menuContent = menu.querySelector('#main-header__menu');
 
     menu.querySelector('.navbar-toggler').onclick = () => {
-        menuContent.classList.add('show');
+        menuContent.classList.toggle('show');
     }
-    menuContent.querySelector('.close-menu-btn').onclick = () => {
-        menuContent.classList.remove('show');
-    }
+    menuContent.querySelectorAll('.nav-item.dropdown').forEach(el => {
+        el.onclick = (e) =>{
+            e.preventDefault();
+            el.querySelector('.dropdown-menu').classList.toggle('show');
+        }
+    })
+    // menuContent.querySelector('.close-menu-btn').onclick = () => {
+    //     menuContent.classList.remove('show');
+    // }
 }
 
 function initSearchForm() {

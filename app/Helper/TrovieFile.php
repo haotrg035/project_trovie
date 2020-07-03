@@ -15,7 +15,7 @@ class TrovieFile
      * @param String $custom_name
      * @return false|string
      */
-    public static function storeFile($file, String $des, String $custom_name = null)
+    public static function storeFile($file, string $des, string $custom_name = null)
     {
         if ($custom_name) {
             return \Storage::putFileAs($des, $file, $custom_name);
@@ -36,7 +36,8 @@ class TrovieFile
         $old_file_name,
         $des = '/storage',
         $custom_name = null
-    ) {
+    )
+    {
         if (\Storage::exists($old_file_name)) {
             \Storage::delete($old_file_name);
         }
@@ -48,7 +49,7 @@ class TrovieFile
         if (\Storage::exists($file_path)) {
             return 'storage/' . $file_path;
         }
-        return 'storage/no_image.jpg';
+        return 'storage/' . config('global.app_no_image');
     }
 
     public static function deleteFIle($file_path)

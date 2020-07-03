@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\BaseController;
 use App\Repositories\Interfaces\CityEloquentRepositoryInterface;
+use App\Repositories\Interfaces\MenuEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -17,15 +18,21 @@ class IndexController extends BaseController
      * @var CityEloquentRepositoryInterface
      */
     private $cityRepository;
+    /**
+     * @var MenuEloquentRepositoryInterface
+     */
+    private $menuRepository;
 
     public function __construct(
         RoomArticleEloquentRepositoryInterface $roomArticleRepository,
-        CityEloquentRepositoryInterface $cityRepository
+        CityEloquentRepositoryInterface $cityRepository,
+        MenuEloquentRepositoryInterface $menuRepository
     )
     {
         parent::__construct();
         $this->roomArticleRepository = $roomArticleRepository;
         $this->cityRepository = $cityRepository;
+        $this->menuRepository = $menuRepository;
     }
 
     /**
@@ -37,6 +44,7 @@ class IndexController extends BaseController
     {
         $this->data['cities'] = $this->cityRepository->getAllCitiesAndDistricts();
         $this->data['recent_articles'] = $this->roomArticleRepository->getArticles(8);
+        $this->data['menu'] = $this->menuRepository->getMenu();
         return view('front-end.index.index', ['data' => $this->data]);
     }
 

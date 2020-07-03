@@ -26,28 +26,51 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="" id="main-header__menu">
-                <button class="close-menu-btn btn btn-danger d-lg-none">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
+{{--                <button class="close-menu-btn btn btn-danger d-lg-none">--}}
+{{--                    <i class="fa fa-times" aria-hidden="true"></i>--}}
+{{--                </button>--}}
                 <ul class="navbar-nav">
                     {{--<li class="nav-item home">
                         <a class="nav-link" href="#">
                             <i class="fa fa-home" aria-hidden="true"></i>
                         </a>
                     </li>--}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#">Khu Vực <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu">
-                            <li class="menu-item">
-                                <a href="" class="nav-link">Cần Thơ</a>
+                    @foreach($data['menu'] as $menu)
+                        @if($menu['type'] == 1)
+                            <li class="nav-item  @if(!empty($menu['children'])) dropdown @endif">
+                                <a class="nav-link" href="{{$menu['url']}}">
+                                    {{$menu['title']}}&nbsp;
+                                    @if(!empty($menu['children']))
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    @endif
+                                </a>
+                                @if(!empty($menu['children']))
+                                    <ul class="dropdown-menu">
+                                        @foreach($menu['children'] as $menu_lv1)
+                                            <li class="menu-item">
+                                                <a href="{{$menu_lv1['url']}}"
+                                                   class="nav-link">{{$menu_lv1['title']}}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
                             </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Hướng Dẫn
-                        </a>
-                    </li>
+                        @elseif($menu['type'] == 2)
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="{{$menu['url']}}">
+                                    {{$menu['title']}}&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu--wide">
+                                    @foreach($data['cities'] as $city)
+                                        <li class="menu-item">
+                                            <a href="{{route('frontend.article.search')}}?city={{$city['id']}}"
+                                               class="nav-link">{{$city['name']}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endif
+                    @endforeach
                     @auth
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('user.profile.show')}}">
