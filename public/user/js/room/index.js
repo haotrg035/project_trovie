@@ -495,23 +495,25 @@ function updateCardMembers(targetRoomCard, members) {
   var MembersList = targetRoomCard.querySelector('.room-card__customer-list');
   MembersList.innerHTML = '';
 
-  var _iterator8 = _createForOfIteratorHelper(members),
-      _step8;
+  if (members !== undefined) {
+    var _iterator8 = _createForOfIteratorHelper(members),
+        _step8;
 
-  try {
-    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-      var member = _step8.value;
+    try {
+      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+        var member = _step8.value;
 
-      var _member = ExampleRoomCardMemberItem.cloneNode(true);
+        var _member = ExampleRoomCardMemberItem.cloneNode(true);
 
-      _member.title = member.full_name;
-      _member.querySelector('img').src = member.avatar;
-      MembersList.append(_member);
+        _member.title = member.full_name;
+        _member.querySelector('img').src = member.avatar;
+        MembersList.append(_member);
+      }
+    } catch (err) {
+      _iterator8.e(err);
+    } finally {
+      _iterator8.f();
     }
-  } catch (err) {
-    _iterator8.e(err);
-  } finally {
-    _iterator8.f();
   }
 }
 
@@ -666,6 +668,7 @@ function initAddRoomModalHandler() {
         tata.success('Thành công', response.data.message);
         hideBsModal(addRoomModal); //Render new room card!!!
 
+        console.log(response.data.data);
         renderNewRoomCard(response.data.data);
       } catch (e) {
         console.log(e);

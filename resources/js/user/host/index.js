@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: 5000
             });
             addressInput.classList.add('is-invalid')
+        } else if () {
+
         } else {
             this.submit();
         }

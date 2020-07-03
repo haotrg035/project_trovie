@@ -93,7 +93,7 @@
                         </form>
                     </div>
                     <div class="col-12 col--custom text-right mb-0">
-                        <a href="/" class="btn btn-base btn-add-user-modal">
+                        <a href="{{route('user.contract.index')}}" class="btn btn-base btn-add-user-modal">
                             <i class="fa fa-users" aria-hidden="true"></i>&nbsp;QUẢN LÝ HỢP ĐỒNG THUÊ TRỌ
                         </a>
                     </div>

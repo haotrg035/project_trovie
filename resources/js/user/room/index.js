@@ -161,13 +161,14 @@ function updateCardServices(targetRoomCard, services) {
 
 function updateCardMembers(targetRoomCard, members) {
     let MembersList = targetRoomCard.querySelector('.room-card__customer-list');
-
     MembersList.innerHTML = '';
-    for (let member of members) {
-        let _member = ExampleRoomCardMemberItem.cloneNode(true);
-        _member.title = member.full_name;
-        _member.querySelector('img').src = member.avatar;
-        MembersList.append(_member);
+    if (members !== undefined){
+        for (let member of members) {
+            let _member = ExampleRoomCardMemberItem.cloneNode(true);
+            _member.title = member.full_name;
+            _member.querySelector('img').src = member.avatar;
+            MembersList.append(_member);
+        }
     }
 }
 
@@ -292,6 +293,7 @@ function initAddRoomModalHandler() {
                 tata.success('Thành công', response.data.message);
                 hideBsModal(addRoomModal);
                 //Render new room card!!!
+                console.log(response.data.data);
                 renderNewRoomCard(response.data.data);
             } catch (e) {
                 console.log(e);

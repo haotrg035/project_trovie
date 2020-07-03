@@ -65,21 +65,21 @@
                                         <div class="form-group">
                                             <label for="floor">Tầng / Khu: </label>
                                             <input type="number" class="form-control trovie-input text-center" required
-                                                   name="floor" placeholder="Nhập số tầng/khu/dãy" min="0">
+                                                   name="floor" placeholder="Nhập số tầng/khu/dãy" min="1" value="1">
                                         </div>
                                     </div>
                                     <div class="col-6 col--custom mb-0">
                                         <div class="form-group form-group--unit form-group--unit--meter">
                                             <label for="price">Diện tích: </label>
                                             <input type="number" class="form-control trovie-input text-center" required
-                                                   name="acreage" placeholder="Nhập diện tích" min="0">
+                                                   name="acreage" placeholder="Nhập diện tích" min="8">
                                         </div>
                                     </div>
                                     <div class="col-6 col--custom mb-0">
                                         <div class="form-group form-group--unit form-group--unit--man">
                                             <label for="members">Số người ở tối đa: </label>
                                             <input type="number" class="form-control trovie-input text-center" required
-                                                   name="members" placeholder="Tối thiểu 1" min="1">
+                                                   name="members" placeholder="Tối thiểu 1" value="1" min="1">
                                         </div>
                                     </div>
                                 </div>
