@@ -88,7 +88,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Builder::defaultStringLength(191);
-        if (\DB::table('settings')->exists()) {
+        if (\Schema::hasTable('settings')) {
             config([
                 'global' => \DB::table('settings')->get()->keyBy('name')->transform(function ($setting) {
                     return $setting->value;
