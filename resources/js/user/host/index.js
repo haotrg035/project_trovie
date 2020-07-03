@@ -38,8 +38,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 duration: 5000
             });
             addressInput.classList.add('is-invalid')
-        } else if () {
-
+        } else if (
+            document.querySelector('#city_name').value.trim() === '' ||
+            document.querySelector('#district_name').value.trim() === ''
+        ) {
+            tata.warn('Thông báo', 'Xin lỗi về bất cập, có sự thiếu sót thông tin nên vui lòng chọn một địa chỉ khác gần đây.', {
+                duration: 5000
+            });
+            addressInput.classList.add('is-invalid')
         } else {
             this.submit();
         }
