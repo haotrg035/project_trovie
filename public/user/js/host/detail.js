@@ -1283,18 +1283,6 @@ var mapElement;
 document.addEventListener('DOMContentLoaded', function () {
   initFileUploader();
   initMap();
-  document.querySelector('.host-info__form-position').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    if (is_edit_address || addressInput.value === addressInput.getAttribute('data-address')) {
-      tata.warn('Thông báo', 'Hãy chọn chính xác địa chỉ theo map!', {
-        duration: 5000
-      });
-      addressInput.classList.add('is-invalid');
-    } else {
-      this.submit();
-    }
-  });
 
   document.querySelector('.host-delete-btn').onclick = function () {
     if (confirm('Bạn có chắc muốn xóa nhà trọ này? Tất cả thông tin và phòng trọ sẽ bị xóa!')) {
@@ -1324,6 +1312,26 @@ function initFileUploader() {
 }
 
 function initMap() {
+  document.querySelector('.host-info__form-position').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (is_edit_address || addressInput.value === addressInput.getAttribute('data-address')) {
+      tata.warn('Thông báo', 'Hãy chọn chính xác địa chỉ theo map!', {
+        duration: 5000
+      });
+      addressInput.classList.add('is-invalid');
+      return false;
+    }
+
+    if (document.getElementById('city_name').value.trim() === '' || document.getElementById('district_name').value.trim() === '') {
+      tata.warn('Thông báo', 'Xin lỗi vì bất cập, Có sự thiếu xót dữ liệu ở địa điểm này, hãy chọn lại địa điểm thay thế.');
+      addressInput.classList.add('is-invalid');
+      return false;
+    }
+
+    this.submit();
+  });
+
   if (updateHostFormMap !== null) {
     mapOptions.center = [longitudeInput.value, latitudeInput.value];
     trovieMap = new _TrovieMap__WEBPACK_IMPORTED_MODULE_0__["TrovieMap"](mapOptions);

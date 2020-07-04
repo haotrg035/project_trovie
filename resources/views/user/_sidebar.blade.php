@@ -31,7 +31,7 @@
 <ul class="main-sidebar list-unstyled no-print trovie-scrollbar" style="overflow-y: auto">
     <li class="main-sidebar__item main-sidebar__item--logo">
         <a href="/" class="item__link">
-            {{config('app.name')}}
+            {{config('global.app_name') ?? config('app.name')}}
         </a>
     </li>
     <li class="main-sidebar__item">
