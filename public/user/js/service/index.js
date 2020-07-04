@@ -1358,17 +1358,106 @@ function updateService(formData) {
 
 document.addEventListener('DOMContentLoaded', function () {
   initUnitModal();
+  unitDeleteHandler();
 });
 
 function initUnitModal() {
   var modalUnit = document.getElementById('unit-modal');
 
   if (modalUnit !== null) {
-    var renderUnitRowItem = function renderUnitRowItem(data) {
-      var tr = document.createElement('tr');
-    };
+    var editBtns = modalUnit.querySelectorAll('tr .btn-edit'),
+        deleteBtn = modalUnit.querySelectorAll('tr .btn-delete');
 
-    var tableUnit = modalUnit.querySelector('table');
+    if (editBtns.length > 0) {
+      editBtns.forEach(function (btn) {
+        unitEditHandler(btn);
+      });
+    }
+
+    if (deleteBtn.length > 0) {
+      deleteBtn.forEach(function (btn) {
+        unitDeleteHandler(btn);
+      });
+    }
+  }
+}
+
+function unitEditHandler(btn) {
+  btn.onclick = function () {
+    var row = btn.parentNode.parentNode;
+    var cancelBtn = row.querySelector('.btn-delete');
+
+    if (btn.dataset.state === 'edit') {
+      btn.dataset.state = 'done';
+      row.querySelector('input').readOnly = false;
+      btn.classList.remove('btn-warning');
+      btn.classList.add('btn-success');
+      btn.querySelector('.fa').className = 'fa fa-check';
+      cancelBtn.dataset.state = 'cancel';
+      cancelBtn.querySelector('.fa').className = 'fa fa-times';
+    } else {
+      if (row.querySelector('input').value.trim() !== '') {
+        axios.post(row.dataset.updateUrl, {
+          _method: 'PATCH',
+          api_token: __apiToken,
+          name: row.querySelector('input').value.trim()
+        }).then(function (response) {
+          btn.dataset.state = 'edit';
+          btn.classList.add('btn-warning');
+          btn.classList.remove('btn-success');
+          btn.querySelector('.fa').className = 'fa fa-pencil-square-o';
+          cancelBtn.dataset.state = 'delete';
+          cancelBtn.querySelector('.fa').className = 'fa fa-trash-o';
+          row.querySelector('input').readOnly = true;
+          row.querySelector('input').value = response.data.data.name;
+          row.querySelector('input').dataset.old = response.data.data.name;
+          tata.success('Thành công', response.data.message);
+          window.location.reload();
+        })["catch"](function (err) {
+          tata.error('Thất bại', err.data.message);
+        });
+      } else {
+        tata.warn('Thông báo', 'Không được bỏ trống');
+      }
+    }
+  };
+}
+
+function unitDeleteHandler(btn) {
+  if (btn !== undefined) {
+    btn.onclick = function (e) {
+      var row = btn.parentNode.parentNode;
+      var editBtn = row.querySelector('.btn-edit');
+
+      if (btn.dataset.state === 'cancel') {
+        e.preventDefault();
+        e.stopPropagation();
+        btn.dataset.state = 'delete';
+        btn.querySelector('.fa').className = 'fa fa-trash-o';
+        editBtn.dataset.state = 'edit';
+        editBtn.classList.add('btn-warning');
+        editBtn.classList.remove('btn-success');
+        editBtn.querySelector('.fa').className = 'fa fa-pencil-square-o';
+        row.querySelector('input').readOnly = true;
+        row.querySelector('input').value = row.querySelector('input').dataset.old;
+      } else {
+        if (btn.dataset.state === 'delete') {
+          if (confirm('Bạn có chắc muốn xóa đơn vị này?')) {
+            var _row = btn.parentNode.parentNode;
+            axios.post(_row.dataset.deleteUrl, {
+              _method: 'DELETE',
+              api_token: __apiToken
+            }).then(function (response) {
+              _row.parentNode.removeChild(_row);
+
+              tata.success('Thành công', response.data.message);
+            })["catch"](function (err) {
+              tata.error('Thất bại', 'Xóa thất bại');
+            });
+          }
+        }
+      }
+    };
   }
 }
 

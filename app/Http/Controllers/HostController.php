@@ -109,11 +109,12 @@ class HostController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param Host $host
-     * @return void
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Host $host)
     {
-        //
+        $result = $this->repository->destroyHost($host->id);
+        return $this->returnRedirect($result, 'delete', route('user.host.index'));
     }
 
 }

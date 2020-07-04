@@ -275,7 +275,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initRoomTypeFilterHandler();
   initRoomInvoiceModalEventHandler();
   initRoomUsersModalHandler();
-  initRoomSearchHandler(); //    TODO: update room filter amount after update room data
+  initRoomSearchHandler();
+  ExampleRoomCard.classList.remove('d-none'); //    TODO: update room filter amount after update room data
 });
 
 function initRoomSearchHandler() {
@@ -449,6 +450,7 @@ function roomCardClickHandler(roomCard) {
       fillRoomModalForm(response.data.data);
       renderRoomModalGalleryItems(response.data.data);
       initRoomModalGallery(response.data.data);
+      document.querySelector('.btn-room-modal-delete').dataset.id = response.data.data.id;
       showBsModal(roomModal);
     } catch (e) {
       console.log(e);
@@ -800,6 +802,7 @@ function fillRoomUserModalData() {
 }
 
 function initRoomUsersModalHandler() {
+  var deleteBtn = document.querySelector('.btn-room-modal-delete');
   $(roomUsersModal).on('hidden.bs.modal', function () {
     resetRoomModalIdInput();
     showBsModal(roomModal);
@@ -812,6 +815,12 @@ function initRoomUsersModalHandler() {
     fillRoomUserModalData();
     showBsModal(roomUsersModal);
   });
+
+  deleteBtn.onclick = function () {
+    if (confirm('Bạn có chắc muốn xóa phòng này?')) {
+      window.location.href = deleteBtn.dataset.deleteUrl + '/' + deleteBtn.dataset.id;
+    }
+  };
 }
 
 function initRoomTypeFilterHandler() {

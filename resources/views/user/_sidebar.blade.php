@@ -1,18 +1,4 @@
-<ul class="main-sidebar list-unstyled no-print">
-    <li class="main-sidebar__item main-sidebar__item--logo">
-        <a href="/" class="item__link">
-            {{config('app.name')}}
-        </a>
-    </li>
-    <li class="main-sidebar__item">
-        <a href="{{route('user.profile.show')}}"
-           class="item__link @if(Route::is('user.user.*')) active @endif">
-            <figure class="link__icon">
-                <i class="fa fa-user" aria-hidden="true"></i>
-            </figure>
-            <p class="link__text">Cá Nhân</p>
-        </a>
-    </li>
+<ul class="admin-sidebar main-sidebar list-unstyled no-print d-lg-none">
     @if(auth()->user()->isAdmin())
         <li class="main-sidebar__item--separator"></li>
         <li class="main-sidebar__item">
@@ -32,6 +18,49 @@
             </a>
         </li>
         <li class="main-sidebar__item">
+            <a href="{{route('admin.place.index')}}" class="item__link @if(Route::is('admin.place.*')) active @endif">
+                <figure class="link__icon">
+                    <i class="fa fa-building" aria-hidden="true"></i>
+                </figure>
+                <p class="link__text">Tỉnh Thành</p>
+            </a>
+        </li>
+    @endif
+</ul>
+<ul class="main-sidebar list-unstyled no-print">
+    <li class="main-sidebar__item main-sidebar__item--logo">
+        <a href="/" class="item__link">
+            {{config('app.name')}}
+        </a>
+    </li>
+    <li class="main-sidebar__item">
+        <a href="{{route('user.profile.show')}}"
+           class="item__link @if(Route::is('user.user.*')) active @endif">
+            <figure class="link__icon">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </figure>
+            <p class="link__text">Cá Nhân</p>
+        </a>
+    </li>
+    @if(auth()->user()->isAdmin())
+        <li class="main-sidebar__item--separator d-none d-lg-block"></li>
+        <li class="main-sidebar__item d-none d-lg-block">
+            <a href="{{route('admin.setting.index')}}" class="item__link @if(Route::is('admin.setting.*')) active @endif">
+                <figure class="link__icon">
+                    <i class="fa fa-gear" aria-hidden="true"></i>
+                </figure>
+                <p class="link__text">Cài Đặt</p>
+            </a>
+        </li>
+        <li class="main-sidebar__item d-none d-lg-block">
+            <a href="{{route('admin.menu.index')}}" class="item__link @if(Route::is('admin.menu.*')) active @endif">
+                <figure class="link__icon">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </figure>
+                <p class="link__text">Menu</p>
+            </a>
+        </li>
+        <li class="main-sidebar__item d-none d-lg-block">
             <a href="{{route('admin.place.index')}}" class="item__link @if(Route::is('admin.place.*')) active @endif">
                 <figure class="link__icon">
                     <i class="fa fa-building" aria-hidden="true"></i>

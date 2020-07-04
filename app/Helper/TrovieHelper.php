@@ -35,7 +35,7 @@ class  TrovieHelper
     public static function stripAddressComponentName($name)
     {
         $name = strtolower($name);
-        return trim(str_replace(['huyện', 'quận', 'thành phố',], '', $name));
+        return trim(str_replace(['huyện', 'quận', 'thành phố', 'thị xã', 'thị trấn'], '', $name));
     }
 
     public static function convertAssocIdArrayToValueIdArray($assocArray = [], $key = 'id')

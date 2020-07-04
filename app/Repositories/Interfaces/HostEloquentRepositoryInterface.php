@@ -12,4 +12,6 @@ interface HostEloquentRepositoryInterface
     public function addGalleryImage(\Illuminate\Http\UploadedFile $file, $id);
 
     public function removeGalleryImage($image_id);
+
+    public function destroyHost($id);
 }

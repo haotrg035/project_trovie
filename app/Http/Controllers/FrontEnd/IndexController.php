@@ -43,7 +43,9 @@ class IndexController extends BaseController
     public function index()
     {
         $this->data['cities'] = $this->cityRepository->getAllCitiesAndDistricts();
+        $this->data['featured_cities'] = $this->cityRepository->getFeaturedCities();
         $this->data['recent_articles'] = $this->roomArticleRepository->getArticles(8);
+        $this->data['availableHosts'] = json_encode($this->roomArticleRepository->getAvailableHosts());
         $this->data['menu'] = $this->menuRepository->getMenu();
         return view('front-end.index.index', ['data' => $this->data]);
     }

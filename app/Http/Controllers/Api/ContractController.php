@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Models\Contract;
 use App\Models\Host;
 use App\Models\Room;
+use App\Models\User;
 use App\Repositories\Interfaces\ContractEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,11 @@ class ContractController extends BaseController
     {
         $result = $this->repository->getContract($contract->id);
         return $this->returnResponse($result, 'show', $result);
+    }
+
+    public function getContractsOwnUser(Request $request, User $user)
+    {
+
     }
 
     public function getContractsByHost(Request $request, Host $host)

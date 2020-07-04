@@ -79,7 +79,7 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
                 $defaultServices = $array_map;
             }
             \DB::table('services')->insert($defaultServices);
-            return  $defaultServices;
+            return $defaultServices;
         }
         return false;
     }
@@ -193,5 +193,24 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
             $result = $result->having('distance', '<', $distance);
         }
         return $result->get();
+    }
+
+    public function destroyHost($id)
+    {
+        $currentHost = $this->find($id, ['rooms']);
+        TrovieFile::deleteFIle($currentHost->image);
+        $galleries = \DB::table('host_gallery')->where('host_id', $id);
+        if ($galleries->exists()) {
+            foreach ($galleries->get() as $gallery) {
+                $this->removeGalleryImage($gallery->id);
+            }
+        }
+        if (!empty($currentHost->rooms)){
+            $roomRepo = new RoomRepository();
+            foreach ($currentHost->rooms as $room) {
+                $roomRepo->deleteRoom($room->id);
+            }
+        }
+        return $this->delete($id);
     }
 }

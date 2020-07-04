@@ -1,8 +1,6 @@
 @extends('front-end.master')
-@section('style')
-
-@endsection
 @section('body')
+    @include('front-end._banner-search')
     <div class="page-section">
         <div class="container">
             <div class="row row--custom">

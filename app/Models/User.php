@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Helper\TrovieFile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -78,6 +79,11 @@ class User extends Authenticatable
     public function room()
     {
         return $this->belongsToMany(Room::class, 'room_user')->wherePivot('active', 1);
+    }
+
+    public function units()
+    {
+        return $this->hasMany(Unit::class, 'user_id', 'id');
     }
 
     public function inviteToken()

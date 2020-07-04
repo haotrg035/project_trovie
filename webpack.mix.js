@@ -43,6 +43,7 @@ mix
     ], 'public/frontend/js/app.js')
     .js('resources/js/frontend/RoomArticle/detail.js', 'public/frontend/js/RoomArticle/')
     .js('resources/js/frontend/RoomArticle/search.js', 'public/frontend/js/RoomArticle/')
+    .js('resources/js/frontend/index/index.js', 'public/frontend/js/index/')
 
     // .sass('resources/sass/frontend/libs.scss', 'public/frontend/css/libs.css')
     .sass('resources/sass/frontend/app.scss', 'public/frontend/css');

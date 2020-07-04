@@ -18,6 +18,7 @@ use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
 use App\Repositories\Interfaces\ServiceEloquentRepositoryInterface;
 use App\Repositories\Interfaces\SettingEloquentRepositoryInterface;
+use App\Repositories\Interfaces\UnitEloquentRepositoryInterface;
 use App\Repositories\Interfaces\UserEloquentRepositoryInterface;
 use App\Repositories\InvoiceRepository;
 use App\Repositories\MenuRepository;
@@ -25,6 +26,7 @@ use App\Repositories\RoomArticleRepository;
 use App\Repositories\RoomRepository;
 use App\Repositories\ServiceRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\UnitRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
@@ -46,6 +48,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(ServiceEloquentRepositoryInterface::class, function () {
             return new ServiceRepository();
+        });
+        $this->app->bind(UnitEloquentRepositoryInterface::class, function () {
+            return new UnitRepository();
         });
         $this->app->bind(ContractEloquentRepositoryInterface::class, function () {
             return new ContractRepository();

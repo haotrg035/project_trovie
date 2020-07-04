@@ -12,7 +12,7 @@ class MenuSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 4; $i++) {
             DB::table('menu_tables')->insert([
                 'title' => $faker->word,
                 'url' => '/',

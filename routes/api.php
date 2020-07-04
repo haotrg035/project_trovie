@@ -46,7 +46,10 @@ Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
             Route::delete('/gallery-delete/{image_id?}',
                 'Api\RoomController@removeGalleryImage')->name('.gallery_remove');
         });
-
+        Route::prefix('unit')->name('.unit')->group(function () {
+            Route::patch('update/{unit}', 'UnitController@api_update')->name('.update');
+            Route::delete('delete/{unit}', 'UnitController@api_delete')->name('.delete');
+        });
         Route::prefix('service')->name('.service')->group(function () {
             Route::get('/{service?}', 'Api\ServiceController@show')->name('.show');
             Route::post('/update/{service?}', 'Api\ServiceController@update')->name('.update');

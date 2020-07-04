@@ -25,7 +25,7 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
         }
         try {
             $roomRepository = new RoomRepository();
-            $rooms = $roomRepository->_model->with([
+            $rooms = $roomRepository->_model->withTrashed()->with([
                 'contracts' => function ($query) {
                     return $query->with(['parties'])->get();
                 },
@@ -62,11 +62,13 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
 
     public function getAllByHost($id)
     {
+        $roomRepo = new RoomRepository();
+        $list_room_id = $roomRepo->_model->withTrashed()->where('host_id', $id)->get('id')->toArray();
         $list_room_id = TrovieHelper::convertAssocIdArrayToValueIdArray(
-            \DB::table('rooms')->where('host_id', $id)->get('id')->toArray(),
+            $list_room_id,
             'id'
         );
-        return $this->getAllByRoom($list_room_id);
+          return $this->getAllByRoom($list_room_id);
     }
 
     public function getContract($id)

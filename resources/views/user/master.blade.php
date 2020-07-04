@@ -32,6 +32,9 @@
     <main class="main-panel">
         {{--        @include('layouts._navbar')--}}
         <div class="main-panel__content trovie-scrollbar" data-simplebar>
+            @if(auth()->user()->isAdmin())
+                <div class="py-4 d-lg-none"></div>
+            @endif
             @yield('panel-content')
         </div>
     </main>

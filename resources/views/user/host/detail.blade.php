@@ -13,9 +13,13 @@
                         </a>
                     </li>
                     <li class="panel-content--host__header__elements__item">
-                        <a href="#" class="btn rounded-0 btn-outline-danger">
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Xóa Nhà Trọ
-                        </a>
+                        <form action="{{route('user.host.destroy',$data['data']['id'])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn rounded-0 btn-outline-danger host-delete-btn">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Xóa Nhà Trọ
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>

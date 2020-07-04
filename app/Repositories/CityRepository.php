@@ -46,4 +46,10 @@ class CityRepository extends EloquentRepository implements CityEloquentRepositor
         }
         return false;
     }
+
+    public function getFeaturedCities()
+    {
+        $cities = $this->_model->where('active',2)->limit(config('global.featured_cities_total_index') ?? 5)->get();
+        return $cities->toArray();
+    }
 }

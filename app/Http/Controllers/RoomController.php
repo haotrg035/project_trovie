@@ -96,11 +96,13 @@ class RoomController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
+     * @param Host $host
      * @param \App\Models\Room $room
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Room $room)
+    public function destroy(Host $host, Room $room)
     {
-        //
+        $this->checkUpdateAuth($room);
+        return $this->returnRedirect($this->repository->deleteRoom($room->id), 'delete', route('user.host.room.index', [$host->id]));
     }
 }

@@ -32,6 +32,14 @@ document.addEventListener('DOMContentLoaded', function () {
             this.submit();
         }
     });
+
+    document.querySelector('.host-delete-btn').onclick = () => {
+        if (confirm('Bạn có chắc muốn xóa nhà trọ này? Tất cả thông tin và phòng trọ sẽ bị xóa!')) {
+            if (confirm('Xác nhận xóa?')){
+
+            }
+        }
+    }
 });
 
 function initFileUploader() {

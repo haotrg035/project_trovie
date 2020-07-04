@@ -133,7 +133,7 @@
 
                             </div>
                         </div>
-                    </form
+                    </form>
                     <div class="col-12 col--custom mb-0">
                         <div class="form-group d-flex justify-content-end pt-3 mb-0 border-top">
                             <button class="btn btn-base btn-room-users mr-3" type="button">
@@ -144,6 +144,10 @@
                             </button>
                             <button class="btn btn-base btn-room-modal-save" type="submit">
                                 <i class="fa fa-floppy-o" aria-hidden="true"></i> LƯU
+                            </button>
+                            <button class="btn btn-danger ml-3 btn-room-modal-delete" type="button"
+                                    data-delete-url="{{route('user.host.room.delete',[$data['data']['host_id']])}}">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i> XÓA
                             </button>
                         </div>
                     </div>

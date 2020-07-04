@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initRoomInvoiceModalEventHandler();
     initRoomUsersModalHandler();
     initRoomSearchHandler();
-
+    ExampleRoomCard.classList.remove('d-none');
 //    TODO: update room filter amount after update room data
 });
 
@@ -131,6 +131,7 @@ function roomCardClickHandler(roomCard) {
             fillRoomModalForm(response.data.data);
             renderRoomModalGalleryItems(response.data.data);
             initRoomModalGallery(response.data.data);
+            document.querySelector('.btn-room-modal-delete').dataset.id = response.data.data.id;
             showBsModal(roomModal);
         } catch (e) {
             console.log(e);
@@ -162,7 +163,7 @@ function updateCardServices(targetRoomCard, services) {
 function updateCardMembers(targetRoomCard, members) {
     let MembersList = targetRoomCard.querySelector('.room-card__customer-list');
     MembersList.innerHTML = '';
-    if (members !== undefined){
+    if (members !== undefined) {
         for (let member of members) {
             let _member = ExampleRoomCardMemberItem.cloneNode(true);
             _member.title = member.full_name;
@@ -358,7 +359,7 @@ function renderRoomUsersItem(data) {
     _userItem.querySelector('.list__user').setAttribute('data-id', data.id);
     _userItem.querySelector('.list__user').setAttribute('data-name', data.full_name);
     _userItem.querySelector('.list__user').setAttribute('data-birthday', data.birthday);
-    if(data.detail.career !== null){
+    if (data.detail.career !== null) {
         _userItem.querySelector('.list__user').setAttribute('data-career', data.detail.career);
     } else {
         _userItem.querySelector('.list__user').setAttribute('data-career', 'N/A');
@@ -398,6 +399,8 @@ function fillRoomUserModalData() {
 }
 
 function initRoomUsersModalHandler() {
+    let deleteBtn = document.querySelector('.btn-room-modal-delete');
+
     $(roomUsersModal).on('hidden.bs.modal', function () {
         resetRoomModalIdInput();
         showBsModal(roomModal);
@@ -410,6 +413,11 @@ function initRoomUsersModalHandler() {
         fillRoomUserModalData();
         showBsModal(roomUsersModal);
     });
+    deleteBtn.onclick = () => {
+        if (confirm('Bạn có chắc muốn xóa phòng này?')) {
+            window.location.href = deleteBtn.dataset.deleteUrl + '/' + deleteBtn.dataset.id;
+        }
+    }
 }
 
 function initRoomTypeFilterHandler() {

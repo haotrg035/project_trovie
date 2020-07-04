@@ -285,4 +285,9 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
             ->whereIn('id', TrovieHelper::convertAssocIdArrayToValueIdArray($activeHosts, 'host_id'))
             ->get(['id', 'name', 'longitude', 'image', 'latitude'])->toArray();
     }
+
+    public function deleteByRoomId($id)
+    {
+        return $this->_model->where('room_id', $id)->delete();
+    }
 }

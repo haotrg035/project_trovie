@@ -42412,8 +42412,10 @@ function initMenu() {
 
   menuContent.querySelectorAll('.nav-item.dropdown').forEach(function (el) {
     el.onclick = function (e) {
-      e.preventDefault();
-      el.querySelector('.dropdown-menu').classList.toggle('show');
+      if (e.target == el.querySelector('.nav-link')) {
+        e.preventDefault();
+        el.querySelector('.dropdown-menu').classList.toggle('show');
+      }
     };
   }); // menuContent.querySelector('.close-menu-btn').onclick = () => {
   //     menuContent.classList.remove('show');

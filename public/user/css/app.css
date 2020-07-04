@@ -1754,6 +1754,11 @@ div.dataTables_wrapper div.dataTables_filter input {
   }
 }
 
+.main-sidebar.admin-sidebar {
+  top: 0;
+  height: 48px;
+}
+
 @media only screen and (max-width: 992px) {
   .main-sidebar .main-sidebar__item {
     flex: 1 1 auto;

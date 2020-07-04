@@ -1030,8 +1030,8 @@ body {
   background-position: center;
   background-size: cover;
   border-radius: 50%;
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 2.4rem;
+  height: 2.4rem;
   position: relative;
   border: 2px solid var(--color-base);
 }
@@ -1246,7 +1246,7 @@ body {
 }
 
 .main-header #main-header__menu ul.navbar-nav .nav-item .dropdown-menu--wide {
-  width: 80vw;
+  width: 60vw;
   left: 50%;
   transform: translateX(-50%);
   flex-wrap: wrap;

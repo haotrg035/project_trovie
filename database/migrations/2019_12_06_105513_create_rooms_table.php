@@ -28,6 +28,7 @@ class CreateRoomsTable extends Migration
             $table->string('desc', 500)->nullable();
             $table->timestamps();
             $table->index(["host_id"]);
+            $table->softDeletes();
         });
     }
 

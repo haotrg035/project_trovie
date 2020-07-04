@@ -10,6 +10,7 @@ use App\Models\RoomGallery;
 use App\Models\Service;
 use App\Models\User;
 use App\Repositories\Interfaces\RoomEloquentRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 use function foo\func;
 
 class RoomRepository extends EloquentRepository implements RoomEloquentRepositoryInterface
@@ -22,7 +23,9 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
 
     public function getAllRoomsByHost($id)
     {
-        $room_list = Room::where('host_id', $id)->with([
+        $room_list = Room::where([
+            ['host_id', '=', $id],
+        ])->with([
             'services' => function ($query) {
                 return $query->get(['id', 'name']);
             },
@@ -265,5 +268,31 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
             return $room;
         }
         return false;
+    }
+
+    public function deleteRoom($id)
+    {
+        $result = false;
+        $articleRepo = new RoomArticleRepository();
+        $articleRepo->deleteByRoomId($id);
+        $gallery = \DB::table('room_gallery')->where('room_id', $id)->get();
+        if (count($gallery) > 0) {
+            foreach ($gallery as $item) {
+                $this->removeGalleryImage($item->id);
+            }
+        }
+        \DB::table('room_service')->where('room_id', $id)->delete();
+        $isConnected = \DB::table('room_user')->where(['room_id' => $id]);
+        if (!$isConnected->exists()) {
+            $result = $this->_model->where('id', $id)->forceDelete();
+        } else {
+            $contractRepo = new ContractRepository();
+            $isConnected->update(['active' => 0]);
+            foreach ($isConnected->get() as $item) {
+               $contractRepo->_model->where('id', $item->contract_id)->update(['active' => 0]);
+            }
+            $result = $this->_model->where('id', $id)->delete();
+        }
+        return $result;
     }
 }

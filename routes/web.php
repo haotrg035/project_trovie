@@ -47,6 +47,9 @@ Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])
         Route::get('/', 'UserController@show')->name('.show');
         Route::patch('/update/{user}', 'UserController@update')->name('.update');
     });
+    Route::prefix('/unit')->name('unit')->group(function () {
+        Route::get('/create','UnitController@create')->name('.create');
+    });
     Route::prefix('/host')->name('host')->group(function () {
         Route::patch('/update-info/{host}', 'HostController@updateInfo')->name('.update_info');
         Route::patch('/update-address/{host}', 'HostController@updateAddress')->name('.update_address');
@@ -54,6 +57,7 @@ Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])
         Route::post('/update-avatar/{host}', 'HostController@updateAvatar')->name('.update_avatar');
         Route::prefix('/{host}/room')->name('.room')->group(function () {
             Route::get('/', 'RoomController@index')->name('.index');
+            Route::get('/delete/{room?}', 'RoomController@destroy')->name('.delete');
         });
     });
     Route::resource('/host', 'HostController')->except(['create', 'edit', 'update'])

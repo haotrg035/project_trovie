@@ -58,7 +58,15 @@
                                            name="article_total_newest_index"
                                            min="4"
                                            value="{{config('global.article_total_newest_index') ?? 4}}">
-                                    <small class="form-text text-muted">Nhỏ nhất là 4</small>
+                                    <small class="form-text text-muted">khuyến cáo là 4</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="index_newest_post_total">Số lượng thành phố</label>
+                                    <input type="text" class="form-control trovie-input"
+                                           name="featured_cities_total_index"
+                                           min="4"
+                                           value="{{config('global.featured_cities_total_index') ?? 5}}">
+                                    <small class="form-text text-muted">khuyến cáo là 5</small>
                                 </div>
                             </fieldset>
                         </div>
@@ -70,7 +78,7 @@
                                     <input type="text" class="form-control trovie-input"
                                            name="article_total_search_result" min="4"
                                            value="{{config('global.article_total_search_result') ?? 4}}">
-                                    <small class="form-text text-muted">Nhỏ nhất là 4</small>
+                                    <small class="form-text text-muted">khuyến cáo là 4</small>
                                 </div>
                             </fieldset>
                         </div>
@@ -83,7 +91,7 @@
                                            name="article_total_newest_detail_page"
                                            min="4"
                                            value="{{config('global.article_total_newest_detail_page') ?? 3}}">
-                                    <small class="form-text text-muted">Nhỏ nhất là 3</small>
+                                    <small class="form-text text-muted">khuyến cáo là 3</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="index_newest_post_total">Tin đăng liên quan</label>
@@ -91,7 +99,7 @@
                                            name="article_total_related_detail_page"
                                            min="4"
                                            value="{{config('global.article_total_related_detail_page') ?? 4}}">
-                                    <small class="form-text text-muted">Nhỏ nhất là 4</small>
+                                    <small class="form-text text-muted">khuyến cáo là 4</small>
                                 </div>
                             </fieldset>
                         </div>

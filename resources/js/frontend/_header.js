@@ -11,9 +11,11 @@ function initMenu() {
         menuContent.classList.toggle('show');
     }
     menuContent.querySelectorAll('.nav-item.dropdown').forEach(el => {
-        el.onclick = (e) =>{
-            e.preventDefault();
-            el.querySelector('.dropdown-menu').classList.toggle('show');
+        el.onclick = (e) => {
+            if (e.target == el.querySelector('.nav-link')) {
+                e.preventDefault();
+                el.querySelector('.dropdown-menu').classList.toggle('show');
+            }
         }
     })
     // menuContent.querySelector('.close-menu-btn').onclick = () => {

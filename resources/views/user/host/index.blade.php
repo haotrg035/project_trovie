@@ -12,7 +12,7 @@
                         </a>
                     </li>
                     <li class="panel-content--host__header__elements__item">
-                        <a href="#" class="btn rounded-0 btn-base-outline">
+                        <a href="{{route('user.service.index')}}" class="btn rounded-0 btn-base-outline">
                             <i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Tiện Ích
                         </a>
                     </li>
