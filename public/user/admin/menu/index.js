@@ -668,7 +668,7 @@ function initDeleteBtns() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/admin/menu/index.js */"./resources/js/user/admin/menu/index.js");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\user\admin\menu\index.js */"./resources/js/user/admin/menu/index.js");
 
 
 /***/ })

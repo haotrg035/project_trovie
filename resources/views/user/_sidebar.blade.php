@@ -2,7 +2,8 @@
     @if(auth()->user()->isAdmin())
         <li class="main-sidebar__item--separator"></li>
         <li class="main-sidebar__item">
-            <a href="{{route('admin.setting.index')}}" class="item__link @if(Route::is('admin.setting.*')) active @endif">
+            <a href="{{route('admin.setting.index')}}"
+               class="item__link @if(Route::is('admin.setting.*')) active @endif">
                 <figure class="link__icon">
                     <i class="fa fa-gear" aria-hidden="true"></i>
                 </figure>
@@ -30,7 +31,7 @@
 <ul class="main-sidebar list-unstyled no-print">
     <li class="main-sidebar__item main-sidebar__item--logo">
         <a href="/" class="item__link">
-            {{config('app.name')}}
+            {{config('global.app_name') ?? config('app.name')}}
         </a>
     </li>
     <li class="main-sidebar__item">
@@ -45,7 +46,8 @@
     @if(auth()->user()->isAdmin())
         <li class="main-sidebar__item--separator d-none d-lg-block"></li>
         <li class="main-sidebar__item d-none d-lg-block">
-            <a href="{{route('admin.setting.index')}}" class="item__link @if(Route::is('admin.setting.*')) active @endif">
+            <a href="{{route('admin.setting.index')}}"
+               class="item__link @if(Route::is('admin.setting.*')) active @endif">
                 <figure class="link__icon">
                     <i class="fa fa-gear" aria-hidden="true"></i>
                 </figure>

@@ -206,7 +206,7 @@
             </div>
             <div class="col-lg-6 col--custom">
                 <div class="row row--custom">
-                    <div class="col-lg-12 col--custom">
+                    <div class="col-lg-12 col--custom d-none">
                         <x-main-card has-header="1">
                             <x-slot name="title">Thông Báo</x-slot>
                             <form action="{{route('user.host.update_announcement',$data['data']['id'])}}"

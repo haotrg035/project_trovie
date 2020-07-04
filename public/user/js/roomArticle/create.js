@@ -112,7 +112,7 @@ function initContentEditor() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/roomArticle/create.js */"./resources/js/user/roomArticle/create.js");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\user\roomArticle\create.js */"./resources/js/user/roomArticle/create.js");
 
 
 /***/ })

@@ -1470,8 +1470,8 @@ function unitDeleteHandler(btn) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/service/index.js */"./resources/js/user/service/index.js");
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/service/unit.js */"./resources/js/user/service/unit.js");
+__webpack_require__(/*! D:\www\project_trovie\resources\js\user\service\index.js */"./resources/js/user/service/index.js");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\user\service\unit.js */"./resources/js/user/service/unit.js");
 
 
 /***/ })

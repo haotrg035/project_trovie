@@ -1179,7 +1179,7 @@ var TrovieMap = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/frontend/RoomArticle/detail.js */"./resources/js/frontend/RoomArticle/detail.js");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\frontend\RoomArticle\detail.js */"./resources/js/frontend/RoomArticle/detail.js");
 
 
 /***/ })

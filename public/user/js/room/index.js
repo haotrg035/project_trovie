@@ -895,7 +895,7 @@ function initRoomTypeFilterHandler() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/room/index.js */"./resources/js/user/room/index.js");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\user\room\index.js */"./resources/js/user/room/index.js");
 
 
 /***/ })

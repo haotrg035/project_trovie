@@ -2466,7 +2466,7 @@ function dataListSelectHandler(select) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/invoice/index.js */"./resources/js/user/invoice/index.js");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\user\invoice\index.js */"./resources/js/user/invoice/index.js");
 
 
 /***/ })

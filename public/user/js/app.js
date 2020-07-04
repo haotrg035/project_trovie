@@ -41440,12 +41440,12 @@ document.addEventListener('DOMContentLoaded', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/project_trovie/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/sidebar.js */"./resources/js/user/sidebar.js");
-__webpack_require__(/*! /var/www/html/project_trovie/resources/js/components/input.js */"./resources/js/components/input.js");
-__webpack_require__(/*! /var/www/html/project_trovie/resources/js/components/trovie_avatar_upload.js */"./resources/js/components/trovie_avatar_upload.js");
-__webpack_require__(/*! /var/www/html/project_trovie/resources/sass/user/app.scss */"./resources/sass/user/app.scss");
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/sass/frontend/app.scss */"./resources/sass/frontend/app.scss");
+__webpack_require__(/*! D:\www\project_trovie\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\www\project_trovie\resources\js\user\sidebar.js */"./resources/js/user/sidebar.js");
+__webpack_require__(/*! D:\www\project_trovie\resources\js\components\input.js */"./resources/js/components/input.js");
+__webpack_require__(/*! D:\www\project_trovie\resources\js\components\trovie_avatar_upload.js */"./resources/js/components/trovie_avatar_upload.js");
+__webpack_require__(/*! D:\www\project_trovie\resources\sass\user\app.scss */"./resources/sass/user/app.scss");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\sass\frontend\app.scss */"./resources/sass/frontend/app.scss");
 
 
 /***/ })

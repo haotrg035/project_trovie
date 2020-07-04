@@ -172,7 +172,7 @@ function initGenerateToken() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/project_trovie/resources/js/user/profile/show.js */"./resources/js/user/profile/show.js");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\user\profile\show.js */"./resources/js/user/profile/show.js");
 
 
 /***/ })

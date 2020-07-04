@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -888,10 +888,10 @@ try {
 
 /***/ }),
 
-/***/ "./resources/js/frontend/RoomArticle/search.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/frontend/RoomArticle/search.js ***!
-  \*****************************************************/
+/***/ "./resources/js/frontend/index/index.js":
+/*!**********************************************!*\
+  !*** ./resources/js/frontend/index/index.js ***!
+  \**********************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -904,60 +904,32 @@ document.addEventListener('DOMContentLoaded', function () {
   initSearchMap();
 });
 
-function initSearchMap() {
-  var articles = document.querySelectorAll('.room-card');
-  var trovieMap = null;
-
-  if (articles !== null && articles.length > 0) {
-    var mapElement = null;
-    var center = [articles[0].dataset.longitude, articles[0].dataset.latitude];
-    var mapOptions = {
-      map: 'room-article-search-map',
-      center: center,
-      marker: false
-    };
-    var availableHost = document.querySelector('#room-article-search-map input[name=available-hosts-info]').value.trim();
-    var listHost = [];
-    goongjs.accessToken = document.querySelector('meta[name=goong-map-api-key]').content;
-    trovieMap = new _user_TrovieMap__WEBPACK_IMPORTED_MODULE_0__["TrovieMap"](mapOptions);
-    mapElement = trovieMap.initGoongMap();
-
-    if (availableHost !== '') {
-      JSON.parse(availableHost).forEach(function (host) {
-        var hostMarker = trovieMap.drawMarker([host.longitude, host.latitude], host.name, host.image);
-
-        hostMarker.onclick = function () {
-          window.location.href = '/phong/tim-kiem?host=' + host.id;
-        };
-
-        new goongjs.Marker(hostMarker).setLngLat([host.longitude, host.latitude]).addTo(mapElement.map);
-      });
-    }
-
-    articles.forEach(function (article) {
-      var _center = [article.dataset.longitude, article.dataset.latitude]; // if (!listHost.includes(article.dataset.hostId)) {
-      //     new goongjs.Marker(trovieMap.drawMarker(
-      //         _center,
-      //         article.querySelector('.host__name').innerText,
-      //         article.querySelector('.host__avatar img').src)
-      //     ).setLngLat(_center).addTo(mapElement.map);
-      //     listHost.push(article.dataset.hostId);
-      // }
-
-      article.onmouseenter = function () {
-        if (_center !== center) {
-          _.debounce(function () {
-            mapElement.map.flyTo({
-              center: _center,
-              zoom: 16
-            });
-          }, 800)();
-
-          center = _center;
-        }
-      };
-    });
-  }
+function initSearchMap() {// let trovieMap = null;
+  // let mapElement = null;
+  // let mapOptions = {
+  //     map: 'room-article-search-map',
+  //     marker: true,
+  // };
+  // let availableHost = document.querySelector('#room-article-search-map input[name=available-hosts-info]').value.trim()
+  // let listHost = [];
+  // goongjs.accessToken = document.querySelector('meta[name=goong-map-api-key]').content;
+  // trovieMap = new TrovieMap(mapOptions);
+  // mapElement = trovieMap.initGoongMapCenterCurrentGeo();
+  //
+  //
+  // if (availableHost !== '') {
+  //     JSON.parse(availableHost).forEach(host => {
+  //         let hostMarker = trovieMap.drawMarker(
+  //             [host.longitude, host.latitude],
+  //             host.name,
+  //             host.image
+  //         );
+  //         hostMarker.onclick = () => {
+  //             window.location.href = '/phong/tim-kiem?host=' + host.id;
+  //         };
+  //         new goongjs.Marker(hostMarker).setLngLat([host.longitude, host.latitude]).addTo(mapElement.map);
+  //     })
+  // }
 }
 
 /***/ }),
@@ -1171,14 +1143,14 @@ var TrovieMap = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 15:
-/*!***********************************************************!*\
-  !*** multi ./resources/js/frontend/RoomArticle/search.js ***!
-  \***********************************************************/
+/***/ 16:
+/*!****************************************************!*\
+  !*** multi ./resources/js/frontend/index/index.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\frontend\RoomArticle\search.js */"./resources/js/frontend/RoomArticle/search.js");
+module.exports = __webpack_require__(/*! D:\www\project_trovie\resources\js\frontend\index\index.js */"./resources/js/frontend/index/index.js");
 
 
 /***/ })
