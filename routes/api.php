@@ -20,6 +20,14 @@ use Illuminate\Support\Facades\Route;
 //        });
 //    });
 //});
+Route::middleware(['api_is_admin', 'auth:api'])->group(function () {
+    Route::prefix('admin')->name('api.admin')->group(function (){
+        Route::prefix('articles')->name('.articles')->group(function () {
+            Route::get('/get-all', 'Api\RoomArticleController@getAllArticle')->name('.get_all');
+        });
+    });
+});
+
 Route::middleware(['api_host_owner', 'auth:api'])->group(function () {
     Route::prefix('user')->name('api.user')->group(function () {
         Route::get('/get-by-invite-token', 'Api\UserController@getUserByInviteToken')->name('.get_by_token');

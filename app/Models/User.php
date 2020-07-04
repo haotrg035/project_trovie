@@ -39,7 +39,6 @@ class User extends Authenticatable
         'api_token',
         'remember_token',
         'email_verified_at',
-        'role'
     ];
     protected $appends = ['phone'];
     /**
@@ -70,7 +69,9 @@ class User extends Authenticatable
     {
         return $this->room()->count();
     }
-
+    public function hosts(){
+        return $this->hasMany(Host::class,'user_id','id');
+    }
     public function detail()
     {
         return $this->hasOne(UserDetail::class, 'user_id', 'id');

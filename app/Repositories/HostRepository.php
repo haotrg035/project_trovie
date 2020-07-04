@@ -205,7 +205,7 @@ class HostRepository extends EloquentRepository implements HostEloquentRepositor
                 $this->removeGalleryImage($gallery->id);
             }
         }
-        if (!empty($currentHost->rooms)){
+        if (!empty($currentHost->rooms)) {
             $roomRepo = new RoomRepository();
             foreach ($currentHost->rooms as $room) {
                 $roomRepo->deleteRoom($room->id);

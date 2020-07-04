@@ -30,7 +30,7 @@ class RoomArticlePolicy
      */
     public function view(User $user, RoomArticle $roomArticle)
     {
-        return $user->isOwnRoom($roomArticle->id);
+        return $user->isOwnRoom($roomArticle->id) || $user->isAdmin();
     }
 
     /**
@@ -41,7 +41,7 @@ class RoomArticlePolicy
      */
     public function create(User $user)
     {
-        return $user->isHostOwner();
+        return $user->isHostOwner() || $user->isAdmin();
     }
 
     /**
@@ -53,7 +53,7 @@ class RoomArticlePolicy
      */
     public function update(User $user, RoomArticle $roomArticle)
     {
-        return $user->isHostOwner() && $user->isOwnArticle($roomArticle->id);
+        return ($user->isHostOwner() && $user->isOwnArticle($roomArticle->id)) || $user->isAdmin();
     }
 
     /**

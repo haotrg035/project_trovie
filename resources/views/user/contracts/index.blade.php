@@ -39,7 +39,7 @@
                 </button>
             </div>
         </x-panel-header>
-        <x-main-card body-class="half-padding">
+        <x-main-card body-class="">
             <div class="mw-100 w-100">
                 <table class="table table-striped table-hovertable-responsive" cellspacing="0"
                        id="table-contract-list" width="100%"

@@ -29,7 +29,8 @@ abstract class BaseController extends Controller
         $data = null,
         $customFailedMessage = null,
         $successMessage = null
-    ) {
+    )
+    {
         $_response = [];
         if ($result) {
             $_response['status'] = 'success';
@@ -103,9 +104,9 @@ abstract class BaseController extends Controller
         return response($_response, 404);
     }
 
-    protected function returnRedirect($result, $messageType, $route)
+    protected function returnRedirect($result, $messageType, $route, $customMessage = '')
     {
-        return redirect($route)->with(['response_message' => $this->getResponse($result, $messageType)]);
+        return redirect($route)->with(['response_message' => $this->getResponse($result, $messageType, [], $customMessage)]);
     }
 
     public function checkViewAuth(Model $model)

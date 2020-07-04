@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RoomArticle;
+use App\Repositories\HostRepository;
 use App\Repositories\Interfaces\RoomArticleEloquentRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,15 @@ class RoomArticleController extends BaseController
     public function index()
     {
         $this->data['list_host'] = $this->repository->getListHostByUser(auth()->id());
-//        $this->data['data'] = $this->repository->getAll();
+
         return view('user.roomArticle.index', ['data' => $this->data]);
+    }
+
+    public function adminIndex()
+    {
+       $hostRepo = new HostRepository();
+        $this->data['list_host'] = $hostRepo->getAll();
+        return view('user.admin.roomArticle.index', ['data' => $this->data]);
     }
 
     /**

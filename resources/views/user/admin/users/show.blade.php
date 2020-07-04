@@ -1,6 +1,12 @@
 @extends('user.master')
 @section('site-title',$data['view_name'])
 @section('panel-content')
+    <div class="panel-content__header mb-5">
+        <h5 class="panel-content__header__title">{{$data['view_name']}}</h5>
+        <div class="panel-content__header__content">
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4 col-lg-3 mb-0">
             <x-main-card has-header="0" class="user-avatar rounded-circle" body-class="half-padding">
@@ -23,9 +29,9 @@
                     </p>
                 </div>
                 @if($data['data']['state'] === 0)
-                    <form action="{{route('api.user.generate_invite_token',auth()->user()->username)}}"
+                    <form action="{{route('api.user.generate_invite_token',$data['data']['username'])}}"
                           id="form-generate-token" class="d-flex w-100 flex-column align-items-center">
-                        <input type="hidden" name="{{auth()->user()->username}}" required readonly>
+                        <input type="hidden" name="{{$data['data']['username']}}" required readonly>
                         <button type="submit" class="btn btn-base mb-3">
                             <i class="fa fa-key" aria-hidden="true"></i> TẠO MÃ MỜI
                         </button>
@@ -33,11 +39,11 @@
                             <input type="text" name="token" style="font-size: 1.35rem;"
                                    class="form-control text-center font-weight-bold rounded bg-white border shadow-sm trovie-input"
                                    readonly
-                                   @if(!empty($data['data']['invite_token']))
+                                   @if(!empty($data['data']['invite_token']) && (strtotime($data['data']['invite_token']['expired_at']) > time()))
                                    value="{{!empty($data['data']['invite_token']['token']) ? $data['data']['invite_token']['token'] : ''}}"
                                 @endif>
                             <p class="text-center mt-3">Mã mời còn hiệu lực trong <span class="invite_token_timeout">
-                                     @if($data['data']['invite_token']) {{$data['data']['invite_token']['expired_at']}} @endif
+                                     @if($data['data']['invite_token'] && (strtotime($data['data']['invite_token']['expired_at']) > time())) {{$data['data']['invite_token']['expired_at']}} @endif
                                 </span>
                             </p>
                         </div>
@@ -46,9 +52,10 @@
             </div>
         </div>
         <div class="col-md-8 col-lg-9">
-            <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="rounded">
-                <x-slot name="title">THÔNG TIN NGƯỜI DÙNG</x-slot>
-                <form action="{{route('user.profile.update',auth()->id())}}" method="post" class="user-info__form">
+            <x-main-card has-header="0" body-class="px-4" header-class="border-bottom p-4" class="rounded">
+                {{--                <x-slot name="title">{{}}</x-slot>--}}
+                <form action="{{route('admin.users.update',$data['data']['id'])}}" method="post"
+                      class="user-info__form">
                     @csrf
                     @method('PATCH')
                     <div class="row">
@@ -67,7 +74,8 @@
                             @endif
                         </div>
                         <div class="col-6 col-lg-4">
-                            <div class="form-group form-group--unit form-group--unit--date @if($errors->first('birthday')) is-invalid  @endif">
+                            <div
+                                class="form-group form-group--unit form-group--unit--date @if($errors->first('birthday')) is-invalid  @endif">
                                 <label for="">NGÀY SINH:</label>
                                 <input type="birthday" name="birthday" id="birthday" required
                                        class="form-control trovie-input @if($errors->first('birthday')) is-invalid  @endif"
@@ -95,7 +103,8 @@
                             @endif
                         </div>
                         <div class="col-6 col-lg-6">
-                            <div class="form-group form-group--unit form-group--unit--phone @if($errors->first('phone')) is-invalid  @endif">
+                            <div
+                                class="form-group form-group--unit form-group--unit--phone @if($errors->first('phone')) is-invalid  @endif">
                                 <label for="">ĐIỆN THOẠI:</label>
                                 <input type="phone" name="phone" id="phone" required
                                        class="form-control trovie-input @if($errors->first('phone')) is-invalid  @endif"
@@ -168,7 +177,8 @@
                             </div>
                         </div>
                         <div class="col-6 col-lg-4">
-                            <div class="form-group form-group--unit form-group--unit--date @if($errors->first('id_card_date')) is-invalid  @endif">
+                            <div
+                                class="form-group form-group--unit form-group--unit--date @if($errors->first('id_card_date')) is-invalid  @endif">
                                 <label for="">NGÀY ĐĂNG KÍ</label>
                                 <input type="text" name="id_card_date" id="id_card_date" required
                                        class="form-control trovie-input @if($errors->first('id_card_date')) is-invalid  @endif"
@@ -195,6 +205,23 @@
                                 </div>
                             @endif
                         </div>
+                        <div class="col-lg-4">
+                            <fieldset class="trovie-fieldset px-3">
+                                <legend>Loại tài khoản</legend>
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="role_user" name="role"
+                                               value="{{config('app.role.host.user')}}" {{$data['data']['role'] === config('app.role.host.user') ? 'checked' : ''}}>
+                                        <label class="custom-control-label pt-0" for="role_user">Khách thuê</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="role_host" name="role"
+                                               value="{{config('app.role.host.hostOwner')}}" {{$data['data']['role'] === config('app.role.host.hostOwner') ? 'checked' : ''}}>
+                                        <label class="custom-control-label pt-0" for="role_host">Chủ trọ</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
                         <div class="col-12 d-flex justify-content-end">
                             <button type="reset" class="btn btn-base">
                                 <i class="fa fa-refresh" aria-hidden="true"></i> LÀM LẠI
@@ -208,23 +235,10 @@
             </x-main-card>
             <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="rounded mt-3">
                 <x-slot name="title">{{'ĐỔI MẬT KHẨU'}}</x-slot>
-                <form action="{{route('user.profile.change_password', $data['data']['id'])}}" method="post">
+                <form action="{{route('admin.users.change_password', $data['data']['id'])}}" method="post">
                     @csrf
                     @method('PATCH')
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="old_password"
-                                       class="col-form-label text-md-right">Mật khẩu cũ:</label>
-                                <input id="old_password" type="password" name="old_password"
-                                       class="form-control trovie-input @error('old_password') is-invalid @enderror"
-                                       value="{{ old('old_password') }}" placeholder="Mật khẩu cũ" required>
-                                @error('old_password')
-                                <span class="invalid-feedback"
-                                      role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="password"
@@ -252,7 +266,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-12 d-inline-flex align-items-center justify-content-end">
+                        <div class="col-md-4 d-inline-flex align-items-center justify-content-end">
                             <button class="btn btn-base"><i class="fa fa-check-circle" aria-hidden="true"></i> ĐỔI MẬT
                                 KHẨU
                             </button>

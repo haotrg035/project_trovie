@@ -20,6 +20,9 @@ Route::prefix('/')->name('frontend')->namespace('FrontEnd')->group(function () {
 });
 
 Route::prefix('/admin')->name('admin')->middleware(['auth', 'web', 'is_admin'])->group(function () {
+    Route::get('/', function () {
+        return redirect(route('admin.setting.index'));
+    });
     Route::prefix('setting')->name('.setting')->group(function () {
         Route::get('/', 'SettingController@setting')->name('.index');
         Route::patch('/update', 'SettingController@update')->name('.update');
@@ -40,15 +43,33 @@ Route::prefix('/admin')->name('admin')->middleware(['auth', 'web', 'is_admin'])-
         Route::post('/update-city/{city?}', 'CityController@update')->name('.update_city');
         Route::post('/update-city-avatar/{city?}', 'CityController@updateAvatar')->name('.update_city_avatar');
     });
+
+    Route::prefix('users')->name('.users')->group(function () {
+        Route::get('/', 'UserController@index')->name('.index');
+        Route::get('/create', 'UserController@create')->name('.create');
+        Route::post('/store', 'UserController@store')->name('.store');
+        Route::get('/show/{user}', 'UserController@adminShowUser')->name('.show');
+        Route::delete('/delete/{user}', 'UserController@destroy')->name('.delete');
+        Route::patch('/update/{user}', 'UserController@adminUpdateUser')->name('.update');
+        Route::patch('/change-password/{user}', 'UserController@adminChangePassword')->name('.change_password');
+    });
+
+    Route::prefix('articles')->name('.articles')->group(function (){
+        Route::get('/', 'RoomArticleController@adminIndex')->name('.index');
+
+    });
+});
+
+Route::prefix('user/profile')->name('user.profile')->middleware(['auth', 'web'])->group(function () {
+    Route::get('/', 'UserController@show')->name('.show');
+    Route::patch('/update/{user}', 'UserController@update')->name('.update');
+    Route::patch('/change-password/{user}', 'UserController@changePassword')->name('.change_password');
 });
 
 Route::prefix('/user')->name('user.')->middleware(['auth', 'web', 'host_owner'])->group(function () {
-    Route::prefix('/profile')->name('profile')->group(function () {
-        Route::get('/', 'UserController@show')->name('.show');
-        Route::patch('/update/{user}', 'UserController@update')->name('.update');
-    });
+
     Route::prefix('/unit')->name('unit')->group(function () {
-        Route::get('/create','UnitController@create')->name('.create');
+        Route::get('/create', 'UnitController@create')->name('.create');
     });
     Route::prefix('/host')->name('host')->group(function () {
         Route::patch('/update-info/{host}', 'HostController@updateInfo')->name('.update_info');

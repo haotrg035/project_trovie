@@ -19,6 +19,11 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
         return User::class;
     }
 
+    public function getAllUsers($relations = ['detail'])
+    {
+        return $this->_model->with($relations)->get();
+    }
+
     public function getUser($id, $relations = [])
     {
         $user = $this->find($id, $relations)->toArray();
@@ -116,7 +121,7 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
 
     public function updateUser($id, $attributes)
     {
-        $user_info_keys = ['full_name', 'email', 'gender', 'birthday'];
+        $user_info_keys = ['full_name', 'email', 'gender', 'role', 'birthday'];
         $user_detail_keys = ['address', 'phone', 'id_card', 'id_card_date', 'id_card_address', 'desc'];
         $user_info = [];
         $user_detail_info = [];
@@ -153,5 +158,71 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
             return 'storage/' . $new_name;
         }
         return false;
+    }
+
+    public function deleteUser($id)
+    {
+        $contractRepo = new ContractRepository();
+
+        $user = $this->find($id, ['hosts']);
+        TrovieFile::deleteFIle($user->avatar);
+        if (!empty($user->hosts) && count($user->hosts->toArray()) > 0) {
+            $hostRepo = new HostRepository();
+            $host_ids = TrovieHelper::convertAssocIdArrayToValueIdArray($user->hosts->toArray(), 'id');
+            foreach ($host_ids as $host_id) {
+                $hostRepo->destroyHost($host_id);
+            }
+        }
+        return $this->delete($id);
+    }
+
+    public function getAdminAllUsers($relations = ['detail'])
+    {
+        return $this->_model
+            ->where('admin_role', '<', config('app.role.web.admin'))
+            ->with($relations)->get();
+    }
+
+    public function createUser($attributes)
+    {
+        $user_info_keys = ['username', 'password', 'full_name', 'email', 'gender', 'birthday', 'role'];
+        $user_detail_keys = ['address', 'phone', 'id_card', 'id_card_date', 'id_card_address', 'desc'];
+        $user_info = [];
+        $user_detail_info = [];
+        foreach ($attributes as $key => $attribute) {
+            if (in_array($key, ['birthday', 'id_card_date'])) {
+                $attribute = TrovieHelper::convertDateFormat($attribute);
+            }
+            if (in_array($key, $user_info_keys)) {
+                $user_info[$key] = $attribute == 'password' ? \Hash::make($attribute) : $attribute;
+            }
+            if (in_array($key, $user_detail_keys)) {
+                $user_detail_info[$key] = $attribute;
+            }
+        }
+
+        $userCreated = $this->create($user_info);
+        if ($userCreated) {
+            $user_detail_info = array_merge($user_detail_info, ['user_id' => $userCreated->id]);
+            UserDetail::create($user_detail_info);
+            if (!empty($attributes['avatar'])) {
+                $this->updateAvatar($attributes['avatar'], $userCreated->id);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function changePassword($id, array $attributes, bool $isAdmin)
+    {
+        $user = $this->_model->makeVisible(['password'])->where('id', $id)->first();
+        if (!$isAdmin) {
+            if (\Hash::make($attributes['old_password']) != $user->password) {
+                return false;
+            }
+        }
+        return $this->_model->where('id', $id)->update([
+            'password' => \Hash::make($attributes['password'])
+        ]);
     }
 }

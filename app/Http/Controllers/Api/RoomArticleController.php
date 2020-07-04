@@ -22,6 +22,15 @@ class RoomArticleController extends BaseController
         $this->repository = $repository;
     }
 
+    public function getAllArticle(Request $request)
+    {
+        if (!auth()->user()->isAdmin()) {
+            return $this->returnResponse(false, 'show', []);
+        }
+        $result = $this->repository->getAllArticles();
+        return $this->returnResponse($result, 'show', $result);
+    }
+
     public function getAllByHost(Request $request, Host $host)
     {
         $this->checkViewAuth($host);

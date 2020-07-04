@@ -10,6 +10,7 @@ class UserDetail extends Model
     protected $primaryKey = 'user_id';
     protected $fillable = ['user_id','address', 'phone', 'id_card', 'id_card_date', 'id_card_address', 'desc'];
 
+
     protected $casts = [
         'id_card_date' => 'date:d/m/Y',
     ];

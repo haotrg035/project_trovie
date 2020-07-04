@@ -53,7 +53,13 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
         }
         return false;
     }
-
+    public function getAllArticles(){
+        $list_room_id = TrovieHelper::convertAssocIdArrayToValueIdArray(
+            \DB::table('rooms')->get('id')->toArray(),
+            'id'
+        );
+        return $this->getAllByRoom($list_room_id);
+    }
     public function getAllByHost($id)
     {
         $list_room_id = TrovieHelper::convertAssocIdArrayToValueIdArray(

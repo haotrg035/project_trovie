@@ -56,13 +56,13 @@
                                             {{ __('Đăng Nhập') }}
                                         </button>
 
-                                        @if (Route::has('password.request'))
-                                            <a class="btn btn-link color-base-text"
-                                               href="{{ route('password.request') }}">
-                                                {{ __('Quên mật khẩu?') }}
-                                            </a>
-                                            <span>hoặc</span>
-                                        @endif
+{{--                                        @if (Route::has('password.request'))--}}
+{{--                                            <a class="btn btn-link color-base-text"--}}
+{{--                                               href="{{ route('password.request') }}">--}}
+{{--                                                {{ __('Quên mật khẩu?') }}--}}
+{{--                                            </a>--}}
+{{--                                            <span>hoặc</span>--}}
+{{--                                        @endif--}}
                                         <a class="btn btn-link btn-base-outline"
                                            href="{{ route('register') }}">
                                             {{ __('Đăng Kí') }}
