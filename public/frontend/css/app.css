@@ -1745,7 +1745,19 @@ body {
 }
 
 .room-article-detail .gallery__list > li {
-  height: 100%;
+  height: 30rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .room-article-detail .gallery__list > li {
+    height: 20rem;
+  }
+}
+
+@media only screen and (max-width: MD) {
+  .room-article-detail .gallery__list > li {
+    height: 20rem;
+  }
 }
 
 .room-article-detail .lSSlideOuter .lSPager.lSGallery li {

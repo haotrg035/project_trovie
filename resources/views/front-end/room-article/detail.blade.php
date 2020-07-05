@@ -1,4 +1,7 @@
 @extends('front-end.master')
+@section('style')
+
+@endsection
 @section('body')
     @include('front-end._banner-search')
     <div class="page-section">
@@ -149,5 +152,6 @@
     </div>
 @endsection
 @section('script')
+
     <script src="{{asset('/frontend/js/RoomArticle/detail.js')}}"></script>
 @endsection

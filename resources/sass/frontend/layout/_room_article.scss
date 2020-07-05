@@ -13,7 +13,10 @@
     }
 
     .gallery__list > li {
-        height: 100%;
+        height: 30rem;
+        @include Responsive(MD){
+            height: 20rem;
+        }
     }
 
     .lSSlideOuter .lSPager.lSGallery {
