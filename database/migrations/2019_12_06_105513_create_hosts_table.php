@@ -27,15 +27,15 @@ class CreateHostsTable extends Migration
             $table->unsignedInteger('city_id')->default(0);
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
-            $table->tinyInteger('type')->unsigned()->default('0');
-            $table->tinyInteger('rating')->default('0');
+//            $table->tinyInteger('type')->unsigned()->default('0');
+//            $table->tinyInteger('rating')->default('0');
             $table->tinyInteger('date_payment')->default(1);
             $table->tinyInteger('date_note_electric')->default(1);
             $table->unsignedInteger('cost_electric');
             $table->tinyInteger('date_note_water')->default(1);
             $table->unsignedInteger('cost_water');
             $table->tinyInteger('floors')->unsigned()->default('1');
-            $table->timestamps();
+//            $table->timestamps();
             $table->index(["user_id"]);
 //            $table->index(["district_id"]);
             $table->foreign('city_id')->references('id')->on('cities');

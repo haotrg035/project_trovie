@@ -15,6 +15,7 @@ class AddServiceForeign extends Migration
     {
         Schema::table('services', function (Blueprint $table) {
             $table->foreign('unit_id')->references('id')->on('service_units');
+            $table->foreign('user_id')->references('id')->on('users');
         });
         Schema::table('service_units', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');

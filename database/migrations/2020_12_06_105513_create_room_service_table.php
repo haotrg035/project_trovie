@@ -17,6 +17,8 @@ class CreateRoomserviceTable extends Migration
             $table->integer('room_id')->unsigned();
             $table->integer('service_id')->unsigned();
             $table->index(['service_id', 'room_id']);
+            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 

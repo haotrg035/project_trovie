@@ -31,10 +31,10 @@ class UserSeeder extends Seeder
                 'id_card_date' => date('Y-m-d', time() - (86400 * 30 * 12 * 10)),
                 'id_card_address' => $faker->address,
                 'address' => $faker->address,
-                'career' => $faker->jobTitle,
+//                'career' => $faker->jobTitle,
                 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis corporis error, eveniet illum ipsam mollitia quibusdam similique. Dolor doloribus eos quae quas! Accusantium deserunt eaque excepturi facilis sint, voluptatem.',
-                'created_at' => date(now()),
-                'updated_at' => date(now())
+//                'created_at' => date(now()),
+//                'updated_at' => date(now())
             ];
 
             $token = $i . \App\Helper\TrovieHelper::generateRandomString(config('app.user_invitation_token_length') - strlen($i . ''));

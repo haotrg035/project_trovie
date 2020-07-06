@@ -11,8 +11,8 @@ $factory->define(\App\Models\Room::class, function (Faker $faker) {
         'name' => $faker->name,
         'price' => random_int(100, 500) * 10000,
         'acreage' => random_int(10, 40),
-        'announcement' => $faker->paragraph,
-        'state' => random_int(1, 3),
+//        'announcement' => $faker->paragraph,
+//        'state' => random_int(1, 3),
         'desc' => $faker->paragraph,
     ];
 });

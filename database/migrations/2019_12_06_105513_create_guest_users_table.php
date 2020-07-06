@@ -18,14 +18,14 @@ class CreateGuestusersTable extends Migration
             $table->date('birthday');
             $table->string('full_name', 60);
             $table->tinyInteger('gender')->default('0');
-            $table->string('avatar', 255)->nullable();
+//            $table->string('avatar', 255)->nullable();
             $table->string('address', 255);
 //            $table->string('email', 255);
             $table->string('phone', 11);
             $table->string('id_card', 13);
             $table->datetime('id_card_date');
             $table->string('id_card_address',250);
-//            $table->string('career', 60);
+            $table->string('career', 60);
 //            $table->string('note');
         });
     }

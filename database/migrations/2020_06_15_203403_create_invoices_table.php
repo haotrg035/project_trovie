@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->unsignedInteger('total_amount');
             $table->unsignedTinyInteger('state')->default(1);
             $table->timestamps();
+            $table->foreign('room_id')->references('id')->on('rooms');
         });
     }
 

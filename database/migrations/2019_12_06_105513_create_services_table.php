@@ -19,7 +19,7 @@ class CreateServicesTable extends Migration
             $table->unsignedInteger('unit_id');
             $table->string('name', 60);
             $table->unsignedInteger('cost');
-            $table->tinyInteger('type')->default('1');
+//            $table->tinyInteger('type')->default('1');
         });
     }
 

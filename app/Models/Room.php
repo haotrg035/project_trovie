@@ -27,7 +27,7 @@ class Room extends Model
         'cost_electric',
         'cost_water'
     ];
-
+    public $timestamps = false;
     public function getTotalUsersAttribute()
     {
         $users = $this->users()->get();

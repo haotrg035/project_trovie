@@ -31,6 +31,7 @@ class Host extends Model
         'longitude',
         'floors'
     ];
+    public $timestamps = false;
 
     public function user()
     {
@@ -65,20 +66,20 @@ class Host extends Model
             $totalUsers += $room->total_users;
             switch ($room->state) {
                 case config('app.room_state.free') :
-                {
-                    $room_type['free']++;
-                    break;
-                }
+                    {
+                        $room_type['free']++;
+                        break;
+                    }
                 case config('app.room_state.waiting') :
-                {
-                    $room_type['waiting']++;
-                    break;
-                }
+                    {
+                        $room_type['waiting']++;
+                        break;
+                    }
                 case config('app.room_state.full') :
-                {
-                    $room_type['full']++;
-                    break;
-                }
+                    {
+                        $room_type['full']++;
+                        break;
+                    }
             }
         }
         return [

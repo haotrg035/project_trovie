@@ -21,7 +21,6 @@ class CreateUserdetailsTable extends Migration
             $table->datetime('id_card_date')->nullable();
             $table->string('id_card_address')->nullable();
             $table->string('desc', 250)->nullable();
-            $table->timestamps();
 
             $table->primary('user_id');
         });
