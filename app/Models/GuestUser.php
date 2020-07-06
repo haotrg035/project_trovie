@@ -22,10 +22,6 @@ class GuestUser extends Model
         'id_card_address'
     ];
 
-    public function getAvatarAttribute($val){
-        return asset(TrovieFile::checkFile($val));
-    }
-
     protected $casts = [
         'birthday' => 'date:d/m/Y',
         'updated_at' => 'datetime:d/m/Y',
