@@ -14,7 +14,7 @@ class GuestUser extends Model
         'birthday',
         'full_name',
         'gender',
-        'avatar',
+//        'avatar',
         'address',
         'phone',
         'id_card',
