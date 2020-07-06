@@ -25,7 +25,7 @@ class CreateGuestusersTable extends Migration
             $table->string('id_card', 13);
             $table->datetime('id_card_date');
             $table->string('id_card_address',250);
-            $table->string('career', 60);
+//            $table->string('career', 60);
 //            $table->string('note');
         });
     }
