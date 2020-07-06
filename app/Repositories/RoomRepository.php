@@ -33,7 +33,7 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
                 return $query->get(['id', 'full_name', 'avatar']);
             },
             'guestUsers' => function ($query) {
-                return $query->get(['id', 'full_name', 'avatar']);
+                return $query->get(['id', 'full_name']);
             }
 
         ])->get();
