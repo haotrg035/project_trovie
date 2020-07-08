@@ -26,7 +26,7 @@
                 <p class="link__text">Tỉnh Thành</p>
             </a>
         </li>
-</ul>
+    </ul>
 @endif
 <ul class="main-sidebar list-unstyled no-print trovie-scrollbar" style="overflow-y: auto">
     <li class="main-sidebar__item main-sidebar__item--logo">
@@ -41,6 +41,15 @@
                 <i class="fa fa-user" aria-hidden="true"></i>
             </figure>
             <p class="link__text">Cá Nhân</p>
+        </a>
+    </li>
+    <li class="main-sidebar__item">
+        <a href="{{route('user.profile.show')}}"
+           class="item__link @if(Route::is('user.user.*')) active @endif">
+            <figure class="link__icon">
+                <i class="fa fa-hotel" aria-hidden="true"></i>
+            </figure>
+            <p class="link__text">Phòng Trọ Của Tôi</p>
         </a>
     </li>
     @if(auth()->user()->isAdmin())
@@ -79,7 +88,8 @@
             </a>
         </li>
         <li class="main-sidebar__item d-none d-lg-block">
-            <a href="{{route('admin.articles.index')}}" class="item__link @if(Route::is('admin.articles.*')) active @endif">
+            <a href="{{route('admin.articles.index')}}"
+               class="item__link @if(Route::is('admin.articles.*')) active @endif">
                 <figure class="link__icon">
                     <i class="fa fa-files-o" aria-hidden="true"></i>
                 </figure>
