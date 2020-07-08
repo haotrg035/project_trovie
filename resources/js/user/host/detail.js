@@ -22,9 +22,11 @@ document.addEventListener('DOMContentLoaded', function () {
     initFileUploader();
     initMap();
     document.querySelector('.host-delete-btn').onclick = () => {
-        if (confirm('Bạn có chắc muốn xóa nhà trọ này? Tất cả thông tin và phòng trọ sẽ bị xóa!')) {
-            if (confirm('Xác nhận xóa?')) {
-
+        if (!confirm('Bạn có chắc muốn xóa nhà trọ này? Tất cả thông tin và phòng trọ sẽ bị xóa!')) {
+            return false;
+        } else {
+            if (!confirm('Xác nhận xóa?')) {
+                return false;
             }
         }
     }
@@ -48,7 +50,7 @@ function initMap() {
                 duration: 5000
             });
             addressInput.classList.add('is-invalid');
-            return  false
+            return false
         }
         if (document.getElementById('city_name').value.trim() === '' || document.getElementById('district_name').value.trim() === '') {
             tata.warn('Thông báo', 'Xin lỗi vì bất cập, Có sự thiếu xót dữ liệu ở địa điểm này, hãy chọn lại địa điểm thay thế.');
@@ -57,7 +59,7 @@ function initMap() {
         }
         this.submit();
     });
-    
+
     if (updateHostFormMap !== null) {
         mapOptions.center = [longitudeInput.value, latitudeInput.value];
         trovieMap = new TrovieMap(mapOptions);

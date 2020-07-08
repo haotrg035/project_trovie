@@ -46,225 +46,237 @@
             </div>
         </div>
         <div class="col-md-8 col-lg-9">
-            <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="rounded">
-                <x-slot name="title">THÔNG TIN NGƯỜI DÙNG</x-slot>
-                <form action="{{route('user.profile.update',auth()->id())}}" method="post" class="user-info__form">
-                    @csrf
-                    @method('PATCH')
-                    <div class="row">
-                        <div class="col-12 col-lg-8">
-                            <div class="form-group @if($errors->first('full_name')) is-invalid  @endif">
-                                <label for="">HỌ TÊN:</label>
-                                <input type="text" name="full_name" id="full_name" required
-                                       class="form-control trovie-input @if($errors->first('full_name')) is-invalid  @endif"
-                                       data-default="{{$data['data']['full_name'] ?? ''}}"
-                                       value="{{$data['data']['full_name'] ?? ''}}">
-                            </div>
-                            @if($errors->first('full_name'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('full_name')}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-6 col-lg-4">
-                            <div class="form-group form-group--unit form-group--unit--date @if($errors->first('birthday')) is-invalid  @endif">
-                                <label for="">NGÀY SINH:</label>
-                                <input type="birthday" name="birthday" id="birthday" required
-                                       class="form-control trovie-input @if($errors->first('birthday')) is-invalid  @endif"
-                                       data-default="{{$data['data']['birthday'] ?? ''}}"
-                                       value="{{$data['data']['birthday'] ?? ''}}">
-                            </div>
-                            @if($errors->first('birthday'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('birthday')}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-6 col-lg-6">
-                            <div class="form-group @if($errors->first('email')) is-invalid  @endif">
-                                <label for="">EMAIL:</label>
-                                <input type="email" name="email" id="email"
-                                       class="form-control trovie-input @if($errors->first('email')) is-invalid  @endif"
-                                       data-default="{{$data['data']['email'] ?? ''}}"
-                                       value="{{$data['data']['email'] ?? ''}}">
-                            </div>
-                            @if($errors->first('email'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('email')}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-6 col-lg-6">
-                            <div class="form-group form-group--unit form-group--unit--phone @if($errors->first('phone')) is-invalid  @endif">
-                                <label for="">ĐIỆN THOẠI:</label>
-                                <input type="phone" name="phone" id="phone" required
-                                       class="form-control trovie-input @if($errors->first('phone')) is-invalid  @endif"
-                                       data-default="{{$data['data']['detail']['phone'] ?? ''}}"
-                                       value="{{$data['data']['detail']['phone'] ?? ''}}">
-                            </div>
-                            @if($errors->first('phone'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('phone')}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-6 col-lg-2 col--custom">
-                            <div class="form-group @if($errors->first('gender')) is-invalid  @endif">
-                                <label for="">GIỚI TÍNH:</label>
-                                <select type="gender" name="gender" id="gender" required
-                                        class="form-control trovie-input @if($errors->first('gender')) is-invalid  @endif"
-                                        data-default="{{$data['data']['birthday']}}"
-                                        value="{{$data['data']['birthday']}}">
-                                    <option value="1" {{$data['data']['gender'] == 1 ? 'selected' : ''}}>Nam</option>
-                                    <option value="2" {{$data['data']['gender'] == 2 ? 'selected' : ''}}>Nữ</option>
-                                </select>
-                            </div>
-                            @if($errors->first('gender'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('gender')}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-12 col-lg-10">
-                            <div class="form-group  @if($errors->first('address')) is-invalid  @endif">
-                                <label for="">NƠI ĐĂNG KÝ HỘ KHẨU:</label>
-                                <input type="text" name="address" id="address" required
-                                       class="form-control trovie-input @if($errors->first('address')) is-invalid  @endif"
-                                       data-default="{{$data['data']['detail']['address'] ?? ''}}"
-                                       value="{{$data['data']['detail']['address'] ?? ''}}">
-                            </div>
-                            @if($errors->first('address'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('address')}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-12 col-lg-12">
-                            <div class="form-group @if($errors->first('desc')) is-invalid  @endif">
-                                <label for="">GIỚI THIỆU VỀ BẢN THÂN:</label>
-                                <input type="text" name="desc" id="desc" required
-                                       class="form-control trovie-input @if($errors->first('desc')) is-invalid  @endif"
-                                       data-default="{{$data['data']['detail']['desc'] ?? ''}}"
-                                       value="{{$data['data']['detail']['desc'] ?? ''}}">
-                            </div>
-                            @if($errors->first('desc'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('desc')}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-6 col-lg-4">
-                            <div class="form-group  @if($errors->first('id_card')) is-invalid  @endif">
-                                <label for="">SỐ CMND / CĂN CƯỚC</label>
-                                <input type="id_card" name="id_card" id="id_card" required
-                                       class="form-control trovie-input @if($errors->first('id_card')) is-invalid  @endif"
-                                       data-default="{{$data['data']['detail']['id_card'] ?? ''}}"
-                                       value="{{$data['data']['detail']['id_card'] ?? ''}}">
-                                @if($errors->first('id_card'))
-                                    <div class="invalid-feedback">
-                                        {{$errors->first('id_card') ?? 'Số CMND không hợp lệ!'}}
+            <div class="row row--custom">
+                <div class="col-md-8 col--custom">
+                    <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="">
+                        <x-slot name="title">THÔNG TIN</x-slot>
+                        <form action="{{route('user.profile.update',auth()->id())}}" method="post"
+                              class="user-info__form">
+                            @csrf
+                            @method('PATCH')
+                            <div class="row">
+                                <div class="col-12 col-lg-8">
+                                    <div class="form-group @if($errors->first('full_name')) is-invalid  @endif">
+                                        <label for="">HỌ TÊN:</label>
+                                        <input type="text" name="full_name" id="full_name" required
+                                               class="form-control trovie-input @if($errors->first('full_name')) is-invalid  @endif"
+                                               data-default="{{$data['data']['full_name'] ?? ''}}"
+                                               value="{{$data['data']['full_name'] ?? ''}}">
                                     </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-4">
-                            <div class="form-group form-group--unit form-group--unit--date @if($errors->first('id_card_date')) is-invalid  @endif">
-                                <label for="">NGÀY ĐĂNG KÍ</label>
-                                <input type="text" name="id_card_date" id="id_card_date" required
-                                       class="form-control trovie-input @if($errors->first('id_card_date')) is-invalid  @endif"
-                                       data-default="{{$data['data']['detail']['id_card_date'] ?? ''}}"
-                                       value="{{$data['data']['detail']['id_card_date'] ?? ''}}">
-                            </div>
-                            @if($errors->first('id_card_date'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('id_card_date')}}
+                                    @if($errors->first('full_name'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('full_name')}}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <div class="form-group @if($errors->first('id_card_address')) is-invalid  @endif">
-                                <label for="">NƠI ĐĂNG KÍ</label>
-                                <input type="text" name="id_card_address" id="id_card_address" required
-                                       class="form-control trovie-input @if($errors->first('id_card_address')) is-invalid  @endif"
-                                       value="{{$data['data']['detail']['id_card_address'] ?? ''}}"
-                                       value="{{$data['data']['detail']['id_card_address'] ?? ''}}">
-                            </div>
-                            @if($errors->first('id_card_address'))
-                                <div class="invalid-feedback">
-                                    {{$errors->first('id_card_address')}}
+                                <div class="col-6 col-lg-4">
+                                    <div
+                                        class="form-group form-group--unit form-group--unit--date @if($errors->first('birthday')) is-invalid  @endif">
+                                        <label for="">NGÀY SINH:</label>
+                                        <input type="birthday" name="birthday" id="birthday" required
+                                               class="form-control trovie-input @if($errors->first('birthday')) is-invalid  @endif"
+                                               data-default="{{$data['data']['birthday'] ?? ''}}"
+                                               value="{{$data['data']['birthday'] ?? ''}}">
+                                    </div>
+                                    @if($errors->first('birthday'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('birthday')}}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
-                        </div>
-                        <div class="col-12 d-flex justify-content-end">
-                            <button type="reset" class="btn btn-base">
-                                <i class="fa fa-refresh" aria-hidden="true"></i> LÀM LẠI
-                            </button>
-                            <button type="submit" class="btn btn-base ml-2">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i> LƯU
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </x-main-card>
-            <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="rounded mt-3">
-                <x-slot name="title">{{'ĐỔI MẬT KHẨU'}}</x-slot>
-                <form action="{{route('user.profile.change_password', $data['data']['id'])}}" method="post">
-                    @csrf
-                    @method('PATCH')
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="old_password"
-                                       class="col-form-label text-md-right">Mật khẩu cũ:</label>
-                                <input id="old_password" type="password" name="old_password"
-                                       class="form-control trovie-input @error('old_password') is-invalid @enderror"
-                                       value="{{ old('old_password') }}" placeholder="Mật khẩu cũ" required>
-                                @error('old_password')
-                                <span class="invalid-feedback"
-                                      role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
+                                <div class="col-6 col-lg-6">
+                                    <div class="form-group @if($errors->first('email')) is-invalid  @endif">
+                                        <label for="">EMAIL:</label>
+                                        <input type="email" name="email" id="email"
+                                               class="form-control trovie-input @if($errors->first('email')) is-invalid  @endif"
+                                               data-default="{{$data['data']['email'] ?? ''}}"
+                                               value="{{$data['data']['email'] ?? ''}}">
+                                    </div>
+                                    @if($errors->first('email'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('email')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <div
+                                        class="form-group form-group--unit form-group--unit--phone @if($errors->first('phone')) is-invalid  @endif">
+                                        <label for="">ĐIỆN THOẠI:</label>
+                                        <input type="phone" name="phone" id="phone" required
+                                               class="form-control trovie-input @if($errors->first('phone')) is-invalid  @endif"
+                                               data-default="{{$data['data']['detail']['phone'] ?? ''}}"
+                                               value="{{$data['data']['detail']['phone'] ?? ''}}">
+                                    </div>
+                                    @if($errors->first('phone'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('phone')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-6 col-lg-2 col--custom">
+                                    <div class="form-group @if($errors->first('gender')) is-invalid  @endif">
+                                        <label for="">GIỚI TÍNH:</label>
+                                        <select type="gender" name="gender" id="gender" required
+                                                class="form-control trovie-input @if($errors->first('gender')) is-invalid  @endif"
+                                                data-default="{{$data['data']['birthday']}}"
+                                                value="{{$data['data']['birthday']}}">
+                                            <option value="1" {{$data['data']['gender'] == 1 ? 'selected' : ''}}>Nam
+                                            </option>
+                                            <option value="2" {{$data['data']['gender'] == 2 ? 'selected' : ''}}>Nữ
+                                            </option>
+                                        </select>
+                                    </div>
+                                    @if($errors->first('gender'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('gender')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-12 col-lg-10">
+                                    <div class="form-group  @if($errors->first('address')) is-invalid  @endif">
+                                        <label for="">NƠI ĐĂNG KÝ HỘ KHẨU:</label>
+                                        <input type="text" name="address" id="address" required
+                                               class="form-control trovie-input @if($errors->first('address')) is-invalid  @endif"
+                                               data-default="{{$data['data']['detail']['address'] ?? ''}}"
+                                               value="{{$data['data']['detail']['address'] ?? ''}}">
+                                    </div>
+                                    @if($errors->first('address'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('address')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-12 col-lg-12">
+                                    <div class="form-group @if($errors->first('desc')) is-invalid  @endif">
+                                        <label for="">GIỚI THIỆU VỀ BẢN THÂN:</label>
+                                        <input type="text" name="desc" id="desc" required
+                                               class="form-control trovie-input @if($errors->first('desc')) is-invalid  @endif"
+                                               data-default="{{$data['data']['detail']['desc'] ?? ''}}"
+                                               value="{{$data['data']['detail']['desc'] ?? ''}}">
+                                    </div>
+                                    @if($errors->first('desc'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('desc')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-6 col-lg-4">
+                                    <div class="form-group  @if($errors->first('id_card')) is-invalid  @endif">
+                                        <label for="">SỐ CMND</label>
+                                        <input type="id_card" name="id_card" id="id_card" required
+                                               class="form-control trovie-input @if($errors->first('id_card')) is-invalid  @endif"
+                                               data-default="{{$data['data']['detail']['id_card'] ?? ''}}"
+                                               value="{{$data['data']['detail']['id_card'] ?? ''}}">
+                                        @if($errors->first('id_card'))
+                                            <div class="invalid-feedback">
+                                                {{$errors->first('id_card') ?? 'Số CMND không hợp lệ!'}}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-4">
+                                    <div
+                                        class="form-group form-group--unit form-group--unit--date @if($errors->first('id_card_date')) is-invalid  @endif">
+                                        <label for="">NGÀY ĐĂNG KÍ</label>
+                                        <input type="text" name="id_card_date" id="id_card_date" required
+                                               class="form-control trovie-input @if($errors->first('id_card_date')) is-invalid  @endif"
+                                               data-default="{{$data['data']['detail']['id_card_date'] ?? ''}}"
+                                               value="{{$data['data']['detail']['id_card_date'] ?? ''}}">
+                                    </div>
+                                    @if($errors->first('id_card_date'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('id_card_date')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-12 col-lg-4">
+                                    <div class="form-group @if($errors->first('id_card_address')) is-invalid  @endif">
+                                        <label for="">NƠI ĐĂNG KÍ</label>
+                                        <input type="text" name="id_card_address" id="id_card_address" required
+                                               class="form-control trovie-input @if($errors->first('id_card_address')) is-invalid  @endif"
+                                               value="{{$data['data']['detail']['id_card_address'] ?? ''}}"
+                                               value="{{$data['data']['detail']['id_card_address'] ?? ''}}">
+                                    </div>
+                                    @if($errors->first('id_card_address'))
+                                        <div class="invalid-feedback">
+                                            {{$errors->first('id_card_address')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="reset" class="btn btn-base">
+                                        <i class="fa fa-refresh" aria-hidden="true"></i> LÀM LẠI
+                                    </button>
+                                    <button type="submit" class="btn btn-base ml-2">
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i> LƯU
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="password"
-                                       class="col-form-label text-md-right">Mật khẩu mới:</label>
-                                <input id="password" type="password" name="password"
-                                       class="form-control trovie-input @error('password') is-invalid @enderror"
-                                       value="{{ old('password') }}" placeholder="Mật khẩu" required>
-                                @error('password')
-                                <span class="invalid-feedback"
-                                      role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
+                        </form>
+                    </x-main-card>
+                    @if(!empty($data['data']['room']))
+                        <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="mt-3">
+                            <x-slot name="title">PHÒNG TRỌ CỦA TÔI</x-slot>
+                        </x-main-card>
+                    @endif
+                </div>
+                <div class="col-md-4 col--custom">
+                    <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="mb-3">
+                        <x-slot name="title">{{'ĐỔI MẬT KHẨU'}}</x-slot>
+                        <form action="{{route('user.profile.change_password', $data['data']['id'])}}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group @error('old_password') is-invalid @enderror">
+                                        <label for="old_password"
+                                               class="col-form-label text-md-right">Mật khẩu cũ:</label>
+                                        <input id="old_password" type="password" name="old_password"
+                                               class="form-control trovie-input @error('old_password') is-invalid @enderror"
+                                               value="{{ old('old_password') }}" placeholder="Mật khẩu cũ" required>
+                                        @error('old_password')
+                                        <span class="invalid-feedback"
+                                              role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group @error('password') is-invalid @enderror">
+                                        <label for="password"
+                                               class="col-form-label text-md-right">Mật khẩu mới:</label>
+                                        <input id="password" type="password" name="password"
+                                               class="form-control trovie-input @error('password') is-invalid @enderror"
+                                               value="{{ old('password') }}" placeholder="Mật khẩu" required>
+                                        @error('password')
+                                        <span class="invalid-feedback"
+                                              role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="password_confirmation"
+                                               class="col-form-label text-md-right">Xác nhận mật khẩu:</label>
+                                        <input id="password_confirmation" type="password" name="password_confirmation"
+                                               class="form-control trovie-input @error('password_confirmation') is-invalid @enderror"
+                                               value="{{ old('password_confirmation') }}"
+                                               placeholder="Xác nhận mật khẩu" required>
+                                        @error('password_confirmation')
+                                        <span class="invalid-feedback"
+                                              role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12 d-inline-flex align-items-center justify-content-end">
+                                    <button class="btn btn-base"><i class="fa fa-check-circle" aria-hidden="true"></i>
+                                        ĐỔI MẬT KHẨU
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="password_confirmation"
-                                       class="col-form-label text-md-right">Xác nhận mật khẩu:</label>
-                                <input id="password_confirmation" type="password" name="password_confirmation"
-                                       class="form-control trovie-input @error('password_confirmation') is-invalid @enderror"
-                                       value="{{ old('password_confirmation') }}"
-                                       placeholder="Xác nhận mật khẩu" required>
-                                @error('password_confirmation')
-                                <span class="invalid-feedback"
-                                      role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-12 d-inline-flex align-items-center justify-content-end">
-                            <button class="btn btn-base"><i class="fa fa-check-circle" aria-hidden="true"></i> ĐỔI MẬT
-                                KHẨU
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </x-main-card>
-            @if(!empty($data['data']['room']))
-                {{--                <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="rounded mt-4">--}}
-                {{--                    <x-slot name="title">PHÒNG ĐANG TRỌ</x-slot>--}}
-                {{--                </x-main-card>--}}
-            @endif
+                        </form>
+                    </x-main-card>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

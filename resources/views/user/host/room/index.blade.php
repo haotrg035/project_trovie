@@ -4,12 +4,12 @@
     <div class="panel-content--room">
         <x-panel-header panel-title="Phòng Trọ">
             <div class="panel-content--room__header-tool">
-                <button class="panel-content--room__header-tool__btn btn btn-base btn-open-add-room-modal rounded-0">
+                <button class="panel-content--room__header-tool__btn btn btn-base btn-open-add-room-modal">
                     <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Thêm Phòng
                 </button>
             </div>
         </x-panel-header>
-        <x-main-card body-class="half-padding">
+        <x-main-card body-class="">
             <div class="panel-content--room__filter d-flex align-items-center justify-content-between">
                 <ul class="nav panel-content--room__filter--room-type">
                     <li class="nav-item panel-content--room__filter--room-type__item">
@@ -24,7 +24,7 @@
                     </li>
                     <li class="nav-item panel-content--room__filter--room-type__item panel-content--room__filter--room-type__item--warning">
                         <a href="javascript:void(0)" data-toggle="tab" class="nav-link" data-room-type="warning">
-                            Sắp trả <span>({{$data['data']['room_count']['state'][2]}})</span>
+                            Có thể ở ghép <span>({{$data['data']['room_count']['state'][2]}})</span>
                         </a>
                     </li>
                     <li class="nav-item panel-content--room__filter--room-type__item panel-content--room__filter--room-type__item--danger">
@@ -42,7 +42,10 @@
             </div>
         </x-main-card>
         <div class="tab-content panel-content--room__list-room"
-             data-room-view-url="{{route('api.user.host.room.show',$data['data']['host_id'])}}">
+             data-room-view-url="{{route('api.user.host.room.show',$data['data']['host_id'])}}"
+             data-room-state-free="{{config('app.room_state.free')}}"
+             data-room-state-wating="{{config('app.room_state.waiting')}}"
+             data-room-state-full="{{config('app.room_state.full')}}">
             <div class="row row--custom">
                 @if($data['data']['room_list'])
                     @foreach($data['data']['room_list'] as $room)
@@ -51,11 +54,11 @@
                                data-view-url="{{route('api.user.host.room.show',[$data['data']['host_id'],$room['id']])}}"
                                class="room-card
                             @switch($room['state'])
-                               @case(1)
+                               @case(config('app.room_state.free'))
                                    room-card--success @break
-                               @case(2)
+                               @case(config('app.room_state.waiting'))
                                    room-card--warning @break
-                               @case(3)
+                               @case(config('app.room_state.full'))
                                    room-card--danger @break
                                @endswitch">
                                 <p class="room-card__id">{{$room['name']}}</p>

@@ -529,9 +529,9 @@ function updateCardData(data) {
   targetRoomCard.querySelector('.property-list__item--acreage p .value__content').innerText = data.acreage;
   targetRoomCard.classList.remove('room-card--success', 'room-card--warning', 'room-card--danger');
 
-  if (data.state === 1) {
+  if (data.state === parseInt(roomCardList.dataset.roomStateFree)) {
     targetRoomCard.classList.add('room-card--success');
-  } else if (data.state === 2) {
+  } else if (data.state === parseInt(roomCardList.dataset.roomStateWating)) {
     targetRoomCard.classList.add('room-card--warning');
   } else {
     targetRoomCard.classList.add('room-card--danger');

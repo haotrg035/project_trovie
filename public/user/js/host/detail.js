@@ -1285,8 +1285,12 @@ document.addEventListener('DOMContentLoaded', function () {
   initMap();
 
   document.querySelector('.host-delete-btn').onclick = function () {
-    if (confirm('Bạn có chắc muốn xóa nhà trọ này? Tất cả thông tin và phòng trọ sẽ bị xóa!')) {
-      if (confirm('Xác nhận xóa?')) {}
+    if (!confirm('Bạn có chắc muốn xóa nhà trọ này? Tất cả thông tin và phòng trọ sẽ bị xóa!')) {
+      return false;
+    } else {
+      if (!confirm('Xác nhận xóa?')) {
+        return false;
+      }
     }
   };
 });

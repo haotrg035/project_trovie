@@ -216,8 +216,11 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
     public function changePassword($id, array $attributes, bool $isAdmin)
     {
         $user = $this->_model->makeVisible(['password'])->where('id', $id)->first();
-        if (!$isAdmin) {
-            if (\Hash::make($attributes['old_password']) != $user->password) {
+        if (!$isAdmin || ($isAdmin && ($id === auth()->id()))) {
+            if (!\Hash::check($attributes['old_password'], $user->password)) {
+                throw \Illuminate\Validation\ValidationException::withMessages([
+                    'old_password' => ['Mật khẩu cũ không chính xác.'],
+                ]);
                 return false;
             }
         }

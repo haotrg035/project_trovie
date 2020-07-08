@@ -41,7 +41,7 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
         $room_count['total'] = $room_list->count();
 
         for ($i = 1; $i <= 3; $i++) {
-            $room_count['state']["$i"] = $room_list->where('state', $i)->count();
+            $room_count['state'][$i] = $room_list->where('state', $i)->count();
         }
         foreach ($room_list as $keyR => $room) {
             foreach ($room['users'] as $keyU => $user) {

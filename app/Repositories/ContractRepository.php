@@ -3,6 +3,7 @@
 
 namespace App\Repositories;
 
+use App\Events\RoomContractUpdatedEvent;
 use App\Helper\TrovieHelper;
 use App\Models\Contract;
 use App\Models\Host;
@@ -68,7 +69,7 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
             $list_room_id,
             'id'
         );
-          return $this->getAllByRoom($list_room_id);
+        return $this->getAllByRoom($list_room_id);
     }
 
     public function getContract($id)
@@ -156,7 +157,6 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
                 }
             }
 
-
             $host = $hostRepository->_model->with(['user', 'user.detail'])->where('id', $data['host_id'])->first();
             $contract_parties_info = [];
             foreach ($user_info_keys as $key) {
@@ -219,6 +219,7 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
                 $result['data'] = $contract->toArray();
                 $result['data']['room_id'] = $room['id'];
                 $result['data']['host_id'] = $host['id'];
+                event(new RoomContractUpdatedEvent($room));
                 return $result;
             }
         } catch (\Exception $e) {
@@ -232,27 +233,37 @@ class ContractRepository extends EloquentRepository implements ContractEloquentR
         $result = ['data' => null, 'error' => ''];
 //        return dd(\DB::table('room_user')->where(['active' => 1, 'contract_id' => $id])->update(['active' => 1]));
         try {
+            $room = null;
             if (\DB::table('room_user')->where(['active' => 1, 'contract_id' => $id])->exists()) {
+                $room = \DB::table('room_user')->where(['active' => 1, 'contract_id' => $id]);
+                $room_id = $room->first()->room_id;
                 if (
-                    \DB::table('room_user')->where(['active' => 1, 'contract_id' => $id])->update(['active' => 0])
+                    $room->update(['active' => 0])
                     && $this->find($id)->update(['active' => 0])
                 ) {
-
                     $result['data'] = true;
+                    event(new RoomContractUpdatedEvent(
+                        (new RoomRepository())->find($room_id)
+                    ));
                     return $result;
                 }
             }
             if (\DB::table('room_guest_user')->where(['active' => 1, 'contract_id' => $id])->exists()) {
+                $room = \DB::table('room_guest_user')->where(['active' => 1, 'contract_id' => $id]);
+                $room_id = $room->first()->room_id;
                 if (
-                    \DB::table('room_guest_user')->where(['active' => 1, 'contract_id' => $id])->update(['active' => 0])
+                    $room->update(['active' => 0])
                     && $this->find($id)->update(['active' => 0])
                 ) {
                     $result['data'] = true;
+                    event(new RoomContractUpdatedEvent(
+                        (new RoomRepository())->find($room_id)
+                    ));
                     return $result;
                 }
             }
         } catch (\Exception $e) {
-            \Log::error('Can\'t update active column of contract id:' . $id . ' Error: ' . $e->getMessage());
+            \Log::error('Can\'t update active column of contract id:' . $id . ' Error: ' . $e->getMessage() . ' - ' . $e->getFile() . ':' . $e->getLine());
         }
         $result['data'] = false;
         return $result;

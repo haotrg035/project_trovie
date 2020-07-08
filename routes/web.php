@@ -23,12 +23,14 @@ Route::prefix('/admin')->name('admin')->middleware(['auth', 'web', 'is_admin'])-
     Route::get('/', function () {
         return redirect(route('admin.setting.index'));
     });
+    
     Route::prefix('setting')->name('.setting')->group(function () {
         Route::get('/', 'SettingController@setting')->name('.index');
         Route::patch('/update', 'SettingController@update')->name('.update');
         Route::post('/update-banner', 'SettingController@updateBanner')->name('.update_banner');
         Route::post('/update-no-image', 'SettingController@updateNoImage')->name('.update_no_image');
     });
+
     Route::prefix('menu')->name('.menu')->group(function () {
         Route::get('/', 'MenuController@index')->name('.index');
         Route::get('/get-menu/{menu?}', 'MenuController@show')->name('.show');
@@ -37,6 +39,7 @@ Route::prefix('/admin')->name('admin')->middleware(['auth', 'web', 'is_admin'])-
         Route::post('/create-menu', 'MenuController@store')->name('.store');
         Route::delete('/delete-menu/{menu?}', 'MenuController@destroy')->name('.destroy');
     });
+
     Route::prefix('place')->name('.place')->group(function () {
         Route::get('/', 'CityController@index')->name('.index');
         Route::get('/get-city/{city?}', 'CityController@show')->name('.show_city');
@@ -56,7 +59,6 @@ Route::prefix('/admin')->name('admin')->middleware(['auth', 'web', 'is_admin'])-
 
     Route::prefix('articles')->name('.articles')->group(function (){
         Route::get('/', 'RoomArticleController@adminIndex')->name('.index');
-
     });
 });
 

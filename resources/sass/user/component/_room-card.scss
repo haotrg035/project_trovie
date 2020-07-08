@@ -3,6 +3,7 @@
     display: block;
     padding: 1rem;
     height: 100%;
+    @include Rounded(16px);
     @extend %transition-section-item-fast;
     @extend .shadow-xs;
 

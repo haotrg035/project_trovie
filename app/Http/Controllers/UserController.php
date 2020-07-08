@@ -121,7 +121,7 @@ class UserController extends BaseController
             'birthday' => 'required',
             'address' => 'required',
             'phone' => 'required|min:10|max:12|unique:user_details,phone,' . $user->id . ',user_id',
-            'role' => 'required|between:' . config('app.role.host.user') . ',' . config('app.role.host.hostOwner'),
+            'role' => 'between:' . config('app.role.host.user') . ',' . config('app.role.host.hostOwner'),
             'id_card' => 'required|min:12|max:12',
             'id_card_date' => 'required',
             'id_card_address' => 'required',
@@ -161,8 +161,8 @@ class UserController extends BaseController
     public function changePassword(Request $request, User $user)
     {
         $this->validate($request, [
-            'old_password' => ['required', 'string'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed']
+            'old_password' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'different:old_password', 'confirmed']
         ]);
 
         if (auth()->id() !== $user->id) {
@@ -172,7 +172,6 @@ class UserController extends BaseController
                 route('user.profile.show')
             );
         }
-
         return $this->returnRedirect(
             $this->repository->changePassword($user->id, $request->all(), false),
             'update',

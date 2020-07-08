@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Room extends Model
 {
     use SoftDeletes;
+
     protected $table = 'rooms';
     protected $primaryKey = 'id';
     protected $appends = ['total_users'];
@@ -28,6 +29,7 @@ class Room extends Model
         'cost_water'
     ];
     public $timestamps = false;
+
     public function getTotalUsersAttribute()
     {
         $users = $this->users()->get();
@@ -106,8 +108,7 @@ class Room extends Model
         return TrovieHelper::currencyFormat($value);
     }
 
-    public
-    function updateState()
+    public function updateState()
     {
         $total_users = $this->users()->count();
         $this->state = $total_users >= $this->members ? 3 : ($total_users < $this->members && $total_users > 0 ? 2 : 1);
