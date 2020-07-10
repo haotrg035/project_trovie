@@ -37,6 +37,7 @@ class CreateHostsTable extends Migration
             $table->tinyInteger('floors')->unsigned()->default('1');
 //            $table->timestamps();
             $table->index(["user_id"]);
+            $table->softDeletes();
 //            $table->index(["district_id"]);
             $table->foreign('city_id')->references('id')->on('cities');
             $table->foreign('district_id')->references('id')->on('districts');

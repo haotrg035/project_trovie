@@ -1,6 +1,6 @@
 <div
-    {{ $attributes->merge(['class' => "room-card room-card--mobile-horizon " . ($horizon ? 'room-card--horizon' : '')]) }}
-    data-toggle-follow="{{route('user.saved_articles.follow_article',$articleDetail['id'])}}">
+        {{ $attributes->merge(['class' => "room-card room-card--mobile-horizon " . ($horizon ? 'room-card--horizon' : '')]) }}
+        data-toggle-follow="{{route('user.saved_articles.follow_article',$articleDetail['id'])}}">
     <a href="{{route('frontend.article.detail', $articleDetail['id'])}}" class="room-card__image">
         @if(!empty($articleDetail['room']['gallery']))
             <img src="{{$articleDetail['room']['gallery'][0]['image']}}" alt="{{$articleDetail['title']}}">
@@ -8,9 +8,12 @@
             <img src="{{asset(\App\Helper\TrovieFile::checkFile(''))}}" alt="{{$articleDetail['title']}}">
         @endif
     </a>
-    <a href="javascript:void(0)" class="room-card__follow" title="Lưu tin đăng">
-        <i class="fa color-base-text @if($isFollowed) fa-bookmark @else fa-bookmark-o @endif" aria-hidden="true"></i>
-    </a>
+    @auth
+        <a href="javascript:void(0)" class="room-card__follow" title="Lưu tin đăng">
+            <i class="fa color-base-text @if($isFollowed) fa-bookmark @else fa-bookmark-o @endif"
+               aria-hidden="true"></i>
+        </a>
+    @endauth
     <div>
         <div class="room-card__body">
             <a href="{{route('frontend.article.detail', $articleDetail['id'])}}" class="room-card__title"

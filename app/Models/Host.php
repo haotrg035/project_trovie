@@ -5,9 +5,11 @@ namespace App\Models;
 use App\Helper\TrovieFile;
 use App\Helper\TrovieHelper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Host extends Model
 {
+    use SoftDeletes;
     protected $table = 'hosts';
     protected $primaryKey = 'id';
     protected $appends = ['countable_info'];

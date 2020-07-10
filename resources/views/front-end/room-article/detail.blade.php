@@ -99,14 +99,14 @@
                 <div class="row row--custom">
                     <div class="col-12 col-lg-7 col-xl-8 col--custom">
                         <div
-                            style="height: 300px; width: 100%; border-radius: 16px;margin-bottom: 1rem; border: 1px solid var(--color-base)"
-                            id="room-article-detail-map"
-                            data-lng="{{$data['article']['room']['host']['longitude']}}"
-                            data-lat="{{$data['article']['room']['host']['latitude']}}"></div>
+                                style="height: 300px; width: 100%; border-radius: 16px;margin-bottom: 1rem; border: 1px solid var(--color-base)"
+                                id="room-article-detail-map"
+                                data-lng="{{$data['article']['room']['host']['longitude']}}"
+                                data-lat="{{$data['article']['room']['host']['latitude']}}"></div>
                         <div class="room-article-detail-general rounded-card">
                             <p class="general__title">TỔNG QUAN</p>
                             <div class="general__content">
-                                {{$data['article']['content']}}
+                                {!! $data['article']['content']  !!}
                             </div>
                         </div>
                     </div>
