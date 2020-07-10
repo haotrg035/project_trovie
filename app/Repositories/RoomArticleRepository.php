@@ -234,6 +234,7 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
                     case $availableParams[2]:
                     {
                         $articleParams[] = ['title', 'LIKE', '%' . $param . '%'];
+                        break;
                     }
                     case $availableParams[3]:
                     {
@@ -242,6 +243,8 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
                 }
             }
         }
+
+
         if (!empty($hostParams)) {
             return $this->getArticlesByHosts($hostParams, $totalResultItems, $isPaginatedResult);
         }
