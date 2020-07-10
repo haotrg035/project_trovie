@@ -18,4 +18,6 @@ interface RoomArticleEloquentRepositoryInterface
     public function search(array $params, $totalResultItems, $isPaginatedResult);
 
     public function getAvailableHosts();
+
+    public function toggleFollowArticle($articleId, $userId);
 }

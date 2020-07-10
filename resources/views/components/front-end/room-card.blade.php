@@ -1,10 +1,15 @@
-<div {{ $attributes->merge(['class' => "room-card room-card--mobile-horizon " . ($horizon ? 'room-card--horizon' : '')]) }}>
+<div
+    {{ $attributes->merge(['class' => "room-card room-card--mobile-horizon " . ($horizon ? 'room-card--horizon' : '')]) }}
+    data-toggle-follow="{{route('user.saved_articles.follow_article',$articleDetail['id'])}}">
     <a href="{{route('frontend.article.detail', $articleDetail['id'])}}" class="room-card__image">
         @if(!empty($articleDetail['room']['gallery']))
             <img src="{{$articleDetail['room']['gallery'][0]['image']}}" alt="{{$articleDetail['title']}}">
         @else
             <img src="{{asset(\App\Helper\TrovieFile::checkFile(''))}}" alt="{{$articleDetail['title']}}">
         @endif
+    </a>
+    <a href="javascript:void(0)" class="room-card__follow" title="Lưu tin đăng">
+        <i class="fa color-base-text @if($isFollowed) fa-bookmark @else fa-bookmark-o @endif" aria-hidden="true"></i>
     </a>
     <div>
         <div class="room-card__body">
@@ -35,9 +40,11 @@
             </ul>
         </div>
         <div class="room-card__host">
-            <a href="{{route('frontend.article.search')}}?host={{$articleDetail['room']['host']['id']}}" class="host__link d-flex" title="Xem nhà trọ">
+            <a href="{{route('frontend.article.search')}}?host={{$articleDetail['room']['host']['id']}}"
+               class="host__link d-flex" title="Xem nhà trọ">
                 <figure class="host__avatar mb-0">
-                    <img src="{{$articleDetail['room']['host']['image']}}" alt="{{$articleDetail['room']['host']['name']}}">
+                    <img src="{{$articleDetail['room']['host']['image']}}"
+                         alt="{{$articleDetail['room']['host']['name']}}">
                 </figure>
                 <p class="host__name">{{$articleDetail['room']['host']['name']}}</p>
             </a>

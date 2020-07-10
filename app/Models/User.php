@@ -12,6 +12,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -70,9 +71,17 @@ class User extends Authenticatable
     {
         return $this->room()->count();
     }
-    public function hosts(){
-        return $this->hasMany(Host::class,'user_id','id');
+
+    public function getFollowedArticlesAttribute()
+    {
+        return \DB::table('saved_article')->where('user_id', $this->id)->get()->toArray();
     }
+
+    public function hosts()
+    {
+        return $this->hasMany(Host::class, 'user_id', 'id');
+    }
+
     public function detail()
     {
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
@@ -80,7 +89,9 @@ class User extends Authenticatable
 
     public function room()
     {
-        return $this->belongsToMany(Room::class, 'room_user')->wherePivot('active', 1);
+        return $this->belongsToMany(Room::class, 'room_user')
+            ->withPivot('date_in')
+            ->wherePivot('active', 1);
     }
 
     public function units()

@@ -95,18 +95,18 @@ abstract class BaseController extends Controller
         return $_response;
     }
 
-    protected function returnResponse($result, $messageType, $data = null, $customFailedMessage = null)
+    protected function returnResponse($result, $messageType, $data = null, $customFailedMessage = null, $customSuccessMessage = null)
     {
-        $_response = $this->getResponse($result, $messageType, $data, $customFailedMessage);
+        $_response = $this->getResponse($result, $messageType, $data, $customFailedMessage, $customSuccessMessage);
         if ($result) {
             return response($_response, 200);
         }
         return response($_response, 404);
     }
 
-    protected function returnRedirect($result, $messageType, $route, $customMessage = '')
+    protected function returnRedirect($result, $messageType, $route, $customMessage = '', $customSuccessMessage = '')
     {
-        return redirect($route)->with(['response_message' => $this->getResponse($result, $messageType, [], $customMessage)]);
+        return redirect($route)->with(['response_message' => $this->getResponse($result, $messageType, [], $customMessage, $customSuccessMessage)]);
     }
 
     public function checkViewAuth(Model $model)

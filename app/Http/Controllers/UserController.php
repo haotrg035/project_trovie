@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\TrovieHelper;
 use App\Models\User;
 use App\Repositories\Interfaces\UserEloquentRepositoryInterface;
+use App\Repositories\RoomArticleRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -93,13 +95,25 @@ class UserController extends BaseController
 //        if ($user->id !== auth()->id()) {
 //            return redirect('/');
 //        }
-        $this->data['data'] = $this->repository->getUser(auth()->id(), ['detail', 'inviteToken', 'room']);
+        $this->data['data'] = $this->repository->getUser(auth()->id(), ['detail', 'inviteToken', 'room', 'room.host', 'room.services', 'room.services.unit']);
         if (!empty($this->data['data']['room']) && count($this->data['data']['room']) > 0) {
-            $this->data['data']['room'] = $this->data['data']['room'][0];
+            $this->data['room'] = $this->data['data']['room'][0];
+            unset($this->data['data']['room']);
         }
         return view('user.profile.index', ['data' => $this->data]);
     }
 
+    public function showFollowedArticles()
+    {
+        $articleRepo = new RoomArticleRepository();
+        $listArticleId = TrovieHelper::convertAssocIdArrayToValueIdArray(
+            $articleRepo->getFollowedArticles(auth()->id())->toArray(),
+            'room_article_id'
+        );
+
+        $this->data['followedArticles'] = $articleRepo->getArticles(-1, $listArticleId, false, true);
+        return view('user.savedArticles.index', ['data' => $this->data]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -156,6 +170,12 @@ class UserController extends BaseController
         }
         $result = $this->repository->deleteUser($user->id);
         return $this->returnRedirect($result, 'delete', route('admin.users.index'));
+    }
+
+    public function cancelContract()
+    {
+        $result = $this->repository->cancelCurrentContract(auth()->id());
+        return $this->returnRedirect($result['data'], 'update', route('user.profile.show'), $result['error'], 'Hủy hợp đồng thành công');
     }
 
     public function changePassword(Request $request, User $user)

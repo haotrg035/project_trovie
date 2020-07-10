@@ -125,6 +125,7 @@ class RoomArticleController extends BaseController
     public function destroy(RoomArticle $roomArticle)
     {
         $this->checkUpdateAuth($roomArticle);
+        \DB::table('saved_article')->where('room_article_id', $roomArticle->id)->delete();
         $result = $this->repository->delete($roomArticle->id);
         return $this->returnResponse($result, 'delete', $result);
     }

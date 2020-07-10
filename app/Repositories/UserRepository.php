@@ -228,4 +228,25 @@ class UserRepository extends EloquentRepository implements UserEloquentRepositor
             'password' => \Hash::make($attributes['password'])
         ]);
     }
+
+    public function cancelCurrentContract(?int $id)
+    {
+        $result = ['data' => false, 'error' => ''];;
+        $currentContract = \DB::table('room_user')
+            ->where([
+                ['user_id', '=', $id],
+                ['active', '=', 1]
+            ]);
+        if ($currentContract->count() <= 0) {
+            $result['error'] = 'Bạn không có hợp đồng nào.';
+            return $result;
+        }
+        if ($currentContract->update(['active' => 0])) {
+            $result['data'] = true;
+            return $result;
+        } else {
+            $result['error'] = 'Hủy hợp đồng thất bại';
+        }
+        return $result;
+    }
 }

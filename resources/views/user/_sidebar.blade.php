@@ -26,6 +26,15 @@
                 <p class="link__text">Tỉnh Thành</p>
             </a>
         </li>
+        <li class="main-sidebar__item">
+            <a href="{{route('admin.articles.index')}}"
+               class="item__link @if(Route::is('admin.articles.*')) active @endif">
+                <figure class="link__icon">
+                    <i class="fa fa-files-o" aria-hidden="true"></i>
+                </figure>
+                <p class="link__text">Tin đăng</p>
+            </a>
+        </li>
     </ul>
 @endif
 <ul class="main-sidebar list-unstyled no-print trovie-scrollbar" style="overflow-y: auto">
@@ -44,12 +53,12 @@
         </a>
     </li>
     <li class="main-sidebar__item">
-        <a href="{{route('user.profile.show')}}"
-           class="item__link @if(Route::is('user.user.*')) active @endif">
+        <a href="{{route('user.saved_articles.index')}}"
+           class="item__link @if(Route::is('user.saved_articles.*')) active @endif">
             <figure class="link__icon">
-                <i class="fa fa-hotel" aria-hidden="true"></i>
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
             </figure>
-            <p class="link__text">Phòng Trọ Của Tôi</p>
+            <p class="link__text">Tin đã lưu</p>
         </a>
     </li>
     @if(auth()->user()->isAdmin())

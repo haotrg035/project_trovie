@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Helper\TrovieFile;
+use App\Helper\TrovieHelper;
 use App\Http\Controllers\BaseController;
 use App\Models\RoomArticle;
 use App\Repositories\CityRepository;
@@ -86,6 +87,10 @@ class RoomArticleController extends BaseController
         $this->data['cities'] = $this->cityRepository->getAllCitiesAndDistricts();
         $this->data['article'] = $this->repository->getArticle($roomArticle->id);
         $this->data['recent_articles'] = $this->repository->getArticles(config('global.article_total_newest_detail_page') ?? 3);
+        $this->data['followedArticles'] = TrovieHelper::convertAssocIdArrayToValueIdArray(
+            $this->repository->getFollowedArticles(auth()->id())->toArray(),
+            'room_article_id'
+        );
         $this->data['near_articles'] = $this->repository->getNearArticles(
             $this->data['article']['room']['host'],
             config('global.article_total_related_detail_page') ?? 4
@@ -107,6 +112,10 @@ class RoomArticleController extends BaseController
         $this->data['cities'] = $this->cityRepository->getAllCitiesAndDistricts();
         $this->data['data'] = $this->repository->search($request->all(), config('global.article_total_search_result') ?? 8, true);
         $this->data['availableHosts'] = json_encode($this->repository->getAvailableHosts());
+        $this->data['followedArticles'] = TrovieHelper::convertAssocIdArrayToValueIdArray(
+            $this->repository->getFollowedArticles(auth()->id())->toArray(),
+            'room_article_id'
+        );
         return view('front-end.room-article.search', ['data' => $this->data]);
     }
 

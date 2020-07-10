@@ -68,10 +68,13 @@ Route::prefix('user')->middleware(['auth', 'web'])->group(function () {
         Route::get('/', 'UserController@show')->name('.show');
         Route::patch('/update/{user}', 'UserController@update')->name('.update');
         Route::patch('/change-password/{user}', 'UserController@changePassword')->name('.change_password');
+        Route::patch('/cancel-contract', 'UserController@cancelContract')->name('.cancel_contract');
     });
-//    Route::prefix('/my-room')->name('user.my_room')->group(function () {
-//
-//    });
+
+    Route::prefix('/saved-articles')->name('user.saved_articles')->group(function () {
+        Route::get('/', 'UserController@showFollowedArticles')->name('.index');
+        Route::get('/toggle-follow/{article}','RoomArticleController@toggleFollowArticle')->name('.follow_article');
+    });
 });
 
 Route::prefix('/host-user')->name('user.')->middleware(['auth', 'web', 'host_owner'])->group(function () {

@@ -109,10 +109,10 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col--custom">
-                                        <div class="form-group form-group--unit form-group--unit--electric">
+                                        <div class="form-group form-group--unit form-group--unit--price">
                                             <label for="cost_electric">
                                                 <i class="fa fa-bolt text-warning" aria-hidden="true"></i>
-                                                Tiền Điện: </label>
+                                                Tiền Điện (đ/Kv): </label>
                                             <input type="text" required
                                                    class="form-control form-control--wide trovie-input @if($errors->first('cost_electric')) is-invalid  @endif"
                                                    value="{{\App\Helper\TrovieHelper::currencyFormat($data['data']['cost_electric'])}}"
@@ -125,10 +125,10 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col--custom">
-                                        <div class="form-group form-group--unit form-group--unit--water">
+                                        <div class="form-group form-group--unit form-group--unit--price">
                                             <label for="cost_water">
                                                 <i class="fa fa-tint text-primary" aria-hidden="true"></i>
-                                                Tiền Nước: </label>
+                                                Tiền Nước (đ/m<sup>3</sup>): </label>
                                             <input type="text" required
                                                    class="form-control form-control--wide trovie-input @if($errors->first('cost_water')) is-invalid  @endif"
                                                    name="cost_water"
@@ -206,7 +206,7 @@
             </div>
             <div class="col-lg-6 col--custom">
                 <div class="row row--custom">
-                    <div class="col-lg-12 col--custom d-none">
+                    <div class="col-lg-12 col--custom">
                         <x-main-card has-header="1">
                             <x-slot name="title">Thông Báo</x-slot>
                             <form action="{{route('user.host.update_announcement',$data['data']['id'])}}"

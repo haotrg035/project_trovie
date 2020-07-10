@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     initMenu();
+    initFollowRoomAction();
     initSearchForm();
 });
 
@@ -23,6 +24,24 @@ function initMenu() {
     // }
 }
 
+function initFollowRoomAction() {
+    let roomCards = document.querySelectorAll('.room-card');
+
+    if (roomCards.length > 0) {
+        roomCards.forEach(roomCard => {
+            roomCard.querySelector('.room-card__follow').onclick = () => {
+                axios.get(roomCard.dataset.toggleFollow).then(response => {
+                    tata.success('Thành công', response.data.message);
+                    roomCard.querySelector('.room-card__follow .fa').classList.toggle('fa-bookmark');
+                    roomCard.querySelector('.room-card__follow .fa').classList.toggle('fa-bookmark-o');
+                }).catch(err => {
+                    tata.error('Thất bại', err.response.data.message);
+                })
+            }
+        });
+    }
+}
+
 function initSearchForm() {
     let searchForm = document.querySelector('.page-banner .search-form');
 
@@ -35,7 +54,6 @@ function initSearchForm() {
             selectDistrict.querySelectorAll('option[data-city="' + selectCity.value + '"]')
                 .forEach(option => option.style.display = 'block');
             selectDistrict.selectedIndex = 0;
-
         };
     }
 }

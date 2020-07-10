@@ -286,13 +286,14 @@ a:hover {
 .form-group--unit::after {
   content: "";
   position: absolute;
-  right: 0;
+  left: 0;
   bottom: 0.3rem;
   line-height: 1.25rem;
+  font-weight: bold;
 }
 
 .form-group--unit .form-control {
-  padding-right: 3rem;
+  padding-left: 3rem;
 }
 
 .form-group--unit .form-control--wide {
@@ -918,6 +919,12 @@ a:hover {
   }
 }
 
+@media only screen and (min-width: 993px) {
+  .frontend-room-card .room-card:not(.room-card--horizon) .room-card__image {
+    height: 12rem;
+  }
+}
+
 .frontend-room-card .room-card .fa {
   color: var(--color-base);
   font-weight: bold;
@@ -940,6 +947,19 @@ a:hover {
   object-fit: cover;
 }
 
+.frontend-room-card .room-card__follow {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  display: block;
+  z-index: 99;
+}
+
+.frontend-room-card .room-card__follow .fa {
+  margin: 0;
+  font-size: 1.75em;
+}
+
 .frontend-room-card .room-card__body {
   padding-top: 0.5rem;
 }
@@ -958,13 +978,12 @@ a:hover {
 }
 
 .frontend-room-card .room-card__title:hover {
-  color: var(--color-variant-3) !important;
+  color: var(--color-variant-3);
 }
 
 .frontend-room-card .room-card__address {
   padding: 0 0.5rem;
   margin-bottom: 0.5rem;
-  color: var(--color-variant-3);
   -webkit-line-clamp: 1;
   line-clamp: 1;
   line-height: 1.25em;
@@ -983,7 +1002,6 @@ a:hover {
   flex: 0 0 50%;
   padding: 0.5rem 0.25rem 0.5rem 0.5rem;
   border-top: 1px solid lightgray;
-  color: var(--color-variant-3);
 }
 
 .frontend-room-card .room-card__prop-list .prop-list__item:nth-child(2n) {
@@ -994,6 +1012,10 @@ a:hover {
 .frontend-room-card .room-card__prop-list .prop-list__item--price span {
   color: var(--color-base);
   font-weight: bold;
+}
+
+.frontend-room-card .room-card__prop-list .prop-list__item--acreage {
+  flex: 1 1 auto;
 }
 
 .frontend-room-card .room-card__host {

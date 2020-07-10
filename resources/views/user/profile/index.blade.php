@@ -48,7 +48,7 @@
         <div class="col-md-8 col-lg-9">
             <div class="row row--custom">
                 <div class="col-md-8 col--custom">
-                    <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="">
+                    <x-main-card has-header="1" body-class="px-3" header-class="border-bottom p-3" class="">
                         <x-slot name="title">THÔNG TIN</x-slot>
                         <form action="{{route('user.profile.update',auth()->id())}}" method="post"
                               class="user-info__form">
@@ -214,15 +214,121 @@
                             </div>
                         </form>
                     </x-main-card>
-                    @if(!empty($data['data']['room']))
-                        <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="mt-3">
-                            <x-slot name="title">PHÒNG TRỌ CỦA TÔI</x-slot>
+                    @if(!empty($data['room']))
+                        <x-main-card has-header="1" body-class="px-3" header-class="border-bottom p-3" class="mt-3">
+                            <x-slot name="title">NHÀ TRỌ CỦA TÔI</x-slot>
+                            <div class="row row--custom">
+                                <div class="col-12 col--custom">
+                                    <figure class="mb-0 text-center">
+                                        <img width="100%" src="{{$data['room']['host']['image']}}"
+                                             alt="{{$data['room']['host']['name']}}"
+                                             style="max-height: 500px; object-fit: cover;border-radius: 12px">
+                                    </figure>
+                                </div>
+                                <div class="col-12 col--custom">
+                                    <h3 class="mb-0">{{$data['room']['host']['name']}}</h3>
+                                </div>
+                                <div class="col-12 col--custom">
+                                    <div class="form-group form-group--present mb-0">
+                                        <label for=""><i class="fa fa-home" aria-hidden="true"></i> Địa chỉ</label>
+                                        <input type="text" class="form-control trovie-input"
+                                               value="{{$data['room']['host']['address']}}">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4 col--custom">
+                                    <div class="form-group form-group--present mb-0">
+                                        <label for="">Phòng</label>
+                                        <input type="text" class="form-control trovie-input"
+                                               value="{{$data['room']['name']}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4 col--custom">
+                                    <div
+                                        class="form-group form-group--present form-group--unit form-group--unit--phone mb-0">
+                                        <label for="">Số điện thoại</label>
+                                        <input type="text" class="form-control trovie-input"
+                                               value="{{$data['room']['host']['phone']}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4 col--custom">
+                                    <div class="form-group form-group--present mb-0">
+                                        <label for="">Khu/Tầng</label>
+                                        <input type="text" class="form-control trovie-input"
+                                               value="{{$data['room']['floor']}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4 col--custom">
+                                    <div
+                                        class="form-group form-group--present form-group--unit form-group--unit--price mb-0">
+                                        <label for="">Giá phòng</label>
+                                        <input type="text" class="form-control trovie-input"
+                                               value="{{$data['room']['price']}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4 col--custom">
+                                    <div
+                                        class="form-group form-group--present form-group--unit form-group--unit--man mb-0">
+                                        <label for="">Khách thuê</label>
+                                        <input type="text" class="form-control trovie-input" readonly
+                                               value="{{$data['room']['total_users'] .' / '.$data['room']['members']}}">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4 col--custom">
+                                    <div class="form-group form-group--present mb-0">
+                                        <label for="">Ngày vào ở</label>
+                                        <input type="text" class="form-control trovie-input"
+                                               value="{{date('d/m/Y',strtotime($data['room']['pivot']['date_in']))}}"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row row--custom">
+                                        <fieldset class="trovie-fieldset px-3 pb-3 mb-3 h-100">
+                                            <legend>TIỆN ÍCH</legend>
+                                            <div class="row overflow-auto trovie-scrollbar"
+                                                 style="max-height: 200px">
+                                                <div class="col-12 col--custom">
+                                                    <div class="form-group">
+                                                        <div
+                                                            class="row row--custom panel-content--room__room-modal__form__services max-height-100 trovie-scrollbar h-auto">
+                                                            @foreach($data['room']['services'] as $service)
+                                                                <div class="col-6 col--custom">
+                                                                    <div
+                                                                        class="custom-control custom-checkbox panel-content--room__room-modal__form__services__item">
+                                                                        <input type="checkbox" class="custom-control-input" disabled checked
+                                                                               id="room-modal__form__services-checkbox-{{$service['id']}}"
+                                                                               value="{{$service['id']}}" name="services[]">
+                                                                        <label class="custom-control-label"
+                                                                               for="room-modal__form__services-checkbox-{{$service['id']}}">
+                                                                            <span class="text-capitalize">{{$service['name']}}</span>
+                                                                            - {{$service['cost']}} đ/{{$service['unit']['name']}}
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end col--custom mb-0">
+                                    <form action="{{route('user.profile.cancel_contract')}}" id="form-cancel-contract" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button class="btn btn-danger">
+                                            <i class="fa fa-times" aria-hidden="true"></i> HỦY HỢP ĐỒNG
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </x-main-card>
                     @endif
                 </div>
                 <div class="col-md-4 col--custom">
-                    <x-main-card has-header="1" body-class="px-4" header-class="border-bottom p-4" class="mb-3">
-                        <x-slot name="title">{{'ĐỔI MẬT KHẨU'}}</x-slot>
+                    <x-main-card has-header="1" body-class="px-3" header-class="border-bottom p-3" class="mb-3">
+                        <x-slot name="title">ĐỔI MẬT KHẨU</x-slot>
                         <form action="{{route('user.profile.change_password', $data['data']['id'])}}" method="post">
                             @csrf
                             @method('PATCH')
@@ -275,6 +381,30 @@
                             </div>
                         </form>
                     </x-main-card>
+                    @if(!empty($data['room']))
+                        @if(!empty($data['room']['host']['announcement']) && $data['room']['host']['notice'] === 1)
+                            <div class="alert alert-info shadow-xs" role="alert" style="border-radius: 16px">
+                                <h4 class="alert-heading">
+                                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                    Thông báo
+                                </h4>
+                                <p class="mb-0">
+                                    {{$data['room']['host']['announcement']}}
+                                </p>
+                            </div>
+                        @endif
+                        @if(!empty($data['room']['announcement']) && $data['room']['notice'] === 1)
+                            <div class="alert alert-warning shadow-xs" role="alert" style="border-radius: 16px">
+                                <h4 class="alert-heading">
+                                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                    Thông báo riêng
+                                </h4>
+                                <p class="mb-0">
+                                    {{$data['room']['announcement']}}
+                                </p>
+                            </div>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>

@@ -95,13 +95,27 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   initGenerateToken();
+  initCancelContract();
 });
+
+function initCancelContract() {
+  var formCancel = document.getElementById('form-cancel-contract');
+
+  if (formCancel !== null) {
+    formCancel.onsubmit = function (ev) {
+      ev.preventDefault();
+
+      if (confirm('Bạn có chắc muốn hủy hợp đồng với nhà trọ đang thuê?')) {
+        if (confirm('Xác nhận hủy hợp đồng?')) {
+          formCancel.submit();
+        }
+      }
+    };
+  }
+}
 
 function initGenerateToken() {
   var formInviteToken = document.querySelector('#form-generate-token');
-  var collapseInviteToken = document.querySelector('#invite-token__collapse');
-  var tokenInput = collapseInviteToken.querySelector('input[name=token]');
-  var tokenTimeOutSpan = collapseInviteToken.querySelector('.invite_token_timeout');
   var tokenExpiredInterval = null;
 
   if (formInviteToken !== null) {
@@ -124,6 +138,10 @@ function initGenerateToken() {
         }
       }, 1000);
     };
+
+    var collapseInviteToken = document.querySelector('#invite-token__collapse');
+    var tokenInput = collapseInviteToken.querySelector('input[name=token]');
+    var tokenTimeOutSpan = collapseInviteToken.querySelector('.invite_token_timeout');
 
     formInviteToken.onsubmit = function (e) {
       e.preventDefault();

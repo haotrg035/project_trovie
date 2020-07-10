@@ -505,6 +505,19 @@ a:hover {
   object-fit: cover;
 }
 
+.room-card__follow {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  display: block;
+  z-index: 99;
+}
+
+.room-card__follow .fa {
+  margin: 0;
+  font-size: 1.75em;
+}
+
 .room-card__body {
   padding-top: 0.5rem;
 }

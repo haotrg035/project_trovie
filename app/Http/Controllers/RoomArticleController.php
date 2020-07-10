@@ -35,7 +35,7 @@ class RoomArticleController extends BaseController
 
     public function adminIndex()
     {
-       $hostRepo = new HostRepository();
+        $hostRepo = new HostRepository();
         $this->data['list_host'] = $hostRepo->getAll();
         return view('user.admin.roomArticle.index', ['data' => $this->data]);
     }
@@ -49,6 +49,12 @@ class RoomArticleController extends BaseController
     {
         $this->data['view_name'] = 'Thêm ' . $this->viewName();
         return view('user.roomArticle.create', ['data' => $this->data]);
+    }
+
+    public function toggleFollowArticle(RoomArticle $article)
+    {
+        $result = $this->repository->toggleFollowArticle($article->id, auth()->id());
+        return $this->returnResponse($result['data'], 'update', $result['data'], $result['error'],$result['success']);
     }
 
     /**

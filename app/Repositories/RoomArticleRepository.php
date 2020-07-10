@@ -53,13 +53,16 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
         }
         return false;
     }
-    public function getAllArticles(){
+
+    public function getAllArticles()
+    {
         $list_room_id = TrovieHelper::convertAssocIdArrayToValueIdArray(
             \DB::table('rooms')->get('id')->toArray(),
             'id'
         );
         return $this->getAllByRoom($list_room_id);
     }
+
     public function getAllByHost($id)
     {
         $list_room_id = TrovieHelper::convertAssocIdArrayToValueIdArray(
@@ -294,6 +297,37 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
 
     public function deleteByRoomId($id)
     {
+        \DB::table('saved_article')->where('room_id')->delete();
         return $this->_model->where('room_id', $id)->delete();
+    }
+
+    public function toggleFollowArticle($articleId, $userId)
+    {
+        $result = ['data' => false, 'error' => '', 'success' => ''];
+        if ($this->_model->where('id', $articleId)->count() > 0) {
+            $savedEntry = \DB::table('saved_article')->where([['user_id', '=', $userId], ['room_article_id', '=', $articleId]]);
+            if (!$savedEntry->exists()) {
+                $result['data'] = \DB::table('saved_article')->insert([
+                    'user_id' => $userId,
+                    'room_article_id' => $articleId
+                ]);
+                $result['success'] = 'Đã theo dõi tin đăng';
+                return $result;
+            } else if ($savedEntry->exists()) {
+                $result['data'] = \DB::table('saved_article')->where([
+                    ['user_id', '=', $userId],
+                    ['room_article_id', '=', $articleId]
+                ])->delete();
+                $result['success'] = 'Đã bỏ theo dõi tin đăng';
+                return $result;
+            }
+        }
+        $result['error'] = 'Bài viết đã được lưu từ trước!';
+        return $result;
+    }
+
+    public function getFollowedArticles($userId)
+    {
+        return \DB::table('saved_article')->where('user_id', $userId)->get();
     }
 }

@@ -19,7 +19,8 @@
                 <div class="row row--custom">
                     @foreach($data['recent_articles'] as $article)
                         <div class="col-12 col-md-6 col-xl-3 col--custom">
-                            <x-front-end.room-card :article-detail="$article"></x-front-end.room-card>
+                            <x-front-end.room-card :article-detail="$article"
+                                                   is-followed="{{in_array($article['id'],$data['followedArticles'])}}"></x-front-end.room-card>
                         </div>
                     @endforeach
                 </div>

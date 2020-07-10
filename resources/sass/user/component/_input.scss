@@ -65,13 +65,14 @@
         &::after {
             content: '';
             position: absolute;
-            right: 0;
+            left: 0;
             bottom: 0.3rem;
             line-height: 1.25rem;
+            font-weight: bold;
         }
 
         .form-control {
-            padding-right: 3rem;
+            padding-left: 3rem;
         }
 
         .form-control--wide {

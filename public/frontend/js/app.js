@@ -42399,6 +42399,7 @@ function cloneFileInput(oldInput) {
 
 document.addEventListener('DOMContentLoaded', function () {
   initMenu();
+  initFollowRoomAction();
   initSearchForm();
 });
 
@@ -42420,6 +42421,24 @@ function initMenu() {
   }); // menuContent.querySelector('.close-menu-btn').onclick = () => {
   //     menuContent.classList.remove('show');
   // }
+}
+
+function initFollowRoomAction() {
+  var roomCards = document.querySelectorAll('.room-card');
+
+  if (roomCards.length > 0) {
+    roomCards.forEach(function (roomCard) {
+      roomCard.querySelector('.room-card__follow').onclick = function () {
+        axios.get(roomCard.dataset.toggleFollow).then(function (response) {
+          tata.success('Thành công', response.data.message);
+          roomCard.querySelector('.room-card__follow .fa').classList.toggle('fa-bookmark');
+          roomCard.querySelector('.room-card__follow .fa').classList.toggle('fa-bookmark-o');
+        })["catch"](function (err) {
+          tata.error('Thất bại', err.response.data.message);
+        });
+      };
+    });
+  }
 }
 
 function initSearchForm() {

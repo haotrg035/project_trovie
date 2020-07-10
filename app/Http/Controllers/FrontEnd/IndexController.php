@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\Helper\TrovieHelper;
 use App\Http\Controllers\BaseController;
 use App\Repositories\Interfaces\CityEloquentRepositoryInterface;
 use App\Repositories\Interfaces\MenuEloquentRepositoryInterface;
@@ -46,6 +47,10 @@ class IndexController extends BaseController
         $this->data['featured_cities'] = $this->cityRepository->getFeaturedCities();
         $this->data['recent_articles'] = $this->roomArticleRepository->getArticles(8);
         $this->data['availableHosts'] = json_encode($this->roomArticleRepository->getAvailableHosts());
+        $this->data['followedArticles'] = TrovieHelper::convertAssocIdArrayToValueIdArray(
+            $this->roomArticleRepository->getFollowedArticles(auth()->id())->toArray(),
+            'room_article_id'
+        );
         $this->data['menu'] = $this->menuRepository->getMenu();
         return view('front-end.index.index', ['data' => $this->data]);
     }

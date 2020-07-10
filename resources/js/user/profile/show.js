@@ -1,15 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
     initGenerateToken()
+    initCancelContract();
 });
+
+function initCancelContract() {
+    let formCancel = document.getElementById('form-cancel-contract');
+    if (formCancel !== null) {
+        formCancel.onsubmit = ev => {
+            ev.preventDefault();
+            if (confirm('Bạn có chắc muốn hủy hợp đồng với nhà trọ đang thuê?')) {
+                if (confirm('Xác nhận hủy hợp đồng?')) {
+                    formCancel.submit();
+                }
+            }
+        }
+    }
+}
 
 function initGenerateToken() {
     let formInviteToken = document.querySelector('#form-generate-token');
-    let collapseInviteToken = document.querySelector('#invite-token__collapse');
-    let tokenInput = collapseInviteToken.querySelector('input[name=token]');
-    let tokenTimeOutSpan = collapseInviteToken.querySelector('.invite_token_timeout');
     let tokenExpiredInterval = null;
 
     if (formInviteToken !== null) {
+        let collapseInviteToken = document.querySelector('#invite-token__collapse');
+        let tokenInput = collapseInviteToken.querySelector('input[name=token]');
+        let tokenTimeOutSpan = collapseInviteToken.querySelector('.invite_token_timeout');
         formInviteToken.onsubmit = (e) => {
             e.preventDefault();
             axios.get(formInviteToken.action,
