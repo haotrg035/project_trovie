@@ -78,28 +78,28 @@
                         <div class="row row--custom">
                             <div class="col-lg-4 col--custom">
                                 <div
-                                    class="form-group form-group--unit form-group--unit--price form-group--present form-group--landscape">
+                                    class="form-group form-group--unit form-group--unit--price form-group--present">
                                     <label>Giá phòng: </label>
                                     <input type="text" required readonly
-                                           autocomplete="off" class="form-control trovie-input text-right"
+                                           autocomplete="off" class="form-control trovie-input"
                                            name="price">
                                 </div>
                             </div>
                             <div class="col-lg-4 col--custom">
                                 <div
-                                    class="form-group form-group--unit form-group--unit--electric form-group--present form-group--landscape">
+                                    class="form-group form-group--unit form-group--present form-group--unit--price">
                                     <label>Giá điện: </label>
                                     <input type="text" required readonly
-                                           autocomplete="off" class="form-control trovie-input text-right"
+                                           autocomplete="off" class="form-control trovie-input"
                                            name="cost_electric">
                                 </div>
                             </div>
                             <div class="col-lg-4 col--custom">
                                 <div
-                                    class="form-group form-group--unit form-group--unit--water form-group--present form-group--landscape">
+                                    class="form-group form-group--unit form-group--unit--price form-group--present">
                                     <label>Giá nước: </label>
                                     <input type="text" required readonly
-                                           autocomplete="off" class="form-control trovie-input text-right"
+                                           autocomplete="off" class="form-control trovie-input"
                                            name="cost_water">
                                 </div>
                             </div>

@@ -55,11 +55,11 @@
                                class="room-card
                             @switch($room['state'])
                                @case(config('app.room_state.free'))
-                                   room-card--success @break
+                                       room-card--success @break
                                @case(config('app.room_state.waiting'))
-                                   room-card--warning @break
+                                       room-card--warning @break
                                @case(config('app.room_state.full'))
-                                   room-card--danger @break
+                                       room-card--danger @break
                                @endswitch">
                                 <p class="room-card__id">{{$room['name']}}</p>
                                 <ul class="room-card__property-list list-unstyled">
@@ -124,7 +124,8 @@
                                         @foreach($room['users'] as $user)
                                             <li class="room-card__customer-list__item" title="{{$user['full_name']}}">
                                             <span class="room-card__customer-list__item__avatar">
-                                                <img src="{{asset($user['avatar'])}}" alt="">
+                                                <img src="{{asset($user['avatar']) ?? \App\Helper\TrovieFile::checkFile('')}}"
+                                                     alt="">
                                             </span>
                                             </li>
                                         @endforeach
@@ -139,7 +140,8 @@
                                         @foreach($room['guest_users'] as $user)
                                             <li class="room-card__customer-list__item" title="{{$user['full_name']}}">
                                             <span class="room-card__customer-list__item__avatar">
-                                                <img src="{{asset($user['avatar'])}}" alt="">
+                                                <img src="{{asset(\App\Helper\TrovieFile::checkFile(''))}}"
+                                                     alt="{{$user['full_name']}}">
                                             </span>
                                             </li>
                                         @endforeach
