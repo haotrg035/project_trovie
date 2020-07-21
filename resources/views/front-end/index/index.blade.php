@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="page-section__header">
                     <p class="header__title">PHÒNG TRỌ VỪA ĐĂNG</p>
-                    <a href="#" class="header__more">Xem thêm <i class="fa fa-angle-double-right"
+                    <a href="{{route('frontend.article.search')}}" class="header__more">Xem thêm <i class="fa fa-angle-double-right"
                                                                  aria-hidden="true"></i></a>
                 </div>
                 <div class="row row--custom">
@@ -52,7 +52,7 @@
                             <div class="row row--custom">
                                 @for($i = 1; $i < count($data['featured_cities']);$i++)
                                     <div class="col-6 col-lg-6 col--custom">
-                                        <a href="#" class="place__item">
+                                        <a href="{{route('frontend.article.search')}}?city={{$data['featured_cities'][$i]['id']}}" class="place__item">
                                             <img src="{{$data['featured_cities'][$i]['avatar']}}"
                                                  alt="{{$data['featured_cities'][$i]['name']}}">
                                             <div class="item__content">

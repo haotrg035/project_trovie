@@ -105,13 +105,17 @@ class UserController extends BaseController
 
     public function showFollowedArticles()
     {
+        $this->data['view_name'] = 'Tin Đăng Đã Lưu';
         $articleRepo = new RoomArticleRepository();
         $listArticleId = TrovieHelper::convertAssocIdArrayToValueIdArray(
             $articleRepo->getFollowedArticles(auth()->id())->toArray(),
             'room_article_id'
         );
-
-        $this->data['followedArticles'] = $articleRepo->getArticles(-1, $listArticleId, false, true);
+        if (count($listArticleId) > 0) {
+            $this->data['followedArticles'] = $articleRepo->getArticles(-1, $listArticleId, false, true);
+        } else {
+            $this->data['followedArticles'] = [];
+        }
         return view('user.savedArticles.index', ['data' => $this->data]);
     }
 

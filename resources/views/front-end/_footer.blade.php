@@ -1,6 +1,6 @@
 <footer class="page-section page-section__footer mb-0">
     <div class="container">
-        <div class="row justify-content-center row--custom">
+        <div class="row justify-content-lg-center row--custom">
             <div class="col-12 col-lg-4">
                 <div class="footer-item footer-item--logo">
                     <p class="footer-item__title">THÔNG TIN</p>
@@ -33,7 +33,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-6 col-lg-2">
+            <div class="col-6 col-lg-2 mb-3 mb-lg-0">
                 <div class="footer-item">
                     <p class="footer-item__title">TÀI KHOẢN</p>
                     <ul class="footer-item__list list-unstyled mb-0">

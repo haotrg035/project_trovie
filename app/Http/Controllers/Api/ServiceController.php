@@ -97,6 +97,7 @@ class ServiceController extends BaseController
     public function destroy(Service $service)
     {
         $this->checkDeleteAuth($service);
+        \DB::table('room_service')->where('service_id',$service->id)->delete();
         $result = $this->repository->delete($service->id);
 
         return $this->returnResponse($result, 'delete', $service->id);

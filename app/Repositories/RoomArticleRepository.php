@@ -93,11 +93,16 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
     public function createArticle($attributes)
     {
 //        $data = array_diff_key($attributes, ['api_token' => 1, 'room' => 1]);
+        $result = ['data' => false, 'error' => '', 'success' => ''];
         $data['title'] = $attributes['title'];
         $data['room_id'] = $attributes['room'];
         $data['content'] = !empty($attributes['content']) ? $attributes['content'] : '';
-        $result = $this->create($data);
-        if ($result) {
+        if (strlen($data['content']) > 1000) {
+            $data['error'] = 'Nội dung tin đăng vượt quá 1000 từ';
+            return $result;
+        }
+        $result['data'] = $this->create($data);
+        if ($result['data']) {
             return $result;
         }
         return false;
@@ -227,21 +232,24 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
                 switch ($key) {
                     case $availableParams[0]:
                     case $availableParams[1]:
-                    {
-                        $placeParams[] = [$key . '_id', '=', $param];
-                        break;
-                    }
+                        {
+                            $placeParams[] = [$key . '_id', '=', $param];
+                            break;
+                        }
                     case $availableParams[2]:
-                    {
-                        $articleParams[] = ['title', 'LIKE', '%' . $param . '%'];
-                    }
+                        {
+                            $articleParams[] = ['title', 'LIKE', '%' . $param . '%'];
+                            break;
+                        }
                     case $availableParams[3]:
-                    {
-                        $hostParams[] = $param;
-                    }
+                        {
+                            $hostParams[] = $param;
+                        }
                 }
             }
         }
+
+
         if (!empty($hostParams)) {
             return $this->getArticlesByHosts($hostParams, $totalResultItems, $isPaginatedResult);
         }
@@ -297,8 +305,11 @@ class RoomArticleRepository extends EloquentRepository implements RoomArticleElo
 
     public function deleteByRoomId($id)
     {
-        \DB::table('saved_article')->where('room_id')->delete();
-        return $this->_model->where('room_id', $id)->delete();
+        $article = $this->_model->where('room_id', $id);
+        if ($article->exists()) {
+            \DB::table('saved_article')->where('room_article_id', $article->first('id'))->delete();
+            return $article->delete();
+        }
     }
 
     public function toggleFollowArticle($articleId, $userId)

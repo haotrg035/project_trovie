@@ -75,7 +75,7 @@ class RoomArticleController extends BaseController
     {
         $this->checkCreateAuth($this->repository->getModel());
         $result = $this->repository->createArticle($request->all());
-        return $this->returnResponse($result, 'create', $result);
+        return $this->returnResponse($result['data'], 'create', $result['data'], $result['error']);
     }
 
     /**

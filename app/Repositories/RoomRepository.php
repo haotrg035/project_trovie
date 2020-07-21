@@ -283,13 +283,14 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
         }
         \DB::table('room_service')->where('room_id', $id)->delete();
         $isConnected = \DB::table('room_user')->where(['room_id' => $id]);
-        if (!$isConnected->exists()) {
+        $isHasInvoices = \DB::table('invoices')->where('room_id', $id);
+        if (!$isConnected->exists() && !$isHasInvoices->exists()) {
             $result = $this->_model->where('id', $id)->forceDelete();
         } else {
             $contractRepo = new ContractRepository();
             $isConnected->update(['active' => 0]);
             foreach ($isConnected->get() as $item) {
-               $contractRepo->_model->where('id', $item->contract_id)->update(['active' => 0]);
+                $contractRepo->_model->where('id', $item->contract_id)->update(['active' => 0]);
             }
             $result = $this->_model->where('id', $id)->delete();
         }

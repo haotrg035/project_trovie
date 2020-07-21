@@ -192,6 +192,15 @@ function initInvoiceCreateModal() {
                     api_token: __apiToken
                 }
             }).then(response => {
+                let roomPriceItem = {
+                    cost: response.data.data.price,
+                    name: 'Tiền phòng',
+                    unit: {
+                        name: 'Tháng'
+                    }
+
+                };
+                invoiceTable.querySelector('tbody').append(renderInvoiceTableRow(roomPriceItem));
                 for (let item of response.data.data.services) {
                     if (TrovieHelper.parseCurrencyFormat(item.cost) > 0) {
                         invoiceTable.querySelector('tbody').append(renderInvoiceTableRow(item));
