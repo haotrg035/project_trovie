@@ -74,13 +74,13 @@
                                                    name="phone" placeholder="">
                                         </div>
                                     </div>
-                                    <div class="col-6 col--custom">
-                                        <div class="form-group form-group--present form-group--unit">
-                                            <label for="name">Nghề nghiệp: </label>
-                                            <input type="text" class="form-control trovie-input" readonly
-                                                   name="career" placeholder="">
-                                        </div>
-                                    </div>
+{{--                                    <div class="col-6 col--custom">--}}
+{{--                                        <div class="form-group form-group--present form-group--unit">--}}
+{{--                                            <label for="name">Nghề nghiệp: </label>--}}
+{{--                                            <input type="text" class="form-control trovie-input" readonly--}}
+{{--                                                   name="career" placeholder="">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <div class="col-12 col--custom mb-0">
                                         <div class="form-group form-group--present">
                                             <label for="name">Quê quán: </label>

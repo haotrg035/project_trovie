@@ -324,7 +324,7 @@ function fillRoomUserModalFormData(data) {
     // roomUsersModalForm.querySelector('input[name=email]').value = data.email || '';
     roomUsersModalForm.querySelector('input[name=id_card]').value = data.idCard || '';
     roomUsersModalForm.querySelector('input[name=birthday]').value = data.birthday || '';
-    roomUsersModalForm.querySelector('input[name=career]').value = data.career || '';
+    // roomUsersModalForm.querySelector('input[name=career]').value = data.career || '';
     roomUsersModalForm.querySelector('input[name=address]').value = data.address || '';
 
 }
@@ -340,7 +340,7 @@ function initUserItemCardClick(element) {
             name: userCard.getAttribute('data-name'),
             birthday: userCard.getAttribute('data-birthday'),
             phone: userCard.getAttribute('data-phone'),
-            career: userCard.getAttribute('data-career'),
+            // career: userCard.getAttribute('data-career'),
             // email: userCard.getAttribute('data-email'),
             idCard: userCard.getAttribute('data-id-card'),
             address: userCard.getAttribute('data-address'),
@@ -359,11 +359,11 @@ function renderRoomUsersItem(data) {
     _userItem.querySelector('.list__user').setAttribute('data-id', data.id);
     _userItem.querySelector('.list__user').setAttribute('data-name', data.full_name);
     _userItem.querySelector('.list__user').setAttribute('data-birthday', data.birthday);
-    if (data.detail.career !== null) {
-        _userItem.querySelector('.list__user').setAttribute('data-career', data.detail.career);
-    } else {
-        _userItem.querySelector('.list__user').setAttribute('data-career', 'N/A');
-    }
+    // if (data.detail.career !== null) {
+    //     _userItem.querySelector('.list__user').setAttribute('data-career', data.detail.career);
+    // } else {
+    //     _userItem.querySelector('.list__user').setAttribute('data-career', 'N/A');
+    // }
     _userItem.querySelector('.list__user').setAttribute('data-email', data.email);
     _userItem.querySelector('.list__user').setAttribute('data-phone', data.detail.phone);
     _userItem.querySelector('.list__user').setAttribute('data-id-card', data.detail.id_card);

@@ -98,12 +98,12 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
             'users' => function ($query) {
                 return $query->with([
                     'detail' => function ($q) {
-                        return $q->get(['user_id', 'career', 'id_card', 'address', 'phone']);
+                        return $q->get(['user_id', 'id_card', 'address', 'phone']);
                     }
                 ])->get(['id', 'full_name', 'avatar', 'email', 'birthday', 'gender']);
             },
             'guestUsers' => function ($query) {
-                return $query->get(['id', 'full_name', 'avatar', 'birthday', 'gender', 'id_card', 'address', 'phone']);
+                return $query->get(['id', 'full_name', 'birthday', 'gender', 'id_card', 'address', 'phone']);
             }
         ])->where('id', $id)->first()->toArray();
 
