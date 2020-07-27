@@ -63,7 +63,12 @@ class InvoiceController extends BaseController
      */
     public function show(Invoice $invoice)
     {
-        $result = $this->repository->find($invoice->id, ['details', 'room']);
+        $result = $this->repository->find($invoice->id, [
+            'details',
+            'room' => function($q) {
+                return $q->withTrashed()->get();
+            }
+        ]);
         return $this->returnResponse($result, 'show', $result);
     }
 

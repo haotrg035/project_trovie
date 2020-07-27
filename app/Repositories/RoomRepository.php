@@ -275,6 +275,9 @@ class RoomRepository extends EloquentRepository implements RoomEloquentRepositor
         $result = false;
         $articleRepo = new RoomArticleRepository();
         $articleRepo->deleteByRoomId($id);
+        $invoiceRepo = new InvoiceRepository();
+        $invoiceRepo->_model->where('room_id', $id)->where('state', config('app.invoice_state.pending'))
+            ->update(['state' => config('app.invoice_state.cancel')]);
         $gallery = \DB::table('room_gallery')->where('room_id', $id)->get();
         if (count($gallery) > 0) {
             foreach ($gallery as $item) {

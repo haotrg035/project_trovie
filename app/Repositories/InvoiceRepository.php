@@ -25,7 +25,7 @@ class InvoiceRepository extends EloquentRepository implements InvoiceEloquentRep
         }
         try {
             $roomRepository = new RoomRepository();
-            $rooms = $roomRepository->_model->with(['invoices'])->whereIn('id', $ids)->get()->toArray();
+            $rooms = $roomRepository->_model->withTrashed()->with(['invoices'])->whereIn('id', $ids)->get()->toArray();
         } catch (\Exception $e) {
             \Log::error('get invoices failed, Error: ' . $e->getMessage());
         }
@@ -52,8 +52,9 @@ class InvoiceRepository extends EloquentRepository implements InvoiceEloquentRep
 
     public function getAllByHost($id)
     {
+        $roomRepository = new RoomRepository();
         $list_room_id = TrovieHelper::convertAssocIdArrayToValueIdArray(
-            \DB::table('rooms')->where('host_id', $id)->get('id')->toArray(),
+            $roomRepository->_model->withTrashed()->where('host_id', $id)->get('id')->toArray(),
             'id'
         );
         return $this->getAllByRoom($list_room_id);
